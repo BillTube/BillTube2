@@ -3,6 +3,24 @@
 |BillTube 2.0 Theme by BILL(2) , You can find me on my discord channel discord.gg/fwadWd9
 |You are free to use (and edit) this theme but leave ALL credits in place for everyone involved.
 */
+
+
+
+UI_AttentionBar = 0;		// [&] imageboard-style attention bar (requires external application)
+AttentionBar_URL = '';
+UI_ChannelAnnouncement = 1;	// [&] additional custom channel announcement
+ChannelAnnouncement_Title = 'Channel Announcement!';
+ChannelAnnouncement_HTML = 'This is a test announcement for BillTube 2.0.';
+UI_ChannelName = 1;		// [&] channel custom brand name
+ChannelName_Caption = 'BillTube';
+Favicon_URL = 'https://lh3.googleusercontent.com/UEy_fI47EiOnT8957PPRrnggiojAo4bjfva7dCvxgQA31wlqZB0RQkNlQhh2LZTPkmhUZaWZht7SzqntDm2NGM0JcX2mbo9nCzNMiXnR6Y8CvjBub7qKezgbSzHWBdAsiTWP5wsj-JfdMALe7yARz9oTZCwqO89NA8MyUOiTq7Ns6w9moanDlb7u1McxFkCjG-mvNIHmerEuDCjiyT77AgFTSIOML7ae5UDUyv5-Djl1vSszTE8SV7fLTg3pIkd1s6SoKQR2MXkFX5-feU9MYN65gUOzLhnqoJy5XaGzXxuhcRGFdLCNTp4UPhwIFsZOFbnAnUkxC8LjxNyP_uZg5Vqe8gR5D_ImPW_q0UwKShBI6Ft2lPSobo-z9ql68RJSIwE2FqypN3SoCPXT6hq6YNDZBphVOrnZEqWeWYU2t92-cx0jzkLqGCGGyuyF2Dc0iOPke0AAWcnBEKTpnwrUq1me0deXrc7DRXzEYrbO_nE6Sju_0jWZQpiVxv0TdrKxRvXO3m2TyBGkUqg8AQ612LyeNSY88F3WDtiEhI4HAnknz98Xqng8yKDDASNROnwoKmg5Nn25IOxBAA6htIWAyOP7ZmpSI9Hs7_p7-FKzm7tPgd7zkKXq5kfNcHvUhQwSHgDrIV9sfPcjDcD2PA2T4pODBbutRCg=w100-h129-no';
+UI_Favicon = 1;			// [&] channel favicon
+VideoPoster = 1;			// [&] Custom video Poster
+Poster_URL = 'https://dl.dropboxusercontent.com/s/xgefazzyhs8xncp/icon.png';
+
+
+
+
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -84,6 +102,9 @@
 	__webpack_require__(38);
 	__webpack_require__(39);
 	module.exports = __webpack_require__(40);
+	__webpack_require__(41);
+	__webpack_require__(42);
+	__webpack_require__(43);
 
 /***/ },
 /* 1 */
@@ -348,11 +369,7 @@ window.FontAwesomeKitConfig = {
   } catch (e) {}
 })();
 
-
-
 /////////////////////
-
-
 //Phone Check (still testing, leave feedback)
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 $("#ytapiplayer_html5_api").attr("muted","");
@@ -361,24 +378,11 @@ $("#main").after($("#chatwrap"));
 $("#chatwrap").after($("#motdwrap"));
 $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/sjb7rw59p0qnx6a/mobile.css' />"); 
 }else {
-		/*! nanoScrollerJS - v0.8.7 - (c) 2015 James Florentino; Licensed MIT */
-
-//	!function(a){return"function"==typeof define&&define.amd?define(["jquery"],function(b){return a(b,window,document)}):"object"==typeof exports?module.exports=a(require("jquery"),window,document):a(jQuery,window,document)}(function(a,b,c){"use strict";var d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H;z={paneClass:"nano-pane",sliderClass:"nano-slider",contentClass:"nano-content",enabledClass:"has-scrollbar",flashedClass:"flashed",activeClass:"active",iOSNativeScrolling:!1,preventPageScrolling:!1,disableResize:!1,alwaysVisible:!1,flashDelay:1500,sliderMinHeight:20,sliderMaxHeight:null,documentContext:null,windowContext:null},u="scrollbar",t="scroll",l="mousedown",m="mouseenter",n="mousemove",p="mousewheel",o="mouseup",s="resize",h="drag",i="enter",w="up",r="panedown",f="DOMMouseScroll",g="down",x="wheel",j="keydown",k="keyup",v="touchmove",d="Microsoft Internet Explorer"===b.navigator.appName&&/msie 7./i.test(b.navigator.appVersion)&&b.ActiveXObject,e=null,D=b.requestAnimationFrame,y=b.cancelAnimationFrame,F=c.createElement("div").style,H=function(){var a,b,c,d,e,f;for(d=["t","webkitT","MozT","msT","OT"],a=e=0,f=d.length;f>e;a=++e)if(c=d[a],b=d[a]+"ransform",b in F)return d[a].substr(0,d[a].length-1);return!1}(),G=function(a){return H===!1?!1:""===H?a:H+a.charAt(0).toUpperCase()+a.substr(1)},E=G("transform"),B=E!==!1,A=function(){var a,b,d;return a=c.createElement("div"),b=a.style,b.position="absolute",b.width="100px",b.height="100px",b.overflow=t,b.top="-9999px",c.body.appendChild(a),d=a.offsetWidth-a.clientWidth,c.body.removeChild(a),d},C=function(){var a,c,d;return c=b.navigator.userAgent,(a=/(?=.+Mac OS X)(?=.+Firefox)/.test(c))?(d=/Firefox\/\d{2}\./.exec(c),d&&(d=d[0].replace(/\D+/g,"")),a&&+d>23):!1},q=function(){function j(d,f){this.el=d,this.options=f,e||(e=A()),this.$el=a(this.el),this.doc=a(this.options.documentContext||c),this.win=a(this.options.windowContext||b),this.body=this.doc.find("body"),this.$content=this.$el.children("."+this.options.contentClass),this.$content.attr("tabindex",this.options.tabIndex||0),this.content=this.$content[0],this.previousPosition=0,this.options.iOSNativeScrolling&&null!=this.el.style.WebkitOverflowScrolling?this.nativeScrolling():this.generate(),this.createEvents(),this.addEvents(),this.reset()}return j.prototype.preventScrolling=function(a,b){if(this.isActive)if(a.type===f)(b===g&&a.originalEvent.detail>0||b===w&&a.originalEvent.detail<0)&&a.preventDefault();else if(a.type===p){if(!a.originalEvent||!a.originalEvent.wheelDelta)return;(b===g&&a.originalEvent.wheelDelta<0||b===w&&a.originalEvent.wheelDelta>0)&&a.preventDefault()}},j.prototype.nativeScrolling=function(){this.$content.css({WebkitOverflowScrolling:"touch"}),this.iOSNativeScrolling=!0,this.isActive=!0},j.prototype.updateScrollValues=function(){var a,b;a=this.content,this.maxScrollTop=a.scrollHeight-a.clientHeight,this.prevScrollTop=this.contentScrollTop||0,this.contentScrollTop=a.scrollTop,b=this.contentScrollTop>this.previousPosition?"down":this.contentScrollTop<this.previousPosition?"up":"same",this.previousPosition=this.contentScrollTop,"same"!==b&&this.$el.trigger("update",{position:this.contentScrollTop,maximum:this.maxScrollTop,direction:b}),this.iOSNativeScrolling||(this.maxSliderTop=this.paneHeight-this.sliderHeight,this.sliderTop=0===this.maxScrollTop?0:this.contentScrollTop*this.maxSliderTop/this.maxScrollTop)},j.prototype.setOnScrollStyles=function(){var a;B?(a={},a[E]="translate(0, "+this.sliderTop+"px)"):a={top:this.sliderTop},D?(y&&this.scrollRAF&&y(this.scrollRAF),this.scrollRAF=D(function(b){return function(){return b.scrollRAF=null,b.slider.css(a)}}(this))):this.slider.css(a)},j.prototype.createEvents=function(){this.events={down:function(a){return function(b){return a.isBeingDragged=!0,a.offsetY=b.pageY-a.slider.offset().top,a.slider.is(b.target)||(a.offsetY=0),a.pane.addClass(a.options.activeClass),a.doc.bind(n,a.events[h]).bind(o,a.events[w]),a.body.bind(m,a.events[i]),!1}}(this),drag:function(a){return function(b){return a.sliderY=b.pageY-a.$el.offset().top-a.paneTop-(a.offsetY||.5*a.sliderHeight),a.scroll(),a.contentScrollTop>=a.maxScrollTop&&a.prevScrollTop!==a.maxScrollTop?a.$el.trigger("scrollend"):0===a.contentScrollTop&&0!==a.prevScrollTop&&a.$el.trigger("scrolltop"),!1}}(this),up:function(a){return function(b){return a.isBeingDragged=!1,a.pane.removeClass(a.options.activeClass),a.doc.unbind(n,a.events[h]).unbind(o,a.events[w]),a.body.unbind(m,a.events[i]),!1}}(this),resize:function(a){return function(b){a.reset()}}(this),panedown:function(a){return function(b){return a.sliderY=(b.offsetY||b.originalEvent.layerY)-.5*a.sliderHeight,a.scroll(),a.events.down(b),!1}}(this),scroll:function(a){return function(b){a.updateScrollValues(),a.isBeingDragged||(a.iOSNativeScrolling||(a.sliderY=a.sliderTop,a.setOnScrollStyles()),null!=b&&(a.contentScrollTop>=a.maxScrollTop?(a.options.preventPageScrolling&&a.preventScrolling(b,g),a.prevScrollTop!==a.maxScrollTop&&a.$el.trigger("scrollend")):0===a.contentScrollTop&&(a.options.preventPageScrolling&&a.preventScrolling(b,w),0!==a.prevScrollTop&&a.$el.trigger("scrolltop"))))}}(this),wheel:function(a){return function(b){var c;if(null!=b)return c=b.delta||b.wheelDelta||b.originalEvent&&b.originalEvent.wheelDelta||-b.detail||b.originalEvent&&-b.originalEvent.detail,c&&(a.sliderY+=-c/3),a.scroll(),!1}}(this),enter:function(a){return function(b){var c;if(a.isBeingDragged)return 1!==(b.buttons||b.which)?(c=a.events)[w].apply(c,arguments):void 0}}(this)}},j.prototype.addEvents=function(){var a;this.removeEvents(),a=this.events,this.options.disableResize||this.win.bind(s,a[s]),this.iOSNativeScrolling||(this.slider.bind(l,a[g]),this.pane.bind(l,a[r]).bind(""+p+" "+f,a[x])),this.$content.bind(""+t+" "+p+" "+f+" "+v,a[t])},j.prototype.removeEvents=function(){var a;a=this.events,this.win.unbind(s,a[s]),this.iOSNativeScrolling||(this.slider.unbind(),this.pane.unbind()),this.$content.unbind(""+t+" "+p+" "+f+" "+v,a[t])},j.prototype.generate=function(){var a,c,d,f,g,h,i;return f=this.options,h=f.paneClass,i=f.sliderClass,a=f.contentClass,(g=this.$el.children("."+h)).length||g.children("."+i).length||this.$el.append('<div class="'+h+'"><div class="'+i+'" /></div>'),this.pane=this.$el.children("."+h),this.slider=this.pane.find("."+i),0===e&&C()?(d=b.getComputedStyle(this.content,null).getPropertyValue("padding-right").replace(/[^0-9.]+/g,""),c={right:-14,paddingRight:+d+14}):e&&(c={right:-e},this.$el.addClass(f.enabledClass)),null!=c&&this.$content.css(c),this},j.prototype.restore=function(){this.stopped=!1,this.iOSNativeScrolling||this.pane.show(),this.addEvents()},j.prototype.reset=function(){var a,b,c,f,g,h,i,j,k,l,m,n;return this.iOSNativeScrolling?void(this.contentHeight=this.content.scrollHeight):(this.$el.find("."+this.options.paneClass).length||this.generate().stop(),this.stopped&&this.restore(),a=this.content,f=a.style,g=f.overflowY,d&&this.$content.css({height:this.$content.height()}),b=a.scrollHeight+e,l=parseInt(this.$el.css("max-height"),10),l>0&&(this.$el.height(""),this.$el.height(a.scrollHeight>l?l:a.scrollHeight)),i=this.pane.outerHeight(!1),k=parseInt(this.pane.css("top"),10),h=parseInt(this.pane.css("bottom"),10),j=i+k+h,n=Math.round(j/b*i),n<this.options.sliderMinHeight?n=this.options.sliderMinHeight:null!=this.options.sliderMaxHeight&&n>this.options.sliderMaxHeight&&(n=this.options.sliderMaxHeight),g===t&&f.overflowX!==t&&(n+=e),this.maxSliderTop=j-n,this.contentHeight=b,this.paneHeight=i,this.paneOuterHeight=j,this.sliderHeight=n,this.paneTop=k,this.slider.height(n),this.events.scroll(),this.pane.show(),this.isActive=!0,a.scrollHeight===a.clientHeight||this.pane.outerHeight(!0)>=a.scrollHeight&&g!==t?(this.pane.hide(),this.isActive=!1):this.el.clientHeight===a.scrollHeight&&g===t?this.slider.hide():this.slider.show(),this.pane.css({opacity:this.options.alwaysVisible?1:"",visibility:this.options.alwaysVisible?"visible":""}),c=this.$content.css("position"),("static"===c||"relative"===c)&&(m=parseInt(this.$content.css("right"),10),m&&this.$content.css({right:"",marginRight:m})),this)},j.prototype.scroll=function(){return this.isActive?(this.sliderY=Math.max(0,this.sliderY),this.sliderY=Math.min(this.maxSliderTop,this.sliderY),this.$content.scrollTop(this.maxScrollTop*this.sliderY/this.maxSliderTop),this.iOSNativeScrolling||(this.updateScrollValues(),this.setOnScrollStyles()),this):void 0},j.prototype.scrollBottom=function(a){return this.isActive?(this.$content.scrollTop(this.contentHeight-this.$content.height()-a).trigger(p),this.stop().restore(),this):void 0},j.prototype.scrollTop=function(a){return this.isActive?(this.$content.scrollTop(+a).trigger(p),this.stop().restore(),this):void 0},j.prototype.scrollTo=function(a){return this.isActive?(this.scrollTop(this.$el.find(a).get(0).offsetTop),this):void 0},j.prototype.stop=function(){return y&&this.scrollRAF&&(y(this.scrollRAF),this.scrollRAF=null),this.stopped=!0,this.removeEvents(),this.iOSNativeScrolling||this.pane.hide(),this},j.prototype.destroy=function(){return this.stopped||this.stop(),!this.iOSNativeScrolling&&this.pane.length&&this.pane.remove(),d&&this.$content.height(""),this.$content.removeAttr("tabindex"),this.$el.hasClass(this.options.enabledClass)&&(this.$el.removeClass(this.options.enabledClass),this.$content.css({right:""})),this},j.prototype.flash=function(){return!this.iOSNativeScrolling&&this.isActive?(this.reset(),this.pane.addClass(this.options.flashedClass),setTimeout(function(a){return function(){a.pane.removeClass(a.options.flashedClass)}}(this),this.options.flashDelay),this):void 0},j}(),a.fn.nanoScroller=function(b){return this.each(function(){var c,d;if((d=this.nanoscroller)||(c=a.extend({},z,b),this.nanoscroller=d=new q(this,c)),b&&"object"==typeof b){if(a.extend(d.options,b),null!=b.scrollBottom)return d.scrollBottom(b.scrollBottom);if(null!=b.scrollTop)return d.scrollTop(b.scrollTop);if(b.scrollTo)return d.scrollTo(b.scrollTo);if("bottom"===b.scroll)return d.scrollBottom(0);if("top"===b.scroll)return d.scrollTop(0);if(b.scroll&&b.scroll instanceof a)return d.scrollTo(b.scroll);if(b.stop)return d.stop();if(b.destroy)return d.destroy();if(b.flash)return d.flash()}return d.reset()})},a.fn.nanoScroller.Constructor=q});
-	//# sourceMappingURL=jquery.nanoscroller.min.js.map
-
-	/**
-	 * Copyright Marc J. Schmidt. See the LICENSE file at the top-level
-	 * directory of this distribution and at
-	 * https://github.com/marcj/css-element-queries/blob/master/LICENSE.
-	 */
-//	!function(){this.ResizeSensor=function(e,t){function s(){this.q=[],this.add=function(e){this.q.push(e)};var e,t;this.call=function(){for(e=0,t=this.q.length;t>e;e++)this.q[e].call()}}function i(e,t){return e.currentStyle?e.currentStyle[t]:window.getComputedStyle?window.getComputedStyle(e,null).getPropertyValue(t):e.style[t]}function o(e,t){if(e.resizedAttached){if(e.resizedAttached)return void e.resizedAttached.add(t)}else e.resizedAttached=new s,e.resizedAttached.add(t);e.resizeSensor=document.createElement("div"),e.resizeSensor.className="resize-sensor";var o="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: scroll; z-index: -1; visibility: hidden;",n="position: absolute; left: 0; top: 0;";e.resizeSensor.style.cssText=o,e.resizeSensor.innerHTML='<div class="resize-sensor-expand" style="'+o+'"><div style="'+n+'"></div></div><div class="resize-sensor-shrink" style="'+o+'"><div style="'+n+' width: 200%; height: 200%"></div></div>',e.appendChild(e.resizeSensor),{fixed:1,absolute:1}[i(e,"position")]||(e.style.position="relative");var r,l,d=e.resizeSensor.childNodes[0],c=d.childNodes[0],h=e.resizeSensor.childNodes[1],a=(h.childNodes[0],function(){c.style.width=d.offsetWidth+10+"px",c.style.height=d.offsetHeight+10+"px",d.scrollLeft=d.scrollWidth,d.scrollTop=d.scrollHeight,h.scrollLeft=h.scrollWidth,h.scrollTop=h.scrollHeight,r=e.offsetWidth,l=e.offsetHeight});a();var f=function(){e.resizedAttached&&e.resizedAttached.call()},u=function(e,t,s){e.attachEvent?e.attachEvent("on"+t,s):e.addEventListener(t,s)},z=function(){(e.offsetWidth!=r||e.offsetHeight!=l)&&f(),a()};u(d,"scroll",z),u(h,"scroll",z)}var n=Object.prototype.toString.call(e),r="[object Array]"===n||"[object NodeList]"===n||"[object HTMLCollection]"===n||"undefined"!=typeof jQuery&&e instanceof jQuery||"undefined"!=typeof Elements&&e instanceof Elements;if(r)for(var l=0,d=e.length;d>l;l++)o(e[l],t);else o(e,t);this.detach=function(){if(r)for(var t=0,s=e.length;s>t;t++)ResizeSensor.detach(e[t]);else ResizeSensor.detach(e)}},this.ResizeSensor.detach=function(e){e.resizeSensor&&(e.removeChild(e.resizeSensor),delete e.resizeSensor,delete e.resizedAttached)}}();
-
-	
+console.log("Loading Theme");
 //////////// background ////////////////////
 
-
 	function randomHero() {
-    var heroPics = ['https://lh3.googleusercontent.com/-3nhlPiBe_qg/Xb-ZXG_3WsI/AAAAAAAALNc/4e-gpVmbPQ0KplILmvSCos8_iT0oOuKuQCPcBGAYYCw/w1400-h780-p/wallhaven-dgvzvl.jpg','https://lh3.googleusercontent.com/-rhqPamDeNT8/Xb-ZXPf_fXI/AAAAAAAALNc/8ec02YPhWLEh4ODTwsWi3li2VR6qBecFACPcBGAYYCw/w1400-h780-p/wallhaven-4y6897.jpg', 'https://lh3.googleusercontent.com/-pUj0gQ6DePY/Xb-ZXE-G5VI/AAAAAAAALNc/a1enGHYof9Q5OmcQ9gzvJ67R5b-nHRmRACPcBGAYYCw/w1400-h870-p/wallhaven-nr27eq.jpg', 'https://lh3.googleusercontent.com/-7c2M22PH3Gs/Xb-ZXFBotiI/AAAAAAAALNc/C97gX1miq2MxD6vBxgt7Wp5KxzNmks3IQCPcBGAYYCw/w1400-h780-p/wallhaven-48goky.jpg'];
+    var heroPics = ['https://lh3.googleusercontent.com/-rhqPamDeNT8/Xb-ZXPf_fXI/AAAAAAAALNc/8ec02YPhWLEh4ODTwsWi3li2VR6qBecFACPcBGAYYCw/w1400-h780-p/wallhaven-4y6897.jpg', 'https://lh3.googleusercontent.com/-pUj0gQ6DePY/Xb-ZXE-G5VI/AAAAAAAALNc/a1enGHYof9Q5OmcQ9gzvJ67R5b-nHRmRACPcBGAYYCw/w1400-h870-p/wallhaven-nr27eq.jpg', 'https://lh3.googleusercontent.com/-7c2M22PH3Gs/Xb-ZXFBotiI/AAAAAAAALNc/C97gX1miq2MxD6vBxgt7Wp5KxzNmks3IQCPcBGAYYCw/w1400-h780-p/wallhaven-48goky.jpg'];
 
     $('body').css({
         'background' : 'url('+ heroPics[Math.floor(Math.random() * heroPics.length)] + ') no-repeat',
@@ -387,12 +391,7 @@ $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/sjb7rw59p0qnx6
         'background-size' : 'cover'
     });
 }
-
-// Show Random Image on Page Load
 randomHero();
-
-console.log("Loading BillTubeTheme");
-//force https for videos from google
 if (window.location.protocol != "https:")
     window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
 //Load some dependencies for the base theme
@@ -417,52 +416,10 @@ $("#videowrap").mousemove(function() {
     clearTimeout(i);
     $("#VideoOverlay").hide();  
 });
-
 $("#VideoOverlay").append($("#mediarefresh"));
 $("#VideoOverlay").append("<button id='pipButton' title='Picture In Picture' class='fal fa-bring-forward OLB'></button>");
 $("#VideoOverlay").append("<button id='skip' title='Voteskip the video' class='fal fa-arrow-alt-to-right OLB'></button>");
 
-
-$(document).ready(function(){
-	$('#hidechat').on('click', function(){nochat();});
-	$('#showchat').on('click', function(){maxchat();});
-});
-
-function nochat(){
-	$('#chatwrap').addClass('hidden');
-	$('#pollwrap').addClass('hidden');
-	$('#maincontain').addClass('fullvideo');
-	$('#hidechat,#scroll-feature,#motdrow,#videoinfo,#queuecontainer,#footer,.navbar,#bg-wrapper,#rightpane').addClass('hidden');
-	$('#showchat').addClass('showchat');
-	    $('#mainpage').css({
-        'padding-top':'0px',
-    });
-	    $('#videowrap').css({
-        'position':'fixed',
-        'height':'100%!important',
-    });
-	    $('.embed-responsive').css({
-        'position':'static',
-    });
-}
-
-function maxchat(){
-	$('#chatwrap').removeClass('hidden');
-	$('#pollwrap').removeClass('hidden');
-	$('#maincontain').removeClass('fullvideo');
-        $('#hidechat,#scroll-feature,#motdrow,#videoinfo,#queuecontainer,#footer,.navbar,#bg-wrapper,#rightpane').removeClass('hidden');
-	$('#showchat').removeClass('showchat');
-	    $('#mainpage').css({
-        'padding-top':'50px',
-    });
-	    $('#videowrap').css({
-        'position':'inherit',
-        'height':'inherit',
-    });
-	    $('.embed-responsive').css({
-        'position':'relative',
-    });
-}
 var requestFullscreen = function (ele) {
 	if (ele.requestFullscreen) {
 		ele.requestFullscreen();
@@ -539,7 +496,6 @@ fsVidButton.addEventListener('click', function(e) {
 //  $(ytapiplayer_html5_api).toggleClass("flip");
 //});
 
-
 $("#chatwrap").append(
 '<div class="chat-area-footer">' +
 '<div class="chat-area-buttons">' +
@@ -552,8 +508,6 @@ $("#chatheader").append(
 '<div class="chat-area-group">' +
 '<span></span>' +
 '</div>');
-
-$("#ytapiplayer_html5_api").attr("poster","var (--VideoPoster)");
 
  var setImageSrc = function(imageData) {
     $placeholder.attr('src', imageData);
@@ -574,6 +528,10 @@ $("#fullscreenbtn").removeClass("btn-default");
 $("#fullscreenbtn").addClass("fad fa-expand-arrows-alt");
 
 
+//if (VideoPoster=="1" && Poster_URL!="") {
+//		$("#ytapiplayer_html5_api").attr({"poster":"url("' + Poster_URL + '")"});
+//	}
+	
 
 
 $("#userlisttoggle").addClass("fa fa-users ch");
@@ -702,12 +660,7 @@ if ($('#currenttitle').length !== 0) {
         return false;
         });
  } );
- scrollbtn = $('<button id="scroll-btn" class="btn btn-sm btn-default" title="Scroll to current item" />')
-  .append('<span class="glyphicon glyphicon-hand-right" />')
-  .prependTo("#ploptions")
-  .on("click", function() {
-	scrollQueue();
-  });
+
   
 window.socket.on("changeMedia", function () {
 var myVideo = document.getElementById("ytapiplayer");
@@ -1207,7 +1160,7 @@ function scrollerInit() {
   });
 //$.getScript("//billtube.github.io/theme/channels.js");
 //$.getScript("//dl.dropbox.com/s/posqswg5ib4pvd8/XaekaiModules.js");
-$.getScript("//dl.dropbox.com/s/cbhvu7e4ezjd0qh/discord.js");
+//$.getScript("//dl.dropbox.com/s/cbhvu7e4ezjd0qh/discord.js");
 var LOADED = (typeof LOADED==="undefined") ? false : true;
 LOADED ? location.reload() : '';
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -1290,7 +1243,7 @@ for (i=0;i<field.length;i++){
   });
 $("#ytapiplayer_html5_api").attr("airplay","allow");
 $("#ytapiplayer_html5_api").attr("x-webkit-airplay","allow");
-$("#ytapiplayer_html5_api").attr("poster","https://i.postimg.cc/kgRDV7ck/yncttk3.gif");
+//$("#ytapiplayer_html5_api").attr("poster","https://i.postimg.cc/kgRDV7ck/yncttk3.gif");
 $("#ytapiplayer_html5_api").attr("autoplay","true");
 
 
@@ -18728,6 +18681,6391 @@ $("#chatwrap").addClass("rightcontent");
 	        that.sendUserChatMessage(e);
 	    });
 	});
+bumplastbtn = $('<button title="Bump last added video" id="bumplast-btn" class="btn btn-default fal fa-redo"></button>')
+  .appendTo(ploptions)
+  .on("click", function() {
+	len=$("#queue").children().length;
+	uid=$("#queue .queue_entry:nth-child("+len+")").data("uid");
+	socket.emit("moveMedia", {from:uid, after:PL_CURRENT});
+  });
+  
+deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" class="btn btn-default fal fa-trash-undo-alt"></button>')
+  .appendTo(ploptions)
+  .on("click", function() {
+	if (confirm('Are you sure to delete last item?')) {
+		len=$("#queue").children().length;
+		uid=$("#queue .queue_entry:nth-child("+len+")").data("uid");
+		socket.emit("delete", uid);
+	}
+  });
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(12);
+	window.cytubeEnhanced.addModule('bbCodesHelper', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        templateButtons: ['b', 'i', 'sp', 'code', 's'],
+	        templateButtonsAnimationSpeed: 150
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+
+	    if ($('#chat-controls').length === 0) {
+	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
+	    }
+
+
+	    this.handleMarkdownHelperBtnClick = function ($markdownHelperBtn, $markdownTemplatesWrapper) {
+	        if ($markdownHelperBtn.hasClass('chatbtn-default')) { //closed
+	            $markdownHelperBtn.removeClass('chatbtn-default');
+	            $markdownHelperBtn.addClass('chatbtn-success');
+
+	            $markdownTemplatesWrapper.show();
+	            $markdownTemplatesWrapper.children().animate({left: 0}, settings.templateButtonsAnimationSpeed);
+	        } else { //opened
+	            $markdownHelperBtn.removeClass('chatbtn-success');
+	            $markdownHelperBtn.addClass('chatbtn-default');
+
+	            $markdownTemplatesWrapper.children().animate({left: -$markdownTemplatesWrapper.width()}, settings.templateButtonsAnimationSpeed, function () {
+	                $markdownTemplatesWrapper.hide();
+	            });
+	        }
+	    };
+
+	    this.$markdownHelperBtn = $('<button id="markdown-helper-btn" type="button" class="chatbtn" title="' + app.t('markdown[.]Markdown helper') + '">')
+	        .html('<i class="fad fa-font-case"></i>')
+	        .on('click', function () {
+	            that.handleMarkdownHelperBtnClick($(this), that.$markdownTemplatesWrapper);
+
+	            app.storage.toggle('bb-codes-opened');
+	        });
+
+	    if ($('#chat-help-btn').length !== 0) {
+	        this.$markdownHelperBtn.insertBefore('#chat-help-btn');
+	    } else {
+	        this.$markdownHelperBtn.appendTo('#chat-controls');
+	    }
+
+
+	    this.$markdownTemplatesWrapper = $('<div class="btn-group markdown-helper-templates-wrapper">')
+	        .insertAfter(this.$markdownHelperBtn)
+	        .hide();
+
+	    if (app.storage.get('bb-codes-opened')) {
+	        this.handleMarkdownHelperBtnClick(this.$markdownHelperBtn, this.$markdownTemplatesWrapper);
+	    }
+
+
+	    /**
+	     * Markdown templates
+	     *
+	     * To add your template you need to also add your template key into settings.templateButtons
+	     * @type {object}
+	     */
+	    this.markdownTemplates = {
+	        'b': {
+	            text: '<b>B</b>',
+	            title: app.t('markdown[.]Bold text')
+	        },
+	        'i': {
+	            text: '<i>I</i>',
+	            title: app.t('markdown[.]Cursive text')
+	        },
+	        'sp': {
+	            text: 'SP',
+	            title: app.t('markdown[.]Spoiler')
+	        },
+	        'code': {
+	            text: '<code>CODE</code>',
+	            title: app.t('markdown[.]Monospace')
+	        },
+	        's': {
+	            text: '<s>S</s>',
+	            title: app.t('markdown[.]Strike')
+	        }
+	    };
+
+	    var template;
+	    for (var templateIndex = 0, templatesLength = settings.templateButtons.length; templateIndex < templatesLength; templateIndex++) {
+	        template = settings.templateButtons[templateIndex];
+
+	        $('<button type="button" class="btn btn-sm btn-default" title="' + this.markdownTemplates[template].title + '">')
+	            .html(this.markdownTemplates[template].text)
+	            .data('template', template)
+	            .appendTo(this.$markdownTemplatesWrapper);
+	    }
+
+
+	    this.handleMarkdown = function (templateType) {
+	        if (this.markdownTemplates.hasOwnProperty(templateType)) {
+	            $('#chatline')
+	                .selection('insert', {
+	                    text: '[' + templateType + ']',
+	                    mode: 'before'
+	                })
+	                .selection('insert', {
+	                    text: '[/' + templateType + ']',
+	                    mode: 'after'
+	                });
+	        }
+	    };
+	    this.$markdownTemplatesWrapper.on('click', 'button', function () {
+	        that.handleMarkdown($(this).data('template'));
+
+	        return false;
+	    });
+	});
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	/*!
+	 * jQuery.selection - jQuery Plugin
+	 *
+	 * Copyright (c) 2010-2014 IWASAKI Koji (@madapaja).
+	 * http://blog.madapaja.net/
+	 * Under The MIT License
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining
+	 * a copy of this software and associated documentation files (the
+	 * "Software"), to deal in the Software without restriction, including
+	 * without limitation the rights to use, copy, modify, merge, publish,
+	 * distribute, sublicense, and/or sell copies of the Software, and to
+	 * permit persons to whom the Software is furnished to do so, subject to
+	 * the following conditions:
+	 *
+	 * The above copyright notice and this permission notice shall be
+	 * included in all copies or substantial portions of the Software.
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	 * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	 * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+	 * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+	 * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+	 * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+	 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	 */
+	(function($, win, doc) {
+	    /**
+	     * get caret status of the selection of the element
+	     *
+	     * @param   {Element}   element         target DOM element
+	     * @return  {Object}    return
+	     * @return  {String}    return.text     selected text
+	     * @return  {Number}    return.start    start position of the selection
+	     * @return  {Number}    return.end      end position of the selection
+	     */
+	    var _getCaretInfo = function(element){
+	        var res = {
+	            text: '',
+	            start: 0,
+	            end: 0
+	        };
+
+	        if (!element.value) {
+	            /* no value or empty string */
+	            return res;
+	        }
+
+	        try {
+	            if (win.getSelection) {
+	                /* except IE */
+	                res.start = element.selectionStart;
+	                res.end = element.selectionEnd;
+	                res.text = element.value.slice(res.start, res.end);
+	            } else if (doc.selection) {
+	                /* for IE */
+	                element.focus();
+
+	                var range = doc.selection.createRange(),
+	                    range2 = doc.body.createTextRange();
+
+	                res.text = range.text;
+
+	                try {
+	                    range2.moveToElementText(element);
+	                    range2.setEndPoint('StartToStart', range);
+	                } catch (e) {
+	                    range2 = element.createTextRange();
+	                    range2.setEndPoint('StartToStart', range);
+	                }
+
+	                res.start = element.value.length - range2.text.length;
+	                res.end = res.start + range.text.length;
+	            }
+	        } catch (e) {
+	            /* give up */
+	        }
+
+	        return res;
+	    };
+
+	    /**
+	     * caret operation for the element
+	     * @type {Object}
+	     */
+	    var _CaretOperation = {
+	        /**
+	         * get caret position
+	         *
+	         * @param   {Element}   element         target element
+	         * @return  {Object}    return
+	         * @return  {Number}    return.start    start position for the selection
+	         * @return  {Number}    return.end      end position for the selection
+	         */
+	        getPos: function(element) {
+	            var tmp = _getCaretInfo(element);
+	            return {start: tmp.start, end: tmp.end};
+	        },
+
+	        /**
+	         * set caret position
+	         *
+	         * @param   {Element}   element         target element
+	         * @param   {Object}    toRange         caret position
+	         * @param   {Number}    toRange.start   start position for the selection
+	         * @param   {Number}    toRange.end     end position for the selection
+	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
+	         */
+	        setPos: function(element, toRange, caret) {
+	            caret = this._caretMode(caret);
+
+	            if (caret === 'start') {
+	                toRange.end = toRange.start;
+	            } else if (caret === 'end') {
+	                toRange.start = toRange.end;
+	            }
+
+	            element.focus();
+	            try {
+	                if (element.createTextRange) {
+	                    var range = element.createTextRange();
+
+	                    if (win.navigator.userAgent.toLowerCase().indexOf("msie") >= 0) {
+	                        toRange.start = element.value.substr(0, toRange.start).replace(/\r/g, '').length;
+	                        toRange.end = element.value.substr(0, toRange.end).replace(/\r/g, '').length;
+	                    }
+
+	                    range.collapse(true);
+	                    range.moveStart('character', toRange.start);
+	                    range.moveEnd('character', toRange.end - toRange.start);
+
+	                    range.select();
+	                } else if (element.setSelectionRange) {
+	                    element.setSelectionRange(toRange.start, toRange.end);
+	                }
+	            } catch (e) {
+	                /* give up */
+	            }
+	        },
+
+	        /**
+	         * get selected text
+	         *
+	         * @param   {Element}   element         target element
+	         * @return  {String}    return          selected text
+	         */
+	        getText: function(element) {
+	            return _getCaretInfo(element).text;
+	        },
+
+	        /**
+	         * get caret mode
+	         *
+	         * @param   {String}    caret           caret mode
+	         * @return  {String}    return          any of the following: "keep" | "start" | "end"
+	         */
+	        _caretMode: function(caret) {
+	            caret = caret || "keep";
+	            if (caret === false) {
+	                caret = 'end';
+	            }
+
+	            switch (caret) {
+	                case 'keep':
+	                case 'start':
+	                case 'end':
+	                    break;
+
+	                default:
+	                    caret = 'keep';
+	            }
+
+	            return caret;
+	        },
+
+	        /**
+	         * replace selected text
+	         *
+	         * @param   {Element}   element         target element
+	         * @param   {String}    text            replacement text
+	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
+	         */
+	        replace: function(element, text, caret) {
+	            var tmp = _getCaretInfo(element),
+	                orig = element.value,
+	                pos = $(element).scrollTop(),
+	                range = {start: tmp.start, end: tmp.start + text.length};
+
+	            element.value = orig.substr(0, tmp.start) + text + orig.substr(tmp.end);
+
+	            $(element).scrollTop(pos);
+	            this.setPos(element, range, caret);
+	        },
+
+	        /**
+	         * insert before the selected text
+	         *
+	         * @param   {Element}   element         target element
+	         * @param   {String}    text            insertion text
+	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
+	         */
+	        insertBefore: function(element, text, caret) {
+	            var tmp = _getCaretInfo(element),
+	                orig = element.value,
+	                pos = $(element).scrollTop(),
+	                range = {start: tmp.start + text.length, end: tmp.end + text.length};
+
+	            element.value = orig.substr(0, tmp.start) + text + orig.substr(tmp.start);
+
+	            $(element).scrollTop(pos);
+	            this.setPos(element, range, caret);
+	        },
+
+	        /**
+	         * insert after the selected text
+	         *
+	         * @param   {Element}   element         target element
+	         * @param   {String}    text            insertion text
+	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
+	         */
+	        insertAfter: function(element, text, caret) {
+	            var tmp = _getCaretInfo(element),
+	                orig = element.value,
+	                pos = $(element).scrollTop(),
+	                range = {start: tmp.start, end: tmp.end};
+
+	            element.value = orig.substr(0, tmp.end) + text + orig.substr(tmp.end);
+
+	            $(element).scrollTop(pos);
+	            this.setPos(element, range, caret);
+	        }
+	    };
+
+	    /* add jQuery.selection */
+	    $.extend({
+	        /**
+	         * get selected text on the window
+	         *
+	         * @param   {String}    mode            selection mode: any of the following: "text" | "html"
+	         * @return  {String}    return
+	         */
+	        selection: function(mode) {
+	            var getText = ((mode || 'text').toLowerCase() === 'text');
+
+	            try {
+	                if (win.getSelection) {
+	                    if (getText) {
+	                        // get text
+	                        return win.getSelection().toString();
+	                    } else {
+	                        // get html
+	                        var sel = win.getSelection(), range;
+
+	                        if (sel.getRangeAt) {
+	                            range = sel.getRangeAt(0);
+	                        } else {
+	                            range = doc.createRange();
+	                            range.setStart(sel.anchorNode, sel.anchorOffset);
+	                            range.setEnd(sel.focusNode, sel.focusOffset);
+	                        }
+
+	                        return $('<div></div>').append(range.cloneContents()).html();
+	                    }
+	                } else if (doc.selection) {
+	                    if (getText) {
+	                        // get text
+	                        return doc.selection.createRange().text;
+	                    } else {
+	                        // get html
+	                        return doc.selection.createRange().htmlText;
+	                    }
+	                }
+	            } catch (e) {
+	                /* give up */
+	            }
+
+	            return '';
+	        }
+	    });
+
+	    /* add selection */
+	    $.fn.extend({
+	        selection: function(mode, opts) {
+	            opts = opts || {};
+
+	            switch (mode) {
+	                /**
+	                 * selection('getPos')
+	                 * get caret position
+	                 *
+	                 * @return  {Object}    return
+	                 * @return  {Number}    return.start    start position for the selection
+	                 * @return  {Number}    return.end      end position for the selection
+	                 */
+	                case 'getPos':
+	                    return _CaretOperation.getPos(this[0]);
+
+	                /**
+	                 * selection('setPos', opts)
+	                 * set caret position
+	                 *
+	                 * @param   {Number}    opts.start      start position for the selection
+	                 * @param   {Number}    opts.end        end position for the selection
+	                 */
+	                case 'setPos':
+	                    return this.each(function() {
+	                        _CaretOperation.setPos(this, opts);
+	                    });
+
+	                /**
+	                 * selection('replace', opts)
+	                 * replace the selected text
+	                 *
+	                 * @param   {String}    opts.text            replacement text
+	                 * @param   {String}    opts.caret           caret mode: any of the following: "keep" | "start" | "end"
+	                 */
+	                case 'replace':
+	                    return this.each(function() {
+	                        _CaretOperation.replace(this, opts.text, opts.caret);
+	                    });
+
+	                /**
+	                 * selection('insert', opts)
+	                 * insert before/after the selected text
+	                 *
+	                 * @param   {String}    opts.text            insertion text
+	                 * @param   {String}    opts.caret           caret mode: any of the following: "keep" | "start" | "end"
+	                 * @param   {String}    opts.mode            insertion mode: any of the following: "before" | "after"
+	                 */
+	                case 'insert':
+	                    return this.each(function() {
+	                        if (opts.mode === 'before') {
+	                            _CaretOperation.insertBefore(this, opts.text, opts.caret);
+	                        } else {
+	                            _CaretOperation.insertAfter(this, opts.text, opts.caret);
+	                        }
+	                    });
+
+	                /**
+	                 * selection('get')
+	                 * get selected text
+	                 *
+	                 * @return  {String}    return
+	                 */
+	                case 'get':
+	                    /* falls through */
+	                default:
+	                    return _CaretOperation.getText(this[0]);
+	            }
+
+	            return this;
+	        }
+	    });
+	})(jQuery, window, window.document);
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('chatAvatars', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var tab = app.Settings.getTab('general', app.t('general[.]General'), 100);
+	    var userSettings = app.Settings.storage;
+	    var appSettings = app.storage;
+
+	    var defaultSettings = {
+	        avatarClass: 'profileImage',
+	        smallAvatarClass: 'chat-avatar_small',
+	        bigAvatarClass: 'chat-avatar_big'
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    var namespace = 'avatars';
+	    this.scheme = {
+	        'avatars-mode': {
+	            title: app.t('chatAvatars[.]Chat avatars'),
+	            default: 'big',
+	            options: [
+	                {value: 'small', title: app.t('chatAvatars[.]Disabled')},
+	                {value: 'small', title: app.t('chatAvatars[.]Small')},
+	                {value: 'big', title: app.t('chatAvatars[.]Big')}
+	            ]
+	        }
+	    };
+	    appSettings.setDefault(namespace + '.cache', []);
+
+
+
+	    this.cacheAvatar = function (username, avatar) {
+	        var cachedAvatars = appSettings.get(namespace + '.cache');
+
+	        if (cachedAvatars.length >= 50) {
+	            cachedAvatars = cachedAvatars.slice(0, 49);
+	        }
+
+	        cachedAvatars.unshift({
+	            username: username,
+	            avatar: avatar
+	        });
+
+	        appSettings.set(namespace + '.cache', cachedAvatars);
+	    };
+
+	    this.getAvatarFromCache = function (username) {
+	        var cachedAvatar = _.findLast(appSettings.get(namespace + '.cache'), function (o) { return o.username == username; });
+	        cachedAvatar = cachedAvatar ? cachedAvatar.avatar : null;
+
+	        return cachedAvatar;
+	    };
+
+	    this.getAvatarFromUserlist = function (username) {
+	        return (window.findUserlistItem(username) && window.findUserlistItem(username).data('profile').image) ? window.findUserlistItem(username).data('profile').image : null;
+	    };
+
+	    this.applyAvatar = function ($usernameBlock, username, newAvatar) {
+	        username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
+	        newAvatar = newAvatar || that.getAvatarFromUserlist(username);
+	        var cachedAvatar = that.getAvatarFromCache(username);
+	        var $messageBlock = $usernameBlock.parent();
+
+	        if (cachedAvatar || newAvatar) {
+	            if (!cachedAvatar) {
+	                that.cacheAvatar(username, newAvatar);
+	            }
+
+	            if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
+	                var $avatar = $("<img>").attr("src", newAvatar || cachedAvatar)
+	                    .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
+	                    .prependTo($messageBlock);
+
+	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+	                    $(this).css('display', 'none');
+	                    $avatar.attr('title', username);
+	                }
+	            }
+	        }
+	    };
+
+
+//
+
+
+
+
+	    /**
+	     * Creating markup for settings
+	     */
+	    var schemeItem;
+	    var option;
+	    var sort = 100;
+	    for (var itemName in this.scheme) {
+	        schemeItem = this.scheme[itemName];
+
+	        userSettings.setDefault(namespace + '.' + itemName, schemeItem.default);
+
+	        if (userSettings.get(namespace + '.' + itemName)) {
+	            for (option in schemeItem.options) {
+	                schemeItem.options[option].selected = (userSettings.get(namespace + '.' + itemName) == schemeItem.options[option].value);
+	            }
+	        }
+
+	        tab.addControl('select', 'horizontal', schemeItem.title, itemName, schemeItem.options, null, sort);
+	        sort += 100;
+	    }
+
+
+	    /**
+	     * Saving and applying settings
+	     */
+	    app.Settings.onSave(function (settings) {
+	        for (var itemName in that.scheme) {
+	            settings.set(namespace + '.' + itemName, $('#' + app.prefix + itemName).val());
+	        }
+
+	        if (settings.isDirty(namespace + '.avatars-mode')) {
+	            app.Settings.requestPageReload();
+	        }
+	    });
+
+
+	    /**
+	     * Applying settings
+	     */
+	    if (userSettings.get(namespace  + '.avatars-mode')) {
+	        window.formatChatMessage = (function (oldFormatChatMessage) {
+	            return function (data, last) {
+	                var $div = oldFormatChatMessage(data, last);
+
+	                that.applyAvatar($div.find('.username'), data.username);
+
+	                return $div;
+	            };
+	        })(window.formatChatMessage);
+
+	        $('.username').each(function () {
+	            that.applyAvatar($(this));
+	        });
+
+
+	        window.socket.on('addUser', function (data) {
+	            if (data.profile && data.profile.image && data.name) {
+	                $('.username:contains("' + data.name + ':")').each(function () {
+	                    that.applyAvatar($(this), data.name, data.profile.image);
+	                });
+	            }
+	        });
+	    }
+	});
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('chatCommandsHelp', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        commands: {
+	            '/me': app.t('chatCommands[.]%username% action (e.g: <i>/me is dancing</i>)'),
+	            '/sp': app.t('chatCommands[.]spoiler'),
+	            '/afk': app.t('chatCommands[.]sets the "AFK" status')
+	        }
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+
+	    if ($('#chat-controls').length === 0) {
+	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
+	    }
+
+	    this.commands = {};
+	    this.commands[app.t('Standard commands')] = settings.commands;
+
+	    if (app.isModulePermitted('additionalChatCommands')) {
+	        app.getModule('additionalChatCommands').done(function (commandsModule) {
+	            var additionalCommands = {};
+
+	            for (var command in commandsModule.commandsList) {
+	                if (commandsModule.commandsList.hasOwnProperty(command) && commandsModule.isCommandPermitted(command) && (commandsModule.commandsList[command].isAvailable ? commandsModule.commandsList[command].isAvailable() : true)) {
+	                    additionalCommands[command] = commandsModule.commandsList[command].description || '';
+	                }
+	            }
+
+	            that.commands[app.t('Extra commands')] = additionalCommands;
+	        });
+	    }
+
+
+	    this.handleChatHelpBtn = function (commands) {
+	        var $header = $('<h3 class="modal-title">').text(app.t('The list of chat commands'));
+
+	        var $bodyWrapper = $('<div>');
+
+	        for (var commandsPart in commands) {
+	            if (commands.hasOwnProperty(commandsPart)) {
+	                $('<h3>').html(commandsPart).appendTo($bodyWrapper);
+
+	                var $ul = $('<ul>');
+	                for (var command in commands[commandsPart]) {
+	                    if (commands[commandsPart].hasOwnProperty(command)) {
+	                        $('<li>').html('<code>' + command + '</code> - ' + commands[commandsPart][command] + '.').appendTo($ul);
+	                    }
+	                }
+
+	                $ul.appendTo($bodyWrapper);
+	            }
+	        }
+
+	        app.UI.createModalWindow('chat-commands-help', $header, $bodyWrapper);
+	    };
+	    this.$chatHelpBtn = $('<button id="chat-help-btn" class="chatbtn fad fa-question-circle">')
+	        .text(app.t(' '))
+	        .appendTo('#chat-controls')
+	        .on('click', function () {
+	            that.handleChatHelpBtn(that.commands);
+	        });
+	});
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('chatControls', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        afkButton: true,
+	        clearChatButton: false
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+
+
+	    this.handleAfkBtn = function () {
+	        window.socket.emit('chatMsg', {msg: '/afk'});
+	    };
+	    this.$afkBtn = $('<span id="afk-btn" class="label label-default pull-right pointer">')
+	        .text(app.t('AFK'))
+	        .appendTo('.chat-area-buttons')
+	        .on('click', function () {
+	            that.handleAfkBtn();
+	        });
+
+
+
+	    this.handleAfk = function (data) {
+	        if (data.name === window.CLIENT.name) {
+	            if (data.afk) {
+	                that.$afkBtn.removeClass('label-default');
+	                that.$afkBtn.addClass('label-success');
+	            } else {
+	                that.$afkBtn.addClass('label-default');
+	                that.$afkBtn.removeClass('label-success');
+	            }
+	        }
+	    };
+
+	    if (settings.afkButton) {
+	        window.socket.on('setAFK', function (data) {
+	            that.handleAfk(data);
+	        });
+	    } else {
+	        this.$afkBtn.hide();
+	    }
+
+
+
+
+	    this.handleClearBtn = function () {
+	        if (window.confirm(app.t('Are you sure, that you want to clear the chat?'))) {
+	            window.socket.emit("chatMsg", {msg: '/clear'});
+	        }
+	    };
+	    this.$clearChatBtn = $('<span id="clear-chat-btn" class="label label-default pull-right pointer">')
+	        .text(app.t('Clear'))
+	        .insertAfter(this.$afkBtn)
+	        .on('click', function () {
+	            that.handleClearBtn();
+	        });
+
+	    if (!window.hasPermission("chatclear")) {
+	        this.$clearChatBtn.hide();
+	    }
+
+
+	    this.handleChatClear = function () {
+	        if (window.hasPermission("chatclear") && settings.clearChatButton) {
+	            that.$clearChatBtn.show();
+	        } else {
+	            that.$clearChatBtn.hide();
+	        }
+	    };
+
+	    window.socket.on('setUserRank', function () {
+	        that.handleChatClear();
+	    });
+	});
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	/*
+	TODO: keep pm messages, add ability to user to specify settings, ignore users
+	 */
+	window.cytubeEnhanced.addModule('chatHistory', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        itemsInHistory: 50
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+	    app.storage.setDefault('pmHistory', []);
+
+
+	    window.socket.on('chatMsg', function (data) {
+	        if (window.CLIENT.name && data.msg.toLowerCase().indexOf(window.CLIENT.name.toLowerCase()) != -1) {
+	            var pmHistory = app.storage.get('pmHistory');
+	            if (!$.isArray(pmHistory)) {
+	                pmHistory = [];
+	            }
+
+	            if (pmHistory.length >= settings.itemsInHistory) {
+	                pmHistory = pmHistory.slice(0, settings.itemsInHistory - 1);
+	            }
+
+	            pmHistory.unshift({
+	                username: data.username,
+	                msg: data.msg,
+	                time: data.time
+	            });
+
+	            app.storage.set('pmHistory', pmHistory);
+	        }
+	    });
+
+
+	    this.formatHistoryMessage = function (data) {
+	        var $messageWrapper = $('<div class="pm-history-message">');
+
+
+	        var time = (new Date(data.time));
+
+	        var day = time.getDate();
+	        day = day < 10 ? ('0' + day) : day;
+	        var month = time.getMonth();
+	        month = month < 10 ? ('0' + month) : month;
+	        var year = time.getFullYear();
+	        var hours = time.getHours();
+	        hours = hours < 10 ? ('0' + hours) : hours;
+	        var minutes = time.getMinutes();
+	        minutes = minutes < 10 ? ('0' + minutes) : minutes;
+	        var seconds = time.getSeconds();
+	        seconds = seconds < 10 ? ('0' + seconds) : seconds;
+
+	        var timeString = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+
+
+
+	        $messageWrapper.append($('<div class="pm-history-message-time">[' + timeString + ']</div>'));
+	        $messageWrapper.append($('<div class="pm-history-message-username">' + data.username + '</div>'));
+	        $messageWrapper.append($('<div class="pm-history-message-content">' + data.msg + '</div>'));
+
+
+	        return $messageWrapper;
+	    };
+
+	    this.showChatHistory = function () {
+	        var pmHistory = app.storage.get('pmHistory');
+	        if (!$.isArray(pmHistory)) {
+	            pmHistory = [];
+	        }
+
+
+	        var $header = $('<div class="modal-header__inner">');
+	        $header.append($('<h3 class="modal-title">').text(app.t('pmHistory[.]Chat history')));
+	        $header.append($('<div class="modat-header__description">').text(app.t('pmHistory[.]Your chat messages history.')));
+
+	        var $wrapper = $('<div class="pm-history-content">');
+	        for (var position = 0, historyLength = pmHistory.length; position < historyLength; position++) {
+	            $wrapper.append(that.formatHistoryMessage(pmHistory[position]));
+	        }
+
+
+	        var $resetChatHistoryBtn = $('<button type="button" id="pm-history-reset-btn" class="btn btn-danger" data-dismiss="modal">' + app.t('pmHistory[.]Reset history') + '</button>')
+	            .on('click', function () {
+	                if (window.confirm(app.t('pmHistory[.]Are you sure, that you want to clear messages history?'))) {
+	                    that.resetChatHistory();
+	                }
+	            });
+	        var $exitChatHistoryBtn = $('<button type="button" id="pm-history-exit-btn" class="btn btn-default" data-dismiss="modal">' + app.t('pmHistory[.]Exit') + '</button>');
+	        var $footer = $('<div class="pm-history-footer">');
+	        $footer.append($resetChatHistoryBtn);
+	        $footer.append($exitChatHistoryBtn);
+
+
+	        return app.UI.createModalWindow('chat-history', $header, $wrapper, $footer);
+	    };
+
+	    this.$showChatHistoryBtn = $('<span id="pm-history-btn" class="label label-default pull-right pointer">')
+	        .text(app.t('pmHistory[.]History'))
+	        .appendTo('.chat-area-buttons')
+	        .on('click', function () {
+	            that.showChatHistory();
+	        });
+
+
+	    this.resetChatHistory = function () {
+	        app.storage.set('pmHistory', app.storage.getDefault('pmHistory'));
+	    };
+	});
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('common', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        insertUsernameOnClick: true
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    this.$chatline = $("#chatline");
+	    this.$userlist = $("#userlist");
+
+
+	    window.chatTabComplete = function () {
+	        var i;
+	        var words = that.$chatline.val().split(" ");
+	        var current = words[words.length - 1].toLowerCase();
+	        if (!current.match(/^[\wа-яА-ЯёЁ-]{1,20}$/)) {
+	            return;
+	        }
+
+	        var __slice = Array.prototype.slice;
+	        var usersWithCap = __slice.call(that.$userlist.find('.userlist_item')).map(function (elem) {
+	            return elem.children[1].innerHTML;
+	        });
+	        var users = __slice.call(usersWithCap).map(function (user) {
+	            return user.toLowerCase();
+	        }).filter(function (name) {
+	            return name.indexOf(current) === 0;
+	        });
+
+	        // users now contains a list of names that start with current word
+
+	        if (users.length === 0) {
+	            return;
+	        }
+
+	        // trim possible names to the shortest possible completion
+	        var min = Math.min.apply(Math, users.map(function (name) {
+	            return name.length;
+	        }));
+	        users = users.map(function (name) {
+	            return name.substring(0, min);
+	        });
+
+	        // continually trim off letters until all prefixes are the same
+	        var changed = true;
+	        var iter = 21;
+	        while (changed) {
+	            changed = false;
+	            var first = users[0];
+	            for (i = 1; i < users.length; i++) {
+	                if (users[i] !== first) {
+	                    changed = true;
+	                    break;
+	                }
+	            }
+
+	            if (changed) {
+	                users = users.map(function (name) {
+	                    return name.substring(0, name.length - 1);
+	                });
+	            }
+
+	            // In the event something above doesn't generate a break condition, limit
+	            // the maximum number of repetitions
+	            if (--iter < 0) {
+	                break;
+	            }
+	        }
+
+	        current = users[0].substring(0, min);
+	        for (i = 0; i < usersWithCap.length; i++) {
+	            if (usersWithCap[i].toLowerCase() === current) {
+	                current = usersWithCap[i];
+	                break;
+	            }
+	        }
+
+	        if (users.length === 1) {
+	            if (words.length === 1) {
+	                current += ":";
+	            }
+	            current += " ";
+	        }
+	        words[words.length - 1] = current;
+	        that.$chatline.val(words.join(" "));
+	    };
+
+
+	    if (settings.insertUsernameOnClick) {
+	        $('#messagebuffer')
+	            .on('click', '.username', function() {
+	                app.Helpers.addMessageToChatInput($(this).text(), 'begin');
+	            })
+	            .on('click', '.chat-avatar', function() {
+	                app.Helpers.addMessageToChatInput($(this).parent().find('.username').text(), 'begin');
+	            });
+	    }
+
+
+
+	    $('#wrap').children('.navbar-fixed-top').removeClass('navbar-fixed-top');
+	    $('#footer').children('.container').append('<p class="text-muted credit">CyTube Enhanced Integrated(<a href="https://github.com/kaba99/cytube-enhanced" target="_blank">GitHub</a>)</p>');
+
+	    setTimeout(function () {
+	        window.handleWindowResize(); //chat height fix
+	    }, 3000);
+	    setTimeout(function () {
+	        window.handleWindowResize(); //chat height fix
+	    }, 10000);
+
+
+
+	    window.addUserDropdown = (function (oldAddUserDropdown) {
+	        return function (entry) {
+	            var functionResponse = oldAddUserDropdown(entry);
+
+	            entry.find('.user-dropdown>strong').click(function () {
+	                that.$chatline.val($(this).text() + ": " + that.$chatline.val());
+	            });
+
+	            return functionResponse;
+	        };
+	    })(window.addUserDropdown);
+
+	    $('.user-dropdown>strong').click(function () {
+	        that.$chatline.val($(this).text() + ": " + that.$chatline.val()).focus();
+	    });
+
+
+	    $('#queue').sortable("option", "axis", "y");
+	});
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('customCss', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        aceUrl: 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js'
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    var tab = app.Settings.getTab('custom-css', 'CSS', 200);
+	    var namespace = 'user-code';
+
+	    var userSettingsFromV1 = app.parseJSON(window.getOrDefault(window.CHANNEL.name + "_config-layout", undefined), {});
+	    app.Settings.storage.setDefault(namespace + '.css', (_.isPlainObject(userSettingsFromV1) && _.isString(userSettingsFromV1['user-css'])) ? userSettingsFromV1['user-css'] : '');
+
+	    var $editor = $('<textarea class="' + app.prefix + 'custom-editor-textarea"></textarea>').val(app.Settings.storage.get(namespace + '.css')).appendTo(tab.$content);
+	    var $aceEditor = $('<div class="' + app.prefix + 'custom-editor-ace" id="' + app.prefix + 'css-editor"></div>').text(app.Settings.storage.get(namespace + '.css'));
+	    var aceEditor;
+
+
+	    tab.onShow(function () {
+	        if (typeof aceEditor === 'undefined') {
+	            if (typeof window.ace === 'undefined') {
+	                if (!app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
+	                    app.Settings.aceIsLoading = true;
+
+	                    $.ajax({
+	                        url: settings.aceUrl,
+	                        dataType: "script",
+	                        timeout: 20000 //20 sec
+	                    }).done(function () {
+	                        that.initializeAceEditor();
+	                    }).always(function () {
+	                        app.Settings.aceIsLoading = false;
+	                        app.Settings.aceLoadingFailed = true;
+	                        tab.$content.toggleLoader('off');
+	                    });
+	                }
+
+	                if (app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
+	                    tab.$content.toggleLoader('on');
+	                }
+	            } else {
+	                that.initializeAceEditor();
+	            }
+	        }
+	    });
+
+
+	    this.applyUserCss = function (css) {
+	        $('#' + app.prefix + 'user-css').remove();
+	        $('head').append('<style id="' + app.prefix + 'user-css" type="text/css">' + css + '</style>');
+	    };
+
+
+	    this.initializeAceEditor = function () {
+	        $aceEditor.text($editor.val());
+	        $editor.replaceWith($aceEditor);
+
+	        aceEditor = window.ace.edit(app.prefix + 'css-editor');
+	        aceEditor.setTheme("ace/theme/tomorrow_night");
+	        aceEditor.getSession().setMode("ace/mode/css");
+	        aceEditor.getSession().setTabSize(4);
+	        aceEditor.getSession().setUseSoftTabs(true);
+	        aceEditor.getSession().setUseWrapMode(true);
+	        aceEditor.getSession().setWrapLimitRange();
+	        aceEditor.setOptions({
+	            minLines: 30,
+	            maxLines: 30,
+	            autoScrollEditorIntoView: true,
+	            highlightActiveLine: true
+	        });
+	    };
+
+
+	    /**
+	     * Saving and applying settings
+	     */
+	    app.Settings.onSave(function (settings) {
+	        if (aceEditor) {
+	            settings.set(namespace + '.css', aceEditor.getValue());
+	        } else {
+	            settings.set(namespace + '.css', $editor.val());
+	        }
+
+	        that.applyUserCss(settings.get(namespace + '.css'));
+	    });
+	    this.applyUserCss(app.Settings.storage.get(namespace + '.css'));
+	});
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('customJs', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        aceUrl: 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js'
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    var tab = app.Settings.getTab('custom-js', 'JS', 300);
+	    var namespace = 'user-code';
+	    app.Settings.storage.setDefault(namespace + '.js', '');
+
+	    var $editor = $('<textarea class="' + app.prefix + 'custom-editor-textarea"></textarea>').val(app.Settings.storage.get(namespace + '.js')).appendTo(tab.$content);
+	    var $aceEditor = $('<div class="' + app.prefix + 'custom-editor-ace" id="' + app.prefix + 'js-editor"></div>').text(app.Settings.storage.get(namespace + '.js'));
+	    var aceEditor;
+
+
+	    tab.onShow(function () {
+	        if (typeof aceEditor === 'undefined') {
+	            if (typeof window.ace === 'undefined') {
+	                if (!app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
+	                    app.Settings.aceIsLoading = true;
+
+	                    $.ajax({
+	                        url: settings.aceUrl,
+	                        dataType: "script",
+	                        timeout: 20000 //20 sec
+	                    }).done(function () {
+	                        that.initializeAceEditor();
+	                    }).always(function () {
+	                        app.Settings.aceIsLoading = false;
+	                        app.Settings.aceLoadingFailed = true;
+	                        tab.$content.toggleLoader('off');
+	                    });
+	                }
+
+	                if (app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
+	                    tab.$content.toggleLoader('on');
+	                }
+	            } else {
+	                that.initializeAceEditor();
+	            }
+	        }
+	    });
+
+
+	    this.applyUserJs = function (js) {
+	        $('#' + app.prefix + 'user-js').remove();
+	        $('body').append('<script id="' + app.prefix + 'user-js" type="text/javascript">' + js + '</script>');
+	    };
+
+
+	    this.initializeAceEditor = function () {
+	        $aceEditor.text($editor.val());
+	        $editor.replaceWith($aceEditor);
+
+	        aceEditor = window.ace.edit(app.prefix + 'js-editor');
+	        aceEditor.setTheme("ace/theme/tomorrow_night");
+	        aceEditor.getSession().setMode("ace/mode/javascript");
+	        aceEditor.getSession().setTabSize(4);
+	        aceEditor.getSession().setUseSoftTabs(true);
+	        aceEditor.getSession().setUseWrapMode(true);
+	        aceEditor.getSession().setWrapLimitRange();
+	        aceEditor.setOptions({
+	            minLines: 30,
+	            maxLines: 30,
+	            autoScrollEditorIntoView: true,
+	            highlightActiveLine: true
+	        });
+	    };
+
+
+	    /**
+	     * Saving and applying settings
+	     */
+	    app.Settings.onSave(function (settings) {
+	        if (aceEditor) {
+	            settings.set(namespace + '.js', aceEditor.getValue());
+	        } else {
+	            settings.set(namespace + '.js', $editor.val());
+	        }
+
+	        that.applyUserJs(settings.get(namespace + '.js'));
+	    });
+	    this.applyUserJs(app.Settings.storage.get(namespace + '.js'));
+	});
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('extras', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        enabledModules: ['anime-quotes', 'pirate-quotes']
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    var tab = app.Settings.getTab('extras', app.t('extras[.]Extras'), 400);
+	    var $tabContent = $('<div class="row">').appendTo(tab.$content).wrap('<div class="' + app.prefix + 'extras">');
+	    var userSettings = app.Settings.storage;
+
+	    var $modulesInfoMessage = $('<div class="' + app.prefix + 'extras__info-message">').text('Сторонние модули отсутствуют.').prependTo(tab.$content);
+
+	    var namespace = 'extras';
+	    userSettings.setDefault(namespace + '.enabled', settings.enabledModules);
+	    this.enabledModules = userSettings.get(namespace + '.enabled') || [];
+	    this.extraModules = {};
+
+
+	    this.add = function (config) {
+	        $modulesInfoMessage.text(app.t('extras[.]Extras for additional functionality'));
+
+	        that.extraModules[config.name] = config;
+	        that.extraModules[config.name].$el = that.addMarkup(config).appendTo($tabContent);
+	        that.sort();
+
+	        if (that.enabledModules.indexOf(config.name) != -1) {
+	            $.getScript(that.extraModules[config.name].url + '?ac=' + Date.now());
+	        }
+	    };
+
+
+	    this.enable = function (name) {
+	        return that.enabledModules.push(name);
+	    };
+
+
+	    this.disable = function (name) {
+	        var position = that.enabledModules.indexOf(name);
+
+	        if (position !== -1) {
+	            return that.enabledModules.splice(position, 1);
+	        } else {
+	            return false;
+	        }
+	    };
+
+
+	    this.addMarkup = function (config) {
+	        var $moduleInfo = $('<div class="' + app.prefix + 'extras__item">');
+	        $moduleInfo.data('name', config.name);
+
+
+	        config.authorUrl = _.trim(config.authorUrl);
+	        var $title = config.authorUrl ?
+	            $('<a class="' + app.prefix + 'extras__item__title ' + app.prefix + 'extras__item__title_link" target="_blank">').attr('href', config.authorUrl).text(config.title).appendTo($moduleInfo) :
+	            $('<div class="' + app.prefix + 'extras__item__title ' + app.prefix + 'extras__item__title_text">').text(config.title).appendTo($moduleInfo);
+
+	        var $description = $('<div class="' + app.prefix + 'extras__item__description">').text(config.description || 'Нет описания').appendTo($moduleInfo);
+
+	        var $toggleModuleButton = $('<div class="' + app.prefix + 'extras__item__button btn btn-xs">').appendTo($moduleInfo).data('enabled', that.enabledModules.indexOf(config.name) != -1).on('click', function () {
+	            if ($(this).data('enabled')) {
+	                $(this).data('enabled', false);
+	                that.disable(config.name);
+	                $(this).removeClass('btn-danger').addClass('btn-success').text('Enabled');
+	            } else {
+	                $(this).data('enabled', true);
+	                that.enable(config.name);
+	                $(this).removeClass('btn-success').addClass('btn-danger').text('Disabled');
+	            }
+	        });
+	        if (that.enabledModules.indexOf(config.name) != -1) {
+	            $toggleModuleButton.addClass('btn-danger').text('Disabled');
+	        } else {
+	            $toggleModuleButton.addClass('btn-success').text('Enabled');
+	        }
+
+	        $moduleInfo = $('<div class="col-md-6">').append($moduleInfo);
+
+	        return $moduleInfo;
+	    };
+
+
+	    this.sort = function () {
+	        var extraModulesArray = [];
+	        for (var module in that.extraModules) {
+	            extraModulesArray.push(that.extraModules[module]);
+	        }
+
+	        extraModulesArray = extraModulesArray.sort(function (a, b) {
+	            var aSort = +(that.enabledModules.indexOf(a.name) != -1);
+	            var bSort = +(that.enabledModules.indexOf(b.name) != -1);
+
+	            if (aSort < bSort) {
+	                return 1;
+	            } else if (aSort > bSort) {
+	                return -1;
+	            } else {
+	                if (a.title.toLowerCase() > b.title.toLowerCase()) {
+	                    return 1;
+	                } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+	                    return -1;
+	                } else {
+	                    return 0;
+	                }
+	            }
+	        });
+
+	        for (var extraModuleIndex = 0, extraModulesLength = extraModulesArray.length; extraModuleIndex < extraModulesLength; extraModuleIndex++) {
+	            extraModulesArray[extraModuleIndex].$el.detach().appendTo($tabContent);
+	        }
+	    };
+
+
+	    /**
+	     * Saving and applying settings
+	     */
+	    app.Settings.onSave(function (settings) {
+	        settings.set(namespace + '.enabled', that.enabledModules);
+
+	        if (settings.isDirty(namespace + '.enabled')) {
+	            app.Settings.requestPageReload();
+	        }
+	    });
+	});
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('favouritePictures', function (app) {
+	    'use strict';
+	    var that = this;
+
+	    var favouritePicturesFromV1 = app.parseJSON(window.localStorage.getItem('favouritePictures'), []);
+	    app.storage.setDefault('favouritePictures', _.isArray(favouritePicturesFromV1) ? favouritePicturesFromV1 : []);
+
+	    if ($('#chat-panel').length === 0) {
+	        $('<div id="chat-panel" class="row">').insertAfter("#main");
+
+	    }
+
+	    if ($('#chat-controls').length === 0) {
+	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
+	    }
+
+
+	    this.$toggleFavouritePicturesPanelBtn = $('<button id="favourite-pictures-btn" class="btn btn-sm btn-default" title="' + app.t('favPics[.]Show your favorite images') + '">')
+	        .html('<i class="glyphicon glyphicon-th"></i>');
+	    if ($('#smiles-btn').length !== 0) {
+	        this.$toggleFavouritePicturesPanelBtn.insertAfter('#smiles-btn');
+	    } else {
+	        this.$toggleFavouritePicturesPanelBtn.prependTo('#chat-controls');
+	    }
+
+
+
+
+
+	    this.$favouritePicturesPanel = $('<div id="favourite-pictures-panel">')
+	        .appendTo('#chat-panel')
+	        .hide();
+	    this.$favouritePicturesPanelRow = $('<div class="favourite-pictures-panel-row">')
+	        .appendTo(this.$favouritePicturesPanel);
+
+
+	    this.$favouritePicturesTrash = $('<div id="pictures-trash" title="' + app.t('favPics[.]Drop the picture here to remove it') + '">')
+	        .append('<i class="pictures-trash-icon glyphicon glyphicon-trash">')
+	        .appendTo(this.$favouritePicturesPanelRow);
+
+
+	    this.$favouritePicturesBodyPanel = $('<div id="pictures-body-panel">')
+	        .appendTo(this.$favouritePicturesPanelRow);
+
+
+
+	    this.$favouritePicturesControlPanel = $('<div id="pictures-control-panel" class="row">')
+	        .appendTo(this.$favouritePicturesPanel);
+
+	    this.$favouritePicturesControlPanelForm = $('<div class="col-md-12">')
+	        .html('<div class="input-group">' +
+	            '<span class="input-group-btn">' +
+	                '<button id="help-pictures-btn" class="btn btn-sm btn-default" style="border-radius:0;" type="button">?</button>' +
+	            '</span>' +
+	            '<span class="input-group-btn">' +
+	                '<button id="export-pictures" class="btn btn-sm btn-default" style="border-radius:0;" type="button">' + app.t('favPics[.]Export pictures') + '</button>' +
+	            '</span>' +
+	             '<span class="input-group-btn">' +
+	                '<label for="import-pictures" class="btn btn-sm btn-default" style="border-radius:0;">' + app.t('favPics[.]Import pictures') + '</label>' +
+	                '<input type="file" style="display:none;" id="import-pictures" name="pictures-import">' +
+	            '</span>' +
+	            '<input type="text" id="picture-address" class="form-control input-sm" placeholder="' + app.t('favPics[.]Picture url') + '">' +
+	            '<span class="input-group-btn">' +
+	                '<button id="add-picture-btn" class="btn btn-sm btn-default" style="border-radius:0;" type="button">' + app.t('favPics[.]Add') + '</button>' +
+	            '</span>' +
+	        '</div>')
+	        .appendTo(this.$favouritePicturesControlPanel);
+
+
+
+	    this.makeSmilesAndPicturesTogether = function () {
+	        that.smilesAndPicturesTogether = true;
+	        that.$toggleFavouritePicturesPanelBtn.hide();
+	        that.$favouritePicturesPanel.hide();
+	    };
+
+
+
+	    this.entityMap = {
+	        "&": "&amp;",
+	        "<": "&lt;",
+	        ">": "&gt;",
+	        '"': '&quot;',
+	        "'": '&#39;'
+	    };
+	    this.replaceUnsafeSymbol = function (symbol) {
+	        return that.entityMap[symbol];
+	    };
+	    this.renderFavouritePictures = function () {
+	        var favouritePictures = app.storage.get('favouritePictures');
+
+	        this.$favouritePicturesBodyPanel.empty();
+
+	        for (var n = 0, favouritePicturesLen = favouritePictures.length; n < favouritePicturesLen; n++) {
+	            var escapedAddress = favouritePictures[n].replace(/[&<>"']/g, this.replaceUnsafeSymbol);
+
+	            $('<img class="favourite-picture-on-panel">').attr({src: escapedAddress}).appendTo(this.$favouritePicturesBodyPanel);
+	        }
+	    };
+
+
+	    this.insertFavouritePicture = function (address) {
+	        app.Helpers.addMessageToChatInput(' ' + address + ' ', 'end');
+	    };
+	    $(document.body).on('click', '.favourite-picture-on-panel', function () {
+	        that.insertFavouritePicture($(this).attr('src'));
+	    });
+
+
+	    this.handleFavouritePicturesPanel = function ($toggleFavouritePicturesPanelBtn) {
+	        var smilesAndPicturesTogether = this.smilesAndPicturesTogether || false;
+
+	        if ($('#smiles-panel').length !== 0 && !smilesAndPicturesTogether) {
+	            $('#smiles-panel').hide();
+	        }
+
+	        this.$favouritePicturesPanel.toggle();
+
+
+	        if (!smilesAndPicturesTogether) {
+	            if ($toggleFavouritePicturesPanelBtn.hasClass('btn-default')) {
+	                if ($('#smiles-btn').length !== 0 && $('#smiles-btn').hasClass('btn-success')) {
+	                    $('#smiles-btn').removeClass('btn-success');
+	                    $('#smiles-btn').addClass('btn-default');
+	                }
+
+	                $toggleFavouritePicturesPanelBtn.removeClass('btn-default');
+	                $toggleFavouritePicturesPanelBtn.addClass('btn-success');
+	            } else {
+	                $toggleFavouritePicturesPanelBtn.removeClass('btn-success');
+	                $toggleFavouritePicturesPanelBtn.addClass('btn-default');
+	            }
+	        }
+	    };
+	    this.$toggleFavouritePicturesPanelBtn.on('click', function() {
+	        that.handleFavouritePicturesPanel($(this));
+	    });
+
+
+	    this.addFavouritePicture = function (imageUrl) {
+	        if (imageUrl !== '') {
+	            var favouritePictures = app.storage.get('favouritePictures');
+
+	            if (favouritePictures.indexOf(imageUrl) === -1) {
+	                if (imageUrl !== '') {
+	                    favouritePictures.push(imageUrl);
+	                }
+	            } else {
+	                window.makeAlert(app.t('favPics[.]The image already exists')).prependTo(this.$favouritePicturesBodyPanel);
+	                $('#picture-address').val('');
+
+	                return false;
+	            }
+	            $('#picture-address').val('');
+
+	            app.storage.set('favouritePictures', favouritePictures);
+
+	            this.renderFavouritePictures();
+	        }
+	    };
+	    $('#add-picture-btn').on('click', function (e) {
+	        e.preventDefault();
+
+	        that.addFavouritePicture($('#picture-address').val().trim());
+	    });
+	    $('#picture-address').on('keypress', function (e) {
+	        if (e.which == 13) {
+	            that.addFavouritePicture($('#picture-address').val().trim());
+	        }
+	    });
+
+
+	    this.showHelp = function () {
+	        var $header = $('<div class="modal-header__inner">');
+	        $header.append($('<h3 class="modal-title">').text(app.t('Help')));
+
+	        var $wrapper = $('<div class="help-pictures-content">');
+	        $wrapper.append($('<p>' + app.t('favPics[.]<p>Favourite pictures feature if for saving favourite pictures like browser bookmarks.</p><p>Features:<ul><li><strong>Only links to images can be saved</strong>, so if image from link was removed, it also removes from your panel.</li><li>Images links are storing in browser. There are export and import buttons to share them between browsers.</li><li>Images are the same for site channels, but <strong>they are different for http:// and https://</strong></li></ul></p>') + '</p>'));
+
+
+	        var $exitPicturesHelpBtn = $('<button type="button" id="help-pictures-exit-btn" class="btn btn-info" data-dismiss="modal">' + app.t('favPics[.]Exit') + '</button>');
+	        var $footer = $('<div class="help-pictures-footer">');
+	        $footer.append($exitPicturesHelpBtn);
+
+
+	        return app.UI.createModalWindow('chat-history', $header, $wrapper, $footer);
+	    };
+	    $('#help-pictures-btn').on('click', function (e) {
+	        e.preventDefault();
+
+	        that.showHelp();
+	    });
+
+
+	    this.exportPictures = function () {
+	        var $downloadLink = $('<a>')
+	            .attr({
+	                href: 'data:text/plain;charset=utf-8,' + encodeURIComponent(app.toJSON(app.storage.get('favouritePictures'))),
+	                download: 'cytube_enhanced_favourite_images.txt'
+	            })
+	            .hide()
+	            .appendTo($(document.body));
+
+	        $downloadLink[0].click();
+
+	        $downloadLink.remove();
+	    };
+	    $('#export-pictures').on('click', function () {
+	        that.exportPictures();
+	    });
+
+
+	    this.importPictures = function (importFile) {
+	        var favouritePicturesAddressesReader = new FileReader();
+
+	        favouritePicturesAddressesReader.addEventListener('load', function(e) {
+	            app.storage.set('favouritePictures', app.parseJSON(e.target.result));
+
+	            that.renderFavouritePictures();
+	        });
+	        favouritePicturesAddressesReader.readAsText(importFile);
+	    };
+	    $('#import-pictures').on('change', function () {
+	        that.importPictures($(this)[0].files[0]);
+	    });
+
+
+	    this.renderFavouritePictures();
+
+
+
+	    this.$favouritePicturesBodyPanel.sortable({
+	        containment: this.$favouritePicturesPanelRow,
+	        revert: true,
+	        update: function(event, ui) {
+	            var imageUrl = $(ui.item).attr('src');
+	            var nextImageUrl = $(ui.item).next().attr('src');
+	            var favouritePictures = app.storage.get('favouritePictures');
+
+	            var imagePosition;
+	            if ((imagePosition = favouritePictures.indexOf(imageUrl)) !== -1) {
+	                favouritePictures.splice(imagePosition, 1);
+	            } else {
+	                return;
+	            }
+
+	            if (typeof nextImageUrl !== 'undefined') {
+	                var nextImagePosition;
+	                if ((nextImagePosition = favouritePictures.indexOf(nextImageUrl)) !== -1) {
+	                    favouritePictures.splice(nextImagePosition, 0, imageUrl);
+	                }
+	            } else {
+	                favouritePictures.push(imageUrl);
+	            }
+
+	            app.storage.set('favouritePictures', favouritePictures);
+	        }
+	    });
+
+
+	    this.$favouritePicturesTrash.droppable({
+	        accept: ".favourite-picture-on-panel",
+	        hoverClass: "favourite-picture-drop-hover",
+	        drop: function (event, ui) {
+	            var imageUrl = ui.draggable.attr('src');
+	            var favouritePictures = app.storage.get('favouritePictures');
+
+	            var imagePosition;
+	            if ((imagePosition = favouritePictures.indexOf(imageUrl)) !== -1) {
+	                favouritePictures.splice(imagePosition, 1);
+	                app.storage.set('favouritePictures', favouritePictures);
+	            }
+
+	            ui.draggable.remove();
+	        }
+	    });
+	});
+
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(23);
+	__webpack_require__(24);
+	window.cytubeEnhanced.addModule('imagePreview', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        selectorsToPreview: '.chat-picture, .motd-tab-content img', // 'selector1, selector2'. Every selector's node must have attribute src
+	        zoom: 0.15
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    this.showPicturePreview = function (pictureToPreview) {
+	        if ($(pictureToPreview).is(settings.selectorsToPreview)) {
+	            var $picture = $('<img src="' + $(pictureToPreview).attr('src') + '">');
+
+	            $picture.ready(function () {
+	                $('<div id="modal-picture-overlay">').appendTo($(document.body));
+	                var $modalPicture = $('<div id="modal-picture">').appendTo($(document.body)).draggable();
+
+	                var pictureWidth = $picture.prop('width');
+	                var pictureHeight = $picture.prop('height');
+
+
+	                var $modalPictureOptions = $('<div id="modal-picture-options">');
+	                $modalPicture.append($('<div id="modal-picture-options-wrapper">').append($modalPictureOptions));
+
+	                $('<a href="' + $picture.prop('src') + '" target="_blank" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>')
+	                    .appendTo($modalPictureOptions);
+	                $('<a href="https://www.google.com/searchbyimage?image_url=' + $picture.prop('src') + '" target="_blank" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-search"></i></button>')
+	                    .appendTo($modalPictureOptions);
+
+
+	                var scaleFactor = 1;
+	                if (pictureWidth > document.documentElement.clientWidth && pictureHeight > document.documentElement.clientHeight) {
+	                    if ((pictureHeight - document.documentElement.clientHeight) > (pictureWidth - document.documentElement.clientWidth)) {
+	                        scaleFactor = pictureHeight / (document.documentElement.clientHeight * 0.8);
+	                    } else {
+	                        scaleFactor = pictureWidth / (document.documentElement.clientWidth * 0.8);
+	                    }
+	                } else if (pictureHeight > document.documentElement.clientHeight) {
+	                    scaleFactor = pictureHeight / (document.documentElement.clientHeight * 0.8);
+	                } else if (pictureWidth > document.documentElement.clientWidth) {
+	                    scaleFactor = pictureWidth / (document.documentElement.clientWidth * 0.8);
+	                }
+
+	                pictureHeight /= scaleFactor;
+	                pictureWidth /= scaleFactor;
+
+	                $modalPicture.css({
+	                    width: pictureWidth,
+	                    height: pictureHeight,
+	                    marginLeft: -(pictureWidth / 2),
+	                    marginTop: -(pictureHeight / 2)
+	                });
+
+
+	                $picture.appendTo($modalPicture);
+	            });
+	        }
+	    };
+	    $(document.body).on('click', function (event) {
+	        that.showPicturePreview(event.target);
+	    });
+
+
+	    this.handleModalPictureMouseWheel = function (e) {
+	        var $modalPicture = $('#modal-picture');
+	        var pictureWidth = parseInt($modalPicture.css('width'), 10);
+	        var pictureHeight = parseInt($modalPicture.css('height'), 10);
+	        var pictureMarginLeft = parseInt($modalPicture.css('marginLeft'), 10);
+	        var pictureMarginTop = parseInt($modalPicture.css('marginTop'), 10);
+
+	        if (e.originalEvent.deltaY < 0) { //up
+	            $modalPicture.css({
+	                width: pictureWidth * (1 + settings.zoom),
+	                height: pictureHeight * (1 + settings.zoom),
+	                marginLeft: pictureMarginLeft + (-pictureWidth * settings.zoom / 2),
+	                marginTop: pictureMarginTop + (-pictureHeight * settings.zoom / 2)
+	            });
+	        } else { //down
+	            $modalPicture.css({
+	                width: pictureWidth * (1 - settings.zoom),
+	                height: pictureHeight * (1 - settings.zoom),
+	                marginLeft: pictureMarginLeft + (pictureWidth * settings.zoom / 2),
+	                marginTop: pictureMarginTop + (pictureHeight * settings.zoom / 2)
+	            });
+	        }
+	    };
+	    $(document.body).on('mousewheel', '#modal-picture', function (e) {
+	        that.handleModalPictureMouseWheel(e);
+
+	        return false;
+	    });
+
+
+	    this.closePictureByClick = function () {
+	        $('#modal-picture-overlay').remove();
+	        $('#modal-picture').remove();
+	    };
+	    $(document.body).on('click', '#modal-picture-overlay, #modal-picture', function () {
+	        that.closePictureByClick();
+	    });
+
+	    this.closePictureByEscape = function (e) {
+	        if (e.which === 27 && $('#modal-picture').length !== 0) {
+	            $('#modal-picture-overlay').remove();
+	            $('#modal-picture').remove();
+	        }
+	    };
+	    $(document.body).on('keydown', function (e) {
+	        that.closePictureByEscape(e);
+	    });
+	});
+
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	/*!
+	 * jQuery Mousewheel 3.1.13
+	 *
+	 * Copyright jQuery Foundation and other contributors
+	 * Released under the MIT license
+	 * http://jquery.org/license
+	 */
+
+	(function (factory) {
+	    if ( typeof define === 'function' && define.amd ) {
+	        // AMD. Register as an anonymous module.
+	        define(['jquery'], factory);
+	    } else if (typeof exports === 'object') {
+	        // Node/CommonJS style for Browserify
+	        module.exports = factory;
+	    } else {
+	        // Browser globals
+	        factory(jQuery);
+	    }
+	}(function ($) {
+
+	    var toFix  = ['wheel', 'mousewheel', 'DOMMouseScroll', 'MozMousePixelScroll'],
+	        toBind = ( 'onwheel' in document || document.documentMode >= 9 ) ?
+	                    ['wheel'] : ['mousewheel', 'DomMouseScroll', 'MozMousePixelScroll'],
+	        slice  = Array.prototype.slice,
+	        nullLowestDeltaTimeout, lowestDelta;
+
+	    if ( $.event.fixHooks ) {
+	        for ( var i = toFix.length; i; ) {
+	            $.event.fixHooks[ toFix[--i] ] = $.event.mouseHooks;
+	        }
+	    }
+
+	    var special = $.event.special.mousewheel = {
+	        version: '3.1.12',
+
+	        setup: function() {
+	            if ( this.addEventListener ) {
+	                for ( var i = toBind.length; i; ) {
+	                    this.addEventListener( toBind[--i], handler, false );
+	                }
+	            } else {
+	                this.onmousewheel = handler;
+	            }
+	            // Store the line height and page height for this particular element
+	            $.data(this, 'mousewheel-line-height', special.getLineHeight(this));
+	            $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
+	        },
+
+	        teardown: function() {
+	            if ( this.removeEventListener ) {
+	                for ( var i = toBind.length; i; ) {
+	                    this.removeEventListener( toBind[--i], handler, false );
+	                }
+	            } else {
+	                this.onmousewheel = null;
+	            }
+	            // Clean up the data we added to the element
+	            $.removeData(this, 'mousewheel-line-height');
+	            $.removeData(this, 'mousewheel-page-height');
+	        },
+
+	        getLineHeight: function(elem) {
+	            var $elem = $(elem),
+	                $parent = $elem['offsetParent' in $.fn ? 'offsetParent' : 'parent']();
+	            if (!$parent.length) {
+	                $parent = $('body');
+	            }
+	            return parseInt($parent.css('fontSize'), 10) || parseInt($elem.css('fontSize'), 10) || 16;
+	        },
+
+	        getPageHeight: function(elem) {
+	            return $(elem).height();
+	        },
+
+	        settings: {
+	            adjustOldDeltas: true, // see shouldAdjustOldDeltas() below
+	            normalizeOffset: true  // calls getBoundingClientRect for each event
+	        }
+	    };
+
+	    $.fn.extend({
+	        mousewheel: function(fn) {
+	            return fn ? this.bind('mousewheel', fn) : this.trigger('mousewheel');
+	        },
+
+	        unmousewheel: function(fn) {
+	            return this.unbind('mousewheel', fn);
+	        }
+	    });
+
+
+	    function handler(event) {
+	        var orgEvent   = event || window.event,
+	            args       = slice.call(arguments, 1),
+	            delta      = 0,
+	            deltaX     = 0,
+	            deltaY     = 0,
+	            absDelta   = 0,
+	            offsetX    = 0,
+	            offsetY    = 0;
+	        event = $.event.fix(orgEvent);
+	        event.type = 'mousewheel';
+
+	        // Old school scrollwheel delta
+	        if ( 'detail'      in orgEvent ) { deltaY = orgEvent.detail * -1;      }
+	        if ( 'wheelDelta'  in orgEvent ) { deltaY = orgEvent.wheelDelta;       }
+	        if ( 'wheelDeltaY' in orgEvent ) { deltaY = orgEvent.wheelDeltaY;      }
+	        if ( 'wheelDeltaX' in orgEvent ) { deltaX = orgEvent.wheelDeltaX * -1; }
+
+	        // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
+	        if ( 'axis' in orgEvent && orgEvent.axis === orgEvent.HORIZONTAL_AXIS ) {
+	            deltaX = deltaY * -1;
+	            deltaY = 0;
+	        }
+
+	        // Set delta to be deltaY or deltaX if deltaY is 0 for backwards compatabilitiy
+	        delta = deltaY === 0 ? deltaX : deltaY;
+
+	        // New school wheel delta (wheel event)
+	        if ( 'deltaY' in orgEvent ) {
+	            deltaY = orgEvent.deltaY * -1;
+	            delta  = deltaY;
+	        }
+	        if ( 'deltaX' in orgEvent ) {
+	            deltaX = orgEvent.deltaX;
+	            if ( deltaY === 0 ) { delta  = deltaX * -1; }
+	        }
+
+	        // No change actually happened, no reason to go any further
+	        if ( deltaY === 0 && deltaX === 0 ) { return; }
+
+	        // Need to convert lines and pages to pixels if we aren't already in pixels
+	        // There are three delta modes:
+	        //   * deltaMode 0 is by pixels, nothing to do
+	        //   * deltaMode 1 is by lines
+	        //   * deltaMode 2 is by pages
+	        if ( orgEvent.deltaMode === 1 ) {
+	            var lineHeight = $.data(this, 'mousewheel-line-height');
+	            delta  *= lineHeight;
+	            deltaY *= lineHeight;
+	            deltaX *= lineHeight;
+	        } else if ( orgEvent.deltaMode === 2 ) {
+	            var pageHeight = $.data(this, 'mousewheel-page-height');
+	            delta  *= pageHeight;
+	            deltaY *= pageHeight;
+	            deltaX *= pageHeight;
+	        }
+
+	        // Store lowest absolute delta to normalize the delta values
+	        absDelta = Math.max( Math.abs(deltaY), Math.abs(deltaX) );
+
+	        if ( !lowestDelta || absDelta < lowestDelta ) {
+	            lowestDelta = absDelta;
+
+	            // Adjust older deltas if necessary
+	            if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
+	                lowestDelta /= 40;
+	            }
+	        }
+
+	        // Adjust older deltas if necessary
+	        if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
+	            // Divide all the things by 40!
+	            delta  /= 40;
+	            deltaX /= 40;
+	            deltaY /= 40;
+	        }
+
+	        // Get a whole, normalized value for the deltas
+	        delta  = Math[ delta  >= 1 ? 'floor' : 'ceil' ](delta  / lowestDelta);
+	        deltaX = Math[ deltaX >= 1 ? 'floor' : 'ceil' ](deltaX / lowestDelta);
+	        deltaY = Math[ deltaY >= 1 ? 'floor' : 'ceil' ](deltaY / lowestDelta);
+
+	        // Normalise offsetX and offsetY properties
+	        if ( special.settings.normalizeOffset && this.getBoundingClientRect ) {
+	            var boundingRect = this.getBoundingClientRect();
+	            offsetX = event.clientX - boundingRect.left;
+	            offsetY = event.clientY - boundingRect.top;
+	        }
+
+	        // Add information to the event object
+	        event.deltaX = deltaX;
+	        event.deltaY = deltaY;
+	        event.deltaFactor = lowestDelta;
+	        event.offsetX = offsetX;
+	        event.offsetY = offsetY;
+	        // Go ahead and set deltaMode to 0 since we converted to pixels
+	        // Although this is a little odd since we overwrite the deltaX/Y
+	        // properties with normalized deltas.
+	        event.deltaMode = 0;
+
+	        // Add event and delta to the front of the arguments
+	        args.unshift(event, delta, deltaX, deltaY);
+
+	        // Clearout lowestDelta after sometime to better
+	        // handle multiple device types that give different
+	        // a different lowestDelta
+	        // Ex: trackpad = 3 and mouse wheel = 120
+	        if (nullLowestDeltaTimeout) { clearTimeout(nullLowestDeltaTimeout); }
+	        nullLowestDeltaTimeout = setTimeout(nullLowestDelta, 200);
+
+	        return ($.event.dispatch || $.event.handle).apply(this, args);
+	    }
+
+	    function nullLowestDelta() {
+	        lowestDelta = null;
+	    }
+
+	    function shouldAdjustOldDeltas(orgEvent, absDelta) {
+	        // If this is an older event and the delta is divisable by 120,
+	        // then we are assuming that the browser is treating this as an
+	        // older mouse wheel event and that we should divide the deltas
+	        // by 40 to try and get a more usable deltaFactor.
+	        // Side note, this actually impacts the reported scroll distance
+	        // in older browsers and can cause scrolling to be slower than native.
+	        // Turn this off by setting $.event.special.mousewheel.settings.adjustOldDeltas to false.
+	        return special.settings.adjustOldDeltas && orgEvent.type === 'mousewheel' && absDelta % 120 === 0;
+	    }
+
+	}));
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	/*!
+	 * jQuery UI Touch Punch 0.2.3
+	 *
+	 * Copyright 2011–2014, Dave Furfero
+	 * Dual licensed under the MIT or GPL Version 2 licenses.
+	 *
+	 * Depends:
+	 *  jquery.ui.widget.js
+	 *  jquery.ui.mouse.js
+	 */
+	(function ($) {
+
+	  // Detect touch support
+	  $.support.touch = 'ontouchend' in document;
+
+	  // Ignore browsers without touch support
+	  if (!$.support.touch) {
+	    return;
+	  }
+
+	  var mouseProto = $.ui.mouse.prototype,
+	      _mouseInit = mouseProto._mouseInit,
+	      _mouseDestroy = mouseProto._mouseDestroy,
+	      touchHandled;
+
+	  /**
+	   * Simulate a mouse event based on a corresponding touch event
+	   * @param {Object} event A touch event
+	   * @param {String} simulatedType The corresponding mouse event
+	   */
+	  function simulateMouseEvent (event, simulatedType) {
+
+	    // Ignore multi-touch events
+	    if (event.originalEvent.touches.length > 1) {
+	      return;
+	    }
+
+	    event.preventDefault();
+
+	    var touch = event.originalEvent.changedTouches[0],
+	        simulatedEvent = document.createEvent('MouseEvents');
+	    
+	    // Initialize the simulated mouse event using the touch event's coordinates
+	    simulatedEvent.initMouseEvent(
+	      simulatedType,    // type
+	      true,             // bubbles                    
+	      true,             // cancelable                 
+	      window,           // view                       
+	      1,                // detail                     
+	      touch.screenX,    // screenX                    
+	      touch.screenY,    // screenY                    
+	      touch.clientX,    // clientX                    
+	      touch.clientY,    // clientY                    
+	      false,            // ctrlKey                    
+	      false,            // altKey                     
+	      false,            // shiftKey                   
+	      false,            // metaKey                    
+	      0,                // button                     
+	      null              // relatedTarget              
+	    );
+
+	    // Dispatch the simulated event to the target element
+	    event.target.dispatchEvent(simulatedEvent);
+	  }
+
+	  /**
+	   * Handle the jQuery UI widget's touchstart events
+	   * @param {Object} event The widget element's touchstart event
+	   */
+	  mouseProto._touchStart = function (event) {
+
+	    var self = this;
+
+	    // Ignore the event if another widget is already being handled
+	    if (touchHandled || !self._mouseCapture(event.originalEvent.changedTouches[0])) {
+	      return;
+	    }
+
+	    // Set the flag to prevent other widgets from inheriting the touch event
+	    touchHandled = true;
+
+	    // Track movement to determine if interaction was a click
+	    self._touchMoved = false;
+
+	    // Simulate the mouseover event
+	    simulateMouseEvent(event, 'mouseover');
+
+	    // Simulate the mousemove event
+	    simulateMouseEvent(event, 'mousemove');
+
+	    // Simulate the mousedown event
+	    simulateMouseEvent(event, 'mousedown');
+	  };
+
+	  /**
+	   * Handle the jQuery UI widget's touchmove events
+	   * @param {Object} event The document's touchmove event
+	   */
+	  mouseProto._touchMove = function (event) {
+
+	    // Ignore event if not handled
+	    if (!touchHandled) {
+	      return;
+	    }
+
+	    // Interaction was not a click
+	    this._touchMoved = true;
+
+	    // Simulate the mousemove event
+	    simulateMouseEvent(event, 'mousemove');
+	  };
+
+	  /**
+	   * Handle the jQuery UI widget's touchend events
+	   * @param {Object} event The document's touchend event
+	   */
+	  mouseProto._touchEnd = function (event) {
+
+	    // Ignore event if not handled
+	    if (!touchHandled) {
+	      return;
+	    }
+
+	    // Simulate the mouseup event
+	    simulateMouseEvent(event, 'mouseup');
+
+	    // Simulate the mouseout event
+	    simulateMouseEvent(event, 'mouseout');
+
+	    // If the touch interaction did not move, it should trigger a click
+	    if (!this._touchMoved) {
+
+	      // Simulate the click event
+	      simulateMouseEvent(event, 'click');
+	    }
+
+	    // Unset the flag to allow other widgets to inherit the touch event
+	    touchHandled = false;
+	  };
+
+	  /**
+	   * A duck punch of the $.ui.mouse _mouseInit method to support touch events.
+	   * This method extends the widget with bound touch event handlers that
+	   * translate touch events to mouse events and pass them to the widget's
+	   * original mouse event handling methods.
+	   */
+	  mouseProto._mouseInit = function () {
+	    
+	    var self = this;
+
+	    // Delegate the touch handlers to the widget's element
+	    self.element.bind({
+	      touchstart: $.proxy(self, '_touchStart'),
+	      touchmove: $.proxy(self, '_touchMove'),
+	      touchend: $.proxy(self, '_touchEnd')
+	    });
+
+	    // Call the original $.ui.mouse init method
+	    _mouseInit.call(self);
+	  };
+
+	  /**
+	   * Remove the touch event handlers
+	   */
+	  mouseProto._mouseDestroy = function () {
+	    
+	    var self = this;
+
+	    // Delegate the touch handlers to the widget's element
+	    self.element.unbind({
+	      touchstart: $.proxy(self, '_touchStart'),
+	      touchmove: $.proxy(self, '_touchMove'),
+	      touchend: $.proxy(self, '_touchEnd')
+	    });
+
+	    // Call the original $.ui.mouse destroy method
+	    _mouseDestroy.call(self);
+	  };
+
+	})(jQuery);
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('languageSwitcher', function (app) {
+	    'use strict';
+	    var that = this;
+
+	    var tab = app.Settings.getTab('general', app.t('general[.]General'), 100);
+
+
+	    var availableLanguages = ['en'];
+	    for (var language in app.translations) {
+	        availableLanguages.push(language);
+	    }
+
+	    var options = [];
+	    for (var languageIndex in availableLanguages) {
+	        options.push({
+	            value: availableLanguages[languageIndex],
+	            title: app.t(availableLanguages[languageIndex]),
+	            selected: (availableLanguages[languageIndex] == app.storage.get('language'))
+	        });
+	    }
+
+
+	    tab.addControl('select', 'horizontal', app.t('general[.]Interface language'), 'language', options, null, 20000);
+
+
+	    app.Settings.onSave(function (settings) {
+	        app.storage.set('language', $('#' + app.prefix + 'language').val());
+
+	        if (app.storage.isDirty('language')) {
+	            app.Settings.requestPageReload();
+	        }
+	    });
+	});
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(1);
+	window.cytubeEnhanced.addModule('navMenuTabs', function (app) {
+	    'use strict';
+	    var that = this;
+
+
+	    this.addTabInput = function ($tabsArea, tabName, tabValue) {
+	        tabName = tabName || '';
+	        tabValue = tabValue || '';
+
+	        var $wrapper = $('<div class="row tab-option-wrapper">').appendTo($tabsArea);
+
+	        var $tabNameWrapperOfWrapper = $('<div class="col-sm-4 col-md-3">').appendTo($wrapper);
+	        var $tabNameWrapper = $('<div class="form-group">').appendTo($tabNameWrapperOfWrapper);
+	        $('<input name="title" type="text" class="form-control" placeholder="' + app.t('tabs[.]Title') + '">')
+	            .val(tabName)
+	            .appendTo($tabNameWrapper);
+
+
+	        var $tabValueWrapperOfWrapper = $('<div class="col-sm-8 col-md-9">').appendTo($wrapper);
+	        var $tabValueWrapper = $('<div class="form-group">').appendTo($tabValueWrapperOfWrapper);
+	        $('<input name="content" type="text" class="form-control" placeholder="' + app.t('tabs[.]Content') + '">')
+	            .val(tabValue)
+	            .appendTo($tabValueWrapper);
+	    };
+
+
+	    this.tabsConfigToHtml = function (channelDescription, tabsConfig) {
+	        var $virtualMainWrapper = $('<div>');
+
+	        if (channelDescription !== undefined && channelDescription !== '') {
+	            $('<div id="motd-channel-description">')
+	                .html(channelDescription)
+	                .appendTo($virtualMainWrapper);
+	        }
+
+	        if (tabsConfig.length !== 0) {
+	            var TAB_TITLE = 0;
+	            var TAB_CONTENT = 1;
+	            var LINK_TITLE = 0;
+	            var LINK_ADDRESS = 1;
+
+	            var $tabsWrapper = $('<div id="motd-tabs-wrapper">').appendTo($virtualMainWrapper);
+	            var $tabs = $('<div id="motd-tabs">').appendTo($tabsWrapper);
+	            var $tabsContent = $('<div id="motd-tabs-content">').appendTo($tabsWrapper);
+
+	            for (var tabIndex = 0, tabsLength = tabsConfig.length; tabIndex < tabsLength; tabIndex++) {
+	                if (tabsConfig[tabIndex][TAB_TITLE].indexOf('!dropdown!') === 0) {
+	                    var $dropdownWrapper = $('<div class="btn-group">');
+	                    $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">')
+	                        .html(tabsConfig[tabIndex][TAB_TITLE].replace('!dropdown!', '') + ' <span class="caret"></span>')
+	                        .appendTo($dropdownWrapper);
+	                    var $dropdownMenu = $('<ul class="dropdown-menu">')
+	                        .appendTo($dropdownWrapper);
+
+	                    var linksConfig = tabsConfig[tabIndex][TAB_CONTENT];
+	                    for (var linkIndex = 0, linksLength = tabsConfig[tabIndex][TAB_CONTENT].length; linkIndex < linksLength; linkIndex++) {
+	                        var $link = $('<a>').attr({href: linksConfig[linkIndex][LINK_ADDRESS], target: '_blank'}).text(linksConfig[linkIndex][LINK_TITLE]);
+	                        $('<li>').html($link).appendTo($dropdownMenu);
+	                    }
+
+	                    $dropdownWrapper.appendTo($tabs);
+	                } else if (tabsConfig[tabIndex][TAB_TITLE].indexOf('!link!') === 0) {
+	                    $('<a href="' + tabsConfig[tabIndex][TAB_CONTENT] + '" target="_blank" class="btn btn-default btn-link">')
+	                        .html(tabsConfig[tabIndex][TAB_TITLE].replace('!link!', ''))
+	                        .appendTo($tabs);
+	                } else {
+	                    $('<button class=" motd-tab-btn" data-tab-index="' + tabIndex + '">')
+	                        .html(tabsConfig[tabIndex][TAB_TITLE])
+	                        .appendTo($tabs);
+
+	                    $('<div class="motd-tab-content" data-tab-index="' + tabIndex + '">')
+	                        .hide()
+	                        .html(tabsConfig[tabIndex][TAB_CONTENT])
+	                        .appendTo($tabsContent);
+	                }
+	            }
+	        }
+
+	        return $virtualMainWrapper.html();
+	    };
+
+
+	    this.tabsHtmlToCondig = function (htmlCode) {
+	        this.$tabsArea.empty();
+
+	        var $tabsTree = $('<div>').html(htmlCode);
+	        var $tabsTreeNavBtns = $tabsTree.find('#motd-tabs').children();
+	        var $tabsTreeTabsContent = $tabsTree.find('#motd-tabs-content');
+
+	        $('#channel-description-input').val($tabsTree.find('#motd-channel-description').html());
+
+	        $tabsTreeNavBtns.each(function () {
+	            if ($(this).hasClass('btn-group')) { //dropdown
+	                var parsedDropdownItems = '';
+	                var $dropdownItems = $(this).children('ul').children();
+
+	                $dropdownItems.each(function () {
+	                    var link = $(this).children('a');
+
+	                    parsedDropdownItems += '[n]' + link.text() + '[/n][a]' + link.attr('href') + '[/a], ';
+	                });
+	                parsedDropdownItems = parsedDropdownItems.slice(0, -2);
+
+	                that.addTabInput(that.$tabsArea, '!dropdown!' + $(this).children('button').html().replace(' <span class="caret"></span>', ''), parsedDropdownItems);
+	            } else if ($(this).hasClass('btn-link')) { //link
+	                that.addTabInput(that.$tabsArea, '!link!' + $(this).html(), $(this).attr('href'));
+	            } else { //tab
+	                that.addTabInput(that.$tabsArea, $(this).html(), $tabsTreeTabsContent.find('[data-tab-index="' + $(this).data('tabIndex') + '"]').html());
+	            }
+	        });
+	    };
+
+
+	    this.motdCutMap = {
+	        '<iframe $1>$2</iframe>': /\[iframe(.*?)\](.*?)[/iframe]]/g
+	    };
+	    this.fixMotdCut = function () {
+	        $('#motd-tabs-content').find('.motd-tab-content').each(function () {
+	            for (var tag in that.motdCutMap) {
+	                if (that.motdCutMap.hasOwnProperty(tag)) {
+	                    $(this).html($(this).html().replace(that.motdCutMap[tag], tag));
+	                }
+	            }
+	        });
+	    };
+
+
+	    this.$tabsSettings = $('<div id="tabs-settings">')
+	        .html('<hr>' +
+	            '<h3>' + app.t('tabs[.]Tabs settings') + '</h3>' +
+	            '<ul>' +
+	                '<li>' + app.t('tabs[.]By default tab behaves like simple tab.') + '</li>' +
+	                '<li>' + app.t('tabs[.]Use !dropdown! prefix to create dropdown list. Example: !dropdown!My dropdown. Value must look like "[n]Link title 1[/n][a]URL 1[/a], [n]Link title 2[/n][a]URL 2[/a], [n]Link title 3[/n][a]URL 3[/a]"') + '</li>' +
+	                '<li>' + app.t('tabs[.]Use !link! prefix to create link. Example: !link!My link. Value must contain URL.') + '</li>' +
+	            '</ul>')
+	        .insertBefore('#cs-motdtext')
+	        .hide();
+
+
+	    this.$tabSettingsBtn = $('<button type="button" class="btn btn-primary motd-bottom-btn" id="show-tabs-settings">')
+	        .text(app.t('tabs[.]Show tabs settings (cytube enhanced)'))
+	        .appendTo('#cs-motdeditor')
+	        .on('click', function () {
+	            if ($(this).hasClass('btn-primary')) {
+	                that.$tabsSettings.show();
+
+	                $(this).removeClass('btn-primary');
+	                $(this).addClass('btn-success');
+	            } else {
+	                that.$tabsSettings.hide();
+
+	                $(this).removeClass('btn-success');
+	                $(this).addClass('btn-primary');
+	            }
+	        });
+
+	    $('#cs-motdtext').before('<hr>');
+
+
+	    this.$channelDescriptionInputWrapper = $('<div class="form-group">').appendTo(this.$tabsSettings);
+	    this.$channelDescriptionLabel = $('<label for="channel-description-input">' + app.t('tabs[.]Channel description') + '</label>').appendTo(this.$channelDescriptionInputWrapper);
+	    this.$channelDescriptionInput = $('<input id="channel-description-input" placeholder="' + app.t('tabs[.]Channel description') + '" class="form-control">').appendTo(this.$channelDescriptionInputWrapper);
+
+
+	    this.$tabsArea = $('<div id="tabs-settings-area">').appendTo(this.$tabsSettings);
+
+	    $('<p>Tabs</p>').insertBefore(this.$tabsArea);
+
+
+	    this.$addTabToTabsSettingsBtn = $('<button type="button" class="btn btn-sm btn-primary" id="tabs-settings-add">')
+	        .text(app.t('tabs[.]Add tab'))
+	        .appendTo(this.$tabsSettings)
+	        .on('click', function () {
+	            that.addTabInput(that.$tabsArea);
+	        });
+
+
+	    this.$removeLastTabFromTabsSettingsBtn = $('<button type="button" class="btn btn-sm btn-primary" id="tabs-settings-remove">')
+	        .text(app.t('tabs[.]Remove the last tab'))
+	        .appendTo(this.$tabsSettings)
+	        .on('click', function () {
+	            that.$tabsArea.children('.tab-option-wrapper').last().remove();
+	        });
+
+
+	    this.$tabsToHtml = $('<button type="button" class="btn btn-sm btn-primary" id="tabs-settings-to-html">')
+	        .text(app.t('tabs[.]Convert to the editor\'s code'))
+	        .appendTo(this.$tabsSettings)
+	        .on('click', function () {
+	            if (window.confirm(app.t('tabs[.]The code in the editor will be replaced with the new code, continue?'))) {
+	                $(this).removeClass('btn-success');
+
+	                var tabsConfig = []; //list of arrays like [tabTitle, tabContent]
+
+	                that.$tabsArea.find('.tab-option-wrapper').each(function () {
+	                    var tabName = $(this).find('input[name="title"]').val().trim();
+	                    var tabContent = $(this).find('input[name="content"]').val().trim();
+
+	                    if (tabName.indexOf('!dropdown!') === 0) {
+	                        if (!/^(?:\[n\](.+?)\[\/n\]\[a\](.+?)\[\/a\][ ]*,[ ]*)*\[n\](.+?)\[\/n\]\[a\](.+?)\[\/a\]$/.test(tabContent)) {
+	                            window.alert(app.t('tabs[.]Wrong content for the dropdown') + tabName.replace('!dropdown!', '') + '.');
+	                            return;
+	                        }
+
+	                        tabContent = tabContent.split(',').map(function (linkInfo) {
+	                            linkInfo = linkInfo.trim().match(/^\[n\](.+?)\[\/n\]\[a\](.+?)\[\/a\]$/);
+
+	                            return [linkInfo[1].trim(), linkInfo[2].trim()];
+	                        });
+	                    } else if (tabName.indexOf('!link!') === 0) {
+
+	                    }
+
+	                    tabsConfig.push([tabName, tabContent]);
+	                });
+
+
+	                $('#cs-motdtext').val(that.tabsConfigToHtml(that.$channelDescriptionInput.val(), tabsConfig));
+	            }
+	        });
+
+
+	    this.$htmlToTabs = $('<button type="button" class="btn btn-sm btn-primary" id="tabs-settings-from-html">')
+	        .text(app.t('tabs[.]Convert from the editor\'s code'))
+	        .appendTo(this.$tabsSettings)
+	        .on('click', function () {
+	            if (window.confirm(app.t('tabs[.]Tabs settings will be replaced with the code from the editor, continue?'))) {
+	                $(this).removeClass('motdselected');
+	                that.tabsHtmlToCondig($('#cs-motdtext').val());
+	            }
+	        });
+
+
+	    this.showMotdTab = function ($tabBtn) {
+	        var $tabContent = $('#motd-tabs-content').find('[data-tab-index="' + $tabBtn.data('tabIndex') + '"]');
+
+	        if ($tabBtn.hasClass('motdbutton')) { //closed
+	            $('.motd-tab-content').hide();
+	            $tabContent.show();
+
+	            $('.motd-tab-btn').removeClass('motdselected').addClass('motdbutton');
+
+	            $tabBtn.removeClass('motdbutton');
+	            $tabBtn.addClass('motdselected');
+	        } else { //opened
+	            $tabContent.hide();
+
+	            $tabBtn.removeClass('motdselected');
+	            $tabBtn.addClass('motdbutton');
+	        }
+	    };
+	    $(document.body).on('click', '#motd-tabs .motd-tab-btn', function () {
+	        that.showMotdTab($(this));
+	    });
+
+
+	    this.motdHandleDropdown = function () {
+	        $('.motd-tab-btn').removeClass('btn-success').addClass('motdbutton');
+	        $('.motd-tab-content').hide();
+	    };
+	    $(document.body).on('click', '#motd-tabs .dropdown-toggle', function () {
+	        that.motdHandleDropdown();
+	    });
+
+
+
+
+	    this.tabsHtmlToCondig($('#cs-motdtext').val());
+
+	    this.fixMotdCut();
+	    window.socket.on('setMotd', function () {
+	        that.fixMotdCut();
+	    });
+
+
+	    $(document).on('change keypress', '#tabs-settings-area input, #tabs-settings-area textarea', function () {
+	        that.$tabsToHtml.addClass('btn-success');
+	    });
+
+	    $(document).on('change keypress', '#cs-motdtext', function () {
+	        that.$htmlToTabs.addClass('btn-success');
+	    });
+		
+		///////////////Navigation shit/////////////////
+
+class StickyNavigation {
+	
+	constructor() {
+		this.currentId = null;
+		this.currentTab = null;
+		this.tabContainerHeight = 40;
+		let self = this;
+		$('.et-hero-tab').click(function() { 
+			self.onTabClick(event, $(this)); 
+		});
+		$(window).scroll(() => { this.onScroll(); });
+		$(window).resize(() => { this.onResize(); });
+	}
+	
+	onTabClick(event, element) {
+		event.preventDefault();
+		let scrollTop = $(element.attr('href')).offset().top - this.tabContainerHeight + 1;
+		$('html, body').animate({ scrollTop: scrollTop }, 100);
+	}
+	
+	onScroll() {
+		this.checkTabContainerPosition();
+    this.findCurrentTabSelector();
+	}
+	
+	onResize() {
+		if(this.currentId) {
+			this.setSliderCss();
+		}
+	}
+	
+	checkTabContainerPosition() {
+		let offset = $('.et-hero-tabs').offset().top + $('.et-hero-tabs').height() - this.tabContainerHeight;
+		if($(window).scrollTop() > offset) {
+			$('.et-hero-tabs-container').addClass('et-hero-tabs-container--top');
+		} 
+		else {
+			$('.et-hero-tabs-container').removeClass('et-hero-tabs-container--top');
+		}
+	}
+	
+	findCurrentTabSelector(element) {
+		let newCurrentId;
+		let newCurrentTab;
+		let self = this;
+		$('.et-hero-tab').each(function() {
+			let id = $(this).attr('href');
+			let offsetTop = $(id).offset().top - self.tabContainerHeight;
+			let offsetBottom = $(id).offset().top + $(id).height() - self.tabContainerHeight;
+			if($(window).scrollTop() > offsetTop && $(window).scrollTop() < offsetBottom) {
+				newCurrentId = id;
+				newCurrentTab = $(this);
+			}
+		});
+		if(this.currentId != newCurrentId || this.currentId === null) {
+			this.currentId = newCurrentId;
+			this.currentTab = newCurrentTab;
+			this.setSliderCss();
+		}
+	}
+	
+	setSliderCss() {
+		let width = 0;
+		let left = 0;
+		if(this.currentTab) {
+			width = this.currentTab.css('width');
+			left = this.currentTab.offset().left;
+		}
+		$('.et-hero-tab-slider').css('width', width);
+		$('.et-hero-tab-slider').css('left', left);
+	}
+	
+}
+//////////////////sticky shit/////////////////
+;(function( win, $ ) {
+
+	function featureTest( property, value, noPrefixes ) {
+		// Thanks Modernizr! https://github.com/phistuck/Modernizr/commit/3fb7217f5f8274e2f11fe6cfeda7cfaf9948a1f5
+		var prop = property + ':',
+			el = document.createElement( 'test' ),
+			mStyle = el.style;
+
+		if( !noPrefixes ) {
+			mStyle.cssText = prop + [ '-webkit-', '-moz-', '-ms-', '-o-', '' ].join( value + ';' + prop ) + value + ';';
+		} else {
+			mStyle.cssText = prop + value;
+		}
+		return mStyle[ property ].indexOf( value ) !== -1;
+	}
+
+	function getPx( unit ) {
+		return parseInt( unit, 10 ) || 0;
+	}
+
+	var uniqueIdCounter = 0;
+
+	var S = {
+		classes: {
+			plugin: 'fixedsticky',
+			active: 'fixedsticky-on',
+			inactive: 'fixedsticky-off',
+			clone: 'fixedsticky-dummy',
+			withoutFixedFixed: 'fixedsticky-withoutfixedfixed'
+		},
+		keys: {
+			offset: 'fixedStickyOffset',
+			position: 'fixedStickyPosition',
+			id: 'fixedStickyId'
+		},
+		tests: {
+			sticky: featureTest( 'position', 'sticky' ),
+			fixed: featureTest( 'position', 'fixed', true )
+		},
+		// Thanks jQuery!
+		getScrollTop: function() {
+			var prop = 'pageYOffset',
+				method = 'scrollTop';
+			return win ? (prop in win) ? win[ prop ] :
+				win.document.documentElement[ method ] :
+				win.document.body[ method ];
+		},
+		bypass: function() {
+			// Check native sticky, check fixed and if fixed-fixed is also included on the page and is supported
+			return ( S.tests.sticky && !S.optOut ) ||
+				!S.tests.fixed ||
+				win.FixedFixed && !$( win.document.documentElement ).hasClass( 'fixed-supported' );
+		},
+		update: function( el ) {
+			if( !el.offsetWidth ) { return; }
+
+			var $el = $( el ),
+				height = $el.outerHeight(),
+				initialOffset = $el.data( S.keys.offset ),
+				scroll = S.getScrollTop(),
+				isAlreadyOn = $el.is( '.' + S.classes.active ),
+				toggle = function( turnOn ) {
+					$el[ turnOn ? 'addClass' : 'removeClass' ]( S.classes.active )
+						[ !turnOn ? 'addClass' : 'removeClass' ]( S.classes.inactive );
+				},
+				viewportHeight = $( window ).height(),
+				position = $el.data( S.keys.position ),
+				skipSettingToFixed,
+				elTop,
+				elBottom,
+				$parent = $el.parent(),
+				parentOffset = $parent.offset().top,
+				parentHeight = $parent.outerHeight();
+
+			if( initialOffset === undefined ) {
+				initialOffset = $el.offset().top;
+				$el.data( S.keys.offset, initialOffset );
+				$el.after( $( '<div>' ).addClass( S.classes.clone ).height( height ) );
+			} else {
+				$el.next( '.' + S.classes.clone ).height( height );
+			}
+
+			if( !position ) {
+				// Some browsers require fixed/absolute to report accurate top/left values.
+				skipSettingToFixed = $el.css( 'top' ) !== 'auto' || $el.css( 'bottom' ) !== 'auto';
+
+				if( !skipSettingToFixed ) {
+					$el.css( 'position', 'fixed' );
+				}
+
+				position = {
+					top: $el.css( 'top' ) !== 'auto',
+					bottom: $el.css( 'bottom' ) !== 'auto'
+				};
+
+				if( !skipSettingToFixed ) {
+					$el.css( 'position', '' );
+				}
+
+				$el.data( S.keys.position, position );
+			}
+
+			function isFixedToTop() {
+				var offsetTop = scroll + elTop;
+
+				// Initial Offset Top
+				return initialOffset < offsetTop &&
+					// Container Bottom
+					offsetTop + height <= parentOffset + parentHeight;
+			}
+
+			function isFixedToBottom() {
+				// Initial Offset Top + Height
+				return initialOffset + ( height || 0 ) > scroll + viewportHeight - elBottom &&
+					// Container Top
+					scroll + viewportHeight - elBottom >= parentOffset + ( height || 0 );
+			}
+
+			elTop = getPx( $el.css( 'top' ) );
+			elBottom = getPx( $el.css( 'bottom' ) );
+
+			if( position.top && isFixedToTop() || position.bottom && isFixedToBottom() ) {
+				if( !isAlreadyOn ) {
+					toggle( true );
+				}
+			} else {
+				if( isAlreadyOn ) {
+					toggle( false );
+				}
+			}
+		},
+		destroy: function( el ) {
+			var $el = $( el );
+			if (S.bypass()) {
+				return $el;
+			}
+
+			return $el.each(function() {
+				var $this = $( this );
+				var id = $this.data( S.keys.id );
+				$( win ).unbind( '.fixedsticky' + id );
+
+				$this
+					.removeData( [ S.keys.offset, S.keys.position, S.keys.id ] )
+					.removeClass( S.classes.active )
+					.removeClass( S.classes.inactive )
+					.next( '.' + S.classes.clone ).remove();
+			});
+		},
+		init: function( el ) {
+			var $el = $( el );
+
+			if( S.bypass() ) {
+				return $el;
+			}
+
+			return $el.each(function() {
+				var _this = this;
+				var id = uniqueIdCounter++;
+				$( this ).data( S.keys.id, id );
+
+				$( win ).bind( 'scroll.fixedsticky' + id, function() {
+					S.update( _this );
+				}).trigger( 'scroll.fixedsticky' + id );
+
+				$( win ).bind( 'resize.fixedsticky' + id , function() {
+					if( $el.is( '.' + S.classes.active ) ) {
+						S.update( _this );
+					}
+				});
+			});
+		}
+	};
+
+	win.FixedSticky = S;
+
+	// Plugin
+	$.fn.fixedsticky = function( method ) {
+		if ( typeof S[ method ] === 'function') {
+			return S[ method ].call( S, this);
+		} else if ( typeof method === 'object' || ! method ) {
+			return S.init.call( S, this );
+		} else {
+			throw new Error( 'Method `' +  method + '` does not exist on jQuery.fixedsticky' );
+		}
+	};
+
+	// Add fallback when fixed-fixed is not available.
+	if( !win.FixedFixed ) {
+		$( win.document.documentElement ).addClass( S.classes.withoutFixedFixed );
+	}
+
+})( window, jQuery );
+
+	    this.$titleRow = $('<div id="navtabs" class="row">').insertAfter('#main');
+
+
+new StickyNavigation();
+$("#navtabs").prepend(
+'<section id="tabs" class="et-hero-tabs">' +
+'<div class="et-hero-tabs-container">' +
+'<a class="et-hero-tab" href="#motdwrap">MOTD</a>' +
+'<a class="et-hero-tab" href="#queuecontainer">PLAYLIST</a>' +
+//'<a class="et-hero-tab" id="polltab" href="#pollwrap"></a>' +
+'<a class="et-hero-tab" id="addmediatoggle" href="#rightpane"></a>' +
+//'<a class="et-hero-tab" id="bgswitch"></a>' +
+'<span class="et-hero-tab-slider"></span>' +
+'</div></section>');
+$( '#tabs' ).fixedsticky();
+
+$("#polltab").append($("#newpollbtn"));
+$("#bgswitch").append("<button id='bgbutton' title='new background'  class='headerbtn'>Random BG</button>");
+$("#addmediatoggle").append("<button id='addmedia' title='Add Media' class='headerbtn'></button>");
+$("#addmediatoggle").click(function(){ //Add Media button action
+	if ($("#rightpane").css('display') == 'none'){//if add media is hidden
+		$("#mediabuttons button").each(function() {
+			if ($(this).css("display") != "none") {
+				if ($(this).hasClass("collapsed")){
+					$(this).trigger("click");
+				}
+				return false;
+			}//if button is clickable
+		})
+		$("#rightpane").slideDown(trnsdelay);
+	}
+	else {
+		$("#rightpane").slideUp(trnsdelay);
+	}
+var trnsdelay = 400;//Defines trnsdelay, transition time (in ms)
+
+});
+	});
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('CopyEmotes', function (app) {
+	    'use strict';
+	    var that = this;
+
+var target = document.querySelector('#messagebuffer');
+var observer = new MutationObserver(function (mutations) {
+	var last = $('#messagebuffer').children().last();
+	var emote = last.find(".channel-emote").click(
+		function () {
+		    $('#chatline').val($('#chatline').val() + " " + ($(this).attr("title")));
+		}
+	);
+	emote.each(function () {
+		console.log($(this).attr("title"), $(this).attr("src"));
+		emoteToDialog($(this).attr("title"), $(this).attr("src"));
+	});
+});
+$("#chatwrap").append(
+'<div id="LastEmote" class="LastEmoteBox">' +
+'</div></div>' );
+
+var config = { childList: true };
+observer.observe(target, config);
+var items = 0; 
+function emoteToDialog(title, src) {
+	if (typeof title == 'undefined' || typeof src == 'undefined') {
+		return;
+	}
+	var emoteID = title.replace("/", "")
+	var del = $('#' + emoteID).remove();
+	if(!del.length > 0){
+		items++;
+	}
+	if(items >= 4){
+		$('#chatEmotes').children().last().remove();;
+		items--;
+	}
+	var btn = $('<div class="emoteicon" id="'+emoteID+'"title=/'+emoteID+' style="float:left;"><img src="' + src + '" id="' + emoteID + "_img'" + '" width="28" height="28" /></img></div>');
+		btn.click(
+		function () {
+			$('#chatline').val($('#chatline').val() + " " + title);
+		}
+	);
+	btn.prependTo("#LastEmote");
+}
+
+	});
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('smilesAndFavouritePicturesTogether', function (app) {
+	    'use strict';
+	    var that = this;
+
+	    var tab = app.Settings.getTab('general', app.t('general[.]General'), 100);
+	    var userSettings = app.Settings.storage;
+
+
+	    if (!app.isModulePermitted('smiles') || !app.isModulePermitted('favouritePictures')) {
+	        return;
+	    }
+
+	    var namespace = 'general';
+	    this.scheme = {
+	        'smiles-and-favourite-pictures-together': {
+	            title: app.t('general[.]Smiles and pictures together'),
+	            default: 'no',
+	            options: [
+	                {value: 'no', title: app.t('settings[.]no')}
+	            ]
+	        }
+	    };
+
+
+	    /**
+	     * Creating markup for settings
+	     */
+	    var schemeItem;
+	    var option;
+	    var sort = 10000;
+	    for (var itemName in this.scheme) {
+	        schemeItem = this.scheme[itemName];
+
+	        userSettings.setDefault(namespace + '.' + itemName, schemeItem.default);
+
+	        if (userSettings.get(namespace + '.' + itemName)) {
+	            for (option in schemeItem.options) {
+	                schemeItem.options[option].selected = (userSettings.get(namespace + '.' + itemName) == schemeItem.options[option].value);
+	            }
+	        }
+
+	        tab.addControl('select', 'horizontal', schemeItem.title, itemName, schemeItem.options, null, sort);
+	        sort += 100;
+	    }
+
+
+	    /**
+	     * Saving and applying settings
+	     */
+	    app.Settings.onSave(function (settings) {
+	        for (var itemName in that.scheme) {
+	            settings.set(namespace + '.' + itemName, $('#' + app.prefix + itemName).val());
+	        }
+
+	        if (settings.isDirty(namespace + '.smiles-and-favourite-pictures-together')) {
+	            app.Settings.requestPageReload();
+	        }
+	    });
+
+
+	    if (userSettings.get(namespace + '.smiles-and-favourite-pictures-together')  == 'yes') {
+	        app.getModule('smiles').done(function (smilesModule) {
+	            smilesModule.makeSmilesAndPicturesTogether();
+	        });
+
+	        app.getModule('favouritePictures').done(function (favouritePicturesModule) {
+	            favouritePicturesModule.makeSmilesAndPicturesTogether();
+	        });
+
+	        $('<button id="smiles-and-picture-btn" class="btn btn-sm btn-default" title="' + app.t('general[.]Show emotes and favorite images') + '">')
+	            .html('<i class="glyphicon glyphicon-th-large"></i>')
+	            .prependTo($('#chat-controls'))
+	            .on('click', function () {
+	                $('#smiles-btn').click();
+	                $('#favourite-pictures-btn').click();
+
+	                if ($(this).hasClass('btn-default')) {
+	                    $(this).removeClass('btn-default');
+	                    $(this).addClass('btn-success');
+	                } else {
+	                    $(this).removeClass('btn-success');
+	                    $(this).addClass('btn-default');
+	                }
+	            });
+	    }
+	});
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('smiles', function (app) {
+	    'use strict';
+	    var that = this;
+
+	    $('#emotelistbtn').hide();
+	    if ($('#chat-panel').length === 0) {
+	        $('<div id="chat-panel" class="row">').insertAfter("#messagebuffer");
+	    }
+	    if ($('#chat-controls').length === 0) {
+	        $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
+	    }
+
+	    this.$smilesBtn = $('<button id="smiles-btn" class="chatbtn" title="' + app.t('emotes[.]Show emotes') + '">')
+	        .html('<i class="fad fa-images"></i>')
+	        .prependTo('#chat-controls');
+
+	    this.$smilesPanel = $('<div id="smiles-panel">')
+	        .prependTo('#chat-panel')
+	        .hide();
+
+
+	    this.renderSmiles = function () {
+	        var smiles = window.CHANNEL.emotes;
+
+	        for (var smileIndex = 0, smilesLen = smiles.length; smileIndex < smilesLen; smileIndex++) {
+	            $('<img class="smile-on-panel">')
+	                .attr({src: smiles[smileIndex].image})
+	                .data('name', smiles[smileIndex].name)
+	                .appendTo(this.$smilesPanel);
+	        }
+	    };
+
+
+	    this.insertSmile = function (smileName) {
+	        app.Helpers.addMessageToChatInput(' ' + smileName + ' ', 'end');
+	    };
+	    $(document.body).on('click', '.smile-on-panel', function () {
+	        that.insertSmile($(this).data('name'));
+	    });
+
+
+	    $(window).on('resize', function () {
+	        if (app.Helpers.getViewportSize().width < 992) {
+	            that.$smilesPanel.empty();
+	        }
+	    });
+	    this.showSmilesPanel = function () {
+	        if (app.Helpers.getViewportSize().width < 992) {
+	            that.$smilesPanel.empty();
+	            $('#emotelistbtn').click();
+	        } else {
+	            if (that.$smilesPanel.html() === '') {
+	                that.renderSmiles();
+	            }
+
+	            var smilesAndPicturesTogether = this.smilesAndPicturesTogether || true; //setted up by userConfig module
+
+	            if ($('#favourite-pictures-panel').length !== 0 && !smilesAndPicturesTogether) {
+	                $('#favourite-pictures-panel').hide();
+	            }
+
+	            that.$smilesPanel.toggle();
+
+	            if (!smilesAndPicturesTogether) {
+	                if (that.$smilesBtn.hasClass('btn-default')) {
+	                    if ($('#favourite-pictures-btn').length !== 0 && $('#favourite-pictures-btn').hasClass('')) {
+	                        $('#favourite-pictures-btn').removeClass('').addClass('');
+	                    }
+
+	                    that.$smilesBtn.removeClass('');
+	                    that.$smilesBtn.addClass('');
+	                } else {
+	                    that.$smilesBtn.removeClass('');
+	                    that.$smilesBtn.addClass('');
+	                }
+	            }
+	        }
+	    };
+	    this.$smilesBtn.on('click', function() {
+	        that.showSmilesPanel();
+	    });
+
+
+	    this.makeSmilesAndPicturesTogether = function () {
+	        that.smilesAndPicturesTogether = true;
+	        that.$smilesBtn.hide();
+	        that.$smilesPanel.hide();
+	    };
+	});
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('themes', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        defaultTheme: 'default', //default theme for user (until user do not change it)
+	        themeId: 'theme-css' //node id in DOM
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+
+	    $('#us-theme').closest('.form-group').hide().val('/css/themes/slate.css');
+	    if (window.createCookie) {
+	        window.createCookie('cytube-theme', '/css/themes/slate.css', 1000);
+	    }
+
+
+	    var tab = app.Settings.getTab('themes', app.t('themes[.]Themes'), 500);
+	    var $tabContent = $('<div class="' + app.prefix + 'themes">').appendTo(tab.$content);
+	    var userSettings = app.Settings.storage;
+
+	    var $themesInfoMessage = $('<div class="' + app.prefix + 'themes__info-message">').text('No Topic').prependTo(tab.$content);
+
+	    var namespace = 'themes';
+	    userSettings.setDefault(namespace + '.selected', settings.defaultTheme);
+	    this.themes = {};
+
+
+	    //if settings.defaultTheme was changed by administrator ask user if he want to switch on it
+	    this.applyNewDefaultTheme = function () {
+	        var previousDefaultTheme = userSettings.get(namespace + '.previousDefaultTheme');
+
+	        if (userSettings.get(namespace + '.selected') == previousDefaultTheme) {
+	            userSettings.set(namespace + '.previousDefaultTheme', settings.defaultTheme);
+	            that.setTheme(settings.defaultTheme);
+	            userSettings.save();
+	            console.log('reloading');
+	            window.location.reload();
+	        } else if (!previousDefaultTheme || (previousDefaultTheme && previousDefaultTheme != settings.defaultTheme)) {
+	            userSettings.set(namespace + '.previousDefaultTheme', settings.defaultTheme);
+	            userSettings.save();
+
+	            if (settings.defaultTheme != userSettings.get(namespace + '.selected')) {
+	                var themeTitle = that.themes[settings.defaultTheme].title;
+	                app.UI.createConfirmWindow(app.t('themes[.]Default theme was changed to "%themeTitle%" by administrator. Do you want to try it? (Don\'t forget, that you can switch your theme in extended settings anytime.)').replace('%themeTitle%', themeTitle), function () {
+	                    that.setTheme(settings.defaultTheme);
+	                    userSettings.save();
+	                    app.UI.createConfirmWindow(app.t('settings[.]Some settings need to refresh the page to get to work. Do it now?'), function () {
+	                        window.location.reload();
+	                    });
+	                });
+	            }
+	        }
+	    };
+
+
+	    this.add = function (config) {
+	        $themesInfoMessage.remove();
+
+	        that.themes[config.name] = config;
+	        that.themes[config.name].$el = that.addMarkup(config).appendTo($tabContent);
+	        that.sort();
+
+	        if (config.name === userSettings.get(namespace + '.selected')) {
+	            if (config.name === settings.defaultTheme) {
+	                userSettings.set(namespace + '.previousDefaultTheme', settings.defaultTheme);
+	                userSettings.save();
+	            }
+	            that.setTheme(config.name);
+	            that.applyTheme(config.name);
+	        } else if (config.name === settings.defaultTheme) {
+	            that.applyNewDefaultTheme();
+	        }
+	    };
+
+
+	    tab.onShow(function () {
+	        $('.' + app.prefix + 'themes__item')
+	            .removeClass('active')
+	            .filter(function() {
+	                return $(this).data('name') === userSettings.get(namespace + '.selected');
+	            })
+	            .addClass('active');
+	    });
+
+
+	    /**
+	     * Sets theme
+	     * @param name Theme's name
+	     */
+	    this.setTheme = function (name) {
+	        userSettings.set(namespace + '.selected', name);
+
+	        $('.' + app.prefix + 'themes__item')
+	            .removeClass('active')
+	            .filter(function() {
+	                return $(this).data('name') === name;
+	            })
+	            .addClass('active');
+	    };
+
+
+	    this.applyTheme = function (name) {
+	        var config = that.themes[name];
+
+	        $('#' + settings.themeId).remove();
+	        if (config.cssUrl) {
+	            $('<link rel="stylesheet" id="' + settings.themeId + '">').attr('href', config.cssUrl).appendTo($('head'));
+	        } else { //resets to default theme
+	            that.setTheme(userSettings.getDefault(namespace + '.selected'));
+	        }
+
+	        if (config.jsUrl) {
+	            $.getScript(config.jsUrl);
+	        }
+	    };
+
+
+	    this.addMarkup = function (config) {
+	        var $moduleInfo = $('<div class="' + app.prefix + 'themes__item">').data('name', config.name).on('click', function () {
+	            var name = $(this).data('name');
+
+	            if (name !== userSettings.get(namespace + '.selected')) {
+	                app.UI.createConfirmWindow(app.t('themes[.]Apply this theme?'), function () {
+	                    that.setTheme(name);
+	                });
+	            }
+	        });
+
+
+	        var $title = $('<div class="' + app.prefix + 'themes__item__title">').text(config.title).appendTo($moduleInfo);
+
+	        if (typeof config.pictureUrl !== 'undefined' && (config.pictureUrl = config.pictureUrl.trim()) !== '') {
+	            $('<div class="' + app.prefix + 'themes__item__picture">').appendTo($moduleInfo).css('background-image', 'url("' + config.pictureUrl + '")');
+	        }
+
+
+	        return $moduleInfo;
+	    };
+
+
+	    this.sort = function () {
+	        var themesArray = [];
+	        for (var theme in that.themes) {
+	            themesArray.push(that.themes[theme]);
+	        }
+
+	        themesArray = themesArray.sort(function (a, b) {
+	            if (a.title.toLowerCase() > b.title.toLowerCase()) {
+	                return 1;
+	            } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+	                return -1;
+	            } else {
+	                return 0;
+	            }
+	        });
+
+	        for (var themeIndex = 0, themesLength = themesArray.length; themeIndex < themesLength; themeIndex++) {
+	            themesArray[themeIndex].$el.detach().appendTo($tabContent);
+	        }
+	    };
+
+
+	    /**
+	     * Saving and applying settings
+	     */
+	    app.Settings.onSave(function (settings) {
+	        if (settings.isDirty(namespace + '.selected')) {
+	            app.Settings.requestPageReload();
+	        }
+	    });
+	});
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('uiRussianTranslate', function (app) {
+	    'use strict';
+	    var that = this;
+
+	    if (app.storage.get('language') !== 'ru') {
+	        return;
+	    }
+
+
+	    if ($('#newpollbtn').length !== 0) {
+	        $('#newpollbtn').text(app.t('standardUI[.]Create a poll'));
+	    }
+
+	    if ($('#usercount').length !== 0) {
+	        $('#usercount').text($('#usercount').text().replace('connected users', app.t('standardUI[.]connected users')).replace('connected user', app.t('standardUI[.]connected user')));
+	        window.socket.on('usercount', function () {
+	            $('#usercount').text($('#usercount').text().replace('connected users', app.t('standardUI[.]connected users')).replace('connected user', app.t('standardUI[.]connected user')));
+	        });
+	    }
+	    window.calcUserBreakdown = (function (oldCalcUserBreakdown) {
+	        return function () {
+	            var chatInfo = oldCalcUserBreakdown();
+	            var translatedChatInfo = {};
+
+	            var chatInfoTranslateMap = {
+	                AFK: app.t('standardUI[.]AFK'),
+	                Anonymous: app.t('standardUI[.]Anonymous'),
+	                'Channel Admins': app.t('standardUI[.]Channel Admins'),
+	                Guests: app.t('standardUI[.]Guests'),
+	                Moderators: app.t('standardUI[.]Moderators'),
+	                'Regular Users': app.t('standardUI[.]Regular Users'),
+	                'Site Admins': app.t('standardUI[.]Site Admins')
+	            };
+
+	            for (var chatInfoElement in chatInfo) {
+	                if (chatInfo.hasOwnProperty(chatInfoElement) && typeof chatInfoTranslateMap[chatInfoElement] !== 'undefined') {
+	                    translatedChatInfo[chatInfoTranslateMap[chatInfoElement]] = chatInfo[chatInfoElement];
+	                }
+	            }
+
+	            return translatedChatInfo;
+	        };
+	    })(window.calcUserBreakdown);
+
+	    if ($('#welcome').length !== 0) {
+	        $('#welcome').text(app.t('standardUI[.]Welcome, ') + window.CLIENT.name);
+	    }
+	    if ($('#logout').length !== 0) {
+	        $('#logout').text(app.t('standardUI[.]Log out'));
+	    }
+	    if ($('#username').length !== 0) {
+	        $('#username').attr({placeholder: app.t('standardUI[.]Login')});
+	    }
+	    if ($('#password').length !== 0) {
+	        $('#password').attr({placeholder: app.t('standardUI[.]Password')});
+	    }
+	    if ($('#loginform').find('.checkbox').find('.navbar-text-nofloat').length !== 0) {
+	        $('#loginform').find('.checkbox').find('.navbar-text-nofloat').text(app.t('standardUI[.]Remember me'));
+	    }
+	    if ($('#login').length !== 0) {
+	        $('#login').text(app.t('standardUI[.]Site login'));
+	    }
+
+	    var menuTranslateMap = {
+	        Home: app.t('standardUI[.]Home'),
+	        Account: app.t('standardUI[.]Account'),
+	        Logout: app.t('standardUI[.]Logout'),
+	        Channels: app.t('standardUI[.]Channels'),
+	        Profile: app.t('standardUI[.]Profile'),
+	        'Change Password/Email': app.t('standardUI[.]Change Password/Email'),
+	        Login: app.t('standardUI[.]Log in'),
+	        Register: app.t('standardUI[.]Register'),
+	        Options: app.t('standardUI[.]Options'),
+	        'Channel Settings': app.t('standardUI[.]Channel Settings'),
+	        Layout: app.t('standardUI[.]Layout'),
+	        'Chat Only': app.t('standardUI[.]Chat Only'),
+	        'Remove Video': app.t('standardUI[.]Remove Video')
+	    };
+	    $('.navbar').find('.navbar-nav').children().each(function () {
+	        $(this).find('a').each(function () {
+	            for (var elementToTranslate in menuTranslateMap) {
+	                if (menuTranslateMap.hasOwnProperty(elementToTranslate)) {
+	                    $(this).html($(this).html().replace(elementToTranslate, menuTranslateMap[elementToTranslate]));
+	                }
+	            }
+	        });
+	    });
+
+	    if ($('#mediaurl').length !== 0) {
+	        $('#mediaurl').attr('placeholder', app.t('standardUI[.]Video url'));
+	    }
+	    if ($('#queue_next').length !== 0) {
+	        $('#queue_next').text(app.t('standardUI[.]Next'));
+	    }
+	    if ($('#queue_end').length !== 0) {
+	        $('#queue_end').text(app.t('standardUI[.]At end'));
+	    }
+
+	    $('.qbtn-play').each(function () {
+	        $(this).html($(this).html().replace(/\s*Play/, ' ' + app.t('standardUI[.]Play')));
+	    });
+	    $('.qbtn-next').each(function () {
+	        $(this).html($(this).html().replace(/\s*Queue Next/, ' ' + app.t('standardUI[.]Queue Next')));
+	    });
+	    $('.qbtn-tmp').each(function () {
+	        $(this).html($(this).html().replace(/\s*Make Temporary/, ' ' + app.t('standardUI[.]Make Temporary')).replace(/\s*Make Permanent/, ' ' + app.t('standardUI[.]Make Permanent')));
+	    });
+	    $('.qbtn-delete').each(function () {
+	        $(this).html($(this).html().replace(/\s*Delete/, ' ' + app.t('standardUI[.]Delete')));
+	    });
+	    window.addQueueButtons = (function (oldAddQueueButtons) {
+	        return function (li) {
+	            var result = oldAddQueueButtons(li);
+
+	            if (li.find('.qbtn-play').length !== 0) {
+	                li.find('.qbtn-play').html(li.find('.qbtn-play').html().replace(/\s*Play/, ' ' + app.t('standardUI[.]Play')));
+	            }
+	            if (li.find('.qbtn-next').length !== 0) {
+	                li.find('.qbtn-next').html(li.find('.qbtn-next').html().replace(/\s*Queue Next/, ' ' + app.t('standardUI[.]Queue Next')));
+	            }
+	            if (li.find('.qbtn-tmp').length !== 0) {
+	                li.find('.qbtn-tmp').html(li.find('.qbtn-tmp').html().replace(/\s*Make Temporary/, ' ' + app.t('standardUI[.]Make Temporary')).replace(/\s*Make Permanent/, ' ' + app.t('standardUI[.]Make Permanent')));
+	            }
+	            if (li.find('.qbtn-delete').length !== 0) {
+	                li.find('.qbtn-delete').html(li.find('.qbtn-delete').html().replace(/\s*Delete/, ' ' + app.t('standardUI[.]Delete')));
+	            }
+
+	            return result;
+	        };
+	    })(window.addQueueButtons);
+
+	    this.handleTemp = function (data) {
+	        var tmpBtn = $(".pluid-" + data.uid).find(".qbtn-tmp");
+
+	        if(tmpBtn.length !== 0) {
+	            if(data.temp) {
+	                tmpBtn.html(tmpBtn.html().replace('Сделать временным', app.t('standardUI[.]Make Temporary')));
+	            }
+	            else {
+	                tmpBtn.html(tmpBtn.html().replace('Сделать постоянным', app.t('standardUI[.]Make Permanent')));
+	            }
+	        }
+	    };
+	    window.socket.on('setTemp', function (data) {
+	        that.handleTemp(data);
+	    });
+
+	    if ($('#guestname').length !== 0) {
+	        $('#guestname').attr('placeholder', app.t('standardUI[.]Name'));
+	    }
+	    if ($('#guestlogin')) {
+	        $('#guestlogin').find('.input-group-addon').text(app.t('standardUI[.]Guest login'));
+	    }
+
+	    if ($('#chatbtn').length !== 0) {
+	        $('#chatbtn').text('Отправить');
+	    }
+
+	    if ($('#modflair').length !== 0) {
+	        $('#modflair').text('Цветной ник');
+	    }
+	});
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('videoControls', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        turnOffVideoOption: true,
+	        selectQualityOption: true,
+	        expandPlaylistOption: true,
+	        showVideoContributorsOption: true,
+	        playlistHeight: 500
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    //$('#mediarefresh').hide();
+
+    this.$topVideoControls = $('<div id="top-video-controls" class="btn-group">').appendTo("#VideoOverlay");
+
+ this.hidePlayer = function ($hidePlayerBtn) {
+        if ($hidePlayerBtn.hasClass('btn-default')) { //video visible
+            var $playerWindow = $('#videowrap').find('.embed-responsive');
+            $playerWindow.css({position: 'relative'});
+			videojs("ytapiplayer_html5_api").ready(function(){this.volume(0);});
+
+            $('<div id="player-overlay">').appendTo(videowrap);
+
+            $hidePlayerBtn.html('<i class="glyphicon glyphicon-film">')
+                .removeClass('btn-default')
+                .addClass('');
+        } else { //video hidden
+            $('#player-overlay').remove();
+			var $playerWindow = $('#videowrap').find('.embed-responsive');
+            $playerWindow.css({position: 'block'});
+			videojs("ytapiplayer_html5_api").ready(function(){this.volume(0.7);});
+            $hidePlayerBtn.html('<i class="glyphicon glyphicon-ban-circle">')
+                .removeClass('').addClass('btn-default');
+        }
+    };
+    this.$hidePlayerBtn = $('<button id="hide-player-btn" class="OLB" title="' + app.t('video[.]Hide video') + '">')
+        .html('<i class="glyphicon glyphicon-ban-circle">')
+        .appendTo(this.$topVideoControls)
+		.addClass('btn-default')
+        .on('click', function() {
+            that.hidePlayer($(this));
+        });
+    if (!settings.turnOffVideoOption) {
+        this.$hidePlayerBtn.hide();
+    }
+
+	    this.settingsFix = function () {
+	        $("#us-theme").val(window.USEROPTS.theme);
+	        $("#us-layout").val(window.USEROPTS.layout);
+	        $("#us-no-channelcss").prop("checked", window.USEROPTS.ignore_channelcss);
+	        $("#us-no-channeljs").prop("checked", window.USEROPTS.ignore_channeljs);
+
+	        $("#us-synch").prop("checked", window.USEROPTS.synch);
+	        $("#us-synch-accuracy").val(window.USEROPTS.sync_accuracy);
+	        $("#us-wmode-transparent").prop("checked", window.USEROPTS.wmode_transparent);
+	        $("#us-hidevideo").prop("checked", window.USEROPTS.hidevid);
+	        $("#us-playlistbuttons").prop("checked", window.USEROPTS.qbtn_hide);
+	        $("#us-oldbtns").prop("checked", window.USEROPTS.qbtn_idontlikechange);
+	        $("#us-default-quality").val(window.USEROPTS.default_quality || "auto");
+
+	        $("#us-chat-timestamp").prop("checked", window.USEROPTS.show_timestamps);
+	        $("#us-sort-rank").prop("checked", window.USEROPTS.sort_rank);
+	        $("#us-sort-afk").prop("checked", window.USEROPTS.sort_afk);
+	        $("#us-blink-title").val(window.USEROPTS.blink_title);
+	        $("#us-ping-sound").val(window.USEROPTS.boop);
+	        $("#us-sendbtn").prop("checked", window.USEROPTS.chatbtn);
+	        $("#us-no-emotes").prop("checked", window.USEROPTS.no_emotes);
+
+	        $("#us-modflair").prop("checked", window.USEROPTS.modhat);
+	        $("#us-joinmessage").prop("checked", window.USEROPTS.joinmessage);
+	        $("#us-shadowchat").prop("checked", window.USEROPTS.show_shadowchat);
+	    };
+
+
+	    if ($('#showmediaurl').length !== 0) {
+	        $('#showmediaurl').html(app.t('standardUI[.]Add video'))
+	            .attr({title: app.t('standardUI[.]Add video from url')})
+	            .detach()
+	            .insertBefore($('#showsearch'));
+	    }
+
+
+	    this.expandPlaylist = function ($expandPlaylistBtn) {
+	        if ($expandPlaylistBtn.hasClass('btn-success')) {//expanded
+	            $('#queue').css('max-height', settings.playlistHeight + 'px');
+
+	            $expandPlaylistBtn.attr('title', app.t('video[.]Expand playlist'));
+
+	            $expandPlaylistBtn.removeClass('btn-success');
+	            $expandPlaylistBtn.addClass('btn-default');
+	        } else {//not expanded
+	            $('#queue').css('max-height', '100000px');
+
+	            $expandPlaylistBtn.attr('title', app.t('video[.]Unexpand playlist'));
+
+	            $expandPlaylistBtn.removeClass('btn-default');
+	            $expandPlaylistBtn.addClass('btn-success');
+
+	            window.scrollQueue();
+	        }
+	    };
+	    this.$expandPlaylistBtn = $('<button id="expand-playlist-btn" class="btn btn-sm btn-default" data-expanded="0" title="' + app.t('video[.]Expand playlist') + '">')
+	        .append('<span class="glyphicon glyphicon-resize-full">')
+	        .prependTo('#ploptions')
+	        .on('click', function() {
+	            that.expandPlaylist($(this));
+	        });
+	    if (!settings.expandPlaylistOption) {
+	        this.$expandPlaylistBtn.hide();
+	    }
+
+
+	    this.$scrollToCurrentBtn = $('<button id="scroll-to-current-btn" class="btn btn-sm btn-default" title="' + app.t('video[.]Scroll the playlist to the current video') + '">')
+	        .append('<span class="glyphicon glyphicon-hand-right">')
+	        .prependTo('#upnext')
+	        .on('click', function() {
+	            window.scrollQueue();
+	        });
+
+
+	    this.showVideoContributorsList = function () {
+	        var $header = $('<h3 class="modal-title">').text(app.t('video[.]Contributors\' list'));
+	        var $bodyWrapper = $('<div>');
+
+	        var contributorsList = {};
+	        $('#queue').find('.queue_entry').each(function () {
+	            var username = $(this).attr('title').replace('Added by: ', '');
+
+	            if (contributorsList[username] === undefined) {
+	                contributorsList[username] = 1;
+	            } else {
+	                contributorsList[username] += 1;
+	            }
+	        });
+
+	        $bodyWrapper.append($('<p>' + app.t('video[.]Video\'s count') + ': ' + ($('#queue').find('.queue_entry').length + 1) + '</p>'));
+
+	        var $contributorsListOl = $('<ol>');
+	        for (var contributor in contributorsList) {
+	            if (contributorsList.hasOwnProperty(contributor)) {
+	                $contributorsListOl.append($('<li>' + contributor + ': ' + contributorsList[contributor] + '.</li>'));
+	            }
+	        }
+	        $contributorsListOl.appendTo($bodyWrapper);
+
+	        app.UI.createModalWindow('video-contributors-list', $header, $bodyWrapper);
+	    };
+	    this.$videoContributorsBtn = $('<button id="video-contributors-btn" class="btn btn-sm btn-default" title="' + app.t('video[.]Contributors\' list') + '">')
+	        .append('<span class="glyphicon glyphicon-user">')
+	        .prependTo('#ploptions')
+	        .on('click', function() {
+	            that.showVideoContributorsList();
+	        });
+	    if (!settings.showVideoContributorsOption) {
+	        this.$videoContributorsBtn.hide();
+	    }
+	});
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('channelslide', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        turnedOn: true
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    
+	    $("#motdwrap").before(
+'<div id="scroll-feature" class="horiz-scroll">' +
+'<div class="scroller">' +
+'<div class="left-scroll invisible">' +
+'<p class="fa fa-angle-left"></p>' +
+'</div>' +
+'<div class="right-scroll">' +
+'<p class="fa fa-angle-right"></p>' +
+'</div>' +
+'<div class="scroll-images scrollable-x">' +
+ '<a href="https://cytu.be/r/southparkhd"><img src="//s14.postimg.cc/m3rs2y1rl/C47_MQA3.png" class="kek" /></a>' +
+  '<a href="https://cytu.be/r/seinfeldHD"><img src="//s14.postimg.cc/yv5y9gqz5/w3_WPXIa.png" class="kek" /></a>' +
+   '<a href="https://cytu.be/r/Simpsons"><img src="//i.postimg.cc/8CqBZg1z/simps.png" class="kek" /></a>' +
+    '<a href="https://cytu.be/r/spooktober"><img src="//i.postimg.cc/HnVkSfqR/spookt.png" class="kek" /></a>' +
+    '<a href="https://cytu.be/r/spookyshows"><img src="//s14.postimg.cc/twifuuuv5/2_LB9834.png" class="kek" /></a>' +
+   '<a href="https://cytu.be/r/buffy"><img src="//s14.postimg.cc/6iagj0koh/Gx_CKt_EZ.png" class="kek" /></a>' +
+    '<a href="https://cytu.be/r/animatedshows"><img src="//s14.postimg.cc/arf6l60sh/Wea_Qe7_R.png" class="kek" /></a>' +
+    '<a href="https://cytu.be/r/spookyshows2"><img src="//i.postimg.cc/8c3GDCvK/SS2.png" class="kek" /></a>' +
+    '<a href="https://cytu.be/r/BillTube"><img src="//s14.postimg.cc/6iagj52pt/Kzcwj_LR.png" class="kek" /></a>' +
+   '<a href="https://cytu.be/r/billcartoon"><img src="//s14.postimg.cc/c6gr9whb5/Bdr_UNQZ.png" class="kek" /></a>' +
+'<a href="https://cytu.be/r/CopsTube"><img src="//s14.postimg.cc/rf6onst0x/v_DJV3_Of.png" class="kek" /></a>' +
+
+'</div></div></div>');
+// The HorizontalScroller Class accepts a jQuery object as its only argument
+// The argument is the parent container of the scrolling element
+// The element requires an ID to differentiate HorizontalScroller instances
+
+function HorizontalScroller(elem) {
+  this.scrollbox = elem; // The scrollers viewable area
+  this.scrollImages = this.scrollbox.find("img");
+  this.leftScrollControl = this.scrollbox.siblings(".left-scroll");
+  this.rightScrollControl = this.scrollbox.siblings(".right-scroll");
+
+  // Listener to change visibility of left and right controls
+  // when at scroll extremes
+  this.scrollbox.on("scroll", this.evaluateControlVisibility.bind(this));
+};
+
+HorizontalScroller.prototype = {
+  
+  scrollboxWidth: function() {
+    return this.scrollbox.outerWidth(true);
+  }, 
+
+  currentScrollPosition: function() {
+    return this.scrollbox.scrollLeft();
+  },
+
+  currentRightPosition: function() {
+    return this.currentScrollPosition() + this.scrollboxWidth() - this.totalWidths();
+  },
+
+  // Maps the image width of each image in the scroller
+  imageWidths: function() {
+    return $.map(this.scrollImages, function(img) { 
+      return $(img).outerWidth(true);
+    })
+  },
+
+  // Returns the total width of all the images, that is,
+  // the total of the visible and overflow content.
+  totalWidths: function() {
+    return this.imageWidths().reduce(function(a,b) { return a+b});
+  },
+
+  // Returns the average width of all the images
+  avgWidth: function() {
+    return this.totalWidths() / this.imageWidths().length;
+  },
+
+  // Determines the number of images in view area.
+  // Number of images changes with responsive CSS
+  imagesAcross: function() {
+    return Math.round( this.scrollboxWidth() / this.avgWidth() );
+  },
+
+  // maps the offset x-distance of each image
+  // from the left edge of the view area
+  imageOffsets: function() {
+    return $.map(this.scrollImages, function(img) { 
+      return Math.round($(img).position().left);
+    }); 
+  },
+
+  // Returns the index of the first number in the given array
+  // greater than the given value, or, returns the index of
+  // the first positive number in the array
+  indexOfFirst: function(array, value) {
+    value = value || 0;
+    var firstIndex;
+    var i = 0;
+    while (firstIndex === undefined && array.length > i) {
+      if (array[i] >= value)
+        firstIndex = i; 
+      i += 1;
+    }
+    return firstIndex; 
+  },
+
+  // Returns the index of first image that is completely in view
+  // within the scrollbox
+  firstVisibleImageIndex: function() {
+    return this.indexOfFirst(this.imageOffsets());
+  },
+
+  // Returns the first image that is completely in view 
+  // within the scrollbox
+  firstVisibleImage: function() {
+    return this.scrollImages[this.firstVisibleImageIndex()];
+  },
+
+  // Returns the index of the last image with its left edge in view 
+  // within the scrollbox
+  lastVisibleImageIndex: function() {
+    return this.firstVisibleImageIndex() + this.imagesAcross();
+  },
+
+  // Returns the last image with its left edge in view 
+  // within the scrollbox
+  lastVisibleImage: function() {
+    return this.scrollImages[this.lastVisibleImageIndex()];
+  },
+
+  // Returns the difference between the scrollboxes left edge
+  // and the left edge of the first fully visible image, that is,
+  // how far in the first fully visible image is
+  offset: function() {
+    var offset = $(this.firstVisibleImage()).position().left;
+    return Math.round(offset);
+  },
+  
+  // Returns the combined scroll amount that the images have to travel
+  // in order to land evenly within the scroll window. The resulting
+  nextScrollPosition: function(direction) {
+    var nextScrollPosition = this.currentScrollPosition() + this.offset();
+
+    switch(direction) {
+      case "left":
+        nextScrollPosition -= this.scrollboxWidth();
+        if (($(this.firstVisibleImage()).outerWidth(true) - this.offset()) < 0) {
+          nextScrollPosition -= $(this.firstVisibleImage()).outerWidth(true);
+        }
+        break;
+      case "right":
+        nextScrollPosition += this.scrollboxWidth();
+        if (this.offset() > 0) {
+          nextScrollPosition -= $(this.firstVisibleImage()).outerWidth(true);
+        }
+        break;
+    }
+    return nextScrollPosition;
+  },
+
+  // Triggers the animation
+  animateScroll: function(direction) {
+    resetFocusedImg();
+    var scroller = this;
+    setTimeout(function() {
+      scroller.scrollbox.animate({
+        scrollLeft: scroller.nextScrollPosition(direction)
+      }, this.scrollboxWidth())
+    }.bind(this), 100);
+  },
+
+  hideScrollControl: function(control) {
+    control.addClass("invisible");
+  },
+
+  showScrollControl: function(control) {
+    control.removeClass("invisible");
+  },
+
+  scrollControlVisibility: function(control) {
+    return control.hasClass("invisible");
+  },
+  
+  scrollAtZero: function() {
+    return this.currentScrollPosition() == 0;
+  },
+
+  scrollAtMax: function() {
+    return this.currentRightPosition() >= -1;
+  },
+
+  evaluateControlVisibility: function() {
+    var left = this.leftScrollControl;
+    var right = this.rightScrollControl;
+    var leftIsInvisible = this.scrollControlVisibility(left);
+    var rightIsInvisible = this.scrollControlVisibility(right);
+
+    if (this.scrollAtZero()) this.hideScrollControl(left);
+    if (this.scrollAtMax()) this.hideScrollControl(right);
+    if (!this.scrollAtZero() && leftIsInvisible) this.showScrollControl(left);
+    if (!this.scrollAtMax() && rightIsInvisible) this.showScrollControl(right);
+  }
+};
+
+// End HorizontalScroller.prototype
+
+var scrollers = {};
+
+// Detects scrollers in the DOM
+function detectScrollers() {
+  return $.map($(".horiz-scroll"), function(scroller) {
+    return $(scroller).attr("id");
+  });
+}
+
+// Generates a new HorizontalScroller for each scroller in DOM
+function mapScrollers(scrollerIds) {
+  scrollerIds.forEach(function(elem, i , arr) {
+    var scroller = "#" + elem + " .scroll-images";
+    scrollers[elem] = new HorizontalScroller( $(scroller) );
+  });
+}
+
+// Gets the scroll direction to pass to animation function
+function getScrollDirection(button) {
+  return (button.hasClass("left-scroll")) ? "left" : "right"
+}
+
+// Triggers the scroll animation for specific scroller
+// in a specific direction
+function triggerAnimation(button) {
+  var scrollId = button.closest(".horiz-scroll").attr("id");
+  var scrollDirection = getScrollDirection(button);
+  scrollers[scrollId].animateScroll(scrollDirection);
+}
+
+// Scroll buttons listener
+function listenForScroll() {
+  $(".left-scroll, .right-scroll").on("click", function() {
+    var button = $(this);
+    triggerAnimation(button);
+  });
+}
+
+function resetFocusedImg() {
+  $(".focused").removeClass("focused");
+}
+
+// listener for click, slides up
+var horizontalScrollImg = $(".horiz-scroll .scroll-images img");
+horizontalScrollImg.on("click", function() {
+  if (!$(this).hasClass("focused"))
+    resetFocusedImg();
+  $(this).toggleClass("focused");
+});
+
+// Registers scrollers and initiates listeners 
+function scrollerInit() {
+  var scrollerIds = detectScrollers();
+  mapScrollers(scrollerIds);
+  listenForScroll();
+}
+
+
+
+// Begins the fun
+scrollerInit();
+
+	});
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+
+	window.cytubeEnhanced.addModule('NameColors', function () {
+	    'use strict';
+	    var that = this;
+
+	    var stringToColour = function(str) {
+ 
+for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+ 
+for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+ 
+return colour;
+}
+ 
+function formatChatMessage(data, last) {
+if (!data.meta || data.msgclass) {
+data.meta = {
+addClass: data.msgclass,
+addClassToNameAndTimestamp: data.msgclass
+};
+}
+var skip = data.username === last.name;
+if(data.meta.addClass === "server-whisper")
+skip = true;
+if(data.msg.match(/^\s*<strong>\w+\s*:\s*<\/strong>\s*/))
+skip = false;
+if (data.meta.forceShowName)
+skip = false;
+ 
+data.msg = execEmotes(data.msg);
+ 
+last.name = data.username;
+var div = $("<div/>");
+if (data.meta.addClass === "drink") {
+div.addClass("drink");
+data.meta.addClass = "";
+}
+ 
+if (USEROPTS.show_timestamps) {
+var time = $("<span/>").addClass("timestamp").appendTo(div);
+var timestamp = new Date(data.time).toTimeString().split(" ")[0];
+time.text("["+timestamp+"] ");
+if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+time.addClass(data.meta.addClass);
+}
+}
+ 
+var name = $("<span/>");
+if (!skip) {
+name.appendTo(div);
+}
+$("<strong/>").addClass("username clr_" + data.username).text(data.username + ": ").css("color", stringToColour(data.username)).appendTo(name);
+
+
+if (data.meta.modflair) 
+{
+name.addClass(getNameColor(data.meta.modflair));
+}
+
+if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+name.addClass(data.meta.addClass);
+}
+if (data.meta.superadminflair) {
+name.addClass("label")
+.addClass(data.meta.superadminflair.labelclass);
+$("<span/>").addClass(data.meta.superadminflair.icon)
+.addClass("glyphicon")
+.css("margin-right", "3px")
+.prependTo(name);
+}
+
+var message = $("<span/>").appendTo(div);
+message[0].innerHTML = data.msg;
+ 
+if (data.meta.action) {
+name.remove();
+message[0].innerHTML = data.username + " " + data.msg;
+}
+if (data.meta.addClass) {
+message.addClass(data.meta.addClass);
+}
+if (data.meta.shadow) {
+div.addClass("chat-shadow");
+}
+div.find("img").load(function () {
+if (SCROLLCHAT) {
+scrollChat();
+}
+});
+return div;
+
+}
+	});
+
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
+	    extraModules.add({
+	        title: 'Anime Quotes',
+	        name: 'anime-quotes',
+	        description: 'Boring anime quotes.',
+	        url: '//cdn.rawgit.com/kaba99/cytube-enhanced/master/extras/anime-quotes/anime-quotes.js'
+	    });
+	});
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
+	    extraModules.add({
+	        title: 'Pirate Quotes',
+	        name: 'pirate-quotes',
+	        description: 'Boring Pirate Quotes.',
+	        url: '//cdn.rawgit.com/kaba99/cytube-enhanced/master/extras/pirate-quotes/pirate-quotes.js'
+	    });
+	});
+
+/***/ },
+/* 37 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
+	    extraModules.add({
+	        title: 'Pirate Script',
+	        name: 'pirate-script',
+	        description: "Well, in general, the scriptwriter here, screwed all kinds of buns. Now you can shit in the chat even more effectively, annoy the moderators even more and much more.",
+	        authorUrl: "https://github.com/Pirate505/animach-xtra",
+	        url: '//cdn.rawgit.com/Pirate505/animach-xtra/master/src/animachxtra.user.js'
+	    });
+	});
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.getModule('themes').done(function (extraModules) {
+	    extraModules.add({
+	        title: 'Default Theme',
+	        name: 'default',
+	        cssUrl: '//dl.dropbox.com/s/o0phwcb3gwqz6bl/default.css',
+	        jsUrl: '//dl.dropbox.com/s/yj0jtegjyh9bhfq/default.js',
+	        pictureUrl: 'https://rawgit.com/kaba99/cytube-enhanced/master/themes/default/screenshot.png'
+	    });
+	});
+
+/***/ },
+/* 39 */
+/***/ function(module, exports) {
+
+window.cytubeEnhanced.getModule('themes').done(function (extraModules) {
+	    extraModules.add({
+	        title: 'Halloween Theme',
+	        name: 'Halloween',
+	        cssUrl: '//dl.dropbox.com/s/sc2fswbaam8ufdx/Halloween.css',
+	        jsUrl: '',
+	        pictureUrl: 'https://rawgit.com/kaba99/cytube-enhanced/master/themes/default/screenshot.png'
+	    });
+	});
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+window.cytubeEnhanced.getModule('themes').done(function (extraModules) {
+	    extraModules.add({
+	        title: 'Lightweight Theme',
+	        name: 'Lightweight',
+	        cssUrl: '//dl.dropbox.com/s/yj4vgjz3prg67rt/Lightweight.css',
+	        jsUrl: '',
+	        pictureUrl: 'https://rawgit.com/kaba99/cytube-enhanced/master/themes/default/screenshot.png'
+	    });
+	});
+
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('Colors', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        turnedOn: true
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    
+var stringToColour = function(str) {
+ 
+for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+ 
+for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+ 
+return colour;
+}
+ 
+function formatChatMessage(data, last) {
+if (!data.meta || data.msgclass) {
+data.meta = {
+addClass: data.msgclass,
+addClassToNameAndTimestamp: data.msgclass
+};
+}
+var skip = data.username === last.name;
+if(data.meta.addClass === "server-whisper")
+skip = true;
+if(data.msg.match(/^\s*<strong>\w+\s*:\s*<\/strong>\s*/))
+skip = false;
+if (data.meta.forceShowName)
+skip = false;
+ 
+data.msg = execEmotes(data.msg);
+ 
+last.name = data.username;
+var div = $("<div/>");
+if (data.meta.addClass === "drink") {
+div.addClass("drink");
+data.meta.addClass = "";
+}
+ 
+if (USEROPTS.show_timestamps) {
+var time = $("<span/>").addClass("timestamp").appendTo(div);
+var timestamp = new Date(data.time).toTimeString().split(" ")[0];
+time.text("["+timestamp+"] ");
+if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+time.addClass(data.meta.addClass);
+}
+}
+
+var name = $("<span/>");
+if (!skip) {
+name.appendTo(div);
+}
+$("<strong/>").addClass("username clr_" + data.username).text(data.username + ": ").css("color", stringToColour(data.username)).appendTo(name);
+if (data.meta.modflair) 
+{
+name.addClass(getNameColor(data.meta.modflair));
+}
+if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+name.addClass(data.meta.addClass);
+}
+if (data.meta.superadminflair) {
+name.addClass("label")
+.addClass(data.meta.superadminflair.labelclass);
+$("<span/>").addClass(data.meta.superadminflair.icon)
+.addClass("glyphicon")
+.css("margin-right", "3px")
+.prependTo(name);
+}
+var message = $("<span/>").appendTo(div);
+message[0].innerHTML = data.msg;
+if (data.meta.action) {
+name.remove();
+message[0].innerHTML = data.username + " " + data.msg;
+}
+if (data.meta.addClass) {
+message.addClass(data.meta.addClass);
+}
+if (data.meta.shadow) {
+div.addClass("chat-shadow");
+}
+div.find("img").load(function () {
+if (SCROLLCHAT) {
+scrollChat();
+}
+});
+return div;
+}
+
+$( document ).ready(function() { 
+function playFile() {
+    var video = $("#ytapiplayer_html5_api");
+    video[0].load();
+    video[0].play();
+};
+});
+
+	});
+
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('Announcements', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        turnedOn: true
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    
+// adding attention bar
+
+if (UI_AttentionBar=="1" && AttentionBar_URL!="") {
+	attbarwrap = $('<div id="attbarrow-outer" class="col-md-12" />').prependTo("#announcements");
+	attbar = $('<iframe id="attbar" width="100%" frameborder="0" scrolling="no" />')
+	  .attr('src', AttentionBar_URL)
+	  .appendTo(attbarwrap);
+}
+
+// adding custom channel announcement
+
+if (UI_ChannelAnnouncement=="1") {
+	ChannelAnnouncement_Title=="" ? ChannelAnnouncement_Title='Administration Message' : '';
+	ChannelAnnouncement_HTML=="" ? ChannelAnnouncement_HTML='<i>no messages</i>' : '';
+	makeAlert(ChannelAnnouncement_Title, ChannelAnnouncement_HTML).appendTo("#motd");
+}
+
+if (UI_ChannelName=="1" && ChannelName_Caption!="") {
+	$(".navbar-brand").html(ChannelName_Caption);
+}
+
+if (UI_Favicon=="1" && Favicon_URL!="") {
+	$(document).ready(function() {
+		$('<link id="chanfavicon" href="'+Favicon_URL+'" type="image/x-icon" rel="shortcut icon" />')
+		  .appendTo("head");
+	});
+}
+	});
+
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('Announcements', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        turnedOn: true
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    
+$('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/itgmhc2mkf9v14r/discord.css' />");
+$("#motd").after("<div class='discordoverlay'><div class='discordmain'><img class='discord' src='//s14.postimg.cc/fel8mtljl/J6_RTf6_P.png' /><div class=discordtext><h1>Join the community!</h1><h2><a href='https://discord.gg/fwadWd9' target='_blank'>discord.gg/fwadWd9</a></h2></div><div class='Darrows Darrows-1'></div><div class='Darrows Darrows-2'></div></div></div>");
+
+	});
+
+/***/ }
+/******/ ]);
+
+
+
+
+
+
+(string))
+	          ? string.replace(reEscapedHtml, unescapeHtmlChar)
+	          : string;
+	    }
+
+	    /**
+	     * Converts `string`, as space separated words, to upper case.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category String
+	     * @param {string} [string=''] The string to convert.
+	     * @returns {string} Returns the upper cased string.
+	     * @example
+	     *
+	     * _.upperCase('--foo-bar');
+	     * // => 'FOO BAR'
+	     *
+	     * _.upperCase('fooBar');
+	     * // => 'FOO BAR'
+	     *
+	     * _.upperCase('__foo_bar__');
+	     * // => 'FOO BAR'
+	     */
+	    var upperCase = createCompounder(function(result, word, index) {
+	      return result + (index ? ' ' : '') + word.toUpperCase();
+	    });
+
+	    /**
+	     * Converts the first character of `string` to upper case.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category String
+	     * @param {string} [string=''] The string to convert.
+	     * @returns {string} Returns the converted string.
+	     * @example
+	     *
+	     * _.upperFirst('fred');
+	     * // => 'Fred'
+	     *
+	     * _.upperFirst('FRED');
+	     * // => 'FRED'
+	     */
+	    var upperFirst = createCaseFirst('toUpperCase');
+
+	    /**
+	     * Splits `string` into an array of its words.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.0.0
+	     * @category String
+	     * @param {string} [string=''] The string to inspect.
+	     * @param {RegExp|string} [pattern] The pattern to match words.
+	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+	     * @returns {Array} Returns the words of `string`.
+	     * @example
+	     *
+	     * _.words('fred, barney, & pebbles');
+	     * // => ['fred', 'barney', 'pebbles']
+	     *
+	     * _.words('fred, barney, & pebbles', /[^, ]+/g);
+	     * // => ['fred', 'barney', '&', 'pebbles']
+	     */
+	    function words(string, pattern, guard) {
+	      string = toString(string);
+	      pattern = guard ? undefined : pattern;
+
+	      if (pattern === undefined) {
+	        pattern = reHasComplexWord.test(string) ? reComplexWord : reBasicWord;
+	      }
+	      return string.match(pattern) || [];
+	    }
+
+	    /*------------------------------------------------------------------------*/
+
+	    /**
+	     * Attempts to invoke `func`, returning either the result or the caught error
+	     * object. Any additional arguments are provided to `func` when it's invoked.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.0.0
+	     * @category Util
+	     * @param {Function} func The function to attempt.
+	     * @param {...*} [args] The arguments to invoke `func` with.
+	     * @returns {*} Returns the `func` result or error object.
+	     * @example
+	     *
+	     * // Avoid throwing errors for invalid selectors.
+	     * var elements = _.attempt(function(selector) {
+	     *   return document.querySelectorAll(selector);
+	     * }, '>_>');
+	     *
+	     * if (_.isError(elements)) {
+	     *   elements = [];
+	     * }
+	     */
+	    var attempt = rest(function(func, args) {
+	      try {
+	        return apply(func, undefined, args);
+	      } catch (e) {
+	        return isError(e) ? e : new Error(e);
+	      }
+	    });
+
+	    /**
+	     * Binds methods of an object to the object itself, overwriting the existing
+	     * method.
+	     *
+	     * **Note:** This method doesn't set the "length" property of bound functions.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {Object} object The object to bind and assign the bound methods to.
+	     * @param {...(string|string[])} methodNames The object method names to bind.
+	     * @returns {Object} Returns `object`.
+	     * @example
+	     *
+	     * var view = {
+	     *   'label': 'docs',
+	     *   'onClick': function() {
+	     *     console.log('clicked ' + this.label);
+	     *   }
+	     * };
+	     *
+	     * _.bindAll(view, 'onClick');
+	     * jQuery(element).on('click', view.onClick);
+	     * // => Logs 'clicked docs' when clicked.
+	     */
+	    var bindAll = rest(function(object, methodNames) {
+	      arrayEach(baseFlatten(methodNames, 1), function(key) {
+	        key = toKey(key);
+	        object[key] = bind(object[key], object);
+	      });
+	      return object;
+	    });
+
+	    /**
+	     * Creates a function that iterates over `pairs` and invokes the corresponding
+	     * function of the first predicate to return truthy. The predicate-function
+	     * pairs are invoked with the `this` binding and arguments of the created
+	     * function.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {Array} pairs The predicate-function pairs.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var func = _.cond([
+	     *   [_.matches({ 'a': 1 }),           _.constant('matches A')],
+	     *   [_.conforms({ 'b': _.isNumber }), _.constant('matches B')],
+	     *   [_.constant(true),                _.constant('no match')]
+	     * ]);
+	     *
+	     * func({ 'a': 1, 'b': 2 });
+	     * // => 'matches A'
+	     *
+	     * func({ 'a': 0, 'b': 1 });
+	     * // => 'matches B'
+	     *
+	     * func({ 'a': '1', 'b': '2' });
+	     * // => 'no match'
+	     */
+	    function cond(pairs) {
+	      var length = pairs ? pairs.length : 0,
+	          toIteratee = getIteratee();
+
+	      pairs = !length ? [] : arrayMap(pairs, function(pair) {
+	        if (typeof pair[1] != 'function') {
+	          throw new TypeError(FUNC_ERROR_TEXT);
+	        }
+	        return [toIteratee(pair[0]), pair[1]];
+	      });
+
+	      return rest(function(args) {
+	        var index = -1;
+	        while (++index < length) {
+	          var pair = pairs[index];
+	          if (apply(pair[0], this, args)) {
+	            return apply(pair[1], this, args);
+	          }
+	        }
+	      });
+	    }
+
+	    /**
+	     * Creates a function that invokes the predicate properties of `source` with
+	     * the corresponding property values of a given object, returning `true` if
+	     * all predicates return truthy, else `false`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {Object} source The object of property predicates to conform to.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var users = [
+	     *   { 'user': 'barney', 'age': 36 },
+	     *   { 'user': 'fred',   'age': 40 }
+	     * ];
+	     *
+	     * _.filter(users, _.conforms({ 'age': _.partial(_.gt, _, 38) }));
+	     * // => [{ 'user': 'fred', 'age': 40 }]
+	     */
+	    function conforms(source) {
+	      return baseConforms(baseClone(source, true));
+	    }
+
+	    /**
+	     * Creates a function that returns `value`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 2.4.0
+	     * @category Util
+	     * @param {*} value The value to return from the new function.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var object = { 'user': 'fred' };
+	     * var getter = _.constant(object);
+	     *
+	     * getter() === object;
+	     * // => true
+	     */
+	    function constant(value) {
+	      return function() {
+	        return value;
+	      };
+	    }
+
+	    /**
+	     * Creates a function that returns the result of invoking the given functions
+	     * with the `this` binding of the created function, where each successive
+	     * invocation is supplied the return value of the previous.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.0.0
+	     * @category Util
+	     * @param {...(Function|Function[])} [funcs] Functions to invoke.
+	     * @returns {Function} Returns the new function.
+	     * @see _.flowRight
+	     * @example
+	     *
+	     * function square(n) {
+	     *   return n * n;
+	     * }
+	     *
+	     * var addSquare = _.flow(_.add, square);
+	     * addSquare(1, 2);
+	     * // => 9
+	     */
+	    var flow = createFlow();
+
+	    /**
+	     * This method is like `_.flow` except that it creates a function that
+	     * invokes the given functions from right to left.
+	     *
+	     * @static
+	     * @since 3.0.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {...(Function|Function[])} [funcs] Functions to invoke.
+	     * @returns {Function} Returns the new function.
+	     * @see _.flow
+	     * @example
+	     *
+	     * function square(n) {
+	     *   return n * n;
+	     * }
+	     *
+	     * var addSquare = _.flowRight(square, _.add);
+	     * addSquare(1, 2);
+	     * // => 9
+	     */
+	    var flowRight = createFlow(true);
+
+	    /**
+	     * This method returns the first argument given to it.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {*} value Any value.
+	     * @returns {*} Returns `value`.
+	     * @example
+	     *
+	     * var object = { 'user': 'fred' };
+	     *
+	     * _.identity(object) === object;
+	     * // => true
+	     */
+	    function identity(value) {
+	      return value;
+	    }
+
+	    /**
+	     * Creates a function that invokes `func` with the arguments of the created
+	     * function. If `func` is a property name, the created function returns the
+	     * property value for a given element. If `func` is an array or object, the
+	     * created function returns `true` for elements that contain the equivalent
+	     * source properties, otherwise it returns `false`.
+	     *
+	     * @static
+	     * @since 4.0.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {*} [func=_.identity] The value to convert to a callback.
+	     * @returns {Function} Returns the callback.
+	     * @example
+	     *
+	     * var users = [
+	     *   { 'user': 'barney', 'age': 36, 'active': true },
+	     *   { 'user': 'fred',   'age': 40, 'active': false }
+	     * ];
+	     *
+	     * // The `_.matches` iteratee shorthand.
+	     * _.filter(users, _.iteratee({ 'user': 'barney', 'active': true }));
+	     * // => [{ 'user': 'barney', 'age': 36, 'active': true }]
+	     *
+	     * // The `_.matchesProperty` iteratee shorthand.
+	     * _.filter(users, _.iteratee(['user', 'fred']));
+	     * // => [{ 'user': 'fred', 'age': 40 }]
+	     *
+	     * // The `_.property` iteratee shorthand.
+	     * _.map(users, _.iteratee('user'));
+	     * // => ['barney', 'fred']
+	     *
+	     * // Create custom iteratee shorthands.
+	     * _.iteratee = _.wrap(_.iteratee, function(iteratee, func) {
+	     *   return !_.isRegExp(func) ? iteratee(func) : function(string) {
+	     *     return func.test(string);
+	     *   };
+	     * });
+	     *
+	     * _.filter(['abc', 'def'], /ef/);
+	     * // => ['def']
+	     */
+	    function iteratee(func) {
+	      return baseIteratee(typeof func == 'function' ? func : baseClone(func, true));
+	    }
+
+	    /**
+	     * Creates a function that performs a partial deep comparison between a given
+	     * object and `source`, returning `true` if the given object has equivalent
+	     * property values, else `false`. The created function is equivalent to
+	     * `_.isMatch` with a `source` partially applied.
+	     *
+	     * **Note:** This method supports comparing the same values as `_.isEqual`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.0.0
+	     * @category Util
+	     * @param {Object} source The object of property values to match.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var users = [
+	     *   { 'user': 'barney', 'age': 36, 'active': true },
+	     *   { 'user': 'fred',   'age': 40, 'active': false }
+	     * ];
+	     *
+	     * _.filter(users, _.matches({ 'age': 40, 'active': false }));
+	     * // => [{ 'user': 'fred', 'age': 40, 'active': false }]
+	     */
+	    function matches(source) {
+	      return baseMatches(baseClone(source, true));
+	    }
+
+	    /**
+	     * Creates a function that performs a partial deep comparison between the
+	     * value at `path` of a given object to `srcValue`, returning `true` if the
+	     * object value is equivalent, else `false`.
+	     *
+	     * **Note:** This method supports comparing the same values as `_.isEqual`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.2.0
+	     * @category Util
+	     * @param {Array|string} path The path of the property to get.
+	     * @param {*} srcValue The value to match.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var users = [
+	     *   { 'user': 'barney' },
+	     *   { 'user': 'fred' }
+	     * ];
+	     *
+	     * _.find(users, _.matchesProperty('user', 'fred'));
+	     * // => { 'user': 'fred' }
+	     */
+	    function matchesProperty(path, srcValue) {
+	      return baseMatchesProperty(path, baseClone(srcValue, true));
+	    }
+
+	    /**
+	     * Creates a function that invokes the method at `path` of a given object.
+	     * Any additional arguments are provided to the invoked method.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.7.0
+	     * @category Util
+	     * @param {Array|string} path The path of the method to invoke.
+	     * @param {...*} [args] The arguments to invoke the method with.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var objects = [
+	     *   { 'a': { 'b': _.constant(2) } },
+	     *   { 'a': { 'b': _.constant(1) } }
+	     * ];
+	     *
+	     * _.map(objects, _.method('a.b'));
+	     * // => [2, 1]
+	     *
+	     * _.map(objects, _.method(['a', 'b']));
+	     * // => [2, 1]
+	     */
+	    var method = rest(function(path, args) {
+	      return function(object) {
+	        return baseInvoke(object, path, args);
+	      };
+	    });
+
+	    /**
+	     * The opposite of `_.method`; this method creates a function that invokes
+	     * the method at a given path of `object`. Any additional arguments are
+	     * provided to the invoked method.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.7.0
+	     * @category Util
+	     * @param {Object} object The object to query.
+	     * @param {...*} [args] The arguments to invoke the method with.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var array = _.times(3, _.constant),
+	     *     object = { 'a': array, 'b': array, 'c': array };
+	     *
+	     * _.map(['a[2]', 'c[0]'], _.methodOf(object));
+	     * // => [2, 0]
+	     *
+	     * _.map([['a', '2'], ['c', '0']], _.methodOf(object));
+	     * // => [2, 0]
+	     */
+	    var methodOf = rest(function(object, args) {
+	      return function(path) {
+	        return baseInvoke(object, path, args);
+	      };
+	    });
+
+	    /**
+	     * Adds all own enumerable string keyed function properties of a source
+	     * object to the destination object. If `object` is a function, then methods
+	     * are added to its prototype as well.
+	     *
+	     * **Note:** Use `_.runInContext` to create a pristine `lodash` function to
+	     * avoid conflicts caused by modifying the original.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {Function|Object} [object=lodash] The destination object.
+	     * @param {Object} source The object of functions to add.
+	     * @param {Object} [options={}] The options object.
+	     * @param {boolean} [options.chain=true] Specify whether mixins are chainable.
+	     * @returns {Function|Object} Returns `object`.
+	     * @example
+	     *
+	     * function vowels(string) {
+	     *   return _.filter(string, function(v) {
+	     *     return /[aeiou]/i.test(v);
+	     *   });
+	     * }
+	     *
+	     * _.mixin({ 'vowels': vowels });
+	     * _.vowels('fred');
+	     * // => ['e']
+	     *
+	     * _('fred').vowels().value();
+	     * // => ['e']
+	     *
+	     * _.mixin({ 'vowels': vowels }, { 'chain': false });
+	     * _('fred').vowels();
+	     * // => ['e']
+	     */
+	    function mixin(object, source, options) {
+	      var props = keys(source),
+	          methodNames = baseFunctions(source, props);
+
+	      if (options == null &&
+	          !(isObject(source) && (methodNames.length || !props.length))) {
+	        options = source;
+	        source = object;
+	        object = this;
+	        methodNames = baseFunctions(source, keys(source));
+	      }
+	      var chain = !(isObject(options) && 'chain' in options) || !!options.chain,
+	          isFunc = isFunction(object);
+
+	      arrayEach(methodNames, function(methodName) {
+	        var func = source[methodName];
+	        object[methodName] = func;
+	        if (isFunc) {
+	          object.prototype[methodName] = function() {
+	            var chainAll = this.__chain__;
+	            if (chain || chainAll) {
+	              var result = object(this.__wrapped__),
+	                  actions = result.__actions__ = copyArray(this.__actions__);
+
+	              actions.push({ 'func': func, 'args': arguments, 'thisArg': object });
+	              result.__chain__ = chainAll;
+	              return result;
+	            }
+	            return func.apply(object, arrayPush([this.value()], arguments));
+	          };
+	        }
+	      });
+
+	      return object;
+	    }
+
+	    /**
+	     * Reverts the `_` variable to its previous value and returns a reference to
+	     * the `lodash` function.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @returns {Function} Returns the `lodash` function.
+	     * @example
+	     *
+	     * var lodash = _.noConflict();
+	     */
+	    function noConflict() {
+	      if (root._ === this) {
+	        root._ = oldDash;
+	      }
+	      return this;
+	    }
+
+	    /**
+	     * A no-operation function that returns `undefined` regardless of the
+	     * arguments it receives.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 2.3.0
+	     * @category Util
+	     * @example
+	     *
+	     * var object = { 'user': 'fred' };
+	     *
+	     * _.noop(object) === undefined;
+	     * // => true
+	     */
+	    function noop() {
+	      // No operation performed.
+	    }
+
+	    /**
+	     * Creates a function that returns its nth argument. If `n` is negative,
+	     * the nth argument from the end is returned.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {number} [n=0] The index of the argument to return.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var func = _.nthArg(1);
+	     * func('a', 'b', 'c', 'd');
+	     * // => 'b'
+	     *
+	     * var func = _.nthArg(-2);
+	     * func('a', 'b', 'c', 'd');
+	     * // => 'c'
+	     */
+	    function nthArg(n) {
+	      n = toInteger(n);
+	      return rest(function(args) {
+	        return baseNth(args, n);
+	      });
+	    }
+
+	    /**
+	     * Creates a function that invokes `iteratees` with the arguments it receives
+	     * and returns their results.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+	     *  [iteratees=[_.identity]] The iteratees to invoke.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var func = _.over(Math.max, Math.min);
+	     *
+	     * func(1, 2, 3, 4);
+	     * // => [4, 1]
+	     */
+	    var over = createOver(arrayMap);
+
+	    /**
+	     * Creates a function that checks if **all** of the `predicates` return
+	     * truthy when invoked with the arguments it receives.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+	     *  [predicates=[_.identity]] The predicates to check.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var func = _.overEvery(Boolean, isFinite);
+	     *
+	     * func('1');
+	     * // => true
+	     *
+	     * func(null);
+	     * // => false
+	     *
+	     * func(NaN);
+	     * // => false
+	     */
+	    var overEvery = createOver(arrayEvery);
+
+	    /**
+	     * Creates a function that checks if **any** of the `predicates` return
+	     * truthy when invoked with the arguments it receives.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+	     *  [predicates=[_.identity]] The predicates to check.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var func = _.overSome(Boolean, isFinite);
+	     *
+	     * func('1');
+	     * // => true
+	     *
+	     * func(null);
+	     * // => true
+	     *
+	     * func(NaN);
+	     * // => false
+	     */
+	    var overSome = createOver(arraySome);
+
+	    /**
+	     * Creates a function that returns the value at `path` of a given object.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 2.4.0
+	     * @category Util
+	     * @param {Array|string} path The path of the property to get.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var objects = [
+	     *   { 'a': { 'b': 2 } },
+	     *   { 'a': { 'b': 1 } }
+	     * ];
+	     *
+	     * _.map(objects, _.property('a.b'));
+	     * // => [2, 1]
+	     *
+	     * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
+	     * // => [1, 2]
+	     */
+	    function property(path) {
+	      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+	    }
+
+	    /**
+	     * The opposite of `_.property`; this method creates a function that returns
+	     * the value at a given path of `object`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.0.0
+	     * @category Util
+	     * @param {Object} object The object to query.
+	     * @returns {Function} Returns the new function.
+	     * @example
+	     *
+	     * var array = [0, 1, 2],
+	     *     object = { 'a': array, 'b': array, 'c': array };
+	     *
+	     * _.map(['a[2]', 'c[0]'], _.propertyOf(object));
+	     * // => [2, 0]
+	     *
+	     * _.map([['a', '2'], ['c', '0']], _.propertyOf(object));
+	     * // => [2, 0]
+	     */
+	    function propertyOf(object) {
+	      return function(path) {
+	        return object == null ? undefined : baseGet(object, path);
+	      };
+	    }
+
+	    /**
+	     * Creates an array of numbers (positive and/or negative) progressing from
+	     * `start` up to, but not including, `end`. A step of `-1` is used if a negative
+	     * `start` is specified without an `end` or `step`. If `end` is not specified,
+	     * it's set to `start` with `start` then set to `0`.
+	     *
+	     * **Note:** JavaScript follows the IEEE-754 standard for resolving
+	     * floating-point values which can produce unexpected results.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {number} [start=0] The start of the range.
+	     * @param {number} end The end of the range.
+	     * @param {number} [step=1] The value to increment or decrement by.
+	     * @returns {Array} Returns the new array of numbers.
+	     * @see _.inRange, _.rangeRight
+	     * @example
+	     *
+	     * _.range(4);
+	     * // => [0, 1, 2, 3]
+	     *
+	     * _.range(-4);
+	     * // => [0, -1, -2, -3]
+	     *
+	     * _.range(1, 5);
+	     * // => [1, 2, 3, 4]
+	     *
+	     * _.range(0, 20, 5);
+	     * // => [0, 5, 10, 15]
+	     *
+	     * _.range(0, -4, -1);
+	     * // => [0, -1, -2, -3]
+	     *
+	     * _.range(1, 4, 0);
+	     * // => [1, 1, 1]
+	     *
+	     * _.range(0);
+	     * // => []
+	     */
+	    var range = createRange();
+
+	    /**
+	     * This method is like `_.range` except that it populates values in
+	     * descending order.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {number} [start=0] The start of the range.
+	     * @param {number} end The end of the range.
+	     * @param {number} [step=1] The value to increment or decrement by.
+	     * @returns {Array} Returns the new array of numbers.
+	     * @see _.inRange, _.range
+	     * @example
+	     *
+	     * _.rangeRight(4);
+	     * // => [3, 2, 1, 0]
+	     *
+	     * _.rangeRight(-4);
+	     * // => [-3, -2, -1, 0]
+	     *
+	     * _.rangeRight(1, 5);
+	     * // => [4, 3, 2, 1]
+	     *
+	     * _.rangeRight(0, 20, 5);
+	     * // => [15, 10, 5, 0]
+	     *
+	     * _.rangeRight(0, -4, -1);
+	     * // => [-3, -2, -1, 0]
+	     *
+	     * _.rangeRight(1, 4, 0);
+	     * // => [1, 1, 1]
+	     *
+	     * _.rangeRight(0);
+	     * // => []
+	     */
+	    var rangeRight = createRange(true);
+
+	    /**
+	     * Invokes the iteratee `n` times, returning an array of the results of
+	     * each invocation. The iteratee is invoked with one argument; (index).
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {number} n The number of times to invoke `iteratee`.
+	     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+	     * @returns {Array} Returns the array of results.
+	     * @example
+	     *
+	     * _.times(3, String);
+	     * // => ['0', '1', '2']
+	     *
+	     *  _.times(4, _.constant(true));
+	     * // => [true, true, true, true]
+	     */
+	    function times(n, iteratee) {
+	      n = toInteger(n);
+	      if (n < 1 || n > MAX_SAFE_INTEGER) {
+	        return [];
+	      }
+	      var index = MAX_ARRAY_LENGTH,
+	          length = nativeMin(n, MAX_ARRAY_LENGTH);
+
+	      iteratee = getIteratee(iteratee);
+	      n -= MAX_ARRAY_LENGTH;
+
+	      var result = baseTimes(length, iteratee);
+	      while (++index < n) {
+	        iteratee(index);
+	      }
+	      return result;
+	    }
+
+	    /**
+	     * Converts `value` to a property path array.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Util
+	     * @param {*} value The value to convert.
+	     * @returns {Array} Returns the new property path array.
+	     * @example
+	     *
+	     * _.toPath('a.b.c');
+	     * // => ['a', 'b', 'c']
+	     *
+	     * _.toPath('a[0].b.c');
+	     * // => ['a', '0', 'b', 'c']
+	     *
+	     * var path = ['a', 'b', 'c'],
+	     *     newPath = _.toPath(path);
+	     *
+	     * console.log(newPath);
+	     * // => ['a', 'b', 'c']
+	     *
+	     * console.log(path === newPath);
+	     * // => false
+	     */
+	    function toPath(value) {
+	      if (isArray(value)) {
+	        return arrayMap(value, toKey);
+	      }
+	      return isSymbol(value) ? [value] : copyArray(stringToPath(value));
+	    }
+
+	    /**
+	     * Generates a unique ID. If `prefix` is given, the ID is appended to it.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Util
+	     * @param {string} [prefix=''] The value to prefix the ID with.
+	     * @returns {string} Returns the unique ID.
+	     * @example
+	     *
+	     * _.uniqueId('contact_');
+	     * // => 'contact_104'
+	     *
+	     * _.uniqueId();
+	     * // => '105'
+	     */
+	    function uniqueId(prefix) {
+	      var id = ++idCounter;
+	      return toString(prefix) + id;
+	    }
+
+	    /*------------------------------------------------------------------------*/
+
+	    /**
+	     * Adds two numbers.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.4.0
+	     * @category Math
+	     * @param {number} augend The first number in an addition.
+	     * @param {number} addend The second number in an addition.
+	     * @returns {number} Returns the total.
+	     * @example
+	     *
+	     * _.add(6, 4);
+	     * // => 10
+	     */
+	    var add = createMathOperation(function(augend, addend) {
+	      return augend + addend;
+	    });
+
+	    /**
+	     * Computes `number` rounded up to `precision`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.10.0
+	     * @category Math
+	     * @param {number} number The number to round up.
+	     * @param {number} [precision=0] The precision to round up to.
+	     * @returns {number} Returns the rounded up number.
+	     * @example
+	     *
+	     * _.ceil(4.006);
+	     * // => 5
+	     *
+	     * _.ceil(6.004, 2);
+	     * // => 6.01
+	     *
+	     * _.ceil(6040, -2);
+	     * // => 6100
+	     */
+	    var ceil = createRound('ceil');
+
+	    /**
+	     * Divide two numbers.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.7.0
+	     * @category Math
+	     * @param {number} dividend The first number in a division.
+	     * @param {number} divisor The second number in a division.
+	     * @returns {number} Returns the quotient.
+	     * @example
+	     *
+	     * _.divide(6, 4);
+	     * // => 1.5
+	     */
+	    var divide = createMathOperation(function(dividend, divisor) {
+	      return dividend / divisor;
+	    });
+
+	    /**
+	     * Computes `number` rounded down to `precision`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.10.0
+	     * @category Math
+	     * @param {number} number The number to round down.
+	     * @param {number} [precision=0] The precision to round down to.
+	     * @returns {number} Returns the rounded down number.
+	     * @example
+	     *
+	     * _.floor(4.006);
+	     * // => 4
+	     *
+	     * _.floor(0.046, 2);
+	     * // => 0.04
+	     *
+	     * _.floor(4060, -2);
+	     * // => 4000
+	     */
+	    var floor = createRound('floor');
+
+	    /**
+	     * Computes the maximum value of `array`. If `array` is empty or falsey,
+	     * `undefined` is returned.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @returns {*} Returns the maximum value.
+	     * @example
+	     *
+	     * _.max([4, 2, 8, 6]);
+	     * // => 8
+	     *
+	     * _.max([]);
+	     * // => undefined
+	     */
+	    function max(array) {
+	      return (array && array.length)
+	          ? baseExtremum(array, identity, baseGt)
+	          : undefined;
+	    }
+
+	    /**
+	     * This method is like `_.max` except that it accepts `iteratee` which is
+	     * invoked for each element in `array` to generate the criterion by which
+	     * the value is ranked. The iteratee is invoked with one argument: (value).
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     *  The iteratee invoked per element.
+	     * @returns {*} Returns the maximum value.
+	     * @example
+	     *
+	     * var objects = [{ 'n': 1 }, { 'n': 2 }];
+	     *
+	     * _.maxBy(objects, function(o) { return o.n; });
+	     * // => { 'n': 2 }
+	     *
+	     * // The `_.property` iteratee shorthand.
+	     * _.maxBy(objects, 'n');
+	     * // => { 'n': 2 }
+	     */
+	    function maxBy(array, iteratee) {
+	      return (array && array.length)
+	          ? baseExtremum(array, getIteratee(iteratee), baseGt)
+	          : undefined;
+	    }
+
+	    /**
+	     * Computes the mean of the values in `array`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @returns {number} Returns the mean.
+	     * @example
+	     *
+	     * _.mean([4, 2, 8, 6]);
+	     * // => 5
+	     */
+	    function mean(array) {
+	      return baseMean(array, identity);
+	    }
+
+	    /**
+	     * This method is like `_.mean` except that it accepts `iteratee` which is
+	     * invoked for each element in `array` to generate the value to be averaged.
+	     * The iteratee is invoked with one argument: (value).
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.7.0
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     *  The iteratee invoked per element.
+	     * @returns {number} Returns the mean.
+	     * @example
+	     *
+	     * var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
+	     *
+	     * _.meanBy(objects, function(o) { return o.n; });
+	     * // => 5
+	     *
+	     * // The `_.property` iteratee shorthand.
+	     * _.meanBy(objects, 'n');
+	     * // => 5
+	     */
+	    function meanBy(array, iteratee) {
+	      return baseMean(array, getIteratee(iteratee));
+	    }
+
+	    /**
+	     * Computes the minimum value of `array`. If `array` is empty or falsey,
+	     * `undefined` is returned.
+	     *
+	     * @static
+	     * @since 0.1.0
+	     * @memberOf _
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @returns {*} Returns the minimum value.
+	     * @example
+	     *
+	     * _.min([4, 2, 8, 6]);
+	     * // => 2
+	     *
+	     * _.min([]);
+	     * // => undefined
+	     */
+	    function min(array) {
+	      return (array && array.length)
+	          ? baseExtremum(array, identity, baseLt)
+	          : undefined;
+	    }
+
+	    /**
+	     * This method is like `_.min` except that it accepts `iteratee` which is
+	     * invoked for each element in `array` to generate the criterion by which
+	     * the value is ranked. The iteratee is invoked with one argument: (value).
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     *  The iteratee invoked per element.
+	     * @returns {*} Returns the minimum value.
+	     * @example
+	     *
+	     * var objects = [{ 'n': 1 }, { 'n': 2 }];
+	     *
+	     * _.minBy(objects, function(o) { return o.n; });
+	     * // => { 'n': 1 }
+	     *
+	     * // The `_.property` iteratee shorthand.
+	     * _.minBy(objects, 'n');
+	     * // => { 'n': 1 }
+	     */
+	    function minBy(array, iteratee) {
+	      return (array && array.length)
+	          ? baseExtremum(array, getIteratee(iteratee), baseLt)
+	          : undefined;
+	    }
+
+	    /**
+	     * Multiply two numbers.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.7.0
+	     * @category Math
+	     * @param {number} multiplier The first number in a multiplication.
+	     * @param {number} multiplicand The second number in a multiplication.
+	     * @returns {number} Returns the product.
+	     * @example
+	     *
+	     * _.multiply(6, 4);
+	     * // => 24
+	     */
+	    var multiply = createMathOperation(function(multiplier, multiplicand) {
+	      return multiplier * multiplicand;
+	    });
+
+	    /**
+	     * Computes `number` rounded to `precision`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.10.0
+	     * @category Math
+	     * @param {number} number The number to round.
+	     * @param {number} [precision=0] The precision to round to.
+	     * @returns {number} Returns the rounded number.
+	     * @example
+	     *
+	     * _.round(4.006);
+	     * // => 4
+	     *
+	     * _.round(4.006, 2);
+	     * // => 4.01
+	     *
+	     * _.round(4060, -2);
+	     * // => 4100
+	     */
+	    var round = createRound('round');
+
+	    /**
+	     * Subtract two numbers.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Math
+	     * @param {number} minuend The first number in a subtraction.
+	     * @param {number} subtrahend The second number in a subtraction.
+	     * @returns {number} Returns the difference.
+	     * @example
+	     *
+	     * _.subtract(6, 4);
+	     * // => 2
+	     */
+	    var subtract = createMathOperation(function(minuend, subtrahend) {
+	      return minuend - subtrahend;
+	    });
+
+	    /**
+	     * Computes the sum of the values in `array`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 3.4.0
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @returns {number} Returns the sum.
+	     * @example
+	     *
+	     * _.sum([4, 2, 8, 6]);
+	     * // => 20
+	     */
+	    function sum(array) {
+	      return (array && array.length)
+	          ? baseSum(array, identity)
+	          : 0;
+	    }
+
+	    /**
+	     * This method is like `_.sum` except that it accepts `iteratee` which is
+	     * invoked for each element in `array` to generate the value to be summed.
+	     * The iteratee is invoked with one argument: (value).
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.0.0
+	     * @category Math
+	     * @param {Array} array The array to iterate over.
+	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     *  The iteratee invoked per element.
+	     * @returns {number} Returns the sum.
+	     * @example
+	     *
+	     * var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
+	     *
+	     * _.sumBy(objects, function(o) { return o.n; });
+	     * // => 20
+	     *
+	     * // The `_.property` iteratee shorthand.
+	     * _.sumBy(objects, 'n');
+	     * // => 20
+	     */
+	    function sumBy(array, iteratee) {
+	      return (array && array.length)
+	          ? baseSum(array, getIteratee(iteratee))
+	          : 0;
+	    }
+
+	    /*------------------------------------------------------------------------*/
+
+	    // Add methods that return wrapped values in chain sequences.
+	    lodash.after = after;
+	    lodash.ary = ary;
+	    lodash.assign = assign;
+	    lodash.assignIn = assignIn;
+	    lodash.assignInWith = assignInWith;
+	    lodash.assignWith = assignWith;
+	    lodash.at = at;
+	    lodash.before = before;
+	    lodash.bind = bind;
+	    lodash.bindAll = bindAll;
+	    lodash.bindKey = bindKey;
+	    lodash.castArray = castArray;
+	    lodash.chain = chain;
+	    lodash.chunk = chunk;
+	    lodash.compact = compact;
+	    lodash.concat = concat;
+	    lodash.cond = cond;
+	    lodash.conforms = conforms;
+	    lodash.constant = constant;
+	    lodash.countBy = countBy;
+	    lodash.create = create;
+	    lodash.curry = curry;
+	    lodash.curryRight = curryRight;
+	    lodash.debounce = debounce;
+	    lodash.defaults = defaults;
+	    lodash.defaultsDeep = defaultsDeep;
+	    lodash.defer = defer;
+	    lodash.delay = delay;
+	    lodash.difference = difference;
+	    lodash.differenceBy = differenceBy;
+	    lodash.differenceWith = differenceWith;
+	    lodash.drop = drop;
+	    lodash.dropRight = dropRight;
+	    lodash.dropRightWhile = dropRightWhile;
+	    lodash.dropWhile = dropWhile;
+	    lodash.fill = fill;
+	    lodash.filter = filter;
+	    lodash.flatMap = flatMap;
+	    lodash.flatMapDeep = flatMapDeep;
+	    lodash.flatMapDepth = flatMapDepth;
+	    lodash.flatten = flatten;
+	    lodash.flattenDeep = flattenDeep;
+	    lodash.flattenDepth = flattenDepth;
+	    lodash.flip = flip;
+	    lodash.flow = flow;
+	    lodash.flowRight = flowRight;
+	    lodash.fromPairs = fromPairs;
+	    lodash.functions = functions;
+	    lodash.functionsIn = functionsIn;
+	    lodash.groupBy = groupBy;
+	    lodash.initial = initial;
+	    lodash.intersection = intersection;
+	    lodash.intersectionBy = intersectionBy;
+	    lodash.intersectionWith = intersectionWith;
+	    lodash.invert = invert;
+	    lodash.invertBy = invertBy;
+	    lodash.invokeMap = invokeMap;
+	    lodash.iteratee = iteratee;
+	    lodash.keyBy = keyBy;
+	    lodash.keys = keys;
+	    lodash.keysIn = keysIn;
+	    lodash.map = map;
+	    lodash.mapKeys = mapKeys;
+	    lodash.mapValues = mapValues;
+	    lodash.matches = matches;
+	    lodash.matchesProperty = matchesProperty;
+	    lodash.memoize = memoize;
+	    lodash.merge = merge;
+	    lodash.mergeWith = mergeWith;
+	    lodash.method = method;
+	    lodash.methodOf = methodOf;
+	    lodash.mixin = mixin;
+	    lodash.negate = negate;
+	    lodash.nthArg = nthArg;
+	    lodash.omit = omit;
+	    lodash.omitBy = omitBy;
+	    lodash.once = once;
+	    lodash.orderBy = orderBy;
+	    lodash.over = over;
+	    lodash.overArgs = overArgs;
+	    lodash.overEvery = overEvery;
+	    lodash.overSome = overSome;
+	    lodash.partial = partial;
+	    lodash.partialRight = partialRight;
+	    lodash.partition = partition;
+	    lodash.pick = pick;
+	    lodash.pickBy = pickBy;
+	    lodash.property = property;
+	    lodash.propertyOf = propertyOf;
+	    lodash.pull = pull;
+	    lodash.pullAll = pullAll;
+	    lodash.pullAllBy = pullAllBy;
+	    lodash.pullAllWith = pullAllWith;
+	    lodash.pullAt = pullAt;
+	    lodash.range = range;
+	    lodash.rangeRight = rangeRight;
+	    lodash.rearg = rearg;
+	    lodash.reject = reject;
+	    lodash.remove = remove;
+	    lodash.rest = rest;
+	    lodash.reverse = reverse;
+	    lodash.sampleSize = sampleSize;
+	    lodash.set = set;
+	    lodash.setWith = setWith;
+	    lodash.shuffle = shuffle;
+	    lodash.slice = slice;
+	    lodash.sortBy = sortBy;
+	    lodash.sortedUniq = sortedUniq;
+	    lodash.sortedUniqBy = sortedUniqBy;
+	    lodash.split = split;
+	    lodash.spread = spread;
+	    lodash.tail = tail;
+	    lodash.take = take;
+	    lodash.takeRight = takeRight;
+	    lodash.takeRightWhile = takeRightWhile;
+	    lodash.takeWhile = takeWhile;
+	    lodash.tap = tap;
+	    lodash.throttle = throttle;
+	    lodash.thru = thru;
+	    lodash.toArray = toArray;
+	    lodash.toPairs = toPairs;
+	    lodash.toPairsIn = toPairsIn;
+	    lodash.toPath = toPath;
+	    lodash.toPlainObject = toPlainObject;
+	    lodash.transform = transform;
+	    lodash.unary = unary;
+	    lodash.union = union;
+	    lodash.unionBy = unionBy;
+	    lodash.unionWith = unionWith;
+	    lodash.uniq = uniq;
+	    lodash.uniqBy = uniqBy;
+	    lodash.uniqWith = uniqWith;
+	    lodash.unset = unset;
+	    lodash.unzip = unzip;
+	    lodash.unzipWith = unzipWith;
+	    lodash.update = update;
+	    lodash.updateWith = updateWith;
+	    lodash.values = values;
+	    lodash.valuesIn = valuesIn;
+	    lodash.without = without;
+	    lodash.words = words;
+	    lodash.wrap = wrap;
+	    lodash.xor = xor;
+	    lodash.xorBy = xorBy;
+	    lodash.xorWith = xorWith;
+	    lodash.zip = zip;
+	    lodash.zipObject = zipObject;
+	    lodash.zipObjectDeep = zipObjectDeep;
+	    lodash.zipWith = zipWith;
+
+	    // Add aliases.
+	    lodash.entries = toPairs;
+	    lodash.entriesIn = toPairsIn;
+	    lodash.extend = assignIn;
+	    lodash.extendWith = assignInWith;
+
+	    // Add methods to `lodash.prototype`.
+	    mixin(lodash, lodash);
+
+	    /*------------------------------------------------------------------------*/
+
+	    // Add methods that return unwrapped values in chain sequences.
+	    lodash.add = add;
+	    lodash.attempt = attempt;
+	    lodash.camelCase = camelCase;
+	    lodash.capitalize = capitalize;
+	    lodash.ceil = ceil;
+	    lodash.clamp = clamp;
+	    lodash.clone = clone;
+	    lodash.cloneDeep = cloneDeep;
+	    lodash.cloneDeepWith = cloneDeepWith;
+	    lodash.cloneWith = cloneWith;
+	    lodash.deburr = deburr;
+	    lodash.divide = divide;
+	    lodash.endsWith = endsWith;
+	    lodash.eq = eq;
+	    lodash.escape = escape;
+	    lodash.escapeRegExp = escapeRegExp;
+	    lodash.every = every;
+	    lodash.find = find;
+	    lodash.findIndex = findIndex;
+	    lodash.findKey = findKey;
+	    lodash.findLast = findLast;
+	    lodash.findLastIndex = findLastIndex;
+	    lodash.findLastKey = findLastKey;
+	    lodash.floor = floor;
+	    lodash.forEach = forEach;
+	    lodash.forEachRight = forEachRight;
+	    lodash.forIn = forIn;
+	    lodash.forInRight = forInRight;
+	    lodash.forOwn = forOwn;
+	    lodash.forOwnRight = forOwnRight;
+	    lodash.get = get;
+	    lodash.gt = gt;
+	    lodash.gte = gte;
+	    lodash.has = has;
+	    lodash.hasIn = hasIn;
+	    lodash.head = head;
+	    lodash.identity = identity;
+	    lodash.includes = includes;
+	    lodash.indexOf = indexOf;
+	    lodash.inRange = inRange;
+	    lodash.invoke = invoke;
+	    lodash.isArguments = isArguments;
+	    lodash.isArray = isArray;
+	    lodash.isArrayBuffer = isArrayBuffer;
+	    lodash.isArrayLike = isArrayLike;
+	    lodash.isArrayLikeObject = isArrayLikeObject;
+	    lodash.isBoolean = isBoolean;
+	    lodash.isBuffer = isBuffer;
+	    lodash.isDate = isDate;
+	    lodash.isElement = isElement;
+	    lodash.isEmpty = isEmpty;
+	    lodash.isEqual = isEqual;
+	    lodash.isEqualWith = isEqualWith;
+	    lodash.isError = isError;
+	    lodash.isFinite = isFinite;
+	    lodash.isFunction = isFunction;
+	    lodash.isInteger = isInteger;
+	    lodash.isLength = isLength;
+	    lodash.isMap = isMap;
+	    lodash.isMatch = isMatch;
+	    lodash.isMatchWith = isMatchWith;
+	    lodash.isNaN = isNaN;
+	    lodash.isNative = isNative;
+	    lodash.isNil = isNil;
+	    lodash.isNull = isNull;
+	    lodash.isNumber = isNumber;
+	    lodash.isObject = isObject;
+	    lodash.isObjectLike = isObjectLike;
+	    lodash.isPlainObject = isPlainObject;
+	    lodash.isRegExp = isRegExp;
+	    lodash.isSafeInteger = isSafeInteger;
+	    lodash.isSet = isSet;
+	    lodash.isString = isString;
+	    lodash.isSymbol = isSymbol;
+	    lodash.isTypedArray = isTypedArray;
+	    lodash.isUndefined = isUndefined;
+	    lodash.isWeakMap = isWeakMap;
+	    lodash.isWeakSet = isWeakSet;
+	    lodash.join = join;
+	    lodash.kebabCase = kebabCase;
+	    lodash.last = last;
+	    lodash.lastIndexOf = lastIndexOf;
+	    lodash.lowerCase = lowerCase;
+	    lodash.lowerFirst = lowerFirst;
+	    lodash.lt = lt;
+	    lodash.lte = lte;
+	    lodash.max = max;
+	    lodash.maxBy = maxBy;
+	    lodash.mean = mean;
+	    lodash.meanBy = meanBy;
+	    lodash.min = min;
+	    lodash.minBy = minBy;
+	    lodash.multiply = multiply;
+	    lodash.nth = nth;
+	    lodash.noConflict = noConflict;
+	    lodash.noop = noop;
+	    lodash.now = now;
+	    lodash.pad = pad;
+	    lodash.padEnd = padEnd;
+	    lodash.padStart = padStart;
+	    lodash.parseInt = parseInt;
+	    lodash.random = random;
+	    lodash.reduce = reduce;
+	    lodash.reduceRight = reduceRight;
+	    lodash.repeat = repeat;
+	    lodash.replace = replace;
+	    lodash.result = result;
+	    lodash.round = round;
+	    lodash.runInContext = runInContext;
+	    lodash.sample = sample;
+	    lodash.size = size;
+	    lodash.snakeCase = snakeCase;
+	    lodash.some = some;
+	    lodash.sortedIndex = sortedIndex;
+	    lodash.sortedIndexBy = sortedIndexBy;
+	    lodash.sortedIndexOf = sortedIndexOf;
+	    lodash.sortedLastIndex = sortedLastIndex;
+	    lodash.sortedLastIndexBy = sortedLastIndexBy;
+	    lodash.sortedLastIndexOf = sortedLastIndexOf;
+	    lodash.startCase = startCase;
+	    lodash.startsWith = startsWith;
+	    lodash.subtract = subtract;
+	    lodash.sum = sum;
+	    lodash.sumBy = sumBy;
+	    lodash.template = template;
+	    lodash.times = times;
+	    lodash.toInteger = toInteger;
+	    lodash.toLength = toLength;
+	    lodash.toLower = toLower;
+	    lodash.toNumber = toNumber;
+	    lodash.toSafeInteger = toSafeInteger;
+	    lodash.toString = toString;
+	    lodash.toUpper = toUpper;
+	    lodash.trim = trim;
+	    lodash.trimEnd = trimEnd;
+	    lodash.trimStart = trimStart;
+	    lodash.truncate = truncate;
+	    lodash.unescape = unescape;
+	    lodash.uniqueId = uniqueId;
+	    lodash.upperCase = upperCase;
+	    lodash.upperFirst = upperFirst;
+
+	    // Add aliases.
+	    lodash.each = forEach;
+	    lodash.eachRight = forEachRight;
+	    lodash.first = head;
+
+	    mixin(lodash, (function() {
+	      var source = {};
+	      baseForOwn(lodash, function(func, methodName) {
+	        if (!hasOwnProperty.call(lodash.prototype, methodName)) {
+	          source[methodName] = func;
+	        }
+	      });
+	      return source;
+	    }()), { 'chain': false });
+
+	    /*------------------------------------------------------------------------*/
+
+	    /**
+	     * The semantic version number.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @type {string}
+	     */
+	    lodash.VERSION = VERSION;
+
+	    // Assign default placeholders.
+	    arrayEach(['bind', 'bindKey', 'curry', 'curryRight', 'partial', 'partialRight'], function(methodName) {
+	      lodash[methodName].placeholder = lodash;
+	    });
+
+	    // Add `LazyWrapper` methods for `_.drop` and `_.take` variants.
+	    arrayEach(['drop', 'take'], function(methodName, index) {
+	      LazyWrapper.prototype[methodName] = function(n) {
+	        var filtered = this.__filtered__;
+	        if (filtered && !index) {
+	          return new LazyWrapper(this);
+	        }
+	        n = n === undefined ? 1 : nativeMax(toInteger(n), 0);
+
+	        var result = this.clone();
+	        if (filtered) {
+	          result.__takeCount__ = nativeMin(n, result.__takeCount__);
+	        } else {
+	          result.__views__.push({
+	            'size': nativeMin(n, MAX_ARRAY_LENGTH),
+	            'type': methodName + (result.__dir__ < 0 ? 'Right' : '')
+	          });
+	        }
+	        return result;
+	      };
+
+	      LazyWrapper.prototype[methodName + 'Right'] = function(n) {
+	        return this.reverse()[methodName](n).reverse();
+	      };
+	    });
+
+	    // Add `LazyWrapper` methods that accept an `iteratee` value.
+	    arrayEach(['filter', 'map', 'takeWhile'], function(methodName, index) {
+	      var type = index + 1,
+	          isFilter = type == LAZY_FILTER_FLAG || type == LAZY_WHILE_FLAG;
+
+	      LazyWrapper.prototype[methodName] = function(iteratee) {
+	        var result = this.clone();
+	        result.__iteratees__.push({
+	          'iteratee': getIteratee(iteratee, 3),
+	          'type': type
+	        });
+	        result.__filtered__ = result.__filtered__ || isFilter;
+	        return result;
+	      };
+	    });
+
+	    // Add `LazyWrapper` methods for `_.head` and `_.last`.
+	    arrayEach(['head', 'last'], function(methodName, index) {
+	      var takeName = 'take' + (index ? 'Right' : '');
+
+	      LazyWrapper.prototype[methodName] = function() {
+	        return this[takeName](1).value()[0];
+	      };
+	    });
+
+	    // Add `LazyWrapper` methods for `_.initial` and `_.tail`.
+	    arrayEach(['initial', 'tail'], function(methodName, index) {
+	      var dropName = 'drop' + (index ? '' : 'Right');
+
+	      LazyWrapper.prototype[methodName] = function() {
+	        return this.__filtered__ ? new LazyWrapper(this) : this[dropName](1);
+	      };
+	    });
+
+	    LazyWrapper.prototype.compact = function() {
+	      return this.filter(identity);
+	    };
+
+	    LazyWrapper.prototype.find = function(predicate) {
+	      return this.filter(predicate).head();
+	    };
+
+	    LazyWrapper.prototype.findLast = function(predicate) {
+	      return this.reverse().find(predicate);
+	    };
+
+	    LazyWrapper.prototype.invokeMap = rest(function(path, args) {
+	      if (typeof path == 'function') {
+	        return new LazyWrapper(this);
+	      }
+	      return this.map(function(value) {
+	        return baseInvoke(value, path, args);
+	      });
+	    });
+
+	    LazyWrapper.prototype.reject = function(predicate) {
+	      predicate = getIteratee(predicate, 3);
+	      return this.filter(function(value) {
+	        return !predicate(value);
+	      });
+	    };
+
+	    LazyWrapper.prototype.slice = function(start, end) {
+	      start = toInteger(start);
+
+	      var result = this;
+	      if (result.__filtered__ && (start > 0 || end < 0)) {
+	        return new LazyWrapper(result);
+	      }
+	      if (start < 0) {
+	        result = result.takeRight(-start);
+	      } else if (start) {
+	        result = result.drop(start);
+	      }
+	      if (end !== undefined) {
+	        end = toInteger(end);
+	        result = end < 0 ? result.dropRight(-end) : result.take(end - start);
+	      }
+	      return result;
+	    };
+
+	    LazyWrapper.prototype.takeRightWhile = function(predicate) {
+	      return this.reverse().takeWhile(predicate).reverse();
+	    };
+
+	    LazyWrapper.prototype.toArray = function() {
+	      return this.take(MAX_ARRAY_LENGTH);
+	    };
+
+	    // Add `LazyWrapper` methods to `lodash.prototype`.
+	    baseForOwn(LazyWrapper.prototype, function(func, methodName) {
+	      var checkIteratee = /^(?:filter|find|map|reject)|While$/.test(methodName),
+	          isTaker = /^(?:head|last)$/.test(methodName),
+	          lodashFunc = lodash[isTaker ? ('take' + (methodName == 'last' ? 'Right' : '')) : methodName],
+	          retUnwrapped = isTaker || /^find/.test(methodName);
+
+	      if (!lodashFunc) {
+	        return;
+	      }
+	      lodash.prototype[methodName] = function() {
+	        var value = this.__wrapped__,
+	            args = isTaker ? [1] : arguments,
+	            isLazy = value instanceof LazyWrapper,
+	            iteratee = args[0],
+	            useLazy = isLazy || isArray(value);
+
+	        var interceptor = function(value) {
+	          var result = lodashFunc.apply(lodash, arrayPush([value], args));
+	          return (isTaker && chainAll) ? result[0] : result;
+	        };
+
+	        if (useLazy && checkIteratee && typeof iteratee == 'function' && iteratee.length != 1) {
+	          // Avoid lazy use if the iteratee has a "length" value other than `1`.
+	          isLazy = useLazy = false;
+	        }
+	        var chainAll = this.__chain__,
+	            isHybrid = !!this.__actions__.length,
+	            isUnwrapped = retUnwrapped && !chainAll,
+	            onlyLazy = isLazy && !isHybrid;
+
+	        if (!retUnwrapped && useLazy) {
+	          value = onlyLazy ? value : new LazyWrapper(this);
+	          var result = func.apply(value, args);
+	          result.__actions__.push({ 'func': thru, 'args': [interceptor], 'thisArg': undefined });
+	          return new LodashWrapper(result, chainAll);
+	        }
+	        if (isUnwrapped && onlyLazy) {
+	          return func.apply(this, args);
+	        }
+	        result = this.thru(interceptor);
+	        return isUnwrapped ? (isTaker ? result.value()[0] : result.value()) : result;
+	      };
+	    });
+
+	    // Add `Array` methods to `lodash.prototype`.
+	    arrayEach(['pop', 'push', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+	      var func = arrayProto[methodName],
+	          chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru',
+	          retUnwrapped = /^(?:pop|shift)$/.test(methodName);
+
+	      lodash.prototype[methodName] = function() {
+	        var args = arguments;
+	        if (retUnwrapped && !this.__chain__) {
+	          var value = this.value();
+	          return func.apply(isArray(value) ? value : [], args);
+	        }
+	        return this[chainName](function(value) {
+	          return func.apply(isArray(value) ? value : [], args);
+	        });
+	      };
+	    });
+
+	    // Map minified method names to their real names.
+	    baseForOwn(LazyWrapper.prototype, function(func, methodName) {
+	      var lodashFunc = lodash[methodName];
+	      if (lodashFunc) {
+	        var key = (lodashFunc.name + ''),
+	            names = realNames[key] || (realNames[key] = []);
+
+	        names.push({ 'name': methodName, 'func': lodashFunc });
+	      }
+	    });
+
+	    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{
+	      'name': 'wrapper',
+	      'func': undefined
+	    }];
+
+	    // Add methods to `LazyWrapper`.
+	    LazyWrapper.prototype.clone = lazyClone;
+	    LazyWrapper.prototype.reverse = lazyReverse;
+	    LazyWrapper.prototype.value = lazyValue;
+
+	    // Add chain sequence methods to the `lodash` wrapper.
+	    lodash.prototype.at = wrapperAt;
+	    lodash.prototype.chain = wrapperChain;
+	    lodash.prototype.commit = wrapperCommit;
+	    lodash.prototype.next = wrapperNext;
+	    lodash.prototype.plant = wrapperPlant;
+	    lodash.prototype.reverse = wrapperReverse;
+	    lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
+
+	    if (iteratorSymbol) {
+	      lodash.prototype[iteratorSymbol] = wrapperToIterator;
+	    }
+	    return lodash;
+	  }
+
+	  /*--------------------------------------------------------------------------*/
+
+	  // Export lodash.
+	  var _ = runInContext();
+
+	  // Expose Lodash on the free variable `window` or `self` when available so it's
+	  // globally accessible, even when bundled with Browserify, Webpack, etc. This
+	  // also prevents errors in cases where Lodash is loaded by a script tag in the
+	  // presence of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch
+	  // for more details. Use `_.noConflict` to remove Lodash from the global object.
+	  (freeWindow || freeSelf || {})._ = _;
+
+	  // Some AMD build optimizers like r.js check for condition patterns like the following:
+	  if (true) {
+	    // Define as an anonymous module so, through path mapping, it can be
+	    // referenced as the "underscore" module.
+	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	      return _;
+	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  }
+	  // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
+	  else if (freeExports && freeModule) {
+	    // Export for Node.js.
+	    if (moduleExports) {
+	      (freeModule.exports = _)._ = _;
+	    }
+	    // Export for CommonJS support.
+	    freeExports._ = _;
+	  }
+	  else {
+	    // Export to the global object.
+	    root._ = _;
+	  }
+	}.call(this));
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)(module), (function() { return this; }())))
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced = new window.CytubeEnhanced(
+	    (window.cytubeEnhancedSettings ? (window.cytubeEnhancedSettings.language || 'en') : 'en'),
+	    (window.cytubeEnhancedSettings ? (window.cytubeEnhancedSettings.modulesSettings || {}) : {}),
+	    (window.cytubeEnhancedSettings ? (window.cytubeEnhancedSettings.modulesExtends || {}) : {})
+	);
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	window.cytubeEnhanced.addModule('additionalChatCommands', function (app, settings) {
+	    'use strict';
+	    var that = this;
+
+	    var defaultSettings = {
+	        permittedCommands: ['*']
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+	    settings.permittedCommands = _.isArray(settings.permittedCommands) ? settings.permittedCommands : [];
+	    settings.permittedCommands = _.map(settings.permittedCommands, function (value) { return _.toLower(value); });
+
+	    this.$chatline = $('#chatline');
+
+
+	    this.isCommandPermitted = function (commandName) {
+	        if (that.commandsList[commandName]) {
+	            if (that.commandsList[commandName].canBeOmitted) {
+	                return settings.permittedCommands.indexOf('*') !== -1 || settings.permittedCommands.indexOf(commandName) !== -1;
+	            } else {
+	                return true;
+	            }
+	        } else {
+	            return false;
+	        }
+	    };
+
+
+	    this.askAnswers = ["100%", app.t('qCommands[.]of course'), app.t('qCommands[.]yes'), app.t('qCommands[.]maybe'), app.t('qCommands[.]impossible'), app.t('qCommands[.]no way'), app.t('qCommands[.]don\'t think so'), app.t('qCommands[.]no'), "50/50", app.t('qCommands[.]cirno is busy'), app.t('qCommands[.]I regret to inform you')];
+
+
+	    /**
+	     * Quotes for !q command
+	     * @type {Array}
+	     */
+	    this.randomQuotes = [];
+
+
+	    /**
+	     *The list of commands
+	     *
+	     * Every command must have method value(message) which returns command's message.
+	     * Commands can also have description property for chatCommandsHelp module and isAvailable method which returns false if command is not permitted (by default returns true)
+	     *
+	     * @type {object}
+	     */
+	    this.commandsList = {
+	        '!pick': {
+	            description: app.t('chatCommands[.]random option from the list of options (!pick option1, option2, option3)'),
+	            value: function (msg) {
+	                var formattedMsg = _.trim(msg.replace('!pick', ''));
+
+	                if (formattedMsg === '') {
+	                    return app.t('chatCommands[.]Use !pick variant1, variant2');
+	                } else {
+	                    var variants = formattedMsg.split(',');
+	                    return _.trim(variants[Math.floor(Math.random() * variants.length)]);
+	                }
+	            },
+	            canBeOmitted: true
+	        },
+	        '!ask': {
+	            description: app.t('chatCommands[.]asking a question with yes/no/... type answer (e.g. <i>!ask Will i be rich?</i>)'),
+	            value: function () {
+	                return that.askAnswers[Math.floor(Math.random() * that.askAnswers.length)];
+	            },
+	            canBeOmitted: true
+	        },
+	        '!time': {
+	            description: app.t('chatCommands[.]show the current time'),
+	            value: function () {
+	                var h = new Date().getHours();
+	                if (h < 10) {
+	                    h = '0' + h;
+	                }
+
+	                var m = new Date().getMinutes();
+	                if (m < 10) {
+	                    m = '0' + m;
+	                }
+
+	                return app.t('chatCommands[.]current time') + ': ' + h + ':' + m;
+	            },
+	            canBeOmitted: true
+	        },
+	        '!dice': {
+	            description: app.t('chatCommands[.]throw a dice'),
+	            value: function () {
+	                return Math.floor(Math.random() * 5) + 1;
+	            },
+	            canBeOmitted: true
+	        },
+	        '!roll': {
+	            description: app.t('chatCommands[.]random number between 0 and 999'),
+	            value: function () {
+	                var randomNumber = Math.floor(Math.random() * 1000);
+
+	                if (randomNumber < 100) {
+	                    randomNumber = '0' + randomNumber;
+	                } else if (randomNumber < 10) {
+	                    randomNumber= '00' + randomNumber;
+	                }
+
+	                return randomNumber;
+	            },
+	            canBeOmitted: true
+	        },
+	        '!skip': {
+	            description: app.t('chatCommands[.]vote for the video skip'),
+	            value: function (msg) {
+	                window.socket.emit("voteskip");
+	                msg = app.t('chatCommands[.]you have been voted for the video skip');
+
+	                return msg;
+	            },
+	            isAvailable: function () {
+	                return window.hasPermission('voteskip');
+	            },
+	            canBeOmitted: true
+	        },
+	        '!next': {
+	            description: app.t('chatCommands[.]play the next video'),
+	            value: function (msg) {
+	                window.socket.emit("playNext");
+	                msg = app.t('chatCommands[.]the next video is playing');
+
+	                return msg;
+	            },
+	            isAvailable: function () {
+	                return window.hasPermission('playlistjump');
+	            },
+	            canBeOmitted: true
+	        },
+	        '!bump': {
+	            description: app.t('chatCommands[.]bump the last video'),
+	            value: function (msg) {
+	                var $lastEntry = $('#queue').find('.queue_entry').last();
+	                var uid = $lastEntry.data("uid");
+	                var title = $lastEntry.find('.qe_title').html();
+
+	                window.socket.emit("moveMedia", {from: uid, after: window.PL_CURRENT});
+
+	                msg = app.t('chatCommands[.]the last video was bumped') + title;
+
+	                return msg;
+	            },
+	            isAvailable: function () {
+	                return window.hasPermission('playlistmove');
+	            },
+	            canBeOmitted: true
+	        },
+	        '!add': {
+	            description: app.t('chatCommands[.]adds the video to the end of the playlist (e.g. <i>!add https://www.youtube.com/watch?v=hh4gpgAZkc8</i>)'),
+	            value: function (msg) {
+	                var parsed = window.parseMediaLink(msg.split("!add ")[1]);
+
+	                if (parsed.id === null) {
+	                    msg = app.t('chatCommands[.]error: the wrong link');
+	                } else {
+	                    window.socket.emit("queue", {id: parsed.id, pos: "end", type: parsed.type});
+	                    msg = app.t('chatCommands[.]the video was added');
+	                }
+
+
+	                return msg;
+	            },
+	            isAvailable: function () {
+	                return window.hasPermission('playlistadd');
+	            },
+	            canBeOmitted: true
+	        },
+	        '!now': {
+	            description: app.t('chatCommands[.]show the current video\'s name'),
+	            value: function () {
+	                return app.t('chatCommands[.]now: ') + $(".queue_active a").html();
+	            },
+	            canBeOmitted: true
+	        },
+	        '!sm': {
+	            description: app.t('chatCommands[.]show the random emote'),
+	            value: function () {
+	                var smilesArray = window.CHANNEL.emotes.map(function (smile) {
+	                    return smile.name;
+	                });
+
+	                return smilesArray[Math.floor(Math.random() * smilesArray.length)] + ' ';
+	            },
+	            canBeOmitted: true
+	        }
+	    };
+
+
+	    this.IS_COMMAND = false;
+	    this.prepareMessage = function (msg) {
+	        that.IS_COMMAND = false;
+
+	        for (var command in that.commandsList) {
+	            if (this.commandsList.hasOwnProperty(command) && _.toLower(_.trim(msg)).indexOf(command) === 0) {
+	                if (that.isCommandPermitted(command) && (that.commandsList[command].isAvailable ? that.commandsList[command].isAvailable() : true)) {
+	                    that.IS_COMMAND = true;
+
+	                    msg = that.commandsList[command].value(msg);
+	                }
+
+	                break;
+	            }
+	        }
+
+	        return msg;
+	    };
+
+
+	    this.sendUserChatMessage = function (e) {
+	        if(e.keyCode === 13) {
+	            if (window.CHATTHROTTLE) {
+	                return;
+	            }
+
+	            var msg = that.$chatline.val().trim();
+
+	            if(msg !== '') {
+	                var meta = {};
+
+	                if (window.USEROPTS.adminhat && window.CLIENT.rank >= 255) {
+	                    msg = "/a " + msg;
+	                } else if (window.USEROPTS.modhat && window.CLIENT.rank >= window.Rank.Moderator) {
+	                    meta.modflair = window.CLIENT.rank;
+	                }
+
+	                // The /m command no longer exists, so emulate it clientside
+	                if (window.CLIENT.rank >= 2 && msg.indexOf("/m ") === 0) {
+	                    meta.modflair = window.CLIENT.rank;
+	                    msg = msg.substring(3);
+	                }
+
+
+	                var msgForCommand = this.prepareMessage(msg);
+
+	                if (that.IS_COMMAND) {
+	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
+	                    window.socket.emit("chatMsg", {msg: '🤖 ' + msgForCommand});
+
+	                    that.IS_COMMAND = false;
+	                } else {
+	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
+	                }
+
+
+	                window.CHATHIST.push(that.$chatline.val());
+	                window.CHATHISTIDX = window.CHATHIST.length;
+	                that.$chatline.val('');
+	            }
+
+	            return;
+	        } else if(e.keyCode === 9) { // Tab completion
+	            window.chatTabComplete();
+	            e.preventDefault();
+	            return false;
+	        } else if(e.keyCode === 38) { // Up arrow (input history)
+	            if(window.CHATHISTIDX === window.CHATHIST.length) {
+	                window.CHATHIST.push(that.$chatline.val());
+	            }
+	            if(window.CHATHISTIDX > 0) {
+	                window.CHATHISTIDX--;
+	                that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
+	            }
+
+	            e.preventDefault();
+	            return false;
+	        } else if(e.keyCode === 40) { // Down arrow (input history)
+	            if(window.CHATHISTIDX < window.CHATHIST.length - 1) {
+	                window.CHATHISTIDX++;
+	                that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
+	            }
+
+	            e.preventDefault();
+	            return false;
+	        }
+	    };
+
+
+	    that.$chatline.off().on('keydown', function (e) {
+	        that.sendUserChatMessage(e);
+	    });
+
+	    $('#chatbtn').off().on('click', function (e) {
+	        that.sendUserChatMessage(e);
+	    });
+	});
 
 
 /***/ },
@@ -22756,10 +29094,20 @@ window.cytubeEnhanced.getModule('themes').done(function (extraModules) {
 	    });
 	});
 
-/***/ }
-/******/ ]);
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
 
+	window.cytubeEnhanced.addModule('Colors', function (app, settings) {
+	    'use strict';
+	    var that = this;
 
+	    var defaultSettings = {
+	        turnedOn: true
+	    };
+	    settings = $.extend({}, defaultSettings, settings);
+
+	    
 var stringToColour = function(str) {
  
 for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
@@ -22850,5437 +29198,71 @@ function playFile() {
 };
 });
 
-
-
-
-
-
-
-
-////////////////
-
-
-            !(isProto && key == 'constructor')) {
-	          result.push(key);
-	        }
-	      }
-	      return result;
-	    }
-
-	    /**
-	     * Creates an array of the own and inherited enumerable property names of `object`.
-	     *
-	     * **Note:** Non-object values are coerced to objects.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category Object
-	     * @param {Object} object The object to query.
-	     * @returns {Array} Returns the array of property names.
-	     * @example
-	     *
-	     * function Foo() {
-	     *   this.a = 1;
-	     *   this.b = 2;
-	     * }
-	     *
-	     * Foo.prototype.c = 3;
-	     *
-	     * _.keysIn(new Foo);
-	     * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-	     */
-	    function keysIn(object) {
-	      var index = -1,
-	          isProto = isPrototype(object),
-	          props = baseKeysIn(object),
-	          propsLength = props.length,
-	          indexes = indexKeys(object),
-	          skipIndexes = !!indexes,
-	          result = indexes || [],
-	          length = result.length;
-
-	      while (++index < propsLength) {
-	        var key = props[index];
-	        if (!(skipIndexes && (key == 'length' || isIndex(key, length))) &&
-	            !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	          result.push(key);
-	        }
-	      }
-	      return result;
-	    }
-
-	    /**
-	     * The opposite of `_.mapValues`; this method creates an object with the
-	     * same values as `object` and keys generated by running each own enumerable
-	     * string keyed property of `object` thru `iteratee`. The iteratee is invoked
-	     * with three arguments: (value, key, object).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.8.0
-	     * @category Object
-	     * @param {Object} object The object to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The function invoked per iteration.
-	     * @returns {Object} Returns the new mapped object.
-	     * @see _.mapValues
-	     * @example
-	     *
-	     * _.mapKeys({ 'a': 1, 'b': 2 }, function(value, key) {
-	     *   return key + value;
-	     * });
-	     * // => { 'a1': 1, 'b2': 2 }
-	     */
-	    function mapKeys(object, iteratee) {
-	      var result = {};
-	      iteratee = getIteratee(iteratee, 3);
-
-	      baseForOwn(object, function(value, key, object) {
-	        result[iteratee(value, key, object)] = value;
-	      });
-	      return result;
-	    }
-
-	    /**
-	     * Creates an object with the same keys as `object` and values generated
-	     * by running each own enumerable string keyed property of `object` thru
-	     * `iteratee`. The iteratee is invoked with three arguments:
-	     * (value, key, object).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 2.4.0
-	     * @category Object
-	     * @param {Object} object The object to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The function invoked per iteration.
-	     * @returns {Object} Returns the new mapped object.
-	     * @see _.mapKeys
-	     * @example
-	     *
-	     * var users = {
-	     *   'fred':    { 'user': 'fred',    'age': 40 },
-	     *   'pebbles': { 'user': 'pebbles', 'age': 1 }
-	     * };
-	     *
-	     * _.mapValues(users, function(o) { return o.age; });
-	     * // => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
-	     *
-	     * // The `_.property` iteratee shorthand.
-	     * _.mapValues(users, 'age');
-	     * // => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
-	     */
-	    function mapValues(object, iteratee) {
-	      var result = {};
-	      iteratee = getIteratee(iteratee, 3);
-
-	      baseForOwn(object, function(value, key, object) {
-	        result[key] = iteratee(value, key, object);
-	      });
-	      return result;
-	    }
-
-	    /**
-	     * This method is like `_.assign` except that it recursively merges own and
-	     * inherited enumerable string keyed properties of source objects into the
-	     * destination object. Source properties that resolve to `undefined` are
-	     * skipped if a destination value exists. Array and plain object properties
-	     * are merged recursively.Other objects and value types are overridden by
-	     * assignment. Source objects are applied from left to right. Subsequent
-	     * sources overwrite property assignments of previous sources.
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 0.5.0
-	     * @category Object
-	     * @param {Object} object The destination object.
-	     * @param {...Object} [sources] The source objects.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * var users = {
-	     *   'data': [{ 'user': 'barney' }, { 'user': 'fred' }]
-	     * };
-	     *
-	     * var ages = {
-	     *   'data': [{ 'age': 36 }, { 'age': 40 }]
-	     * };
-	     *
-	     * _.merge(users, ages);
-	     * // => { 'data': [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }] }
-	     */
-	    var merge = createAssigner(function(object, source, srcIndex) {
-	      baseMerge(object, source, srcIndex);
-	    });
-
-	    /**
-	     * This method is like `_.merge` except that it accepts `customizer` which
-	     * is invoked to produce the merged values of the destination and source
-	     * properties. If `customizer` returns `undefined`, merging is handled by the
-	     * method instead. The `customizer` is invoked with seven arguments:
-	     * (objValue, srcValue, key, object, source, stack).
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Object
-	     * @param {Object} object The destination object.
-	     * @param {...Object} sources The source objects.
-	     * @param {Function} customizer The function to customize assigned values.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * function customizer(objValue, srcValue) {
-	     *   if (_.isArray(objValue)) {
-	     *     return objValue.concat(srcValue);
-	     *   }
-	     * }
-	     *
-	     * var object = {
-	     *   'fruits': ['apple'],
-	     *   'vegetables': ['beet']
-	     * };
-	     *
-	     * var other = {
-	     *   'fruits': ['banana'],
-	     *   'vegetables': ['carrot']
-	     * };
-	     *
-	     * _.mergeWith(object, other, customizer);
-	     * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot'] }
-	     */
-	    var mergeWith = createAssigner(function(object, source, srcIndex, customizer) {
-	      baseMerge(object, source, srcIndex, customizer);
-	    });
-
-	    /**
-	     * The opposite of `_.pick`; this method creates an object composed of the
-	     * own and inherited enumerable string keyed properties of `object` that are
-	     * not omitted.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Object
-	     * @param {Object} object The source object.
-	     * @param {...(string|string[])} [props] The property identifiers to omit.
-	     * @returns {Object} Returns the new object.
-	     * @example
-	     *
-	     * var object = { 'a': 1, 'b': '2', 'c': 3 };
-	     *
-	     * _.omit(object, ['a', 'c']);
-	     * // => { 'b': '2' }
-	     */
-	    var omit = rest(function(object, props) {
-	      if (object == null) {
-	        return {};
-	      }
-	      props = arrayMap(baseFlatten(props, 1), toKey);
-	      return basePick(object, baseDifference(getAllKeysIn(object), props));
-	    });
-
-	    /**
-	     * The opposite of `_.pickBy`; this method creates an object composed of
-	     * the own and inherited enumerable string keyed properties of `object` that
-	     * `predicate` doesn't return truthy for. The predicate is invoked with two
-	     * arguments: (value, key).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Object
-	     * @param {Object} object The source object.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per property.
-	     * @returns {Object} Returns the new object.
-	     * @example
-	     *
-	     * var object = { 'a': 1, 'b': '2', 'c': 3 };
-	     *
-	     * _.omitBy(object, _.isNumber);
-	     * // => { 'b': '2' }
-	     */
-	    function omitBy(object, predicate) {
-	      predicate = getIteratee(predicate);
-	      return basePickBy(object, function(value, key) {
-	        return !predicate(value, key);
-	      });
-	    }
-
-	    /**
-	     * Creates an object composed of the picked `object` properties.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Object
-	     * @param {Object} object The source object.
-	     * @param {...(string|string[])} [props] The property identifiers to pick.
-	     * @returns {Object} Returns the new object.
-	     * @example
-	     *
-	     * var object = { 'a': 1, 'b': '2', 'c': 3 };
-	     *
-	     * _.pick(object, ['a', 'c']);
-	     * // => { 'a': 1, 'c': 3 }
-	     */
-	    var pick = rest(function(object, props) {
-	      return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
-	    });
-
-	    /**
-	     * Creates an object composed of the `object` properties `predicate` returns
-	     * truthy for. The predicate is invoked with two arguments: (value, key).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Object
-	     * @param {Object} object The source object.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per property.
-	     * @returns {Object} Returns the new object.
-	     * @example
-	     *
-	     * var object = { 'a': 1, 'b': '2', 'c': 3 };
-	     *
-	     * _.pickBy(object, _.isNumber);
-	     * // => { 'a': 1, 'c': 3 }
-	     */
-	    function pickBy(object, predicate) {
-	      return object == null ? {} : basePickBy(object, getIteratee(predicate));
-	    }
-
-	    /**
-	     * This method is like `_.get` except that if the resolved value is a
-	     * function it's invoked with the `this` binding of its parent object and
-	     * its result is returned.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Object
-	     * @param {Object} object The object to query.
-	     * @param {Array|string} path The path of the property to resolve.
-	     * @param {*} [defaultValue] The value returned for `undefined` resolved values.
-	     * @returns {*} Returns the resolved value.
-	     * @example
-	     *
-	     * var object = { 'a': [{ 'b': { 'c1': 3, 'c2': _.constant(4) } }] };
-	     *
-	     * _.result(object, 'a[0].b.c1');
-	     * // => 3
-	     *
-	     * _.result(object, 'a[0].b.c2');
-	     * // => 4
-	     *
-	     * _.result(object, 'a[0].b.c3', 'default');
-	     * // => 'default'
-	     *
-	     * _.result(object, 'a[0].b.c3', _.constant('default'));
-	     * // => 'default'
-	     */
-	    function result(object, path, defaultValue) {
-	      path = isKey(path, object) ? [path] : castPath(path);
-
-	      var index = -1,
-	          length = path.length;
-
-	      // Ensure the loop is entered when path is empty.
-	      if (!length) {
-	        object = undefined;
-	        length = 1;
-	      }
-	      while (++index < length) {
-	        var value = object == null ? undefined : object[toKey(path[index])];
-	        if (value === undefined) {
-	          index = length;
-	          value = defaultValue;
-	        }
-	        object = isFunction(value) ? value.call(object) : value;
-	      }
-	      return object;
-	    }
-
-	    /**
-	     * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
-	     * it's created. Arrays are created for missing index properties while objects
-	     * are created for all other missing properties. Use `_.setWith` to customize
-	     * `path` creation.
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.7.0
-	     * @category Object
-	     * @param {Object} object The object to modify.
-	     * @param {Array|string} path The path of the property to set.
-	     * @param {*} value The value to set.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * var object = { 'a': [{ 'b': { 'c': 3 } }] };
-	     *
-	     * _.set(object, 'a[0].b.c', 4);
-	     * console.log(object.a[0].b.c);
-	     * // => 4
-	     *
-	     * _.set(object, ['x', '0', 'y', 'z'], 5);
-	     * console.log(object.x[0].y.z);
-	     * // => 5
-	     */
-	    function set(object, path, value) {
-	      return object == null ? object : baseSet(object, path, value);
-	    }
-
-	    /**
-	     * This method is like `_.set` except that it accepts `customizer` which is
-	     * invoked to produce the objects of `path`.  If `customizer` returns `undefined`
-	     * path creation is handled by the method instead. The `customizer` is invoked
-	     * with three arguments: (nsValue, key, nsObject).
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Object
-	     * @param {Object} object The object to modify.
-	     * @param {Array|string} path The path of the property to set.
-	     * @param {*} value The value to set.
-	     * @param {Function} [customizer] The function to customize assigned values.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * var object = {};
-	     *
-	     * _.setWith(object, '[0][1]', 'a', Object);
-	     * // => { '0': { '1': 'a' } }
-	     */
-	    function setWith(object, path, value, customizer) {
-	      customizer = typeof customizer == 'function' ? customizer : undefined;
-	      return object == null ? object : baseSet(object, path, value, customizer);
-	    }
-
-	    /**
-	     * Creates an array of own enumerable string keyed-value pairs for `object`
-	     * which can be consumed by `_.fromPairs`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @alias entries
-	     * @category Object
-	     * @param {Object} object The object to query.
-	     * @returns {Array} Returns the new array of key-value pairs.
-	     * @example
-	     *
-	     * function Foo() {
-	     *   this.a = 1;
-	     *   this.b = 2;
-	     * }
-	     *
-	     * Foo.prototype.c = 3;
-	     *
-	     * _.toPairs(new Foo);
-	     * // => [['a', 1], ['b', 2]] (iteration order is not guaranteed)
-	     */
-	    function toPairs(object) {
-	      return baseToPairs(object, keys(object));
-	    }
-
-	    /**
-	     * Creates an array of own and inherited enumerable string keyed-value pairs
-	     * for `object` which can be consumed by `_.fromPairs`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @alias entriesIn
-	     * @category Object
-	     * @param {Object} object The object to query.
-	     * @returns {Array} Returns the new array of key-value pairs.
-	     * @example
-	     *
-	     * function Foo() {
-	     *   this.a = 1;
-	     *   this.b = 2;
-	     * }
-	     *
-	     * Foo.prototype.c = 3;
-	     *
-	     * _.toPairsIn(new Foo);
-	     * // => [['a', 1], ['b', 2], ['c', 1]] (iteration order is not guaranteed)
-	     */
-	    function toPairsIn(object) {
-	      return baseToPairs(object, keysIn(object));
-	    }
-
-	    /**
-	     * An alternative to `_.reduce`; this method transforms `object` to a new
-	     * `accumulator` object which is the result of running each of its own
-	     * enumerable string keyed properties thru `iteratee`, with each invocation
-	     * potentially mutating the `accumulator` object. The iteratee is invoked
-	     * with four arguments: (accumulator, value, key, object). Iteratee functions
-	     * may exit iteration early by explicitly returning `false`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 1.3.0
-	     * @category Object
-	     * @param {Array|Object} object The object to iterate over.
-	     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
-	     * @param {*} [accumulator] The custom accumulator value.
-	     * @returns {*} Returns the accumulated value.
-	     * @example
-	     *
-	     * _.transform([2, 3, 4], function(result, n) {
-	     *   result.push(n *= n);
-	     *   return n % 2 == 0;
-	     * }, []);
-	     * // => [4, 9]
-	     *
-	     * _.transform({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
-	     *   (result[value] || (result[value] = [])).push(key);
-	     * }, {});
-	     * // => { '1': ['a', 'c'], '2': ['b'] }
-	     */
-	    function transform(object, iteratee, accumulator) {
-	      var isArr = isArray(object) || isTypedArray(object);
-	      iteratee = getIteratee(iteratee, 4);
-
-	      if (accumulator == null) {
-	        if (isArr || isObject(object)) {
-	          var Ctor = object.constructor;
-	          if (isArr) {
-	            accumulator = isArray(object) ? new Ctor : [];
-	          } else {
-	            accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
-	          }
-	        } else {
-	          accumulator = {};
-	        }
-	      }
-	      (isArr ? arrayEach : baseForOwn)(object, function(value, index, object) {
-	        return iteratee(accumulator, value, index, object);
-	      });
-	      return accumulator;
-	    }
-
-	    /**
-	     * Removes the property at `path` of `object`.
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Object
-	     * @param {Object} object The object to modify.
-	     * @param {Array|string} path The path of the property to unset.
-	     * @returns {boolean} Returns `true` if the property is deleted, else `false`.
-	     * @example
-	     *
-	     * var object = { 'a': [{ 'b': { 'c': 7 } }] };
-	     * _.unset(object, 'a[0].b.c');
-	     * // => true
-	     *
-	     * console.log(object);
-	     * // => { 'a': [{ 'b': {} }] };
-	     *
-	     * _.unset(object, ['a', '0', 'b', 'c']);
-	     * // => true
-	     *
-	     * console.log(object);
-	     * // => { 'a': [{ 'b': {} }] };
-	     */
-	    function unset(object, path) {
-	      return object == null ? true : baseUnset(object, path);
-	    }
-
-	    /**
-	     * This method is like `_.set` except that accepts `updater` to produce the
-	     * value to set. Use `_.updateWith` to customize `path` creation. The `updater`
-	     * is invoked with one argument: (value).
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.6.0
-	     * @category Object
-	     * @param {Object} object The object to modify.
-	     * @param {Array|string} path The path of the property to set.
-	     * @param {Function} updater The function to produce the updated value.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * var object = { 'a': [{ 'b': { 'c': 3 } }] };
-	     *
-	     * _.update(object, 'a[0].b.c', function(n) { return n * n; });
-	     * console.log(object.a[0].b.c);
-	     * // => 9
-	     *
-	     * _.update(object, 'x[0].y.z', function(n) { return n ? n + 1 : 0; });
-	     * console.log(object.x[0].y.z);
-	     * // => 0
-	     */
-	    function update(object, path, updater) {
-	      return object == null ? object : baseUpdate(object, path, castFunction(updater));
-	    }
-
-	    /**
-	     * This method is like `_.update` except that it accepts `customizer` which is
-	     * invoked to produce the objects of `path`.  If `customizer` returns `undefined`
-	     * path creation is handled by the method instead. The `customizer` is invoked
-	     * with three arguments: (nsValue, key, nsObject).
-	     *
-	     * **Note:** This method mutates `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.6.0
-	     * @category Object
-	     * @param {Object} object The object to modify.
-	     * @param {Array|string} path The path of the property to set.
-	     * @param {Function} updater The function to produce the updated value.
-	     * @param {Function} [customizer] The function to customize assigned values.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * var object = {};
-	     *
-	     * _.updateWith(object, '[0][1]', _.constant('a'), Object);
-	     * // => { '0': { '1': 'a' } }
-	     */
-	    function updateWith(object, path, updater, customizer) {
-	      customizer = typeof customizer == 'function' ? customizer : undefined;
-	      return object == null ? object : baseUpdate(object, path, castFunction(updater), customizer);
-	    }
-
-	    /**
-	     * Creates an array of the own enumerable string keyed property values of `object`.
-	     *
-	     * **Note:** Non-object values are coerced to objects.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Object
-	     * @param {Object} object The object to query.
-	     * @returns {Array} Returns the array of property values.
-	     * @example
-	     *
-	     * function Foo() {
-	     *   this.a = 1;
-	     *   this.b = 2;
-	     * }
-	     *
-	     * Foo.prototype.c = 3;
-	     *
-	     * _.values(new Foo);
-	     * // => [1, 2] (iteration order is not guaranteed)
-	     *
-	     * _.values('hi');
-	     * // => ['h', 'i']
-	     */
-	    function values(object) {
-	      return object ? baseValues(object, keys(object)) : [];
-	    }
-
-	    /**
-	     * Creates an array of the own and inherited enumerable string keyed property
-	     * values of `object`.
-	     *
-	     * **Note:** Non-object values are coerced to objects.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category Object
-	     * @param {Object} object The object to query.
-	     * @returns {Array} Returns the array of property values.
-	     * @example
-	     *
-	     * function Foo() {
-	     *   this.a = 1;
-	     *   this.b = 2;
-	     * }
-	     *
-	     * Foo.prototype.c = 3;
-	     *
-	     * _.valuesIn(new Foo);
-	     * // => [1, 2, 3] (iteration order is not guaranteed)
-	     */
-	    function valuesIn(object) {
-	      return object == null ? [] : baseValues(object, keysIn(object));
-	    }
-
-	    /*------------------------------------------------------------------------*/
-
-	    /**
-	     * Clamps `number` within the inclusive `lower` and `upper` bounds.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Number
-	     * @param {number} number The number to clamp.
-	     * @param {number} [lower] The lower bound.
-	     * @param {number} upper The upper bound.
-	     * @returns {number} Returns the clamped number.
-	     * @example
-	     *
-	     * _.clamp(-10, -5, 5);
-	     * // => -5
-	     *
-	     * _.clamp(10, -5, 5);
-	     * // => 5
-	     */
-	    function clamp(number, lower, upper) {
-	      if (upper === undefined) {
-	        upper = lower;
-	        lower = undefined;
-	      }
-	      if (upper !== undefined) {
-	        upper = toNumber(upper);
-	        upper = upper === upper ? upper : 0;
-	      }
-	      if (lower !== undefined) {
-	        lower = toNumber(lower);
-	        lower = lower === lower ? lower : 0;
-	      }
-	      return baseClamp(toNumber(number), lower, upper);
-	    }
-
-	    /**
-	     * Checks if `n` is between `start` and up to, but not including, `end`. If
-	     * `end` is not specified, it's set to `start` with `start` then set to `0`.
-	     * If `start` is greater than `end` the params are swapped to support
-	     * negative ranges.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.3.0
-	     * @category Number
-	     * @param {number} number The number to check.
-	     * @param {number} [start=0] The start of the range.
-	     * @param {number} end The end of the range.
-	     * @returns {boolean} Returns `true` if `number` is in the range, else `false`.
-	     * @see _.range, _.rangeRight
-	     * @example
-	     *
-	     * _.inRange(3, 2, 4);
-	     * // => true
-	     *
-	     * _.inRange(4, 8);
-	     * // => true
-	     *
-	     * _.inRange(4, 2);
-	     * // => false
-	     *
-	     * _.inRange(2, 2);
-	     * // => false
-	     *
-	     * _.inRange(1.2, 2);
-	     * // => true
-	     *
-	     * _.inRange(5.2, 4);
-	     * // => false
-	     *
-	     * _.inRange(-3, -2, -6);
-	     * // => true
-	     */
-	    function inRange(number, start, end) {
-	      start = toNumber(start) || 0;
-	      if (end === undefined) {
-	        end = start;
-	        start = 0;
-	      } else {
-	        end = toNumber(end) || 0;
-	      }
-	      number = toNumber(number);
-	      return baseInRange(number, start, end);
-	    }
-
-	    /**
-	     * Produces a random number between the inclusive `lower` and `upper` bounds.
-	     * If only one argument is provided a number between `0` and the given number
-	     * is returned. If `floating` is `true`, or either `lower` or `upper` are
-	     * floats, a floating-point number is returned instead of an integer.
-	     *
-	     * **Note:** JavaScript follows the IEEE-754 standard for resolving
-	     * floating-point values which can produce unexpected results.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 0.7.0
-	     * @category Number
-	     * @param {number} [lower=0] The lower bound.
-	     * @param {number} [upper=1] The upper bound.
-	     * @param {boolean} [floating] Specify returning a floating-point number.
-	     * @returns {number} Returns the random number.
-	     * @example
-	     *
-	     * _.random(0, 5);
-	     * // => an integer between 0 and 5
-	     *
-	     * _.random(5);
-	     * // => also an integer between 0 and 5
-	     *
-	     * _.random(5, true);
-	     * // => a floating-point number between 0 and 5
-	     *
-	     * _.random(1.2, 5.2);
-	     * // => a floating-point number between 1.2 and 5.2
-	     */
-	    function random(lower, upper, floating) {
-	      if (floating && typeof floating != 'boolean' && isIterateeCall(lower, upper, floating)) {
-	        upper = floating = undefined;
-	      }
-	      if (floating === undefined) {
-	        if (typeof upper == 'boolean') {
-	          floating = upper;
-	          upper = undefined;
-	        }
-	        else if (typeof lower == 'boolean') {
-	          floating = lower;
-	          lower = undefined;
-	        }
-	      }
-	      if (lower === undefined && upper === undefined) {
-	        lower = 0;
-	        upper = 1;
-	      }
-	      else {
-	        lower = toNumber(lower) || 0;
-	        if (upper === undefined) {
-	          upper = lower;
-	          lower = 0;
-	        } else {
-	          upper = toNumber(upper) || 0;
-	        }
-	      }
-	      if (lower > upper) {
-	        var temp = lower;
-	        lower = upper;
-	        upper = temp;
-	      }
-	      if (floating || lower % 1 || upper % 1) {
-	        var rand = nativeRandom();
-	        return nativeMin(lower + (rand * (upper - lower + freeParseFloat('1e-' + ((rand + '').length - 1)))), upper);
-	      }
-	      return baseRandom(lower, upper);
-	    }
-
-	    /*------------------------------------------------------------------------*/
-
-	    /**
-	     * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the camel cased string.
-	     * @example
-	     *
-	     * _.camelCase('Foo Bar');
-	     * // => 'fooBar'
-	     *
-	     * _.camelCase('--foo-bar--');
-	     * // => 'fooBar'
-	     *
-	     * _.camelCase('__FOO_BAR__');
-	     * // => 'fooBar'
-	     */
-	    var camelCase = createCompounder(function(result, word, index) {
-	      word = word.toLowerCase();
-	      return result + (index ? capitalize(word) : word);
-	    });
-
-	    /**
-	     * Converts the first character of `string` to upper case and the remaining
-	     * to lower case.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to capitalize.
-	     * @returns {string} Returns the capitalized string.
-	     * @example
-	     *
-	     * _.capitalize('FRED');
-	     * // => 'Fred'
-	     */
-	    function capitalize(string) {
-	      return upperFirst(toString(string).toLowerCase());
-	    }
-
-	    /**
-	     * Deburrs `string` by converting
-	     * [latin-1 supplementary letters](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
-	     * to basic latin letters and removing
-	     * [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to deburr.
-	     * @returns {string} Returns the deburred string.
-	     * @example
-	     *
-	     * _.deburr('déjà vu');
-	     * // => 'deja vu'
-	     */
-	    function deburr(string) {
-	      string = toString(string);
-	      return string && string.replace(reLatin1, deburrLetter).replace(reComboMark, '');
-	    }
-
-	    /**
-	     * Checks if `string` ends with the given target string.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to search.
-	     * @param {string} [target] The string to search for.
-	     * @param {number} [position=string.length] The position to search from.
-	     * @returns {boolean} Returns `true` if `string` ends with `target`,
-	     *  else `false`.
-	     * @example
-	     *
-	     * _.endsWith('abc', 'c');
-	     * // => true
-	     *
-	     * _.endsWith('abc', 'b');
-	     * // => false
-	     *
-	     * _.endsWith('abc', 'b', 2);
-	     * // => true
-	     */
-	    function endsWith(string, target, position) {
-	      string = toString(string);
-	      target = baseToString(target);
-
-	      var length = string.length;
-	      position = position === undefined
-	          ? length
-	          : baseClamp(toInteger(position), 0, length);
-
-	      position -= target.length;
-	      return position >= 0 && string.indexOf(target, position) == position;
-	    }
-
-	    /**
-	     * Converts the characters "&", "<", ">", '"', "'", and "\`" in `string` to
-	     * their corresponding HTML entities.
-	     *
-	     * **Note:** No other characters are escaped. To escape additional
-	     * characters use a third-party library like [_he_](https://mths.be/he).
-	     *
-	     * Though the ">" character is escaped for symmetry, characters like
-	     * ">" and "/" don't need escaping in HTML and have no special meaning
-	     * unless they're part of a tag or unquoted attribute value. See
-	     * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
-	     * (under "semi-related fun fact") for more details.
-	     *
-	     * Backticks are escaped because in IE < 9, they can break out of
-	     * attribute values or HTML comments. See [#59](https://html5sec.org/#59),
-	     * [#102](https://html5sec.org/#102), [#108](https://html5sec.org/#108), and
-	     * [#133](https://html5sec.org/#133) of the
-	     * [HTML5 Security Cheatsheet](https://html5sec.org/) for more details.
-	     *
-	     * When working with HTML you should always
-	     * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
-	     * XSS vectors.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category String
-	     * @param {string} [string=''] The string to escape.
-	     * @returns {string} Returns the escaped string.
-	     * @example
-	     *
-	     * _.escape('fred, barney, & pebbles');
-	     * // => 'fred, barney, &amp; pebbles'
-	     */
-	    function escape(string) {
-	      string = toString(string);
-	      return (string && reHasUnescapedHtml.test(string))
-	          ? string.replace(reUnescapedHtml, escapeHtmlChar)
-	          : string;
-	    }
-
-	    /**
-	     * Escapes the `RegExp` special characters "^", "$", "\", ".", "*", "+",
-	     * "?", "(", ")", "[", "]", "{", "}", and "|" in `string`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to escape.
-	     * @returns {string} Returns the escaped string.
-	     * @example
-	     *
-	     * _.escapeRegExp('[lodash](https://lodash.com/)');
-	     * // => '\[lodash\]\(https://lodash\.com/\)'
-	     */
-	    function escapeRegExp(string) {
-	      string = toString(string);
-	      return (string && reHasRegExpChar.test(string))
-	          ? string.replace(reRegExpChar, '\\$&')
-	          : string;
-	    }
-
-	    /**
-	     * Converts `string` to
-	     * [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the kebab cased string.
-	     * @example
-	     *
-	     * _.kebabCase('Foo Bar');
-	     * // => 'foo-bar'
-	     *
-	     * _.kebabCase('fooBar');
-	     * // => 'foo-bar'
-	     *
-	     * _.kebabCase('__FOO_BAR__');
-	     * // => 'foo-bar'
-	     */
-	    var kebabCase = createCompounder(function(result, word, index) {
-	      return result + (index ? '-' : '') + word.toLowerCase();
-	    });
-
-	    /**
-	     * Converts `string`, as space separated words, to lower case.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the lower cased string.
-	     * @example
-	     *
-	     * _.lowerCase('--Foo-Bar--');
-	     * // => 'foo bar'
-	     *
-	     * _.lowerCase('fooBar');
-	     * // => 'foo bar'
-	     *
-	     * _.lowerCase('__FOO_BAR__');
-	     * // => 'foo bar'
-	     */
-	    var lowerCase = createCompounder(function(result, word, index) {
-	      return result + (index ? ' ' : '') + word.toLowerCase();
-	    });
-
-	    /**
-	     * Converts the first character of `string` to lower case.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the converted string.
-	     * @example
-	     *
-	     * _.lowerFirst('Fred');
-	     * // => 'fred'
-	     *
-	     * _.lowerFirst('FRED');
-	     * // => 'fRED'
-	     */
-	    var lowerFirst = createCaseFirst('toLowerCase');
-
-	    /**
-	     * Pads `string` on the left and right sides if it's shorter than `length`.
-	     * Padding characters are truncated if they can't be evenly divided by `length`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to pad.
-	     * @param {number} [length=0] The padding length.
-	     * @param {string} [chars=' '] The string used as padding.
-	     * @returns {string} Returns the padded string.
-	     * @example
-	     *
-	     * _.pad('abc', 8);
-	     * // => '  abc   '
-	     *
-	     * _.pad('abc', 8, '_-');
-	     * // => '_-abc_-_'
-	     *
-	     * _.pad('abc', 3);
-	     * // => 'abc'
-	     */
-	    function pad(string, length, chars) {
-	      string = toString(string);
-	      length = toInteger(length);
-
-	      var strLength = length ? stringSize(string) : 0;
-	      if (!length || strLength >= length) {
-	        return string;
-	      }
-	      var mid = (length - strLength) / 2;
-	      return (
-	          createPadding(nativeFloor(mid), chars) +
-	          string +
-	          createPadding(nativeCeil(mid), chars)
-	      );
-	    }
-
-	    /**
-	     * Pads `string` on the right side if it's shorter than `length`. Padding
-	     * characters are truncated if they exceed `length`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to pad.
-	     * @param {number} [length=0] The padding length.
-	     * @param {string} [chars=' '] The string used as padding.
-	     * @returns {string} Returns the padded string.
-	     * @example
-	     *
-	     * _.padEnd('abc', 6);
-	     * // => 'abc   '
-	     *
-	     * _.padEnd('abc', 6, '_-');
-	     * // => 'abc_-_'
-	     *
-	     * _.padEnd('abc', 3);
-	     * // => 'abc'
-	     */
-	    function padEnd(string, length, chars) {
-	      string = toString(string);
-	      length = toInteger(length);
-
-	      var strLength = length ? stringSize(string) : 0;
-	      return (length && strLength < length)
-	          ? (string + createPadding(length - strLength, chars))
-	          : string;
-	    }
-
-	    /**
-	     * Pads `string` on the left side if it's shorter than `length`. Padding
-	     * characters are truncated if they exceed `length`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to pad.
-	     * @param {number} [length=0] The padding length.
-	     * @param {string} [chars=' '] The string used as padding.
-	     * @returns {string} Returns the padded string.
-	     * @example
-	     *
-	     * _.padStart('abc', 6);
-	     * // => '   abc'
-	     *
-	     * _.padStart('abc', 6, '_-');
-	     * // => '_-_abc'
-	     *
-	     * _.padStart('abc', 3);
-	     * // => 'abc'
-	     */
-	    function padStart(string, length, chars) {
-	      string = toString(string);
-	      length = toInteger(length);
-
-	      var strLength = length ? stringSize(string) : 0;
-	      return (length && strLength < length)
-	          ? (createPadding(length - strLength, chars) + string)
-	          : string;
-	    }
-
-	    /**
-	     * Converts `string` to an integer of the specified radix. If `radix` is
-	     * `undefined` or `0`, a `radix` of `10` is used unless `value` is a
-	     * hexadecimal, in which case a `radix` of `16` is used.
-	     *
-	     * **Note:** This method aligns with the
-	     * [ES5 implementation](https://es5.github.io/#x15.1.2.2) of `parseInt`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 1.1.0
-	     * @category String
-	     * @param {string} string The string to convert.
-	     * @param {number} [radix=10] The radix to interpret `value` by.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {number} Returns the converted integer.
-	     * @example
-	     *
-	     * _.parseInt('08');
-	     * // => 8
-	     *
-	     * _.map(['6', '08', '10'], _.parseInt);
-	     * // => [6, 8, 10]
-	     */
-	    function parseInt(string, radix, guard) {
-	      // Chrome fails to trim leading <BOM> whitespace characters.
-	      // See https://bugs.chromium.org/p/v8/issues/detail?id=3109 for more details.
-	      if (guard || radix == null) {
-	        radix = 0;
-	      } else if (radix) {
-	        radix = +radix;
-	      }
-	      string = toString(string).replace(reTrim, '');
-	      return nativeParseInt(string, radix || (reHasHexPrefix.test(string) ? 16 : 10));
-	    }
-
-	    /**
-	     * Repeats the given string `n` times.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to repeat.
-	     * @param {number} [n=1] The number of times to repeat the string.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {string} Returns the repeated string.
-	     * @example
-	     *
-	     * _.repeat('*', 3);
-	     * // => '***'
-	     *
-	     * _.repeat('abc', 2);
-	     * // => 'abcabc'
-	     *
-	     * _.repeat('abc', 0);
-	     * // => ''
-	     */
-	    function repeat(string, n, guard) {
-	      if ((guard ? isIterateeCall(string, n, guard) : n === undefined)) {
-	        n = 1;
-	      } else {
-	        n = toInteger(n);
-	      }
-	      return baseRepeat(toString(string), n);
-	    }
-
-	    /**
-	     * Replaces matches for `pattern` in `string` with `replacement`.
-	     *
-	     * **Note:** This method is based on
-	     * [`String#replace`](https://mdn.io/String/replace).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to modify.
-	     * @param {RegExp|string} pattern The pattern to replace.
-	     * @param {Function|string} replacement The match replacement.
-	     * @returns {string} Returns the modified string.
-	     * @example
-	     *
-	     * _.replace('Hi Fred', 'Fred', 'Barney');
-	     * // => 'Hi Barney'
-	     */
-	    function replace() {
-	      var args = arguments,
-	          string = toString(args[0]);
-
-	      return args.length < 3 ? string : nativeReplace.call(string, args[1], args[2]);
-	    }
-
-	    /**
-	     * Converts `string` to
-	     * [snake case](https://en.wikipedia.org/wiki/Snake_case).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the snake cased string.
-	     * @example
-	     *
-	     * _.snakeCase('Foo Bar');
-	     * // => 'foo_bar'
-	     *
-	     * _.snakeCase('fooBar');
-	     * // => 'foo_bar'
-	     *
-	     * _.snakeCase('--FOO-BAR--');
-	     * // => 'foo_bar'
-	     */
-	    var snakeCase = createCompounder(function(result, word, index) {
-	      return result + (index ? '_' : '') + word.toLowerCase();
-	    });
-
-	    /**
-	     * Splits `string` by `separator`.
-	     *
-	     * **Note:** This method is based on
-	     * [`String#split`](https://mdn.io/String/split).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to split.
-	     * @param {RegExp|string} separator The separator pattern to split by.
-	     * @param {number} [limit] The length to truncate results to.
-	     * @returns {Array} Returns the new array of string segments.
-	     * @example
-	     *
-	     * _.split('a-b-c', '-', 2);
-	     * // => ['a', 'b']
-	     */
-	    function split(string, separator, limit) {
-	      if (limit && typeof limit != 'number' && isIterateeCall(string, separator, limit)) {
-	        separator = limit = undefined;
-	      }
-	      limit = limit === undefined ? MAX_ARRAY_LENGTH : limit >>> 0;
-	      if (!limit) {
-	        return [];
-	      }
-	      string = toString(string);
-	      if (string && (
-	              typeof separator == 'string' ||
-	              (separator != null && !isRegExp(separator))
-	          )) {
-	        separator = baseToString(separator);
-	        if (separator == '' && reHasComplexSymbol.test(string)) {
-	          return castSlice(stringToArray(string), 0, limit);
-	        }
-	      }
-	      return nativeSplit.call(string, separator, limit);
-	    }
-
-	    /**
-	     * Converts `string` to
-	     * [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.1.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the start cased string.
-	     * @example
-	     *
-	     * _.startCase('--foo-bar--');
-	     * // => 'Foo Bar'
-	     *
-	     * _.startCase('fooBar');
-	     * // => 'Foo Bar'
-	     *
-	     * _.startCase('__FOO_BAR__');
-	     * // => 'FOO BAR'
-	     */
-	    var startCase = createCompounder(function(result, word, index) {
-	      return result + (index ? ' ' : '') + upperFirst(word);
-	    });
-
-	    /**
-	     * Checks if `string` starts with the given target string.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to search.
-	     * @param {string} [target] The string to search for.
-	     * @param {number} [position=0] The position to search from.
-	     * @returns {boolean} Returns `true` if `string` starts with `target`,
-	     *  else `false`.
-	     * @example
-	     *
-	     * _.startsWith('abc', 'a');
-	     * // => true
-	     *
-	     * _.startsWith('abc', 'b');
-	     * // => false
-	     *
-	     * _.startsWith('abc', 'b', 1);
-	     * // => true
-	     */
-	    function startsWith(string, target, position) {
-	      string = toString(string);
-	      position = baseClamp(toInteger(position), 0, string.length);
-	      return string.lastIndexOf(baseToString(target), position) == position;
-	    }
-
-	    /**
-	     * Creates a compiled template function that can interpolate data properties
-	     * in "interpolate" delimiters, HTML-escape interpolated data properties in
-	     * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Data
-	     * properties may be accessed as free variables in the template. If a setting
-	     * object is given, it takes precedence over `_.templateSettings` values.
-	     *
-	     * **Note:** In the development build `_.template` utilizes
-	     * [sourceURLs](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/#toc-sourceurl)
-	     * for easier debugging.
-	     *
-	     * For more information on precompiling templates see
-	     * [lodash's custom builds documentation](https://lodash.com/custom-builds).
-	     *
-	     * For more information on Chrome extension sandboxes see
-	     * [Chrome's extensions documentation](https://developer.chrome.com/extensions/sandboxingEval).
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category String
-	     * @param {string} [string=''] The template string.
-	     * @param {Object} [options={}] The options object.
-	     * @param {RegExp} [options.escape=_.templateSettings.escape]
-	     *  The HTML "escape" delimiter.
-	     * @param {RegExp} [options.evaluate=_.templateSettings.evaluate]
-	     *  The "evaluate" delimiter.
-	     * @param {Object} [options.imports=_.templateSettings.imports]
-	     *  An object to import into the template as free variables.
-	     * @param {RegExp} [options.interpolate=_.templateSettings.interpolate]
-	     *  The "interpolate" delimiter.
-	     * @param {string} [options.sourceURL='lodash.templateSources[n]']
-	     *  The sourceURL of the compiled template.
-	     * @param {string} [options.variable='obj']
-	     *  The data object variable name.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {Function} Returns the compiled template function.
-	     * @example
-	     *
-	     * // Use the "interpolate" delimiter to create a compiled template.
-	     * var compiled = _.template('hello <%= user %>!');
-	     * compiled({ 'user': 'fred' });
-	     * // => 'hello fred!'
-	     *
-	     * // Use the HTML "escape" delimiter to escape data property values.
-	     * var compiled = _.template('<b><%- value %></b>');
-	     * compiled({ 'value': '<script>' });
-	     * // => '<b>&lt;script&gt;</b>'
-	     *
-	     * // Use the "evaluate" delimiter to execute JavaScript and generate HTML.
-	     * var compiled = _.template('<% _.forEach(users, function(user) { %><li><%- user %></li><% }); %>');
-	     * compiled({ 'users': ['fred', 'barney'] });
-	     * // => '<li>fred</li><li>barney</li>'
-	     *
-	     * // Use the internal `print` function in "evaluate" delimiters.
-	     * var compiled = _.template('<% print("hello " + user); %>!');
-	     * compiled({ 'user': 'barney' });
-	     * // => 'hello barney!'
-	     *
-	     * // Use the ES delimiter as an alternative to the default "interpolate" delimiter.
-	     * var compiled = _.template('hello ${ user }!');
-	     * compiled({ 'user': 'pebbles' });
-	     * // => 'hello pebbles!'
-	     *
-	     * // Use custom template delimiters.
-	     * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-	     * var compiled = _.template('hello {{ user }}!');
-	     * compiled({ 'user': 'mustache' });
-	     * // => 'hello mustache!'
-	     *
-	     * // Use backslashes to treat delimiters as plain text.
-	     * var compiled = _.template('<%= "\\<%- value %\\>" %>');
-	     * compiled({ 'value': 'ignored' });
-	     * // => '<%- value %>'
-	     *
-	     * // Use the `imports` option to import `jQuery` as `jq`.
-	     * var text = '<% jq.each(users, function(user) { %><li><%- user %></li><% }); %>';
-	     * var compiled = _.template(text, { 'imports': { 'jq': jQuery } });
-	     * compiled({ 'users': ['fred', 'barney'] });
-	     * // => '<li>fred</li><li>barney</li>'
-	     *
-	     * // Use the `sourceURL` option to specify a custom sourceURL for the template.
-	     * var compiled = _.template('hello <%= user %>!', { 'sourceURL': '/basic/greeting.jst' });
-	     * compiled(data);
-	     * // => Find the source of "greeting.jst" under the Sources tab or Resources panel of the web inspector.
-	     *
-	     * // Use the `variable` option to ensure a with-statement isn't used in the compiled template.
-	     * var compiled = _.template('hi <%= data.user %>!', { 'variable': 'data' });
-	     * compiled.source;
-	     * // => function(data) {
-	     * //   var __t, __p = '';
-	     * //   __p += 'hi ' + ((__t = ( data.user )) == null ? '' : __t) + '!';
-	     * //   return __p;
-	     * // }
-	     *
-	     * // Use the `source` property to inline compiled templates for meaningful
-	     * // line numbers in error messages and stack traces.
-	     * fs.writeFileSync(path.join(cwd, 'jst.js'), '\
-	     *   var JST = {\
-	     *     "main": ' + _.template(mainText).source + '\
-	     *   };\
-	     * ');
-	     */
-	    function template(string, options, guard) {
-	      // Based on John Resig's `tmpl` implementation
-	      // (http://ejohn.org/blog/javascript-micro-templating/)
-	      // and Laura Doktorova's doT.js (https://github.com/olado/doT).
-	      var settings = lodash.templateSettings;
-
-	      if (guard && isIterateeCall(string, options, guard)) {
-	        options = undefined;
-	      }
-	      string = toString(string);
-	      options = assignInWith({}, options, settings, assignInDefaults);
-
-	      var imports = assignInWith({}, options.imports, settings.imports, assignInDefaults),
-	          importsKeys = keys(imports),
-	          importsValues = baseValues(imports, importsKeys);
-
-	      var isEscaping,
-	          isEvaluating,
-	          index = 0,
-	          interpolate = options.interpolate || reNoMatch,
-	          source = "__p += '";
-
-	      // Compile the regexp to match each delimiter.
-	      var reDelimiters = RegExp(
-	          (options.escape || reNoMatch).source + '|' +
-	          interpolate.source + '|' +
-	          (interpolate === reInterpolate ? reEsTemplate : reNoMatch).source + '|' +
-	          (options.evaluate || reNoMatch).source + '|$'
-	          , 'g');
-
-	      // Use a sourceURL for easier debugging.
-	      var sourceURL = '//# sourceURL=' +
-	          ('sourceURL' in options
-	                  ? options.sourceURL
-	                  : ('lodash.templateSources[' + (++templateCounter) + ']')
-	          ) + '\n';
-
-	      string.replace(reDelimiters, function(match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) {
-	        interpolateValue || (interpolateValue = esTemplateValue);
-
-	        // Escape characters that can't be included in string literals.
-	        source += string.slice(index, offset).replace(reUnescapedString, escapeStringChar);
-
-	        // Replace delimiters with snippets.
-	        if (escapeValue) {
-	          isEscaping = true;
-	          source += "' +\n__e(" + escapeValue + ") +\n'";
-	        }
-	        if (evaluateValue) {
-	          isEvaluating = true;
-	          source += "';\n" + evaluateValue + ";\n__p += '";
-	        }
-	        if (interpolateValue) {
-	          source += "' +\n((__t = (" + interpolateValue + ")) == null ? '' : __t) +\n'";
-	        }
-	        index = offset + match.length;
-
-	        // The JS engine embedded in Adobe products needs `match` returned in
-	        // order to produce the correct `offset` value.
-	        return match;
-	      });
-
-	      source += "';\n";
-
-	      // If `variable` is not specified wrap a with-statement around the generated
-	      // code to add the data object to the top of the scope chain.
-	      var variable = options.variable;
-	      if (!variable) {
-	        source = 'with (obj) {\n' + source + '\n}\n';
-	      }
-	      // Cleanup code by stripping empty strings.
-	      source = (isEvaluating ? source.replace(reEmptyStringLeading, '') : source)
-	          .replace(reEmptyStringMiddle, '$1')
-	          .replace(reEmptyStringTrailing, '$1;');
-
-	      // Frame code as the function body.
-	      source = 'function(' + (variable || 'obj') + ') {\n' +
-	          (variable
-	                  ? ''
-	                  : 'obj || (obj = {});\n'
-	          ) +
-	          "var __t, __p = ''" +
-	          (isEscaping
-	                  ? ', __e = _.escape'
-	                  : ''
-	          ) +
-	          (isEvaluating
-	                  ? ', __j = Array.prototype.join;\n' +
-	              "function print() { __p += __j.call(arguments, '') }\n"
-	                  : ';\n'
-	          ) +
-	          source +
-	          'return __p\n}';
-
-	      var result = attempt(function() {
-	        return Function(importsKeys, sourceURL + 'return ' + source)
-	            .apply(undefined, importsValues);
-	      });
-
-	      // Provide the compiled function's source by its `toString` method or
-	      // the `source` property as a convenience for inlining compiled templates.
-	      result.source = source;
-	      if (isError(result)) {
-	        throw result;
-	      }
-	      return result;
-	    }
-
-	    /**
-	     * Converts `string`, as a whole, to lower case just like
-	     * [String#toLowerCase](https://mdn.io/toLowerCase).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the lower cased string.
-	     * @example
-	     *
-	     * _.toLower('--Foo-Bar--');
-	     * // => '--foo-bar--'
-	     *
-	     * _.toLower('fooBar');
-	     * // => 'foobar'
-	     *
-	     * _.toLower('__FOO_BAR__');
-	     * // => '__foo_bar__'
-	     */
-	    function toLower(value) {
-	      return toString(value).toLowerCase();
-	    }
-
-	    /**
-	     * Converts `string`, as a whole, to upper case just like
-	     * [String#toUpperCase](https://mdn.io/toUpperCase).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the upper cased string.
-	     * @example
-	     *
-	     * _.toUpper('--foo-bar--');
-	     * // => '--FOO-BAR--'
-	     *
-	     * _.toUpper('fooBar');
-	     * // => 'FOOBAR'
-	     *
-	     * _.toUpper('__foo_bar__');
-	     * // => '__FOO_BAR__'
-	     */
-	    function toUpper(value) {
-	      return toString(value).toUpperCase();
-	    }
-
-	    /**
-	     * Removes leading and trailing whitespace or specified characters from `string`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to trim.
-	     * @param {string} [chars=whitespace] The characters to trim.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {string} Returns the trimmed string.
-	     * @example
-	     *
-	     * _.trim('  abc  ');
-	     * // => 'abc'
-	     *
-	     * _.trim('-_-abc-_-', '_-');
-	     * // => 'abc'
-	     *
-	     * _.map(['  foo  ', '  bar  '], _.trim);
-	     * // => ['foo', 'bar']
-	     */
-	    function trim(string, chars, guard) {
-	      string = toString(string);
-	      if (string && (guard || chars === undefined)) {
-	        return string.replace(reTrim, '');
-	      }
-	      if (!string || !(chars = baseToString(chars))) {
-	        return string;
-	      }
-	      var strSymbols = stringToArray(string),
-	          chrSymbols = stringToArray(chars),
-	          start = charsStartIndex(strSymbols, chrSymbols),
-	          end = charsEndIndex(strSymbols, chrSymbols) + 1;
-
-	      return castSlice(strSymbols, start, end).join('');
-	    }
-
-	    /**
-	     * Removes trailing whitespace or specified characters from `string`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to trim.
-	     * @param {string} [chars=whitespace] The characters to trim.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {string} Returns the trimmed string.
-	     * @example
-	     *
-	     * _.trimEnd('  abc  ');
-	     * // => '  abc'
-	     *
-	     * _.trimEnd('-_-abc-_-', '_-');
-	     * // => '-_-abc'
-	     */
-	    function trimEnd(string, chars, guard) {
-	      string = toString(string);
-	      if (string && (guard || chars === undefined)) {
-	        return string.replace(reTrimEnd, '');
-	      }
-	      if (!string || !(chars = baseToString(chars))) {
-	        return string;
-	      }
-	      var strSymbols = stringToArray(string),
-	          end = charsEndIndex(strSymbols, stringToArray(chars)) + 1;
-
-	      return castSlice(strSymbols, 0, end).join('');
-	    }
-
-	    /**
-	     * Removes leading whitespace or specified characters from `string`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to trim.
-	     * @param {string} [chars=whitespace] The characters to trim.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {string} Returns the trimmed string.
-	     * @example
-	     *
-	     * _.trimStart('  abc  ');
-	     * // => 'abc  '
-	     *
-	     * _.trimStart('-_-abc-_-', '_-');
-	     * // => 'abc-_-'
-	     */
-	    function trimStart(string, chars, guard) {
-	      string = toString(string);
-	      if (string && (guard || chars === undefined)) {
-	        return string.replace(reTrimStart, '');
-	      }
-	      if (!string || !(chars = baseToString(chars))) {
-	        return string;
-	      }
-	      var strSymbols = stringToArray(string),
-	          start = charsStartIndex(strSymbols, stringToArray(chars));
-
-	      return castSlice(strSymbols, start).join('');
-	    }
-
-	    /**
-	     * Truncates `string` if it's longer than the given maximum string length.
-	     * The last characters of the truncated string are replaced with the omission
-	     * string which defaults to "...".
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to truncate.
-	     * @param {Object} [options={}] The options object.
-	     * @param {number} [options.length=30] The maximum string length.
-	     * @param {string} [options.omission='...'] The string to indicate text is omitted.
-	     * @param {RegExp|string} [options.separator] The separator pattern to truncate to.
-	     * @returns {string} Returns the truncated string.
-	     * @example
-	     *
-	     * _.truncate('hi-diddly-ho there, neighborino');
-	     * // => 'hi-diddly-ho there, neighbo...'
-	     *
-	     * _.truncate('hi-diddly-ho there, neighborino', {
-	     *   'length': 24,
-	     *   'separator': ' '
-	     * });
-	     * // => 'hi-diddly-ho there,...'
-	     *
-	     * _.truncate('hi-diddly-ho there, neighborino', {
-	     *   'length': 24,
-	     *   'separator': /,? +/
-	     * });
-	     * // => 'hi-diddly-ho there...'
-	     *
-	     * _.truncate('hi-diddly-ho there, neighborino', {
-	     *   'omission': ' [...]'
-	     * });
-	     * // => 'hi-diddly-ho there, neig [...]'
-	     */
-	    function truncate(string, options) {
-	      var length = DEFAULT_TRUNC_LENGTH,
-	          omission = DEFAULT_TRUNC_OMISSION;
-
-	      if (isObject(options)) {
-	        var separator = 'separator' in options ? options.separator : separator;
-	        length = 'length' in options ? toInteger(options.length) : length;
-	        omission = 'omission' in options ? baseToString(options.omission) : omission;
-	      }
-	      string = toString(string);
-
-	      var strLength = string.length;
-	      if (reHasComplexSymbol.test(string)) {
-	        var strSymbols = stringToArray(string);
-	        strLength = strSymbols.length;
-	      }
-	      if (length >= strLength) {
-	        return string;
-	      }
-	      var end = length - stringSize(omission);
-	      if (end < 1) {
-	        return omission;
-	      }
-	      var result = strSymbols
-	          ? castSlice(strSymbols, 0, end).join('')
-	          : string.slice(0, end);
-
-	      if (separator === undefined) {
-	        return result + omission;
-	      }
-	      if (strSymbols) {
-	        end += (result.length - end);
-	      }
-	      if (isRegExp(separator)) {
-	        if (string.slice(end).search(separator)) {
-	          var match,
-	              substring = result;
-
-	          if (!separator.global) {
-	            separator = RegExp(separator.source, toString(reFlags.exec(separator)) + 'g');
-	          }
-	          separator.lastIndex = 0;
-	          while ((match = separator.exec(substring))) {
-	            var newEnd = match.index;
-	          }
-	          result = result.slice(0, newEnd === undefined ? end : newEnd);
-	        }
-	      } else if (string.indexOf(baseToString(separator), end) != end) {
-	        var index = result.lastIndexOf(separator);
-	        if (index > -1) {
-	          result = result.slice(0, index);
-	        }
-	      }
-	      return result + omission;
-	    }
-
-	    /**
-	     * The inverse of `_.escape`; this method converts the HTML entities
-	     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;`, and `&#96;` in `string` to
-	     * their corresponding characters.
-	     *
-	     * **Note:** No other HTML entities are unescaped. To unescape additional
-	     * HTML entities use a third-party library like [_he_](https://mths.be/he).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 0.6.0
-	     * @category String
-	     * @param {string} [string=''] The string to unescape.
-	     * @returns {string} Returns the unescaped string.
-	     * @example
-	     *
-	     * _.unescape('fred, barney, &amp; pebbles');
-	     * // => 'fred, barney, & pebbles'
-	     */
-	    function unescape(string) {
-	      string = toString(string);
-	      return (string && reHasEscapedHtml.test(string))
-	          ? string.replace(reEscapedHtml, unescapeHtmlChar)
-	          : string;
-	    }
-
-	    /**
-	     * Converts `string`, as space separated words, to upper case.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the upper cased string.
-	     * @example
-	     *
-	     * _.upperCase('--foo-bar');
-	     * // => 'FOO BAR'
-	     *
-	     * _.upperCase('fooBar');
-	     * // => 'FOO BAR'
-	     *
-	     * _.upperCase('__foo_bar__');
-	     * // => 'FOO BAR'
-	     */
-	    var upperCase = createCompounder(function(result, word, index) {
-	      return result + (index ? ' ' : '') + word.toUpperCase();
-	    });
-
-	    /**
-	     * Converts the first character of `string` to upper case.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to convert.
-	     * @returns {string} Returns the converted string.
-	     * @example
-	     *
-	     * _.upperFirst('fred');
-	     * // => 'Fred'
-	     *
-	     * _.upperFirst('FRED');
-	     * // => 'FRED'
-	     */
-	    var upperFirst = createCaseFirst('toUpperCase');
-
-	    /**
-	     * Splits `string` into an array of its words.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category String
-	     * @param {string} [string=''] The string to inspect.
-	     * @param {RegExp|string} [pattern] The pattern to match words.
-	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
-	     * @returns {Array} Returns the words of `string`.
-	     * @example
-	     *
-	     * _.words('fred, barney, & pebbles');
-	     * // => ['fred', 'barney', 'pebbles']
-	     *
-	     * _.words('fred, barney, & pebbles', /[^, ]+/g);
-	     * // => ['fred', 'barney', '&', 'pebbles']
-	     */
-	    function words(string, pattern, guard) {
-	      string = toString(string);
-	      pattern = guard ? undefined : pattern;
-
-	      if (pattern === undefined) {
-	        pattern = reHasComplexWord.test(string) ? reComplexWord : reBasicWord;
-	      }
-	      return string.match(pattern) || [];
-	    }
-
-	    /*------------------------------------------------------------------------*/
-
-	    /**
-	     * Attempts to invoke `func`, returning either the result or the caught error
-	     * object. Any additional arguments are provided to `func` when it's invoked.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category Util
-	     * @param {Function} func The function to attempt.
-	     * @param {...*} [args] The arguments to invoke `func` with.
-	     * @returns {*} Returns the `func` result or error object.
-	     * @example
-	     *
-	     * // Avoid throwing errors for invalid selectors.
-	     * var elements = _.attempt(function(selector) {
-	     *   return document.querySelectorAll(selector);
-	     * }, '>_>');
-	     *
-	     * if (_.isError(elements)) {
-	     *   elements = [];
-	     * }
-	     */
-	    var attempt = rest(function(func, args) {
-	      try {
-	        return apply(func, undefined, args);
-	      } catch (e) {
-	        return isError(e) ? e : new Error(e);
-	      }
-	    });
-
-	    /**
-	     * Binds methods of an object to the object itself, overwriting the existing
-	     * method.
-	     *
-	     * **Note:** This method doesn't set the "length" property of bound functions.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {Object} object The object to bind and assign the bound methods to.
-	     * @param {...(string|string[])} methodNames The object method names to bind.
-	     * @returns {Object} Returns `object`.
-	     * @example
-	     *
-	     * var view = {
-	     *   'label': 'docs',
-	     *   'onClick': function() {
-	     *     console.log('clicked ' + this.label);
-	     *   }
-	     * };
-	     *
-	     * _.bindAll(view, 'onClick');
-	     * jQuery(element).on('click', view.onClick);
-	     * // => Logs 'clicked docs' when clicked.
-	     */
-	    var bindAll = rest(function(object, methodNames) {
-	      arrayEach(baseFlatten(methodNames, 1), function(key) {
-	        key = toKey(key);
-	        object[key] = bind(object[key], object);
-	      });
-	      return object;
-	    });
-
-	    /**
-	     * Creates a function that iterates over `pairs` and invokes the corresponding
-	     * function of the first predicate to return truthy. The predicate-function
-	     * pairs are invoked with the `this` binding and arguments of the created
-	     * function.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {Array} pairs The predicate-function pairs.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var func = _.cond([
-	     *   [_.matches({ 'a': 1 }),           _.constant('matches A')],
-	     *   [_.conforms({ 'b': _.isNumber }), _.constant('matches B')],
-	     *   [_.constant(true),                _.constant('no match')]
-	     * ]);
-	     *
-	     * func({ 'a': 1, 'b': 2 });
-	     * // => 'matches A'
-	     *
-	     * func({ 'a': 0, 'b': 1 });
-	     * // => 'matches B'
-	     *
-	     * func({ 'a': '1', 'b': '2' });
-	     * // => 'no match'
-	     */
-	    function cond(pairs) {
-	      var length = pairs ? pairs.length : 0,
-	          toIteratee = getIteratee();
-
-	      pairs = !length ? [] : arrayMap(pairs, function(pair) {
-	        if (typeof pair[1] != 'function') {
-	          throw new TypeError(FUNC_ERROR_TEXT);
-	        }
-	        return [toIteratee(pair[0]), pair[1]];
-	      });
-
-	      return rest(function(args) {
-	        var index = -1;
-	        while (++index < length) {
-	          var pair = pairs[index];
-	          if (apply(pair[0], this, args)) {
-	            return apply(pair[1], this, args);
-	          }
-	        }
-	      });
-	    }
-
-	    /**
-	     * Creates a function that invokes the predicate properties of `source` with
-	     * the corresponding property values of a given object, returning `true` if
-	     * all predicates return truthy, else `false`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {Object} source The object of property predicates to conform to.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var users = [
-	     *   { 'user': 'barney', 'age': 36 },
-	     *   { 'user': 'fred',   'age': 40 }
-	     * ];
-	     *
-	     * _.filter(users, _.conforms({ 'age': _.partial(_.gt, _, 38) }));
-	     * // => [{ 'user': 'fred', 'age': 40 }]
-	     */
-	    function conforms(source) {
-	      return baseConforms(baseClone(source, true));
-	    }
-
-	    /**
-	     * Creates a function that returns `value`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 2.4.0
-	     * @category Util
-	     * @param {*} value The value to return from the new function.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var object = { 'user': 'fred' };
-	     * var getter = _.constant(object);
-	     *
-	     * getter() === object;
-	     * // => true
-	     */
-	    function constant(value) {
-	      return function() {
-	        return value;
-	      };
-	    }
-
-	    /**
-	     * Creates a function that returns the result of invoking the given functions
-	     * with the `this` binding of the created function, where each successive
-	     * invocation is supplied the return value of the previous.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category Util
-	     * @param {...(Function|Function[])} [funcs] Functions to invoke.
-	     * @returns {Function} Returns the new function.
-	     * @see _.flowRight
-	     * @example
-	     *
-	     * function square(n) {
-	     *   return n * n;
-	     * }
-	     *
-	     * var addSquare = _.flow(_.add, square);
-	     * addSquare(1, 2);
-	     * // => 9
-	     */
-	    var flow = createFlow();
-
-	    /**
-	     * This method is like `_.flow` except that it creates a function that
-	     * invokes the given functions from right to left.
-	     *
-	     * @static
-	     * @since 3.0.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {...(Function|Function[])} [funcs] Functions to invoke.
-	     * @returns {Function} Returns the new function.
-	     * @see _.flow
-	     * @example
-	     *
-	     * function square(n) {
-	     *   return n * n;
-	     * }
-	     *
-	     * var addSquare = _.flowRight(square, _.add);
-	     * addSquare(1, 2);
-	     * // => 9
-	     */
-	    var flowRight = createFlow(true);
-
-	    /**
-	     * This method returns the first argument given to it.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {*} value Any value.
-	     * @returns {*} Returns `value`.
-	     * @example
-	     *
-	     * var object = { 'user': 'fred' };
-	     *
-	     * _.identity(object) === object;
-	     * // => true
-	     */
-	    function identity(value) {
-	      return value;
-	    }
-
-	    /**
-	     * Creates a function that invokes `func` with the arguments of the created
-	     * function. If `func` is a property name, the created function returns the
-	     * property value for a given element. If `func` is an array or object, the
-	     * created function returns `true` for elements that contain the equivalent
-	     * source properties, otherwise it returns `false`.
-	     *
-	     * @static
-	     * @since 4.0.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {*} [func=_.identity] The value to convert to a callback.
-	     * @returns {Function} Returns the callback.
-	     * @example
-	     *
-	     * var users = [
-	     *   { 'user': 'barney', 'age': 36, 'active': true },
-	     *   { 'user': 'fred',   'age': 40, 'active': false }
-	     * ];
-	     *
-	     * // The `_.matches` iteratee shorthand.
-	     * _.filter(users, _.iteratee({ 'user': 'barney', 'active': true }));
-	     * // => [{ 'user': 'barney', 'age': 36, 'active': true }]
-	     *
-	     * // The `_.matchesProperty` iteratee shorthand.
-	     * _.filter(users, _.iteratee(['user', 'fred']));
-	     * // => [{ 'user': 'fred', 'age': 40 }]
-	     *
-	     * // The `_.property` iteratee shorthand.
-	     * _.map(users, _.iteratee('user'));
-	     * // => ['barney', 'fred']
-	     *
-	     * // Create custom iteratee shorthands.
-	     * _.iteratee = _.wrap(_.iteratee, function(iteratee, func) {
-	     *   return !_.isRegExp(func) ? iteratee(func) : function(string) {
-	     *     return func.test(string);
-	     *   };
-	     * });
-	     *
-	     * _.filter(['abc', 'def'], /ef/);
-	     * // => ['def']
-	     */
-	    function iteratee(func) {
-	      return baseIteratee(typeof func == 'function' ? func : baseClone(func, true));
-	    }
-
-	    /**
-	     * Creates a function that performs a partial deep comparison between a given
-	     * object and `source`, returning `true` if the given object has equivalent
-	     * property values, else `false`. The created function is equivalent to
-	     * `_.isMatch` with a `source` partially applied.
-	     *
-	     * **Note:** This method supports comparing the same values as `_.isEqual`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category Util
-	     * @param {Object} source The object of property values to match.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var users = [
-	     *   { 'user': 'barney', 'age': 36, 'active': true },
-	     *   { 'user': 'fred',   'age': 40, 'active': false }
-	     * ];
-	     *
-	     * _.filter(users, _.matches({ 'age': 40, 'active': false }));
-	     * // => [{ 'user': 'fred', 'age': 40, 'active': false }]
-	     */
-	    function matches(source) {
-	      return baseMatches(baseClone(source, true));
-	    }
-
-	    /**
-	     * Creates a function that performs a partial deep comparison between the
-	     * value at `path` of a given object to `srcValue`, returning `true` if the
-	     * object value is equivalent, else `false`.
-	     *
-	     * **Note:** This method supports comparing the same values as `_.isEqual`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.2.0
-	     * @category Util
-	     * @param {Array|string} path The path of the property to get.
-	     * @param {*} srcValue The value to match.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var users = [
-	     *   { 'user': 'barney' },
-	     *   { 'user': 'fred' }
-	     * ];
-	     *
-	     * _.find(users, _.matchesProperty('user', 'fred'));
-	     * // => { 'user': 'fred' }
-	     */
-	    function matchesProperty(path, srcValue) {
-	      return baseMatchesProperty(path, baseClone(srcValue, true));
-	    }
-
-	    /**
-	     * Creates a function that invokes the method at `path` of a given object.
-	     * Any additional arguments are provided to the invoked method.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.7.0
-	     * @category Util
-	     * @param {Array|string} path The path of the method to invoke.
-	     * @param {...*} [args] The arguments to invoke the method with.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var objects = [
-	     *   { 'a': { 'b': _.constant(2) } },
-	     *   { 'a': { 'b': _.constant(1) } }
-	     * ];
-	     *
-	     * _.map(objects, _.method('a.b'));
-	     * // => [2, 1]
-	     *
-	     * _.map(objects, _.method(['a', 'b']));
-	     * // => [2, 1]
-	     */
-	    var method = rest(function(path, args) {
-	      return function(object) {
-	        return baseInvoke(object, path, args);
-	      };
-	    });
-
-	    /**
-	     * The opposite of `_.method`; this method creates a function that invokes
-	     * the method at a given path of `object`. Any additional arguments are
-	     * provided to the invoked method.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.7.0
-	     * @category Util
-	     * @param {Object} object The object to query.
-	     * @param {...*} [args] The arguments to invoke the method with.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var array = _.times(3, _.constant),
-	     *     object = { 'a': array, 'b': array, 'c': array };
-	     *
-	     * _.map(['a[2]', 'c[0]'], _.methodOf(object));
-	     * // => [2, 0]
-	     *
-	     * _.map([['a', '2'], ['c', '0']], _.methodOf(object));
-	     * // => [2, 0]
-	     */
-	    var methodOf = rest(function(object, args) {
-	      return function(path) {
-	        return baseInvoke(object, path, args);
-	      };
-	    });
-
-	    /**
-	     * Adds all own enumerable string keyed function properties of a source
-	     * object to the destination object. If `object` is a function, then methods
-	     * are added to its prototype as well.
-	     *
-	     * **Note:** Use `_.runInContext` to create a pristine `lodash` function to
-	     * avoid conflicts caused by modifying the original.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {Function|Object} [object=lodash] The destination object.
-	     * @param {Object} source The object of functions to add.
-	     * @param {Object} [options={}] The options object.
-	     * @param {boolean} [options.chain=true] Specify whether mixins are chainable.
-	     * @returns {Function|Object} Returns `object`.
-	     * @example
-	     *
-	     * function vowels(string) {
-	     *   return _.filter(string, function(v) {
-	     *     return /[aeiou]/i.test(v);
-	     *   });
-	     * }
-	     *
-	     * _.mixin({ 'vowels': vowels });
-	     * _.vowels('fred');
-	     * // => ['e']
-	     *
-	     * _('fred').vowels().value();
-	     * // => ['e']
-	     *
-	     * _.mixin({ 'vowels': vowels }, { 'chain': false });
-	     * _('fred').vowels();
-	     * // => ['e']
-	     */
-	    function mixin(object, source, options) {
-	      var props = keys(source),
-	          methodNames = baseFunctions(source, props);
-
-	      if (options == null &&
-	          !(isObject(source) && (methodNames.length || !props.length))) {
-	        options = source;
-	        source = object;
-	        object = this;
-	        methodNames = baseFunctions(source, keys(source));
-	      }
-	      var chain = !(isObject(options) && 'chain' in options) || !!options.chain,
-	          isFunc = isFunction(object);
-
-	      arrayEach(methodNames, function(methodName) {
-	        var func = source[methodName];
-	        object[methodName] = func;
-	        if (isFunc) {
-	          object.prototype[methodName] = function() {
-	            var chainAll = this.__chain__;
-	            if (chain || chainAll) {
-	              var result = object(this.__wrapped__),
-	                  actions = result.__actions__ = copyArray(this.__actions__);
-
-	              actions.push({ 'func': func, 'args': arguments, 'thisArg': object });
-	              result.__chain__ = chainAll;
-	              return result;
-	            }
-	            return func.apply(object, arrayPush([this.value()], arguments));
-	          };
-	        }
-	      });
-
-	      return object;
-	    }
-
-	    /**
-	     * Reverts the `_` variable to its previous value and returns a reference to
-	     * the `lodash` function.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @returns {Function} Returns the `lodash` function.
-	     * @example
-	     *
-	     * var lodash = _.noConflict();
-	     */
-	    function noConflict() {
-	      if (root._ === this) {
-	        root._ = oldDash;
-	      }
-	      return this;
-	    }
-
-	    /**
-	     * A no-operation function that returns `undefined` regardless of the
-	     * arguments it receives.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 2.3.0
-	     * @category Util
-	     * @example
-	     *
-	     * var object = { 'user': 'fred' };
-	     *
-	     * _.noop(object) === undefined;
-	     * // => true
-	     */
-	    function noop() {
-	      // No operation performed.
-	    }
-
-	    /**
-	     * Creates a function that returns its nth argument. If `n` is negative,
-	     * the nth argument from the end is returned.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {number} [n=0] The index of the argument to return.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var func = _.nthArg(1);
-	     * func('a', 'b', 'c', 'd');
-	     * // => 'b'
-	     *
-	     * var func = _.nthArg(-2);
-	     * func('a', 'b', 'c', 'd');
-	     * // => 'c'
-	     */
-	    function nthArg(n) {
-	      n = toInteger(n);
-	      return rest(function(args) {
-	        return baseNth(args, n);
-	      });
-	    }
-
-	    /**
-	     * Creates a function that invokes `iteratees` with the arguments it receives
-	     * and returns their results.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [iteratees=[_.identity]] The iteratees to invoke.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var func = _.over(Math.max, Math.min);
-	     *
-	     * func(1, 2, 3, 4);
-	     * // => [4, 1]
-	     */
-	    var over = createOver(arrayMap);
-
-	    /**
-	     * Creates a function that checks if **all** of the `predicates` return
-	     * truthy when invoked with the arguments it receives.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [predicates=[_.identity]] The predicates to check.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var func = _.overEvery(Boolean, isFinite);
-	     *
-	     * func('1');
-	     * // => true
-	     *
-	     * func(null);
-	     * // => false
-	     *
-	     * func(NaN);
-	     * // => false
-	     */
-	    var overEvery = createOver(arrayEvery);
-
-	    /**
-	     * Creates a function that checks if **any** of the `predicates` return
-	     * truthy when invoked with the arguments it receives.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [predicates=[_.identity]] The predicates to check.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var func = _.overSome(Boolean, isFinite);
-	     *
-	     * func('1');
-	     * // => true
-	     *
-	     * func(null);
-	     * // => true
-	     *
-	     * func(NaN);
-	     * // => false
-	     */
-	    var overSome = createOver(arraySome);
-
-	    /**
-	     * Creates a function that returns the value at `path` of a given object.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 2.4.0
-	     * @category Util
-	     * @param {Array|string} path The path of the property to get.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var objects = [
-	     *   { 'a': { 'b': 2 } },
-	     *   { 'a': { 'b': 1 } }
-	     * ];
-	     *
-	     * _.map(objects, _.property('a.b'));
-	     * // => [2, 1]
-	     *
-	     * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
-	     * // => [1, 2]
-	     */
-	    function property(path) {
-	      return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
-	    }
-
-	    /**
-	     * The opposite of `_.property`; this method creates a function that returns
-	     * the value at a given path of `object`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.0.0
-	     * @category Util
-	     * @param {Object} object The object to query.
-	     * @returns {Function} Returns the new function.
-	     * @example
-	     *
-	     * var array = [0, 1, 2],
-	     *     object = { 'a': array, 'b': array, 'c': array };
-	     *
-	     * _.map(['a[2]', 'c[0]'], _.propertyOf(object));
-	     * // => [2, 0]
-	     *
-	     * _.map([['a', '2'], ['c', '0']], _.propertyOf(object));
-	     * // => [2, 0]
-	     */
-	    function propertyOf(object) {
-	      return function(path) {
-	        return object == null ? undefined : baseGet(object, path);
-	      };
-	    }
-
-	    /**
-	     * Creates an array of numbers (positive and/or negative) progressing from
-	     * `start` up to, but not including, `end`. A step of `-1` is used if a negative
-	     * `start` is specified without an `end` or `step`. If `end` is not specified,
-	     * it's set to `start` with `start` then set to `0`.
-	     *
-	     * **Note:** JavaScript follows the IEEE-754 standard for resolving
-	     * floating-point values which can produce unexpected results.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {number} [start=0] The start of the range.
-	     * @param {number} end The end of the range.
-	     * @param {number} [step=1] The value to increment or decrement by.
-	     * @returns {Array} Returns the new array of numbers.
-	     * @see _.inRange, _.rangeRight
-	     * @example
-	     *
-	     * _.range(4);
-	     * // => [0, 1, 2, 3]
-	     *
-	     * _.range(-4);
-	     * // => [0, -1, -2, -3]
-	     *
-	     * _.range(1, 5);
-	     * // => [1, 2, 3, 4]
-	     *
-	     * _.range(0, 20, 5);
-	     * // => [0, 5, 10, 15]
-	     *
-	     * _.range(0, -4, -1);
-	     * // => [0, -1, -2, -3]
-	     *
-	     * _.range(1, 4, 0);
-	     * // => [1, 1, 1]
-	     *
-	     * _.range(0);
-	     * // => []
-	     */
-	    var range = createRange();
-
-	    /**
-	     * This method is like `_.range` except that it populates values in
-	     * descending order.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {number} [start=0] The start of the range.
-	     * @param {number} end The end of the range.
-	     * @param {number} [step=1] The value to increment or decrement by.
-	     * @returns {Array} Returns the new array of numbers.
-	     * @see _.inRange, _.range
-	     * @example
-	     *
-	     * _.rangeRight(4);
-	     * // => [3, 2, 1, 0]
-	     *
-	     * _.rangeRight(-4);
-	     * // => [-3, -2, -1, 0]
-	     *
-	     * _.rangeRight(1, 5);
-	     * // => [4, 3, 2, 1]
-	     *
-	     * _.rangeRight(0, 20, 5);
-	     * // => [15, 10, 5, 0]
-	     *
-	     * _.rangeRight(0, -4, -1);
-	     * // => [-3, -2, -1, 0]
-	     *
-	     * _.rangeRight(1, 4, 0);
-	     * // => [1, 1, 1]
-	     *
-	     * _.rangeRight(0);
-	     * // => []
-	     */
-	    var rangeRight = createRange(true);
-
-	    /**
-	     * Invokes the iteratee `n` times, returning an array of the results of
-	     * each invocation. The iteratee is invoked with one argument; (index).
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {number} n The number of times to invoke `iteratee`.
-	     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
-	     * @returns {Array} Returns the array of results.
-	     * @example
-	     *
-	     * _.times(3, String);
-	     * // => ['0', '1', '2']
-	     *
-	     *  _.times(4, _.constant(true));
-	     * // => [true, true, true, true]
-	     */
-	    function times(n, iteratee) {
-	      n = toInteger(n);
-	      if (n < 1 || n > MAX_SAFE_INTEGER) {
-	        return [];
-	      }
-	      var index = MAX_ARRAY_LENGTH,
-	          length = nativeMin(n, MAX_ARRAY_LENGTH);
-
-	      iteratee = getIteratee(iteratee);
-	      n -= MAX_ARRAY_LENGTH;
-
-	      var result = baseTimes(length, iteratee);
-	      while (++index < n) {
-	        iteratee(index);
-	      }
-	      return result;
-	    }
-
-	    /**
-	     * Converts `value` to a property path array.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Util
-	     * @param {*} value The value to convert.
-	     * @returns {Array} Returns the new property path array.
-	     * @example
-	     *
-	     * _.toPath('a.b.c');
-	     * // => ['a', 'b', 'c']
-	     *
-	     * _.toPath('a[0].b.c');
-	     * // => ['a', '0', 'b', 'c']
-	     *
-	     * var path = ['a', 'b', 'c'],
-	     *     newPath = _.toPath(path);
-	     *
-	     * console.log(newPath);
-	     * // => ['a', 'b', 'c']
-	     *
-	     * console.log(path === newPath);
-	     * // => false
-	     */
-	    function toPath(value) {
-	      if (isArray(value)) {
-	        return arrayMap(value, toKey);
-	      }
-	      return isSymbol(value) ? [value] : copyArray(stringToPath(value));
-	    }
-
-	    /**
-	     * Generates a unique ID. If `prefix` is given, the ID is appended to it.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Util
-	     * @param {string} [prefix=''] The value to prefix the ID with.
-	     * @returns {string} Returns the unique ID.
-	     * @example
-	     *
-	     * _.uniqueId('contact_');
-	     * // => 'contact_104'
-	     *
-	     * _.uniqueId();
-	     * // => '105'
-	     */
-	    function uniqueId(prefix) {
-	      var id = ++idCounter;
-	      return toString(prefix) + id;
-	    }
-
-	    /*------------------------------------------------------------------------*/
-
-	    /**
-	     * Adds two numbers.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.4.0
-	     * @category Math
-	     * @param {number} augend The first number in an addition.
-	     * @param {number} addend The second number in an addition.
-	     * @returns {number} Returns the total.
-	     * @example
-	     *
-	     * _.add(6, 4);
-	     * // => 10
-	     */
-	    var add = createMathOperation(function(augend, addend) {
-	      return augend + addend;
-	    });
-
-	    /**
-	     * Computes `number` rounded up to `precision`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.10.0
-	     * @category Math
-	     * @param {number} number The number to round up.
-	     * @param {number} [precision=0] The precision to round up to.
-	     * @returns {number} Returns the rounded up number.
-	     * @example
-	     *
-	     * _.ceil(4.006);
-	     * // => 5
-	     *
-	     * _.ceil(6.004, 2);
-	     * // => 6.01
-	     *
-	     * _.ceil(6040, -2);
-	     * // => 6100
-	     */
-	    var ceil = createRound('ceil');
-
-	    /**
-	     * Divide two numbers.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.7.0
-	     * @category Math
-	     * @param {number} dividend The first number in a division.
-	     * @param {number} divisor The second number in a division.
-	     * @returns {number} Returns the quotient.
-	     * @example
-	     *
-	     * _.divide(6, 4);
-	     * // => 1.5
-	     */
-	    var divide = createMathOperation(function(dividend, divisor) {
-	      return dividend / divisor;
-	    });
-
-	    /**
-	     * Computes `number` rounded down to `precision`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.10.0
-	     * @category Math
-	     * @param {number} number The number to round down.
-	     * @param {number} [precision=0] The precision to round down to.
-	     * @returns {number} Returns the rounded down number.
-	     * @example
-	     *
-	     * _.floor(4.006);
-	     * // => 4
-	     *
-	     * _.floor(0.046, 2);
-	     * // => 0.04
-	     *
-	     * _.floor(4060, -2);
-	     * // => 4000
-	     */
-	    var floor = createRound('floor');
-
-	    /**
-	     * Computes the maximum value of `array`. If `array` is empty or falsey,
-	     * `undefined` is returned.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @returns {*} Returns the maximum value.
-	     * @example
-	     *
-	     * _.max([4, 2, 8, 6]);
-	     * // => 8
-	     *
-	     * _.max([]);
-	     * // => undefined
-	     */
-	    function max(array) {
-	      return (array && array.length)
-	          ? baseExtremum(array, identity, baseGt)
-	          : undefined;
-	    }
-
-	    /**
-	     * This method is like `_.max` except that it accepts `iteratee` which is
-	     * invoked for each element in `array` to generate the criterion by which
-	     * the value is ranked. The iteratee is invoked with one argument: (value).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
-	     * @returns {*} Returns the maximum value.
-	     * @example
-	     *
-	     * var objects = [{ 'n': 1 }, { 'n': 2 }];
-	     *
-	     * _.maxBy(objects, function(o) { return o.n; });
-	     * // => { 'n': 2 }
-	     *
-	     * // The `_.property` iteratee shorthand.
-	     * _.maxBy(objects, 'n');
-	     * // => { 'n': 2 }
-	     */
-	    function maxBy(array, iteratee) {
-	      return (array && array.length)
-	          ? baseExtremum(array, getIteratee(iteratee), baseGt)
-	          : undefined;
-	    }
-
-	    /**
-	     * Computes the mean of the values in `array`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @returns {number} Returns the mean.
-	     * @example
-	     *
-	     * _.mean([4, 2, 8, 6]);
-	     * // => 5
-	     */
-	    function mean(array) {
-	      return baseMean(array, identity);
-	    }
-
-	    /**
-	     * This method is like `_.mean` except that it accepts `iteratee` which is
-	     * invoked for each element in `array` to generate the value to be averaged.
-	     * The iteratee is invoked with one argument: (value).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.7.0
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
-	     * @returns {number} Returns the mean.
-	     * @example
-	     *
-	     * var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
-	     *
-	     * _.meanBy(objects, function(o) { return o.n; });
-	     * // => 5
-	     *
-	     * // The `_.property` iteratee shorthand.
-	     * _.meanBy(objects, 'n');
-	     * // => 5
-	     */
-	    function meanBy(array, iteratee) {
-	      return baseMean(array, getIteratee(iteratee));
-	    }
-
-	    /**
-	     * Computes the minimum value of `array`. If `array` is empty or falsey,
-	     * `undefined` is returned.
-	     *
-	     * @static
-	     * @since 0.1.0
-	     * @memberOf _
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @returns {*} Returns the minimum value.
-	     * @example
-	     *
-	     * _.min([4, 2, 8, 6]);
-	     * // => 2
-	     *
-	     * _.min([]);
-	     * // => undefined
-	     */
-	    function min(array) {
-	      return (array && array.length)
-	          ? baseExtremum(array, identity, baseLt)
-	          : undefined;
-	    }
-
-	    /**
-	     * This method is like `_.min` except that it accepts `iteratee` which is
-	     * invoked for each element in `array` to generate the criterion by which
-	     * the value is ranked. The iteratee is invoked with one argument: (value).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
-	     * @returns {*} Returns the minimum value.
-	     * @example
-	     *
-	     * var objects = [{ 'n': 1 }, { 'n': 2 }];
-	     *
-	     * _.minBy(objects, function(o) { return o.n; });
-	     * // => { 'n': 1 }
-	     *
-	     * // The `_.property` iteratee shorthand.
-	     * _.minBy(objects, 'n');
-	     * // => { 'n': 1 }
-	     */
-	    function minBy(array, iteratee) {
-	      return (array && array.length)
-	          ? baseExtremum(array, getIteratee(iteratee), baseLt)
-	          : undefined;
-	    }
-
-	    /**
-	     * Multiply two numbers.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.7.0
-	     * @category Math
-	     * @param {number} multiplier The first number in a multiplication.
-	     * @param {number} multiplicand The second number in a multiplication.
-	     * @returns {number} Returns the product.
-	     * @example
-	     *
-	     * _.multiply(6, 4);
-	     * // => 24
-	     */
-	    var multiply = createMathOperation(function(multiplier, multiplicand) {
-	      return multiplier * multiplicand;
-	    });
-
-	    /**
-	     * Computes `number` rounded to `precision`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.10.0
-	     * @category Math
-	     * @param {number} number The number to round.
-	     * @param {number} [precision=0] The precision to round to.
-	     * @returns {number} Returns the rounded number.
-	     * @example
-	     *
-	     * _.round(4.006);
-	     * // => 4
-	     *
-	     * _.round(4.006, 2);
-	     * // => 4.01
-	     *
-	     * _.round(4060, -2);
-	     * // => 4100
-	     */
-	    var round = createRound('round');
-
-	    /**
-	     * Subtract two numbers.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Math
-	     * @param {number} minuend The first number in a subtraction.
-	     * @param {number} subtrahend The second number in a subtraction.
-	     * @returns {number} Returns the difference.
-	     * @example
-	     *
-	     * _.subtract(6, 4);
-	     * // => 2
-	     */
-	    var subtract = createMathOperation(function(minuend, subtrahend) {
-	      return minuend - subtrahend;
-	    });
-
-	    /**
-	     * Computes the sum of the values in `array`.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 3.4.0
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @returns {number} Returns the sum.
-	     * @example
-	     *
-	     * _.sum([4, 2, 8, 6]);
-	     * // => 20
-	     */
-	    function sum(array) {
-	      return (array && array.length)
-	          ? baseSum(array, identity)
-	          : 0;
-	    }
-
-	    /**
-	     * This method is like `_.sum` except that it accepts `iteratee` which is
-	     * invoked for each element in `array` to generate the value to be summed.
-	     * The iteratee is invoked with one argument: (value).
-	     *
-	     * @static
-	     * @memberOf _
-	     * @since 4.0.0
-	     * @category Math
-	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
-	     * @returns {number} Returns the sum.
-	     * @example
-	     *
-	     * var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
-	     *
-	     * _.sumBy(objects, function(o) { return o.n; });
-	     * // => 20
-	     *
-	     * // The `_.property` iteratee shorthand.
-	     * _.sumBy(objects, 'n');
-	     * // => 20
-	     */
-	    function sumBy(array, iteratee) {
-	      return (array && array.length)
-	          ? baseSum(array, getIteratee(iteratee))
-	          : 0;
-	    }
-
-	    /*------------------------------------------------------------------------*/
-
-	    // Add methods that return wrapped values in chain sequences.
-	    lodash.after = after;
-	    lodash.ary = ary;
-	    lodash.assign = assign;
-	    lodash.assignIn = assignIn;
-	    lodash.assignInWith = assignInWith;
-	    lodash.assignWith = assignWith;
-	    lodash.at = at;
-	    lodash.before = before;
-	    lodash.bind = bind;
-	    lodash.bindAll = bindAll;
-	    lodash.bindKey = bindKey;
-	    lodash.castArray = castArray;
-	    lodash.chain = chain;
-	    lodash.chunk = chunk;
-	    lodash.compact = compact;
-	    lodash.concat = concat;
-	    lodash.cond = cond;
-	    lodash.conforms = conforms;
-	    lodash.constant = constant;
-	    lodash.countBy = countBy;
-	    lodash.create = create;
-	    lodash.curry = curry;
-	    lodash.curryRight = curryRight;
-	    lodash.debounce = debounce;
-	    lodash.defaults = defaults;
-	    lodash.defaultsDeep = defaultsDeep;
-	    lodash.defer = defer;
-	    lodash.delay = delay;
-	    lodash.difference = difference;
-	    lodash.differenceBy = differenceBy;
-	    lodash.differenceWith = differenceWith;
-	    lodash.drop = drop;
-	    lodash.dropRight = dropRight;
-	    lodash.dropRightWhile = dropRightWhile;
-	    lodash.dropWhile = dropWhile;
-	    lodash.fill = fill;
-	    lodash.filter = filter;
-	    lodash.flatMap = flatMap;
-	    lodash.flatMapDeep = flatMapDeep;
-	    lodash.flatMapDepth = flatMapDepth;
-	    lodash.flatten = flatten;
-	    lodash.flattenDeep = flattenDeep;
-	    lodash.flattenDepth = flattenDepth;
-	    lodash.flip = flip;
-	    lodash.flow = flow;
-	    lodash.flowRight = flowRight;
-	    lodash.fromPairs = fromPairs;
-	    lodash.functions = functions;
-	    lodash.functionsIn = functionsIn;
-	    lodash.groupBy = groupBy;
-	    lodash.initial = initial;
-	    lodash.intersection = intersection;
-	    lodash.intersectionBy = intersectionBy;
-	    lodash.intersectionWith = intersectionWith;
-	    lodash.invert = invert;
-	    lodash.invertBy = invertBy;
-	    lodash.invokeMap = invokeMap;
-	    lodash.iteratee = iteratee;
-	    lodash.keyBy = keyBy;
-	    lodash.keys = keys;
-	    lodash.keysIn = keysIn;
-	    lodash.map = map;
-	    lodash.mapKeys = mapKeys;
-	    lodash.mapValues = mapValues;
-	    lodash.matches = matches;
-	    lodash.matchesProperty = matchesProperty;
-	    lodash.memoize = memoize;
-	    lodash.merge = merge;
-	    lodash.mergeWith = mergeWith;
-	    lodash.method = method;
-	    lodash.methodOf = methodOf;
-	    lodash.mixin = mixin;
-	    lodash.negate = negate;
-	    lodash.nthArg = nthArg;
-	    lodash.omit = omit;
-	    lodash.omitBy = omitBy;
-	    lodash.once = once;
-	    lodash.orderBy = orderBy;
-	    lodash.over = over;
-	    lodash.overArgs = overArgs;
-	    lodash.overEvery = overEvery;
-	    lodash.overSome = overSome;
-	    lodash.partial = partial;
-	    lodash.partialRight = partialRight;
-	    lodash.partition = partition;
-	    lodash.pick = pick;
-	    lodash.pickBy = pickBy;
-	    lodash.property = property;
-	    lodash.propertyOf = propertyOf;
-	    lodash.pull = pull;
-	    lodash.pullAll = pullAll;
-	    lodash.pullAllBy = pullAllBy;
-	    lodash.pullAllWith = pullAllWith;
-	    lodash.pullAt = pullAt;
-	    lodash.range = range;
-	    lodash.rangeRight = rangeRight;
-	    lodash.rearg = rearg;
-	    lodash.reject = reject;
-	    lodash.remove = remove;
-	    lodash.rest = rest;
-	    lodash.reverse = reverse;
-	    lodash.sampleSize = sampleSize;
-	    lodash.set = set;
-	    lodash.setWith = setWith;
-	    lodash.shuffle = shuffle;
-	    lodash.slice = slice;
-	    lodash.sortBy = sortBy;
-	    lodash.sortedUniq = sortedUniq;
-	    lodash.sortedUniqBy = sortedUniqBy;
-	    lodash.split = split;
-	    lodash.spread = spread;
-	    lodash.tail = tail;
-	    lodash.take = take;
-	    lodash.takeRight = takeRight;
-	    lodash.takeRightWhile = takeRightWhile;
-	    lodash.takeWhile = takeWhile;
-	    lodash.tap = tap;
-	    lodash.throttle = throttle;
-	    lodash.thru = thru;
-	    lodash.toArray = toArray;
-	    lodash.toPairs = toPairs;
-	    lodash.toPairsIn = toPairsIn;
-	    lodash.toPath = toPath;
-	    lodash.toPlainObject = toPlainObject;
-	    lodash.transform = transform;
-	    lodash.unary = unary;
-	    lodash.union = union;
-	    lodash.unionBy = unionBy;
-	    lodash.unionWith = unionWith;
-	    lodash.uniq = uniq;
-	    lodash.uniqBy = uniqBy;
-	    lodash.uniqWith = uniqWith;
-	    lodash.unset = unset;
-	    lodash.unzip = unzip;
-	    lodash.unzipWith = unzipWith;
-	    lodash.update = update;
-	    lodash.updateWith = updateWith;
-	    lodash.values = values;
-	    lodash.valuesIn = valuesIn;
-	    lodash.without = without;
-	    lodash.words = words;
-	    lodash.wrap = wrap;
-	    lodash.xor = xor;
-	    lodash.xorBy = xorBy;
-	    lodash.xorWith = xorWith;
-	    lodash.zip = zip;
-	    lodash.zipObject = zipObject;
-	    lodash.zipObjectDeep = zipObjectDeep;
-	    lodash.zipWith = zipWith;
-
-	    // Add aliases.
-	    lodash.entries = toPairs;
-	    lodash.entriesIn = toPairsIn;
-	    lodash.extend = assignIn;
-	    lodash.extendWith = assignInWith;
-
-	    // Add methods to `lodash.prototype`.
-	    mixin(lodash, lodash);
-
-	    /*------------------------------------------------------------------------*/
-
-	    // Add methods that return unwrapped values in chain sequences.
-	    lodash.add = add;
-	    lodash.attempt = attempt;
-	    lodash.camelCase = camelCase;
-	    lodash.capitalize = capitalize;
-	    lodash.ceil = ceil;
-	    lodash.clamp = clamp;
-	    lodash.clone = clone;
-	    lodash.cloneDeep = cloneDeep;
-	    lodash.cloneDeepWith = cloneDeepWith;
-	    lodash.cloneWith = cloneWith;
-	    lodash.deburr = deburr;
-	    lodash.divide = divide;
-	    lodash.endsWith = endsWith;
-	    lodash.eq = eq;
-	    lodash.escape = escape;
-	    lodash.escapeRegExp = escapeRegExp;
-	    lodash.every = every;
-	    lodash.find = find;
-	    lodash.findIndex = findIndex;
-	    lodash.findKey = findKey;
-	    lodash.findLast = findLast;
-	    lodash.findLastIndex = findLastIndex;
-	    lodash.findLastKey = findLastKey;
-	    lodash.floor = floor;
-	    lodash.forEach = forEach;
-	    lodash.forEachRight = forEachRight;
-	    lodash.forIn = forIn;
-	    lodash.forInRight = forInRight;
-	    lodash.forOwn = forOwn;
-	    lodash.forOwnRight = forOwnRight;
-	    lodash.get = get;
-	    lodash.gt = gt;
-	    lodash.gte = gte;
-	    lodash.has = has;
-	    lodash.hasIn = hasIn;
-	    lodash.head = head;
-	    lodash.identity = identity;
-	    lodash.includes = includes;
-	    lodash.indexOf = indexOf;
-	    lodash.inRange = inRange;
-	    lodash.invoke = invoke;
-	    lodash.isArguments = isArguments;
-	    lodash.isArray = isArray;
-	    lodash.isArrayBuffer = isArrayBuffer;
-	    lodash.isArrayLike = isArrayLike;
-	    lodash.isArrayLikeObject = isArrayLikeObject;
-	    lodash.isBoolean = isBoolean;
-	    lodash.isBuffer = isBuffer;
-	    lodash.isDate = isDate;
-	    lodash.isElement = isElement;
-	    lodash.isEmpty = isEmpty;
-	    lodash.isEqual = isEqual;
-	    lodash.isEqualWith = isEqualWith;
-	    lodash.isError = isError;
-	    lodash.isFinite = isFinite;
-	    lodash.isFunction = isFunction;
-	    lodash.isInteger = isInteger;
-	    lodash.isLength = isLength;
-	    lodash.isMap = isMap;
-	    lodash.isMatch = isMatch;
-	    lodash.isMatchWith = isMatchWith;
-	    lodash.isNaN = isNaN;
-	    lodash.isNative = isNative;
-	    lodash.isNil = isNil;
-	    lodash.isNull = isNull;
-	    lodash.isNumber = isNumber;
-	    lodash.isObject = isObject;
-	    lodash.isObjectLike = isObjectLike;
-	    lodash.isPlainObject = isPlainObject;
-	    lodash.isRegExp = isRegExp;
-	    lodash.isSafeInteger = isSafeInteger;
-	    lodash.isSet = isSet;
-	    lodash.isString = isString;
-	    lodash.isSymbol = isSymbol;
-	    lodash.isTypedArray = isTypedArray;
-	    lodash.isUndefined = isUndefined;
-	    lodash.isWeakMap = isWeakMap;
-	    lodash.isWeakSet = isWeakSet;
-	    lodash.join = join;
-	    lodash.kebabCase = kebabCase;
-	    lodash.last = last;
-	    lodash.lastIndexOf = lastIndexOf;
-	    lodash.lowerCase = lowerCase;
-	    lodash.lowerFirst = lowerFirst;
-	    lodash.lt = lt;
-	    lodash.lte = lte;
-	    lodash.max = max;
-	    lodash.maxBy = maxBy;
-	    lodash.mean = mean;
-	    lodash.meanBy = meanBy;
-	    lodash.min = min;
-	    lodash.minBy = minBy;
-	    lodash.multiply = multiply;
-	    lodash.nth = nth;
-	    lodash.noConflict = noConflict;
-	    lodash.noop = noop;
-	    lodash.now = now;
-	    lodash.pad = pad;
-	    lodash.padEnd = padEnd;
-	    lodash.padStart = padStart;
-	    lodash.parseInt = parseInt;
-	    lodash.random = random;
-	    lodash.reduce = reduce;
-	    lodash.reduceRight = reduceRight;
-	    lodash.repeat = repeat;
-	    lodash.replace = replace;
-	    lodash.result = result;
-	    lodash.round = round;
-	    lodash.runInContext = runInContext;
-	    lodash.sample = sample;
-	    lodash.size = size;
-	    lodash.snakeCase = snakeCase;
-	    lodash.some = some;
-	    lodash.sortedIndex = sortedIndex;
-	    lodash.sortedIndexBy = sortedIndexBy;
-	    lodash.sortedIndexOf = sortedIndexOf;
-	    lodash.sortedLastIndex = sortedLastIndex;
-	    lodash.sortedLastIndexBy = sortedLastIndexBy;
-	    lodash.sortedLastIndexOf = sortedLastIndexOf;
-	    lodash.startCase = startCase;
-	    lodash.startsWith = startsWith;
-	    lodash.subtract = subtract;
-	    lodash.sum = sum;
-	    lodash.sumBy = sumBy;
-	    lodash.template = template;
-	    lodash.times = times;
-	    lodash.toInteger = toInteger;
-	    lodash.toLength = toLength;
-	    lodash.toLower = toLower;
-	    lodash.toNumber = toNumber;
-	    lodash.toSafeInteger = toSafeInteger;
-	    lodash.toString = toString;
-	    lodash.toUpper = toUpper;
-	    lodash.trim = trim;
-	    lodash.trimEnd = trimEnd;
-	    lodash.trimStart = trimStart;
-	    lodash.truncate = truncate;
-	    lodash.unescape = unescape;
-	    lodash.uniqueId = uniqueId;
-	    lodash.upperCase = upperCase;
-	    lodash.upperFirst = upperFirst;
-
-	    // Add aliases.
-	    lodash.each = forEach;
-	    lodash.eachRight = forEachRight;
-	    lodash.first = head;
-
-	    mixin(lodash, (function() {
-	      var source = {};
-	      baseForOwn(lodash, function(func, methodName) {
-	        if (!hasOwnProperty.call(lodash.prototype, methodName)) {
-	          source[methodName] = func;
-	        }
-	      });
-	      return source;
-	    }()), { 'chain': false });
-
-	    /*------------------------------------------------------------------------*/
-
-	    /**
-	     * The semantic version number.
-	     *
-	     * @static
-	     * @memberOf _
-	     * @type {string}
-	     */
-	    lodash.VERSION = VERSION;
-
-	    // Assign default placeholders.
-	    arrayEach(['bind', 'bindKey', 'curry', 'curryRight', 'partial', 'partialRight'], function(methodName) {
-	      lodash[methodName].placeholder = lodash;
-	    });
-
-	    // Add `LazyWrapper` methods for `_.drop` and `_.take` variants.
-	    arrayEach(['drop', 'take'], function(methodName, index) {
-	      LazyWrapper.prototype[methodName] = function(n) {
-	        var filtered = this.__filtered__;
-	        if (filtered && !index) {
-	          return new LazyWrapper(this);
-	        }
-	        n = n === undefined ? 1 : nativeMax(toInteger(n), 0);
-
-	        var result = this.clone();
-	        if (filtered) {
-	          result.__takeCount__ = nativeMin(n, result.__takeCount__);
-	        } else {
-	          result.__views__.push({
-	            'size': nativeMin(n, MAX_ARRAY_LENGTH),
-	            'type': methodName + (result.__dir__ < 0 ? 'Right' : '')
-	          });
-	        }
-	        return result;
-	      };
-
-	      LazyWrapper.prototype[methodName + 'Right'] = function(n) {
-	        return this.reverse()[methodName](n).reverse();
-	      };
-	    });
-
-	    // Add `LazyWrapper` methods that accept an `iteratee` value.
-	    arrayEach(['filter', 'map', 'takeWhile'], function(methodName, index) {
-	      var type = index + 1,
-	          isFilter = type == LAZY_FILTER_FLAG || type == LAZY_WHILE_FLAG;
-
-	      LazyWrapper.prototype[methodName] = function(iteratee) {
-	        var result = this.clone();
-	        result.__iteratees__.push({
-	          'iteratee': getIteratee(iteratee, 3),
-	          'type': type
-	        });
-	        result.__filtered__ = result.__filtered__ || isFilter;
-	        return result;
-	      };
-	    });
-
-	    // Add `LazyWrapper` methods for `_.head` and `_.last`.
-	    arrayEach(['head', 'last'], function(methodName, index) {
-	      var takeName = 'take' + (index ? 'Right' : '');
-
-	      LazyWrapper.prototype[methodName] = function() {
-	        return this[takeName](1).value()[0];
-	      };
-	    });
-
-	    // Add `LazyWrapper` methods for `_.initial` and `_.tail`.
-	    arrayEach(['initial', 'tail'], function(methodName, index) {
-	      var dropName = 'drop' + (index ? '' : 'Right');
-
-	      LazyWrapper.prototype[methodName] = function() {
-	        return this.__filtered__ ? new LazyWrapper(this) : this[dropName](1);
-	      };
-	    });
-
-	    LazyWrapper.prototype.compact = function() {
-	      return this.filter(identity);
-	    };
-
-	    LazyWrapper.prototype.find = function(predicate) {
-	      return this.filter(predicate).head();
-	    };
-
-	    LazyWrapper.prototype.findLast = function(predicate) {
-	      return this.reverse().find(predicate);
-	    };
-
-	    LazyWrapper.prototype.invokeMap = rest(function(path, args) {
-	      if (typeof path == 'function') {
-	        return new LazyWrapper(this);
-	      }
-	      return this.map(function(value) {
-	        return baseInvoke(value, path, args);
-	      });
-	    });
-
-	    LazyWrapper.prototype.reject = function(predicate) {
-	      predicate = getIteratee(predicate, 3);
-	      return this.filter(function(value) {
-	        return !predicate(value);
-	      });
-	    };
-
-	    LazyWrapper.prototype.slice = function(start, end) {
-	      start = toInteger(start);
-
-	      var result = this;
-	      if (result.__filtered__ && (start > 0 || end < 0)) {
-	        return new LazyWrapper(result);
-	      }
-	      if (start < 0) {
-	        result = result.takeRight(-start);
-	      } else if (start) {
-	        result = result.drop(start);
-	      }
-	      if (end !== undefined) {
-	        end = toInteger(end);
-	        result = end < 0 ? result.dropRight(-end) : result.take(end - start);
-	      }
-	      return result;
-	    };
-
-	    LazyWrapper.prototype.takeRightWhile = function(predicate) {
-	      return this.reverse().takeWhile(predicate).reverse();
-	    };
-
-	    LazyWrapper.prototype.toArray = function() {
-	      return this.take(MAX_ARRAY_LENGTH);
-	    };
-
-	    // Add `LazyWrapper` methods to `lodash.prototype`.
-	    baseForOwn(LazyWrapper.prototype, function(func, methodName) {
-	      var checkIteratee = /^(?:filter|find|map|reject)|While$/.test(methodName),
-	          isTaker = /^(?:head|last)$/.test(methodName),
-	          lodashFunc = lodash[isTaker ? ('take' + (methodName == 'last' ? 'Right' : '')) : methodName],
-	          retUnwrapped = isTaker || /^find/.test(methodName);
-
-	      if (!lodashFunc) {
-	        return;
-	      }
-	      lodash.prototype[methodName] = function() {
-	        var value = this.__wrapped__,
-	            args = isTaker ? [1] : arguments,
-	            isLazy = value instanceof LazyWrapper,
-	            iteratee = args[0],
-	            useLazy = isLazy || isArray(value);
-
-	        var interceptor = function(value) {
-	          var result = lodashFunc.apply(lodash, arrayPush([value], args));
-	          return (isTaker && chainAll) ? result[0] : result;
-	        };
-
-	        if (useLazy && checkIteratee && typeof iteratee == 'function' && iteratee.length != 1) {
-	          // Avoid lazy use if the iteratee has a "length" value other than `1`.
-	          isLazy = useLazy = false;
-	        }
-	        var chainAll = this.__chain__,
-	            isHybrid = !!this.__actions__.length,
-	            isUnwrapped = retUnwrapped && !chainAll,
-	            onlyLazy = isLazy && !isHybrid;
-
-	        if (!retUnwrapped && useLazy) {
-	          value = onlyLazy ? value : new LazyWrapper(this);
-	          var result = func.apply(value, args);
-	          result.__actions__.push({ 'func': thru, 'args': [interceptor], 'thisArg': undefined });
-	          return new LodashWrapper(result, chainAll);
-	        }
-	        if (isUnwrapped && onlyLazy) {
-	          return func.apply(this, args);
-	        }
-	        result = this.thru(interceptor);
-	        return isUnwrapped ? (isTaker ? result.value()[0] : result.value()) : result;
-	      };
-	    });
-
-	    // Add `Array` methods to `lodash.prototype`.
-	    arrayEach(['pop', 'push', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
-	      var func = arrayProto[methodName],
-	          chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru',
-	          retUnwrapped = /^(?:pop|shift)$/.test(methodName);
-
-	      lodash.prototype[methodName] = function() {
-	        var args = arguments;
-	        if (retUnwrapped && !this.__chain__) {
-	          var value = this.value();
-	          return func.apply(isArray(value) ? value : [], args);
-	        }
-	        return this[chainName](function(value) {
-	          return func.apply(isArray(value) ? value : [], args);
-	        });
-	      };
-	    });
-
-	    // Map minified method names to their real names.
-	    baseForOwn(LazyWrapper.prototype, function(func, methodName) {
-	      var lodashFunc = lodash[methodName];
-	      if (lodashFunc) {
-	        var key = (lodashFunc.name + ''),
-	            names = realNames[key] || (realNames[key] = []);
-
-	        names.push({ 'name': methodName, 'func': lodashFunc });
-	      }
-	    });
-
-	    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{
-	      'name': 'wrapper',
-	      'func': undefined
-	    }];
-
-	    // Add methods to `LazyWrapper`.
-	    LazyWrapper.prototype.clone = lazyClone;
-	    LazyWrapper.prototype.reverse = lazyReverse;
-	    LazyWrapper.prototype.value = lazyValue;
-
-	    // Add chain sequence methods to the `lodash` wrapper.
-	    lodash.prototype.at = wrapperAt;
-	    lodash.prototype.chain = wrapperChain;
-	    lodash.prototype.commit = wrapperCommit;
-	    lodash.prototype.next = wrapperNext;
-	    lodash.prototype.plant = wrapperPlant;
-	    lodash.prototype.reverse = wrapperReverse;
-	    lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
-
-	    if (iteratorSymbol) {
-	      lodash.prototype[iteratorSymbol] = wrapperToIterator;
-	    }
-	    return lodash;
-	  }
-
-	  /*--------------------------------------------------------------------------*/
-
-	  // Export lodash.
-	  var _ = runInContext();
-
-	  // Expose Lodash on the free variable `window` or `self` when available so it's
-	  // globally accessible, even when bundled with Browserify, Webpack, etc. This
-	  // also prevents errors in cases where Lodash is loaded by a script tag in the
-	  // presence of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch
-	  // for more details. Use `_.noConflict` to remove Lodash from the global object.
-	  (freeWindow || freeSelf || {})._ = _;
-
-	  // Some AMD build optimizers like r.js check for condition patterns like the following:
-	  if (true) {
-	    // Define as an anonymous module so, through path mapping, it can be
-	    // referenced as the "underscore" module.
-	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	      return _;
-	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  }
-	  // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
-	  else if (freeExports && freeModule) {
-	    // Export for Node.js.
-	    if (moduleExports) {
-	      (freeModule.exports = _)._ = _;
-	    }
-	    // Export for CommonJS support.
-	    freeExports._ = _;
-	  }
-	  else {
-	    // Export to the global object.
-	    root._ = _;
-	  }
-	}.call(this));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)(module), (function() { return this; }())))
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced = new window.CytubeEnhanced(
-	    (window.cytubeEnhancedSettings ? (window.cytubeEnhancedSettings.language || 'en') : 'en'),
-	    (window.cytubeEnhancedSettings ? (window.cytubeEnhancedSettings.modulesSettings || {}) : {}),
-	    (window.cytubeEnhancedSettings ? (window.cytubeEnhancedSettings.modulesExtends || {}) : {})
-	);
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('additionalChatCommands', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        permittedCommands: ['*']
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-	    settings.permittedCommands = _.isArray(settings.permittedCommands) ? settings.permittedCommands : [];
-	    settings.permittedCommands = _.map(settings.permittedCommands, function (value) { return _.toLower(value); });
-
-	    this.$chatline = $('#chatline');
-
-
-	    this.isCommandPermitted = function (commandName) {
-	        if (that.commandsList[commandName]) {
-	            if (that.commandsList[commandName].canBeOmitted) {
-	                return settings.permittedCommands.indexOf('*') !== -1 || settings.permittedCommands.indexOf(commandName) !== -1;
-	            } else {
-	                return true;
-	            }
-	        } else {
-	            return false;
-	        }
-	    };
-
-
-	    this.askAnswers = ["100%", app.t('qCommands[.]of course'), app.t('qCommands[.]yes'), app.t('qCommands[.]maybe'), app.t('qCommands[.]impossible'), app.t('qCommands[.]no way'), app.t('qCommands[.]don\'t think so'), app.t('qCommands[.]no'), "50/50", app.t('qCommands[.]cirno is busy'), app.t('qCommands[.]I regret to inform you')];
-
-
-	    /**
-	     * Quotes for !q command
-	     * @type {Array}
-	     */
-	    this.randomQuotes = [];
-
-
-	    /**
-	     *The list of commands
-	     *
-	     * Every command must have method value(message) which returns command's message.
-	     * Commands can also have description property for chatCommandsHelp module and isAvailable method which returns false if command is not permitted (by default returns true)
-	     *
-	     * @type {object}
-	     */
-	    this.commandsList = {
-	        '!pick': {
-	            description: app.t('chatCommands[.]random option from the list of options (!pick option1, option2, option3)'),
-	            value: function (msg) {
-	                var formattedMsg = _.trim(msg.replace('!pick', ''));
-
-	                if (formattedMsg === '') {
-	                    return app.t('chatCommands[.]Use !pick variant1, variant2');
-	                } else {
-	                    var variants = formattedMsg.split(',');
-	                    return _.trim(variants[Math.floor(Math.random() * variants.length)]);
-	                }
-	            },
-	            canBeOmitted: true
-	        },
-	        '!ask': {
-	            description: app.t('chatCommands[.]asking a question with yes/no/... type answer (e.g. <i>!ask Will i be rich?</i>)'),
-	            value: function () {
-	                return that.askAnswers[Math.floor(Math.random() * that.askAnswers.length)];
-	            },
-	            canBeOmitted: true
-	        },
-	        '!time': {
-	            description: app.t('chatCommands[.]show the current time'),
-	            value: function () {
-	                var h = new Date().getHours();
-	                if (h < 10) {
-	                    h = '0' + h;
-	                }
-
-	                var m = new Date().getMinutes();
-	                if (m < 10) {
-	                    m = '0' + m;
-	                }
-
-	                return app.t('chatCommands[.]current time') + ': ' + h + ':' + m;
-	            },
-	            canBeOmitted: true
-	        },
-	        '!dice': {
-	            description: app.t('chatCommands[.]throw a dice'),
-	            value: function () {
-	                return Math.floor(Math.random() * 5) + 1;
-	            },
-	            canBeOmitted: true
-	        },
-	        '!roll': {
-	            description: app.t('chatCommands[.]random number between 0 and 999'),
-	            value: function () {
-	                var randomNumber = Math.floor(Math.random() * 1000);
-
-	                if (randomNumber < 100) {
-	                    randomNumber = '0' + randomNumber;
-	                } else if (randomNumber < 10) {
-	                    randomNumber= '00' + randomNumber;
-	                }
-
-	                return randomNumber;
-	            },
-	            canBeOmitted: true
-	        },
-	        '!skip': {
-	            description: app.t('chatCommands[.]vote for the video skip'),
-	            value: function (msg) {
-	                window.socket.emit("voteskip");
-	                msg = app.t('chatCommands[.]you have been voted for the video skip');
-
-	                return msg;
-	            },
-	            isAvailable: function () {
-	                return window.hasPermission('voteskip');
-	            },
-	            canBeOmitted: true
-	        },
-	        '!next': {
-	            description: app.t('chatCommands[.]play the next video'),
-	            value: function (msg) {
-	                window.socket.emit("playNext");
-	                msg = app.t('chatCommands[.]the next video is playing');
-
-	                return msg;
-	            },
-	            isAvailable: function () {
-	                return window.hasPermission('playlistjump');
-	            },
-	            canBeOmitted: true
-	        },
-	        '!bump': {
-	            description: app.t('chatCommands[.]bump the last video'),
-	            value: function (msg) {
-	                var $lastEntry = $('#queue').find('.queue_entry').last();
-	                var uid = $lastEntry.data("uid");
-	                var title = $lastEntry.find('.qe_title').html();
-
-	                window.socket.emit("moveMedia", {from: uid, after: window.PL_CURRENT});
-
-	                msg = app.t('chatCommands[.]the last video was bumped') + title;
-
-	                return msg;
-	            },
-	            isAvailable: function () {
-	                return window.hasPermission('playlistmove');
-	            },
-	            canBeOmitted: true
-	        },
-	        '!add': {
-	            description: app.t('chatCommands[.]adds the video to the end of the playlist (e.g. <i>!add https://www.youtube.com/watch?v=hh4gpgAZkc8</i>)'),
-	            value: function (msg) {
-	                var parsed = window.parseMediaLink(msg.split("!add ")[1]);
-
-	                if (parsed.id === null) {
-	                    msg = app.t('chatCommands[.]error: the wrong link');
-	                } else {
-	                    window.socket.emit("queue", {id: parsed.id, pos: "end", type: parsed.type});
-	                    msg = app.t('chatCommands[.]the video was added');
-	                }
-
-
-	                return msg;
-	            },
-	            isAvailable: function () {
-	                return window.hasPermission('playlistadd');
-	            },
-	            canBeOmitted: true
-	        },
-	        '!now': {
-	            description: app.t('chatCommands[.]show the current video\'s name'),
-	            value: function () {
-	                return app.t('chatCommands[.]now: ') + $(".queue_active a").html();
-	            },
-	            canBeOmitted: true
-	        },
-	        '!sm': {
-	            description: app.t('chatCommands[.]show the random emote'),
-	            value: function () {
-	                var smilesArray = window.CHANNEL.emotes.map(function (smile) {
-	                    return smile.name;
-	                });
-
-	                return smilesArray[Math.floor(Math.random() * smilesArray.length)] + ' ';
-	            },
-	            canBeOmitted: true
-	        }
-	    };
-
-
-	    this.IS_COMMAND = false;
-	    this.prepareMessage = function (msg) {
-	        that.IS_COMMAND = false;
-
-	        for (var command in that.commandsList) {
-	            if (this.commandsList.hasOwnProperty(command) && _.toLower(_.trim(msg)).indexOf(command) === 0) {
-	                if (that.isCommandPermitted(command) && (that.commandsList[command].isAvailable ? that.commandsList[command].isAvailable() : true)) {
-	                    that.IS_COMMAND = true;
-
-	                    msg = that.commandsList[command].value(msg);
-	                }
-
-	                break;
-	            }
-	        }
-
-	        return msg;
-	    };
-
-
-	    this.sendUserChatMessage = function (e) {
-	        if(e.keyCode === 13) {
-	            if (window.CHATTHROTTLE) {
-	                return;
-	            }
-
-	            var msg = that.$chatline.val().trim();
-
-	            if(msg !== '') {
-	                var meta = {};
-
-	                if (window.USEROPTS.adminhat && window.CLIENT.rank >= 255) {
-	                    msg = "/a " + msg;
-	                } else if (window.USEROPTS.modhat && window.CLIENT.rank >= window.Rank.Moderator) {
-	                    meta.modflair = window.CLIENT.rank;
-	                }
-
-	                // The /m command no longer exists, so emulate it clientside
-	                if (window.CLIENT.rank >= 2 && msg.indexOf("/m ") === 0) {
-	                    meta.modflair = window.CLIENT.rank;
-	                    msg = msg.substring(3);
-	                }
-
-
-	                var msgForCommand = this.prepareMessage(msg);
-
-	                if (that.IS_COMMAND) {
-	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
-	                    window.socket.emit("chatMsg", {msg: '🤖 ' + msgForCommand});
-
-	                    that.IS_COMMAND = false;
-	                } else {
-	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
-	                }
-
-
-	                window.CHATHIST.push(that.$chatline.val());
-	                window.CHATHISTIDX = window.CHATHIST.length;
-	                that.$chatline.val('');
-	            }
-
-	            return;
-	        } else if(e.keyCode === 9) { // Tab completion
-	            window.chatTabComplete();
-	            e.preventDefault();
-	            return false;
-	        } else if(e.keyCode === 38) { // Up arrow (input history)
-	            if(window.CHATHISTIDX === window.CHATHIST.length) {
-	                window.CHATHIST.push(that.$chatline.val());
-	            }
-	            if(window.CHATHISTIDX > 0) {
-	                window.CHATHISTIDX--;
-	                that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
-	            }
-
-	            e.preventDefault();
-	            return false;
-	        } else if(e.keyCode === 40) { // Down arrow (input history)
-	            if(window.CHATHISTIDX < window.CHATHIST.length - 1) {
-	                window.CHATHISTIDX++;
-	                that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
-	            }
-
-	            e.preventDefault();
-	            return false;
-	        }
-	    };
-
-
-	    that.$chatline.off().on('keydown', function (e) {
-	        that.sendUserChatMessage(e);
-	    });
-
-	    $('#chatbtn').off().on('click', function (e) {
-	        that.sendUserChatMessage(e);
-	    });
 	});
 
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/* 42 */
+/***/ function(module, exports) {
 
-	__webpack_require__(12);
-	window.cytubeEnhanced.addModule('bbCodesHelper', function (app, settings) {
+	window.cytubeEnhanced.addModule('Announcements', function (app, settings) {
 	    'use strict';
 	    var that = this;
 
 	    var defaultSettings = {
-	        templateButtons: ['b', 'i', 'sp', 'code', 's'],
-	        templateButtonsAnimationSpeed: 150
+	        turnedOn: true
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
+	    
+// adding attention bar
 
-	    if ($('#chat-controls').length === 0) {
-	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
-	    }
+if (UI_AttentionBar=="1" && AttentionBar_URL!="") {
+	attbarwrap = $('<div id="attbarrow-outer" class="col-md-12" />').prependTo("#announcements");
+	attbar = $('<iframe id="attbar" width="100%" frameborder="0" scrolling="no" />')
+	  .attr('src', AttentionBar_URL)
+	  .appendTo(attbarwrap);
+}
 
+// adding custom channel announcement
 
-	    this.handleMarkdownHelperBtnClick = function ($markdownHelperBtn, $markdownTemplatesWrapper) {
-	        if ($markdownHelperBtn.hasClass('chatbtn-default')) { //closed
-	            $markdownHelperBtn.removeClass('chatbtn-default');
-	            $markdownHelperBtn.addClass('chatbtn-success');
+if (UI_ChannelAnnouncement=="1") {
+	ChannelAnnouncement_Title=="" ? ChannelAnnouncement_Title='Administration Message' : '';
+	ChannelAnnouncement_HTML=="" ? ChannelAnnouncement_HTML='<i>no messages</i>' : '';
+	makeAlert(ChannelAnnouncement_Title, ChannelAnnouncement_HTML).appendTo("#motd");
+}
 
-	            $markdownTemplatesWrapper.show();
-	            $markdownTemplatesWrapper.children().animate({left: 0}, settings.templateButtonsAnimationSpeed);
-	        } else { //opened
-	            $markdownHelperBtn.removeClass('chatbtn-success');
-	            $markdownHelperBtn.addClass('chatbtn-default');
+if (UI_ChannelName=="1" && ChannelName_Caption!="") {
+	$(".navbar-brand").html(ChannelName_Caption);
+}
 
-	            $markdownTemplatesWrapper.children().animate({left: -$markdownTemplatesWrapper.width()}, settings.templateButtonsAnimationSpeed, function () {
-	                $markdownTemplatesWrapper.hide();
-	            });
-	        }
-	    };
-
-	    this.$markdownHelperBtn = $('<button id="markdown-helper-btn" type="button" class="chatbtn" title="' + app.t('markdown[.]Markdown helper') + '">')
-	        .html('<i class="glyphicon glyphicon-font"></i>')
-	        .on('click', function () {
-	            that.handleMarkdownHelperBtnClick($(this), that.$markdownTemplatesWrapper);
-
-	            app.storage.toggle('bb-codes-opened');
-	        });
-
-	    if ($('#chat-help-btn').length !== 0) {
-	        this.$markdownHelperBtn.insertBefore('#chat-help-btn');
-	    } else {
-	        this.$markdownHelperBtn.appendTo('#chat-controls');
-	    }
-
-
-	    this.$markdownTemplatesWrapper = $('<div class="btn-group markdown-helper-templates-wrapper">')
-	        .insertAfter(this.$markdownHelperBtn)
-	        .hide();
-
-	    if (app.storage.get('bb-codes-opened')) {
-	        this.handleMarkdownHelperBtnClick(this.$markdownHelperBtn, this.$markdownTemplatesWrapper);
-	    }
-
-
-	    /**
-	     * Markdown templates
-	     *
-	     * To add your template you need to also add your template key into settings.templateButtons
-	     * @type {object}
-	     */
-	    this.markdownTemplates = {
-	        'b': {
-	            text: '<b>B</b>',
-	            title: app.t('markdown[.]Bold text')
-	        },
-	        'i': {
-	            text: '<i>I</i>',
-	            title: app.t('markdown[.]Cursive text')
-	        },
-	        'sp': {
-	            text: 'SP',
-	            title: app.t('markdown[.]Spoiler')
-	        },
-	        'code': {
-	            text: '<code>CODE</code>',
-	            title: app.t('markdown[.]Monospace')
-	        },
-	        's': {
-	            text: '<s>S</s>',
-	            title: app.t('markdown[.]Strike')
-	        }
-	    };
-
-	    var template;
-	    for (var templateIndex = 0, templatesLength = settings.templateButtons.length; templateIndex < templatesLength; templateIndex++) {
-	        template = settings.templateButtons[templateIndex];
-
-	        $('<button type="button" class="btn btn-sm btn-default" title="' + this.markdownTemplates[template].title + '">')
-	            .html(this.markdownTemplates[template].text)
-	            .data('template', template)
-	            .appendTo(this.$markdownTemplatesWrapper);
-	    }
-
-
-	    this.handleMarkdown = function (templateType) {
-	        if (this.markdownTemplates.hasOwnProperty(templateType)) {
-	            $('#chatline')
-	                .selection('insert', {
-	                    text: '[' + templateType + ']',
-	                    mode: 'before'
-	                })
-	                .selection('insert', {
-	                    text: '[/' + templateType + ']',
-	                    mode: 'after'
-	                });
-	        }
-	    };
-	    this.$markdownTemplatesWrapper.on('click', 'button', function () {
-	        that.handleMarkdown($(this).data('template'));
-
-	        return false;
-	    });
+if (UI_Favicon=="1" && Favicon_URL!="") {
+	$(document).ready(function() {
+		$('<link id="chanfavicon" href="'+Favicon_URL+'" type="image/x-icon" rel="shortcut icon" />')
+		  .appendTo("head");
+	});
+}
 	});
 
 
 /***/ },
-/* 12 */
+/* 43 */
 /***/ function(module, exports) {
 
-	/*!
-	 * jQuery.selection - jQuery Plugin
-	 *
-	 * Copyright (c) 2010-2014 IWASAKI Koji (@madapaja).
-	 * http://blog.madapaja.net/
-	 * Under The MIT License
-	 *
-	 * Permission is hereby granted, free of charge, to any person obtaining
-	 * a copy of this software and associated documentation files (the
-	 * "Software"), to deal in the Software without restriction, including
-	 * without limitation the rights to use, copy, modify, merge, publish,
-	 * distribute, sublicense, and/or sell copies of the Software, and to
-	 * permit persons to whom the Software is furnished to do so, subject to
-	 * the following conditions:
-	 *
-	 * The above copyright notice and this permission notice shall be
-	 * included in all copies or substantial portions of the Software.
-	 *
-	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-	 * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	 * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-	 * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-	 * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-	 * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-	 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-	 */
-	(function($, win, doc) {
-	    /**
-	     * get caret status of the selection of the element
-	     *
-	     * @param   {Element}   element         target DOM element
-	     * @return  {Object}    return
-	     * @return  {String}    return.text     selected text
-	     * @return  {Number}    return.start    start position of the selection
-	     * @return  {Number}    return.end      end position of the selection
-	     */
-	    var _getCaretInfo = function(element){
-	        var res = {
-	            text: '',
-	            start: 0,
-	            end: 0
-	        };
-
-	        if (!element.value) {
-	            /* no value or empty string */
-	            return res;
-	        }
-
-	        try {
-	            if (win.getSelection) {
-	                /* except IE */
-	                res.start = element.selectionStart;
-	                res.end = element.selectionEnd;
-	                res.text = element.value.slice(res.start, res.end);
-	            } else if (doc.selection) {
-	                /* for IE */
-	                element.focus();
-
-	                var range = doc.selection.createRange(),
-	                    range2 = doc.body.createTextRange();
-
-	                res.text = range.text;
-
-	                try {
-	                    range2.moveToElementText(element);
-	                    range2.setEndPoint('StartToStart', range);
-	                } catch (e) {
-	                    range2 = element.createTextRange();
-	                    range2.setEndPoint('StartToStart', range);
-	                }
-
-	                res.start = element.value.length - range2.text.length;
-	                res.end = res.start + range.text.length;
-	            }
-	        } catch (e) {
-	            /* give up */
-	        }
-
-	        return res;
-	    };
-
-	    /**
-	     * caret operation for the element
-	     * @type {Object}
-	     */
-	    var _CaretOperation = {
-	        /**
-	         * get caret position
-	         *
-	         * @param   {Element}   element         target element
-	         * @return  {Object}    return
-	         * @return  {Number}    return.start    start position for the selection
-	         * @return  {Number}    return.end      end position for the selection
-	         */
-	        getPos: function(element) {
-	            var tmp = _getCaretInfo(element);
-	            return {start: tmp.start, end: tmp.end};
-	        },
-
-	        /**
-	         * set caret position
-	         *
-	         * @param   {Element}   element         target element
-	         * @param   {Object}    toRange         caret position
-	         * @param   {Number}    toRange.start   start position for the selection
-	         * @param   {Number}    toRange.end     end position for the selection
-	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
-	         */
-	        setPos: function(element, toRange, caret) {
-	            caret = this._caretMode(caret);
-
-	            if (caret === 'start') {
-	                toRange.end = toRange.start;
-	            } else if (caret === 'end') {
-	                toRange.start = toRange.end;
-	            }
-
-	            element.focus();
-	            try {
-	                if (element.createTextRange) {
-	                    var range = element.createTextRange();
-
-	                    if (win.navigator.userAgent.toLowerCase().indexOf("msie") >= 0) {
-	                        toRange.start = element.value.substr(0, toRange.start).replace(/\r/g, '').length;
-	                        toRange.end = element.value.substr(0, toRange.end).replace(/\r/g, '').length;
-	                    }
-
-	                    range.collapse(true);
-	                    range.moveStart('character', toRange.start);
-	                    range.moveEnd('character', toRange.end - toRange.start);
-
-	                    range.select();
-	                } else if (element.setSelectionRange) {
-	                    element.setSelectionRange(toRange.start, toRange.end);
-	                }
-	            } catch (e) {
-	                /* give up */
-	            }
-	        },
-
-	        /**
-	         * get selected text
-	         *
-	         * @param   {Element}   element         target element
-	         * @return  {String}    return          selected text
-	         */
-	        getText: function(element) {
-	            return _getCaretInfo(element).text;
-	        },
-
-	        /**
-	         * get caret mode
-	         *
-	         * @param   {String}    caret           caret mode
-	         * @return  {String}    return          any of the following: "keep" | "start" | "end"
-	         */
-	        _caretMode: function(caret) {
-	            caret = caret || "keep";
-	            if (caret === false) {
-	                caret = 'end';
-	            }
-
-	            switch (caret) {
-	                case 'keep':
-	                case 'start':
-	                case 'end':
-	                    break;
-
-	                default:
-	                    caret = 'keep';
-	            }
-
-	            return caret;
-	        },
-
-	        /**
-	         * replace selected text
-	         *
-	         * @param   {Element}   element         target element
-	         * @param   {String}    text            replacement text
-	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
-	         */
-	        replace: function(element, text, caret) {
-	            var tmp = _getCaretInfo(element),
-	                orig = element.value,
-	                pos = $(element).scrollTop(),
-	                range = {start: tmp.start, end: tmp.start + text.length};
-
-	            element.value = orig.substr(0, tmp.start) + text + orig.substr(tmp.end);
-
-	            $(element).scrollTop(pos);
-	            this.setPos(element, range, caret);
-	        },
-
-	        /**
-	         * insert before the selected text
-	         *
-	         * @param   {Element}   element         target element
-	         * @param   {String}    text            insertion text
-	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
-	         */
-	        insertBefore: function(element, text, caret) {
-	            var tmp = _getCaretInfo(element),
-	                orig = element.value,
-	                pos = $(element).scrollTop(),
-	                range = {start: tmp.start + text.length, end: tmp.end + text.length};
-
-	            element.value = orig.substr(0, tmp.start) + text + orig.substr(tmp.start);
-
-	            $(element).scrollTop(pos);
-	            this.setPos(element, range, caret);
-	        },
-
-	        /**
-	         * insert after the selected text
-	         *
-	         * @param   {Element}   element         target element
-	         * @param   {String}    text            insertion text
-	         * @param   {String}    caret           caret mode: any of the following: "keep" | "start" | "end"
-	         */
-	        insertAfter: function(element, text, caret) {
-	            var tmp = _getCaretInfo(element),
-	                orig = element.value,
-	                pos = $(element).scrollTop(),
-	                range = {start: tmp.start, end: tmp.end};
-
-	            element.value = orig.substr(0, tmp.end) + text + orig.substr(tmp.end);
-
-	            $(element).scrollTop(pos);
-	            this.setPos(element, range, caret);
-	        }
-	    };
-
-	    /* add jQuery.selection */
-	    $.extend({
-	        /**
-	         * get selected text on the window
-	         *
-	         * @param   {String}    mode            selection mode: any of the following: "text" | "html"
-	         * @return  {String}    return
-	         */
-	        selection: function(mode) {
-	            var getText = ((mode || 'text').toLowerCase() === 'text');
-
-	            try {
-	                if (win.getSelection) {
-	                    if (getText) {
-	                        // get text
-	                        return win.getSelection().toString();
-	                    } else {
-	                        // get html
-	                        var sel = win.getSelection(), range;
-
-	                        if (sel.getRangeAt) {
-	                            range = sel.getRangeAt(0);
-	                        } else {
-	                            range = doc.createRange();
-	                            range.setStart(sel.anchorNode, sel.anchorOffset);
-	                            range.setEnd(sel.focusNode, sel.focusOffset);
-	                        }
-
-	                        return $('<div></div>').append(range.cloneContents()).html();
-	                    }
-	                } else if (doc.selection) {
-	                    if (getText) {
-	                        // get text
-	                        return doc.selection.createRange().text;
-	                    } else {
-	                        // get html
-	                        return doc.selection.createRange().htmlText;
-	                    }
-	                }
-	            } catch (e) {
-	                /* give up */
-	            }
-
-	            return '';
-	        }
-	    });
-
-	    /* add selection */
-	    $.fn.extend({
-	        selection: function(mode, opts) {
-	            opts = opts || {};
-
-	            switch (mode) {
-	                /**
-	                 * selection('getPos')
-	                 * get caret position
-	                 *
-	                 * @return  {Object}    return
-	                 * @return  {Number}    return.start    start position for the selection
-	                 * @return  {Number}    return.end      end position for the selection
-	                 */
-	                case 'getPos':
-	                    return _CaretOperation.getPos(this[0]);
-
-	                /**
-	                 * selection('setPos', opts)
-	                 * set caret position
-	                 *
-	                 * @param   {Number}    opts.start      start position for the selection
-	                 * @param   {Number}    opts.end        end position for the selection
-	                 */
-	                case 'setPos':
-	                    return this.each(function() {
-	                        _CaretOperation.setPos(this, opts);
-	                    });
-
-	                /**
-	                 * selection('replace', opts)
-	                 * replace the selected text
-	                 *
-	                 * @param   {String}    opts.text            replacement text
-	                 * @param   {String}    opts.caret           caret mode: any of the following: "keep" | "start" | "end"
-	                 */
-	                case 'replace':
-	                    return this.each(function() {
-	                        _CaretOperation.replace(this, opts.text, opts.caret);
-	                    });
-
-	                /**
-	                 * selection('insert', opts)
-	                 * insert before/after the selected text
-	                 *
-	                 * @param   {String}    opts.text            insertion text
-	                 * @param   {String}    opts.caret           caret mode: any of the following: "keep" | "start" | "end"
-	                 * @param   {String}    opts.mode            insertion mode: any of the following: "before" | "after"
-	                 */
-	                case 'insert':
-	                    return this.each(function() {
-	                        if (opts.mode === 'before') {
-	                            _CaretOperation.insertBefore(this, opts.text, opts.caret);
-	                        } else {
-	                            _CaretOperation.insertAfter(this, opts.text, opts.caret);
-	                        }
-	                    });
-
-	                /**
-	                 * selection('get')
-	                 * get selected text
-	                 *
-	                 * @return  {String}    return
-	                 */
-	                case 'get':
-	                    /* falls through */
-	                default:
-	                    return _CaretOperation.getText(this[0]);
-	            }
-
-	            return this;
-	        }
-	    });
-	})(jQuery, window, window.document);
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('chatAvatars', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var tab = app.Settings.getTab('general', app.t('general[.]General'), 100);
-	    var userSettings = app.Settings.storage;
-	    var appSettings = app.storage;
-
-	    var defaultSettings = {
-	        avatarClass: 'profileImage',
-	        smallAvatarClass: 'chat-avatar_small',
-	        bigAvatarClass: 'chat-avatar_big'
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-
-	    var namespace = 'avatars';
-	    this.scheme = {
-	        'avatars-mode': {
-	            title: app.t('chatAvatars[.]Chat avatars'),
-	            default: 'big',
-	            options: [
-	                {value: 'small', title: app.t('chatAvatars[.]Disabled')},
-	                {value: 'small', title: app.t('chatAvatars[.]Small')},
-	                {value: 'big', title: app.t('chatAvatars[.]Big')}
-	            ]
-	        }
-	    };
-	    appSettings.setDefault(namespace + '.cache', []);
-
-
-
-	    this.cacheAvatar = function (username, avatar) {
-	        var cachedAvatars = appSettings.get(namespace + '.cache');
-
-	        if (cachedAvatars.length >= 50) {
-	            cachedAvatars = cachedAvatars.slice(0, 49);
-	        }
-
-	        cachedAvatars.unshift({
-	            username: username,
-	            avatar: avatar
-	        });
-
-	        appSettings.set(namespace + '.cache', cachedAvatars);
-	    };
-
-	    this.getAvatarFromCache = function (username) {
-	        var cachedAvatar = _.findLast(appSettings.get(namespace + '.cache'), function (o) { return o.username == username; });
-	        cachedAvatar = cachedAvatar ? cachedAvatar.avatar : null;
-
-	        return cachedAvatar;
-	    };
-
-	    this.getAvatarFromUserlist = function (username) {
-	        return (window.findUserlistItem(username) && window.findUserlistItem(username).data('profile').image) ? window.findUserlistItem(username).data('profile').image : null;
-	    };
-
-	    this.applyAvatar = function ($usernameBlock, username, newAvatar) {
-	        username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
-	        newAvatar = newAvatar || that.getAvatarFromUserlist(username);
-	        var cachedAvatar = that.getAvatarFromCache(username);
-	        var $messageBlock = $usernameBlock.parent();
-
-	        if (cachedAvatar || newAvatar) {
-	            if (!cachedAvatar) {
-	                that.cacheAvatar(username, newAvatar);
-	            }
-
-	            if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
-	                var $avatar = $("<img>").attr("src", newAvatar || cachedAvatar)
-	                    .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
-	                    .prependTo($messageBlock);
-
-	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
-	                    $(this).css('display', 'none');
-	                    $avatar.attr('title', username);
-	                }
-	            }
-	        }
-	    };
-
-
-//
-
-
-
-
-	    /**
-	     * Creating markup for settings
-	     */
-	    var schemeItem;
-	    var option;
-	    var sort = 100;
-	    for (var itemName in this.scheme) {
-	        schemeItem = this.scheme[itemName];
-
-	        userSettings.setDefault(namespace + '.' + itemName, schemeItem.default);
-
-	        if (userSettings.get(namespace + '.' + itemName)) {
-	            for (option in schemeItem.options) {
-	                schemeItem.options[option].selected = (userSettings.get(namespace + '.' + itemName) == schemeItem.options[option].value);
-	            }
-	        }
-
-	        tab.addControl('select', 'horizontal', schemeItem.title, itemName, schemeItem.options, null, sort);
-	        sort += 100;
-	    }
-
-
-	    /**
-	     * Saving and applying settings
-	     */
-	    app.Settings.onSave(function (settings) {
-	        for (var itemName in that.scheme) {
-	            settings.set(namespace + '.' + itemName, $('#' + app.prefix + itemName).val());
-	        }
-
-	        if (settings.isDirty(namespace + '.avatars-mode')) {
-	            app.Settings.requestPageReload();
-	        }
-	    });
-
-
-	    /**
-	     * Applying settings
-	     */
-	    if (userSettings.get(namespace  + '.avatars-mode')) {
-	        window.formatChatMessage = (function (oldFormatChatMessage) {
-	            return function (data, last) {
-	                var $div = oldFormatChatMessage(data, last);
-
-	                that.applyAvatar($div.find('.username'), data.username);
-
-	                return $div;
-	            };
-	        })(window.formatChatMessage);
-
-	        $('.username').each(function () {
-	            that.applyAvatar($(this));
-	        });
-
-
-	        window.socket.on('addUser', function (data) {
-	            if (data.profile && data.profile.image && data.name) {
-	                $('.username:contains("' + data.name + ':")').each(function () {
-	                    that.applyAvatar($(this), data.name, data.profile.image);
-	                });
-	            }
-	        });
-	    }
-	});
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('chatCommandsHelp', function (app, settings) {
+	window.cytubeEnhanced.addModule('Announcements', function (app, settings) {
 	    'use strict';
 	    var that = this;
 
 	    var defaultSettings = {
-	        commands: {
-	            '/me': app.t('chatCommands[.]%username% action (e.g: <i>/me is dancing</i>)'),
-	            '/sp': app.t('chatCommands[.]spoiler'),
-	            '/afk': app.t('chatCommands[.]sets the "AFK" status')
-	        }
+	        turnedOn: true
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
+	    
+$('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/itgmhc2mkf9v14r/discord.css' />");
+$("#motd").after("<div class='discordoverlay'><div class='discordmain'><img class='discord' src='//s14.postimg.cc/fel8mtljl/J6_RTf6_P.png' /><div class=discordtext><h1>Join the community!</h1><h2><a href='https://discord.gg/fwadWd9' target='_blank'>discord.gg/fwadWd9</a></h2></div><div class='Darrows Darrows-1'></div><div class='Darrows Darrows-2'></div></div></div>");
 
-	    if ($('#chat-controls').length === 0) {
-	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
-	    }
-
-	    this.commands = {};
-	    this.commands[app.t('Standard commands')] = settings.commands;
-
-	    if (app.isModulePermitted('additionalChatCommands')) {
-	        app.getModule('additionalChatCommands').done(function (commandsModule) {
-	            var additionalCommands = {};
-
-	            for (var command in commandsModule.commandsList) {
-	                if (commandsModule.commandsList.hasOwnProperty(command) && commandsModule.isCommandPermitted(command) && (commandsModule.commandsList[command].isAvailable ? commandsModule.commandsList[command].isAvailable() : true)) {
-	                    additionalCommands[command] = commandsModule.commandsList[command].description || '';
-	                }
-	            }
-
-	            that.commands[app.t('Extra commands')] = additionalCommands;
-	        });
-	    }
-
-
-	    this.handleChatHelpBtn = function (commands) {
-	        var $header = $('<h3 class="modal-title">').text(app.t('The list of chat commands'));
-
-	        var $bodyWrapper = $('<div>');
-
-	        for (var commandsPart in commands) {
-	            if (commands.hasOwnProperty(commandsPart)) {
-	                $('<h3>').html(commandsPart).appendTo($bodyWrapper);
-
-	                var $ul = $('<ul>');
-	                for (var command in commands[commandsPart]) {
-	                    if (commands[commandsPart].hasOwnProperty(command)) {
-	                        $('<li>').html('<code>' + command + '</code> - ' + commands[commandsPart][command] + '.').appendTo($ul);
-	                    }
-	                }
-
-	                $ul.appendTo($bodyWrapper);
-	            }
-	        }
-
-	        app.UI.createModalWindow('chat-commands-help', $header, $bodyWrapper);
-	    };
-	    this.$chatHelpBtn = $('<button id="chat-help-btn" class="chatbtn">')
-	        .text(app.t('!'))
-	        .appendTo('#chat-controls')
-	        .on('click', function () {
-	            that.handleChatHelpBtn(that.commands);
-	        });
 	});
 
-
-/***/ },
-/* 15 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('chatControls', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        afkButton: true,
-	        clearChatButton: false
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-
-
-
-	    this.handleAfkBtn = function () {
-	        window.socket.emit('chatMsg', {msg: '/afk'});
-	    };
-	    this.$afkBtn = $('<span id="afk-btn" class="label label-default pull-right pointer">')
-	        .text(app.t('AFK'))
-	        .appendTo('.chat-area-buttons')
-	        .on('click', function () {
-	            that.handleAfkBtn();
-	        });
-
-
-
-	    this.handleAfk = function (data) {
-	        if (data.name === window.CLIENT.name) {
-	            if (data.afk) {
-	                that.$afkBtn.removeClass('label-default');
-	                that.$afkBtn.addClass('label-success');
-	            } else {
-	                that.$afkBtn.addClass('label-default');
-	                that.$afkBtn.removeClass('label-success');
-	            }
-	        }
-	    };
-
-	    if (settings.afkButton) {
-	        window.socket.on('setAFK', function (data) {
-	            that.handleAfk(data);
-	        });
-	    } else {
-	        this.$afkBtn.hide();
-	    }
-
-
-
-
-	    this.handleClearBtn = function () {
-	        if (window.confirm(app.t('Are you sure, that you want to clear the chat?'))) {
-	            window.socket.emit("chatMsg", {msg: '/clear'});
-	        }
-	    };
-	    this.$clearChatBtn = $('<span id="clear-chat-btn" class="label label-default pull-right pointer">')
-	        .text(app.t('Clear'))
-	        .insertAfter(this.$afkBtn)
-	        .on('click', function () {
-	            that.handleClearBtn();
-	        });
-
-	    if (!window.hasPermission("chatclear")) {
-	        this.$clearChatBtn.hide();
-	    }
-
-
-	    this.handleChatClear = function () {
-	        if (window.hasPermission("chatclear") && settings.clearChatButton) {
-	            that.$clearChatBtn.show();
-	        } else {
-	            that.$clearChatBtn.hide();
-	        }
-	    };
-
-	    window.socket.on('setUserRank', function () {
-	        that.handleChatClear();
-	    });
-	});
-
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	/*
-	TODO: keep pm messages, add ability to user to specify settings, ignore users
-	 */
-	window.cytubeEnhanced.addModule('chatHistory', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        itemsInHistory: 50
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-	    app.storage.setDefault('pmHistory', []);
-
-
-	    window.socket.on('chatMsg', function (data) {
-	        if (window.CLIENT.name && data.msg.toLowerCase().indexOf(window.CLIENT.name.toLowerCase()) != -1) {
-	            var pmHistory = app.storage.get('pmHistory');
-	            if (!$.isArray(pmHistory)) {
-	                pmHistory = [];
-	            }
-
-	            if (pmHistory.length >= settings.itemsInHistory) {
-	                pmHistory = pmHistory.slice(0, settings.itemsInHistory - 1);
-	            }
-
-	            pmHistory.unshift({
-	                username: data.username,
-	                msg: data.msg,
-	                time: data.time
-	            });
-
-	            app.storage.set('pmHistory', pmHistory);
-	        }
-	    });
-
-
-	    this.formatHistoryMessage = function (data) {
-	        var $messageWrapper = $('<div class="pm-history-message">');
-
-
-	        var time = (new Date(data.time));
-
-	        var day = time.getDate();
-	        day = day < 10 ? ('0' + day) : day;
-	        var month = time.getMonth();
-	        month = month < 10 ? ('0' + month) : month;
-	        var year = time.getFullYear();
-	        var hours = time.getHours();
-	        hours = hours < 10 ? ('0' + hours) : hours;
-	        var minutes = time.getMinutes();
-	        minutes = minutes < 10 ? ('0' + minutes) : minutes;
-	        var seconds = time.getSeconds();
-	        seconds = seconds < 10 ? ('0' + seconds) : seconds;
-
-	        var timeString = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
-
-
-
-	        $messageWrapper.append($('<div class="pm-history-message-time">[' + timeString + ']</div>'));
-	        $messageWrapper.append($('<div class="pm-history-message-username">' + data.username + '</div>'));
-	        $messageWrapper.append($('<div class="pm-history-message-content">' + data.msg + '</div>'));
-
-
-	        return $messageWrapper;
-	    };
-
-	    this.showChatHistory = function () {
-	        var pmHistory = app.storage.get('pmHistory');
-	        if (!$.isArray(pmHistory)) {
-	            pmHistory = [];
-	        }
-
-
-	        var $header = $('<div class="modal-header__inner">');
-	        $header.append($('<h3 class="modal-title">').text(app.t('pmHistory[.]Chat history')));
-	        $header.append($('<div class="modat-header__description">').text(app.t('pmHistory[.]Your chat messages history.')));
-
-	        var $wrapper = $('<div class="pm-history-content">');
-	        for (var position = 0, historyLength = pmHistory.length; position < historyLength; position++) {
-	            $wrapper.append(that.formatHistoryMessage(pmHistory[position]));
-	        }
-
-
-	        var $resetChatHistoryBtn = $('<button type="button" id="pm-history-reset-btn" class="btn btn-danger" data-dismiss="modal">' + app.t('pmHistory[.]Reset history') + '</button>')
-	            .on('click', function () {
-	                if (window.confirm(app.t('pmHistory[.]Are you sure, that you want to clear messages history?'))) {
-	                    that.resetChatHistory();
-	                }
-	            });
-	        var $exitChatHistoryBtn = $('<button type="button" id="pm-history-exit-btn" class="btn btn-default" data-dismiss="modal">' + app.t('pmHistory[.]Exit') + '</button>');
-	        var $footer = $('<div class="pm-history-footer">');
-	        $footer.append($resetChatHistoryBtn);
-	        $footer.append($exitChatHistoryBtn);
-
-
-	        return app.UI.createModalWindow('chat-history', $header, $wrapper, $footer);
-	    };
-
-	    this.$showChatHistoryBtn = $('<span id="pm-history-btn" class="label label-default pull-right pointer">')
-	        .text(app.t('pmHistory[.]History'))
-	        .appendTo('.chat-area-buttons')
-	        .on('click', function () {
-	            that.showChatHistory();
-	        });
-
-
-	    this.resetChatHistory = function () {
-	        app.storage.set('pmHistory', app.storage.getDefault('pmHistory'));
-	    };
-	});
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('common', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        insertUsernameOnClick: true
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-
-	    this.$chatline = $("#chatline");
-	    this.$userlist = $("#userlist");
-
-
-	    window.chatTabComplete = function () {
-	        var i;
-	        var words = that.$chatline.val().split(" ");
-	        var current = words[words.length - 1].toLowerCase();
-	        if (!current.match(/^[\wа-яА-ЯёЁ-]{1,20}$/)) {
-	            return;
-	        }
-
-	        var __slice = Array.prototype.slice;
-	        var usersWithCap = __slice.call(that.$userlist.find('.userlist_item')).map(function (elem) {
-	            return elem.children[1].innerHTML;
-	        });
-	        var users = __slice.call(usersWithCap).map(function (user) {
-	            return user.toLowerCase();
-	        }).filter(function (name) {
-	            return name.indexOf(current) === 0;
-	        });
-
-	        // users now contains a list of names that start with current word
-
-	        if (users.length === 0) {
-	            return;
-	        }
-
-	        // trim possible names to the shortest possible completion
-	        var min = Math.min.apply(Math, users.map(function (name) {
-	            return name.length;
-	        }));
-	        users = users.map(function (name) {
-	            return name.substring(0, min);
-	        });
-
-	        // continually trim off letters until all prefixes are the same
-	        var changed = true;
-	        var iter = 21;
-	        while (changed) {
-	            changed = false;
-	            var first = users[0];
-	            for (i = 1; i < users.length; i++) {
-	                if (users[i] !== first) {
-	                    changed = true;
-	                    break;
-	                }
-	            }
-
-	            if (changed) {
-	                users = users.map(function (name) {
-	                    return name.substring(0, name.length - 1);
-	                });
-	            }
-
-	            // In the event something above doesn't generate a break condition, limit
-	            // the maximum number of repetitions
-	            if (--iter < 0) {
-	                break;
-	            }
-	        }
-
-	        current = users[0].substring(0, min);
-	        for (i = 0; i < usersWithCap.length; i++) {
-	            if (usersWithCap[i].toLowerCase() === current) {
-	                current = usersWithCap[i];
-	                break;
-	            }
-	        }
-
-	        if (users.length === 1) {
-	            if (words.length === 1) {
-	                current += ":";
-	            }
-	            current += " ";
-	        }
-	        words[words.length - 1] = current;
-	        that.$chatline.val(words.join(" "));
-	    };
-
-
-	    if (settings.insertUsernameOnClick) {
-	        $('#messagebuffer')
-	            .on('click', '.username', function() {
-	                app.Helpers.addMessageToChatInput($(this).text(), 'begin');
-	            })
-	            .on('click', '.chat-avatar', function() {
-	                app.Helpers.addMessageToChatInput($(this).parent().find('.username').text(), 'begin');
-	            });
-	    }
-
-
-
-	    $('#wrap').children('.navbar-fixed-top').removeClass('navbar-fixed-top');
-	    $('#footer').children('.container').append('<p class="text-muted credit">CyTube Enhanced Integrated(<a href="https://github.com/kaba99/cytube-enhanced" target="_blank">GitHub</a>)</p>');
-
-	    setTimeout(function () {
-	        window.handleWindowResize(); //chat height fix
-	    }, 3000);
-	    setTimeout(function () {
-	        window.handleWindowResize(); //chat height fix
-	    }, 10000);
-
-
-
-	    window.addUserDropdown = (function (oldAddUserDropdown) {
-	        return function (entry) {
-	            var functionResponse = oldAddUserDropdown(entry);
-
-	            entry.find('.user-dropdown>strong').click(function () {
-	                that.$chatline.val($(this).text() + ": " + that.$chatline.val());
-	            });
-
-	            return functionResponse;
-	        };
-	    })(window.addUserDropdown);
-
-	    $('.user-dropdown>strong').click(function () {
-	        that.$chatline.val($(this).text() + ": " + that.$chatline.val()).focus();
-	    });
-
-
-	    $('#queue').sortable("option", "axis", "y");
-	});
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('customCss', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        aceUrl: 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js'
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-
-	    var tab = app.Settings.getTab('custom-css', 'CSS', 200);
-	    var namespace = 'user-code';
-
-	    var userSettingsFromV1 = app.parseJSON(window.getOrDefault(window.CHANNEL.name + "_config-layout", undefined), {});
-	    app.Settings.storage.setDefault(namespace + '.css', (_.isPlainObject(userSettingsFromV1) && _.isString(userSettingsFromV1['user-css'])) ? userSettingsFromV1['user-css'] : '');
-
-	    var $editor = $('<textarea class="' + app.prefix + 'custom-editor-textarea"></textarea>').val(app.Settings.storage.get(namespace + '.css')).appendTo(tab.$content);
-	    var $aceEditor = $('<div class="' + app.prefix + 'custom-editor-ace" id="' + app.prefix + 'css-editor"></div>').text(app.Settings.storage.get(namespace + '.css'));
-	    var aceEditor;
-
-
-	    tab.onShow(function () {
-	        if (typeof aceEditor === 'undefined') {
-	            if (typeof window.ace === 'undefined') {
-	                if (!app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
-	                    app.Settings.aceIsLoading = true;
-
-	                    $.ajax({
-	                        url: settings.aceUrl,
-	                        dataType: "script",
-	                        timeout: 20000 //20 sec
-	                    }).done(function () {
-	                        that.initializeAceEditor();
-	                    }).always(function () {
-	                        app.Settings.aceIsLoading = false;
-	                        app.Settings.aceLoadingFailed = true;
-	                        tab.$content.toggleLoader('off');
-	                    });
-	                }
-
-	                if (app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
-	                    tab.$content.toggleLoader('on');
-	                }
-	            } else {
-	                that.initializeAceEditor();
-	            }
-	        }
-	    });
-
-
-	    this.applyUserCss = function (css) {
-	        $('#' + app.prefix + 'user-css').remove();
-	        $('head').append('<style id="' + app.prefix + 'user-css" type="text/css">' + css + '</style>');
-	    };
-
-
-	    this.initializeAceEditor = function () {
-	        $aceEditor.text($editor.val());
-	        $editor.replaceWith($aceEditor);
-
-	        aceEditor = window.ace.edit(app.prefix + 'css-editor');
-	        aceEditor.setTheme("ace/theme/tomorrow_night");
-	        aceEditor.getSession().setMode("ace/mode/css");
-	        aceEditor.getSession().setTabSize(4);
-	        aceEditor.getSession().setUseSoftTabs(true);
-	        aceEditor.getSession().setUseWrapMode(true);
-	        aceEditor.getSession().setWrapLimitRange();
-	        aceEditor.setOptions({
-	            minLines: 30,
-	            maxLines: 30,
-	            autoScrollEditorIntoView: true,
-	            highlightActiveLine: true
-	        });
-	    };
-
-
-	    /**
-	     * Saving and applying settings
-	     */
-	    app.Settings.onSave(function (settings) {
-	        if (aceEditor) {
-	            settings.set(namespace + '.css', aceEditor.getValue());
-	        } else {
-	            settings.set(namespace + '.css', $editor.val());
-	        }
-
-	        that.applyUserCss(settings.get(namespace + '.css'));
-	    });
-	    this.applyUserCss(app.Settings.storage.get(namespace + '.css'));
-	});
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('customJs', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        aceUrl: 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js'
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-
-	    var tab = app.Settings.getTab('custom-js', 'JS', 300);
-	    var namespace = 'user-code';
-	    app.Settings.storage.setDefault(namespace + '.js', '');
-
-	    var $editor = $('<textarea class="' + app.prefix + 'custom-editor-textarea"></textarea>').val(app.Settings.storage.get(namespace + '.js')).appendTo(tab.$content);
-	    var $aceEditor = $('<div class="' + app.prefix + 'custom-editor-ace" id="' + app.prefix + 'js-editor"></div>').text(app.Settings.storage.get(namespace + '.js'));
-	    var aceEditor;
-
-
-	    tab.onShow(function () {
-	        if (typeof aceEditor === 'undefined') {
-	            if (typeof window.ace === 'undefined') {
-	                if (!app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
-	                    app.Settings.aceIsLoading = true;
-
-	                    $.ajax({
-	                        url: settings.aceUrl,
-	                        dataType: "script",
-	                        timeout: 20000 //20 sec
-	                    }).done(function () {
-	                        that.initializeAceEditor();
-	                    }).always(function () {
-	                        app.Settings.aceIsLoading = false;
-	                        app.Settings.aceLoadingFailed = true;
-	                        tab.$content.toggleLoader('off');
-	                    });
-	                }
-
-	                if (app.Settings.aceIsLoading && !app.Settings.aceLoadingFailed) {
-	                    tab.$content.toggleLoader('on');
-	                }
-	            } else {
-	                that.initializeAceEditor();
-	            }
-	        }
-	    });
-
-
-	    this.applyUserJs = function (js) {
-	        $('#' + app.prefix + 'user-js').remove();
-	        $('body').append('<script id="' + app.prefix + 'user-js" type="text/javascript">' + js + '</script>');
-	    };
-
-
-	    this.initializeAceEditor = function () {
-	        $aceEditor.text($editor.val());
-	        $editor.replaceWith($aceEditor);
-
-	        aceEditor = window.ace.edit(app.prefix + 'js-editor');
-	        aceEditor.setTheme("ace/theme/tomorrow_night");
-	        aceEditor.getSession().setMode("ace/mode/javascript");
-	        aceEditor.getSession().setTabSize(4);
-	        aceEditor.getSession().setUseSoftTabs(true);
-	        aceEditor.getSession().setUseWrapMode(true);
-	        aceEditor.getSession().setWrapLimitRange();
-	        aceEditor.setOptions({
-	            minLines: 30,
-	            maxLines: 30,
-	            autoScrollEditorIntoView: true,
-	            highlightActiveLine: true
-	        });
-	    };
-
-
-	    /**
-	     * Saving and applying settings
-	     */
-	    app.Settings.onSave(function (settings) {
-	        if (aceEditor) {
-	            settings.set(namespace + '.js', aceEditor.getValue());
-	        } else {
-	            settings.set(namespace + '.js', $editor.val());
-	        }
-
-	        that.applyUserJs(settings.get(namespace + '.js'));
-	    });
-	    this.applyUserJs(app.Settings.storage.get(namespace + '.js'));
-	});
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('extras', function (app, settings) {
-	    'use strict';
-	    var that = this;
-
-	    var defaultSettings = {
-	        enabledModules: ['anime-quotes', 'pirate-quotes']
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
-
-	    var tab = app.Settings.getTab('extras', app.t('extras[.]Extras'), 400);
-	    var $tabContent = $('<div class="row">').appendTo(tab.$content).wrap('<div class="' + app.prefix + 'extras">');
-	    var userSettings = app.Settings.storage;
-
-	    var $modulesInfoMessage = $('<div class="' + app.prefix + 'extras__info-message">').text('Сторонние модули отсутствуют.').prependTo(tab.$content);
-
-	    var namespace = 'extras';
-	    userSettings.setDefault(namespace + '.enabled', settings.enabledModules);
-	    this.enabledModules = userSettings.get(namespace + '.enabled') || [];
-	    this.extraModules = {};
-
-
-	    this.add = function (config) {
-	        $modulesInfoMessage.text(app.t('extras[.]Extras for additional functionality'));
-
-	        that.extraModules[config.name] = config;
-	        that.extraModules[config.name].$el = that.addMarkup(config).appendTo($tabContent);
-	        that.sort();
-
-	        if (that.enabledModules.indexOf(config.name) != -1) {
-	            $.getScript(that.extraModules[config.name].url + '?ac=' + Date.now());
-	        }
-	    };
-
-
-	    this.enable = function (name) {
-	        return that.enabledModules.push(name);
-	    };
-
-
-	    this.disable = function (name) {
-	        var position = that.enabledModules.indexOf(name);
-
-	        if (position !== -1) {
-	            return that.enabledModules.splice(position, 1);
-	        } else {
-	            return false;
-	        }
-	    };
-
-
-	    this.addMarkup = function (config) {
-	        var $moduleInfo = $('<div class="' + app.prefix + 'extras__item">');
-	        $moduleInfo.data('name', config.name);
-
-
-	        config.authorUrl = _.trim(config.authorUrl);
-	        var $title = config.authorUrl ?
-	            $('<a class="' + app.prefix + 'extras__item__title ' + app.prefix + 'extras__item__title_link" target="_blank">').attr('href', config.authorUrl).text(config.title).appendTo($moduleInfo) :
-	            $('<div class="' + app.prefix + 'extras__item__title ' + app.prefix + 'extras__item__title_text">').text(config.title).appendTo($moduleInfo);
-
-	        var $description = $('<div class="' + app.prefix + 'extras__item__description">').text(config.description || 'Нет описания').appendTo($moduleInfo);
-
-	        var $toggleModuleButton = $('<div class="' + app.prefix + 'extras__item__button btn btn-xs">').appendTo($moduleInfo).data('enabled', that.enabledModules.indexOf(config.name) != -1).on('click', function () {
-	            if ($(this).data('enabled')) {
-	                $(this).data('enabled', false);
-	                that.disable(config.name);
-	                $(this).removeClass('btn-danger').addClass('btn-success').text('Enabled');
-	            } else {
-	                $(this).data('enabled', true);
-	                that.enable(config.name);
-	                $(this).removeClass('btn-success').addClass('btn-danger').text('Disabled');
-	            }
-	        });
-	        if (that.enabledModules.indexOf(config.name) != -1) {
-	            $toggleModuleButton.addClass('btn-danger').text('Disabled');
-	        } else {
-	            $toggleModuleButton.addClass('btn-success').text('Enabled');
-	        }
-
-	        $moduleInfo = $('<div class="col-md-6">').append($moduleInfo);
-
-	        return $moduleInfo;
-	    };
-
-
-	    this.sort = function () {
-	        var extraModulesArray = [];
-	        for (var module in that.extraModules) {
-	            extraModulesArray.push(that.extraModules[module]);
-	        }
-
-	        extraModulesArray = extraModulesArray.sort(function (a, b) {
-	            var aSort = +(that.enabledModules.indexOf(a.name) != -1);
-	            var bSort = +(that.enabledModules.indexOf(b.name) != -1);
-
-	            if (aSort < bSort) {
-	                return 1;
-	            } else if (aSort > bSort) {
-	                return -1;
-	            } else {
-	                if (a.title.toLowerCase() > b.title.toLowerCase()) {
-	                    return 1;
-	                } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
-	                    return -1;
-	                } else {
-	                    return 0;
-	                }
-	            }
-	        });
-
-	        for (var extraModuleIndex = 0, extraModulesLength = extraModulesArray.length; extraModuleIndex < extraModulesLength; extraModuleIndex++) {
-	            extraModulesArray[extraModuleIndex].$el.detach().appendTo($tabContent);
-	        }
-	    };
-
-
-	    /**
-	     * Saving and applying settings
-	     */
-	    app.Settings.onSave(function (settings) {
-	        settings.set(namespace + '.enabled', that.enabledModules);
-
-	        if (settings.isDirty(namespace + '.enabled')) {
-	            app.Settings.requestPageReload();
-	        }
-	    });
-	});
-
-
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	window.cytubeEnhanced.addModule('favouritePictures', function (app) {
-	    'use strict';
-	    var that = this;
-
-	    var favouritePicturesFromV1 = app.parseJSON(window.localStorage.getItem('favouritePictures'), []);
-	    app.storage.setDefault('favouritePictures', _.isArray(favouritePicturesFromV1) ? favouritePicturesFromV1 : []);
-
-	    if ($('#chat-panel').length === 0) {
-	        $('<div id="chat-panel" class="row">').insertAfter("#main");
-
-	    }
-
-	    if ($('#chat-controls').length === 0) {
-	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
-	    }
-
-
-	    this.$toggleFavouritePicturesPanelBtn = $('<button id="favourite-pictures-btn" class="btn btn-sm btn-default" title="' + app.t('favPics[.]Show your favorite images') + '">')
-	        .html('<i class="glyphicon glyphicon-th"></i>');
-	    if ($('#smiles-btn').length !== 0) {
-	        this.$toggleFavouritePicturesPanelBtn.insertAfter('#smiles-btn');
-	    } else {
-	        this.$toggleFavouritePicturesPanelBtn.prependTo('#chat-controls');
-	    }
-
-
-
-
-
-	    this.$favouritePicturesPanel = $('<div id="favourite-pictures-panel">')
-	        .appendTo('#chat-panel')
-	        .hide();
-	    this.$favouritePicturesPanelRow = $('<div class="favourite-pictures-panel-row">')
-	        .appendTo(this.$favouritePicturesPanel);
-
-
-	    this.$favouritePicturesTrash = $('<div id="pictures-trash" title="' + app
+/***/ }
+/******/ ]);		      
