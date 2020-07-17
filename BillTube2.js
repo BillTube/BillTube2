@@ -2,12 +2,10 @@
 |Thanks to: Kuer, Xaekai[xaemae], ss7(supersaw7) and kenblu24
 |BillTube 2.0 Theme by BILL(2) , You can find me on my discord channel discord.gg/fwadWd9
 |You are free to use (and edit) this theme but leave ALL credits in place for everyone involved.
-*/
 
 
+Copy and paste the following into your Channel Javascript to customize your channel.
 
-UI_AttentionBar = 0;		// [&] imageboard-style attention bar (requires external application)
-AttentionBar_URL = '';
 UI_ChannelAnnouncement = 1;	// [&] additional custom channel announcement
 ChannelAnnouncement_Title = 'Channel Announcement!';
 ChannelAnnouncement_HTML = 'This is a test announcement for BillTube 2.0.';
@@ -18,8 +16,7 @@ UI_Favicon = 1;			// [&] channel favicon
 VideoPoster = 1;			// [&] Custom video Poster
 Poster_URL = 'https://dl.dropboxusercontent.com/s/xgefazzyhs8xncp/icon.png';
 
-
-
+*/
 
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -22844,16 +22841,6 @@ function playFile() {
 	        turnedOn: true
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
-
-	    
-// adding attention bar
-
-if (UI_AttentionBar=="1" && AttentionBar_URL!="") {
-	attbarwrap = $('<div id="attbarrow-outer" class="col-md-12" />').prependTo("#announcements");
-	attbar = $('<iframe id="attbar" width="100%" frameborder="0" scrolling="no" />')
-	  .attr('src', AttentionBar_URL)
-	  .appendTo(attbarwrap);
-}
 
 // adding custom channel announcement
 
