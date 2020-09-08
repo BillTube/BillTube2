@@ -1,3 +1,3 @@
-# BillTube2
+# BillTube 2
 BillTube 2.0
-DO NOT USE
+Beta build, should be stable!
