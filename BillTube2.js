@@ -235,10 +235,6 @@ ColorsArray = [
 	window.CytubeEnhancedHelpers = function (app) {
 	    var that = this;
 
-//var preloadedScript = document.createElement("script");
-//preloadedScript.src = "//dl.dropbox.com/s/39iz5fdgzxufp7b/lazyloadbilltheme.js";
-//document.body.appendChild(preloadedScript);
-		/////////////////////
 //Mobile Check
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 $("#ytapiplayer_html5_api").attr("muted","");
@@ -255,13 +251,6 @@ $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-aw
 $('head').append("<link rel='stylesheet' href='//cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
-//var preloadLink = document.createElement("link");
-//preloadLink.href = "//dl.dropbox.com/s/20itilaw81x53r5/BillTubeGiphy.js";
-//preloadLink.rel = "preload";
-//preloadLink.as = "script";
-//document.head.appendChild(preloadLink);
-
-
 
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
@@ -495,19 +484,12 @@ $('#voteskip').hide();
 $('#fullscreenbtn').hide();
 $("#nav-collapsible").append("<div id='headermenu' class='headermenu'></div>");
 $('#videowrap-header').hide();
-
-//$("#VideoOverlay").append("<button id='flipButton' title='Flip the Video' class='btn btn-sm btn-default OLB hidden'>Mirror</button>");
-//$("flipButton").click(function() {
-//  $(ytapiplayer_html5_api).toggleClass("flip");
-//});
 $('body').removeClass('compact').removeClass('synchtube').removeClass('hd');
-
 $("#chatwrap").append(
 '<div class="chat-area-footer">' +
 '<div class="chat-area-buttons">' +
 '<div id="chatbox"></div>' +
 '</div></div>' );
-
 $("#chatheader").append(
 '<div class="chat-area-header">' +
 '<div class="chat-area-title"><i id="marq" class="fad fa-play" onclick="toggleClassTitle()"></i></div>' +
@@ -554,7 +536,6 @@ $("#fullscreenbtn").text("");
 $("#fullscreenbtn").addClass("fa fa-arrows-alt");
 $("#fullscreenbtn").removeClass("btn btn-sm");
 $("#loginform").detach().after("#headermenu");
-//$("#fullscreenbtn").addClass("ch");
 $("#nav-collapsible").after($("#fullscreenbtn"));
 $("#morebtn").after($("#videocontrols"));
 $("#videocontrols").removeClass("pull-right");
@@ -570,7 +551,6 @@ $("#mediarefresh").addClass("fal fa-sync OLB");
 $("#mediarefresh").removeClass("btn btn-sm btn-default");
 $("#mediarefresh").text("");
 $("#userlist").addClass("animated animatedFadeInUp fadeInUp");
-
 $("#queue").addClass("queue_sortable");
 $("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Up Next</p></div></div>");
 $("#queuecontainer").append($("#queue"));
@@ -578,7 +558,6 @@ $("#upnext").append($("#plmeta"));
 $("#upnext").after("<ul id='ploptions' class='menu hidden' role='menu'></ul>");
 $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplaylist"));
 $("#upnext").before($("#qlockbtn"));
-//$("<div class='indicator'><svg width='16px' height='12px'><polyline id='back' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline><polyline id='front' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline></svg></div>").appendTo('.navbar-header');
 $('#queuecontainer').hover(function(){
     $('#pllength').css({
         'opacity':'0.9',
@@ -611,8 +590,6 @@ $("#chatwrap .nano").append($("#messagebuffer"));
 $('#chatwrap').children('.form-control').before("<input type='text' id='username'style='width:0;height:0;visibility:hidden;position:absolute;left:0;top:0' /><input type='password'style='width:0;height:0;visibility:hidden;position:absolute;left:0;top:0' />");
 $('.form-control').attr('autocomplete' , 'off');
 $("nav .navbar-brand").attr('href', document.URL);
-//$("#mainpage").append("<div id='mHandle-left' class='mHandle'></div> <div id='mHandle-right' class='mHandle'></div><div id='mHandle-mid' class='mHandle'></div>");
-//$("body").prepend("<div id='dragoverlay'><div class='l'></div><div class='r'></div><div id='handleWidget'></div></div>");
 $("#mainpage").append("<style id='splitRatio'>@media (min-width: 992px) {#mainpage > .nano {width: 83%;} #chatwrap {width: 17%;}}</style>");
 $("#maincontain").addClass("maincontain");
 $("#sitefooter").append($("#logoutform"));
