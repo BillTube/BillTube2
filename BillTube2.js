@@ -19222,6 +19222,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	            }
 	        }
 	    };
+		
 
 
 //
@@ -19959,17 +19960,17 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	            if ($(this).data('enabled')) {
 	                $(this).data('enabled', false);
 	                that.disable(config.name);
-	                $(this).removeClass('btn-danger').addClass('btn-success').text('Enabled');
+	                $(this).removeClass('btn-danger').addClass('btn-success').text('Enable');
 	            } else {
 	                $(this).data('enabled', true);
 	                that.enable(config.name);
-	                $(this).removeClass('btn-success').addClass('btn-danger').text('Disabled');
+	                $(this).removeClass('btn-success').addClass('btn-danger').text('Disable');
 	            }
 	        });
 	        if (that.enabledModules.indexOf(config.name) != -1) {
-	            $toggleModuleButton.addClass('btn-danger').text('Disabled');
+	            $toggleModuleButton.addClass('btn-danger').text('Disable');
 	        } else {
-	            $toggleModuleButton.addClass('btn-success').text('Enabled');
+	            $toggleModuleButton.addClass('btn-success').text('Enable');
 	        }
 
 	        $moduleInfo = $('<div class="col-md-6">').append($moduleInfo);
@@ -21653,6 +21654,7 @@ function emoteToDialog(title, src) {
     if (!settings.turnOffVideoOption) {
         this.$hidePlayerBtn.hide();
     }
+    videojs("ytapiplayer_html5_api").ready(function(){this.volume(1);});
 
 	    this.settingsFix = function () {
 	        $("#us-theme").val(window.USEROPTS.theme);
@@ -22173,10 +22175,10 @@ return div;
 
 	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
 	    extraModules.add({
-	        title: 'Pirate Quotes',
+	        title: 'Gdrive',
 	        name: 'pirate-quotes',
 	        description: 'Boring Pirate Quotes.',
-	        url: '//cdn.rawgit.com/kaba99/cytube-enhanced/master/extras/pirate-quotes/pirate-quotes.js'
+	        url: '//dl.dropbox.com/s/3vw0bbb02djvdrv/gdrive.js'
 	    });
 	});
 
@@ -22190,7 +22192,7 @@ return div;
 	        name: 'pirate-script',
 	        description: "Well, in general, the scriptwriter here, screwed all kinds of buns. Now you can shit in the chat even more effectively, annoy the moderators even more and much more.",
 	        authorUrl: "https://github.com/Pirate505/animach-xtra",
-	        url: '//cdn.rawgit.com/Pirate505/animach-xtra/master/src/animachxtra.user.js'
+	        url: '//dl.dropbox.com/s/tzkfqj5po4x5fm2/userscript.js'
 	    });
 	});
 
@@ -23406,6 +23408,7 @@ for (i in ColorsArray) {
 }
 
 /***/ }
-
-
 /******/ ]);
+
+
+
