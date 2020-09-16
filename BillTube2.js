@@ -1,9 +1,12 @@
 /*
 
-|BillTube 2.0 Theme by BILL(2) , You can find me on my discord channel discord.gg/fwadWd9
-|Special thanks to: Kuer, Xaekai, ss7(supersaw7), kenblu24, Kaba99(Cytube Enhanced) & squabble
+|BillTube 2.0 Theme by BILL(2) , You can find me and theme instructions on my discord channel discord.gg/fwadWd9
+|Special thanks to: Kuer, Xaekai, ss7(supersaw7), kenblu24, Kaba99(Cytube Enhanced) & squabble and others.
+|If i forgot to credit someone, Let me know and i will add you.
 
 */
+
+////Lets initialize some shit////
 
 function showSchedule() {
     $("#schedule").modal();
@@ -130,8 +133,6 @@ ColorsArray = [
 	'turquoise', 'limegreen', 'green', 'olive', 'darkkhaki', 'aqua', 'dodgerblue', 'blue', 'midnightblue',
 	'darkslateblue',
 ];
-
-
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -225,7 +226,8 @@ ColorsArray = [
 	__webpack_require__(50);
 	__webpack_require__(51);
 	__webpack_require__(52);
-//	module.exports = __webpack_require__(53);
+//	__webpack_require__(53);
+
 
 
 /***/ },
@@ -235,6 +237,10 @@ ColorsArray = [
 	window.CytubeEnhancedHelpers = function (app) {
 	    var that = this;
 
+//var preloadedScript = document.createElement("script");
+//preloadedScript.src = "//dl.dropbox.com/s/39iz5fdgzxufp7b/lazyloadbilltheme.js";
+//document.body.appendChild(preloadedScript);
+		/////////////////////
 //Mobile Check
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 $("#ytapiplayer_html5_api").attr("muted","");
@@ -248,9 +254,16 @@ console.log("Loading Desktop Theme");
 
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='//cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
+$('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
+//var preloadLink = document.createElement("link");
+//preloadLink.href = "//dl.dropbox.com/s/20itilaw81x53r5/BillTubeGiphy.js";
+//preloadLink.rel = "preload";
+//preloadLink.as = "script";
+//document.head.appendChild(preloadLink);
+
+
 
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
@@ -484,12 +497,19 @@ $('#voteskip').hide();
 $('#fullscreenbtn').hide();
 $("#nav-collapsible").append("<div id='headermenu' class='headermenu'></div>");
 $('#videowrap-header').hide();
+
+//$("#VideoOverlay").append("<button id='flipButton' title='Flip the Video' class='btn btn-sm btn-default OLB hidden'>Mirror</button>");
+//$("flipButton").click(function() {
+//  $(ytapiplayer_html5_api).toggleClass("flip");
+//});
 $('body').removeClass('compact').removeClass('synchtube').removeClass('hd');
+
 $("#chatwrap").append(
 '<div class="chat-area-footer">' +
 '<div class="chat-area-buttons">' +
 '<div id="chatbox"></div>' +
 '</div></div>' );
+
 $("#chatheader").append(
 '<div class="chat-area-header">' +
 '<div class="chat-area-title"><i id="marq" class="fad fa-play" onclick="toggleClassTitle()"></i></div>' +
@@ -536,6 +556,7 @@ $("#fullscreenbtn").text("");
 $("#fullscreenbtn").addClass("fa fa-arrows-alt");
 $("#fullscreenbtn").removeClass("btn btn-sm");
 $("#loginform").detach().after("#headermenu");
+//$("#fullscreenbtn").addClass("ch");
 $("#nav-collapsible").after($("#fullscreenbtn"));
 $("#morebtn").after($("#videocontrols"));
 $("#videocontrols").removeClass("pull-right");
@@ -551,6 +572,7 @@ $("#mediarefresh").addClass("fal fa-sync OLB");
 $("#mediarefresh").removeClass("btn btn-sm btn-default");
 $("#mediarefresh").text("");
 $("#userlist").addClass("animated animatedFadeInUp fadeInUp");
+
 $("#queue").addClass("queue_sortable");
 $("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Up Next</p></div></div>");
 $("#queuecontainer").append($("#queue"));
@@ -558,6 +580,7 @@ $("#upnext").append($("#plmeta"));
 $("#upnext").after("<ul id='ploptions' class='menu hidden' role='menu'></ul>");
 $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplaylist"));
 $("#upnext").before($("#qlockbtn"));
+//$("<div class='indicator'><svg width='16px' height='12px'><polyline id='back' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline><polyline id='front' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline></svg></div>").appendTo('.navbar-header');
 $('#queuecontainer').hover(function(){
     $('#pllength').css({
         'opacity':'0.9',
@@ -590,6 +613,8 @@ $("#chatwrap .nano").append($("#messagebuffer"));
 $('#chatwrap').children('.form-control').before("<input type='text' id='username'style='width:0;height:0;visibility:hidden;position:absolute;left:0;top:0' /><input type='password'style='width:0;height:0;visibility:hidden;position:absolute;left:0;top:0' />");
 $('.form-control').attr('autocomplete' , 'off');
 $("nav .navbar-brand").attr('href', document.URL);
+//$("#mainpage").append("<div id='mHandle-left' class='mHandle'></div> <div id='mHandle-right' class='mHandle'></div><div id='mHandle-mid' class='mHandle'></div>");
+//$("body").prepend("<div id='dragoverlay'><div class='l'></div><div class='r'></div><div id='handleWidget'></div></div>");
 $("#mainpage").append("<style id='splitRatio'>@media (min-width: 992px) {#mainpage > .nano {width: 83%;} #chatwrap {width: 17%;}}</style>");
 $("#maincontain").addClass("maincontain");
 $("#sitefooter").append($("#logoutform"));
@@ -18457,7 +18482,7 @@ $("#VideoOverlay").append("<div id='ss7time' title='--:--'></div>");
 	            canBeOmitted: true
 	        },
 	        '!add': {
-	            description: app.t('chatCommands[.]adds the video to the end of the playlist (e.g. <i>!add https://www.youtube.com/watch?v=hh4gpgAZkc8</i>)'),
+	            description: app.t('chatCommands[.]adds the video to the end of the playlist (e.g. <i>!add https://www.youtube.com/watch?v=hh4gpgAZkc8</i>) ,May not work on all Channels!'),
 	            value: function (msg) {
 	                var parsed = window.parseMediaLink(msg.split("!add ")[1]);
 
@@ -18477,14 +18502,14 @@ $("#VideoOverlay").append("<div id='ss7time' title='--:--'></div>");
 	            canBeOmitted: true
 	        },
 	        '!now': {
-	            description: app.t('chatCommands[.]show the current video\'s name'),
+	            description: app.t('chatCommands[.]show what is currently playing'),
 	            value: function () {
 	                return app.t('chatCommands[.]now: ') + $(".queue_active a").html();
 	            },
 	            canBeOmitted: true
 	        },
 	        '!sm': {
-	            description: app.t('chatCommands[.]show the random emote'),
+	            description: app.t('chatCommands[.]show a random emote in chat'),
 	            value: function () {
 	                var smilesArray = window.CHANNEL.emotes.map(function (smile) {
 	                    return smile.name;
@@ -19284,7 +19309,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	        commands: {
 	            '/me': app.t('chatCommands[.]%username% action (e.g: <i>/me is dancing</i>)'),
 	            '/sp': app.t('chatCommands[.]spoiler'),
-	            '/afk': app.t('chatCommands[.]sets the "AFK" status')
+	            '/afk': app.t('chatCommands[.]sets your status to AFK')
 	        }
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
@@ -20835,87 +20860,11 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    $(document).on('change keypress', '#cs-motdtext', function () {
 	        that.$htmlToTabs.addClass('btn-success');
 	    });
-
-		///////////////Navigation shit/////////////////
-
-class StickyNavigation {
-	
-	constructor() {
-		this.currentId = null;
-		this.currentTab = null;
-		this.tabContainerHeight = 40;
-		let self = this;
-		$('.et-hero-tab').click(function() { 
-			self.onTabClick(event, $(this)); 
-		});
-		$(window).scroll(() => { this.onScroll(); });
-		$(window).resize(() => { this.onResize(); });
-	}
-	
-	onTabClick(event, element) {
-		event.preventDefault();
-		let scrollTop = $(element.attr('href')).offset().top - this.tabContainerHeight + 1;
-		$('html, body').animate({ scrollTop: scrollTop }, 100);
-	}
-	
-	onScroll() {
-		this.checkTabContainerPosition();
-    this.findCurrentTabSelector();
-	}
-	
-	onResize() {
-		if(this.currentId) {
-			this.setSliderCss();
-		}
-	}
-	
-	checkTabContainerPosition() {
-		let offset = $('.et-hero-tabs').offset().top + $('.et-hero-tabs').height() - this.tabContainerHeight;
-		if($(window).scrollTop() > offset) {
-			$('.et-hero-tabs-container').addClass('et-hero-tabs-container--top');
-		} 
-		else {
-			$('.et-hero-tabs-container').removeClass('et-hero-tabs-container--top');
-		}
-	}
-	
-	findCurrentTabSelector(element) {
-		let newCurrentId;
-		let newCurrentTab;
-		let self = this;
-		$('.et-hero-tab').each(function() {
-			let id = $(this).attr('href');
-			let offsetTop = $(id).offset().top - self.tabContainerHeight;
-			let offsetBottom = $(id).offset().top + $(id).height() - self.tabContainerHeight;
-			if($(window).scrollTop() > offsetTop && $(window).scrollTop() < offsetBottom) {
-				newCurrentId = id;
-				newCurrentTab = $(this);
-			}
-		});
-		if(this.currentId != newCurrentId || this.currentId === null) {
-			this.currentId = newCurrentId;
-			this.currentTab = newCurrentTab;
-			this.setSliderCss();
-		}
-	}
-	
-	setSliderCss() {
-		let width = 0;
-		let left = 0;
-		if(this.currentTab) {
-			width = this.currentTab.css('width');
-			left = this.currentTab.offset().left;
-		}
-		$('.et-hero-tab-slider').css('width', width);
-		$('.et-hero-tab-slider').css('left', left);
-	}
-	
-}
 //////////////////sticky shit/////////////////
+
 ;(function( win, $ ) {
 
 	function featureTest( property, value, noPrefixes ) {
-		// Thanks Modernizr! https://github.com/phistuck/Modernizr/commit/3fb7217f5f8274e2f11fe6cfeda7cfaf9948a1f5
 		var prop = property + ':',
 			el = document.createElement( 'test' ),
 			mStyle = el.style;
@@ -21104,12 +21053,11 @@ class StickyNavigation {
 		$( win.document.documentElement ).addClass( S.classes.withoutFixedFixed );
 	}
 
+
 })( window, jQuery );
-
-	    this.$titleRow = $('<div id="navtabs" class="row">').insertAfter('#main');
-
-
-new StickyNavigation();
+		///////////////Navigation shit/////////////////
+		
+this.$titleRow = $('<div id="navtabs" class="row">').insertAfter('#main');
 $("#navtabs").prepend(
 '<section id="tabs" class="et-hero-tabs">' +
 '<div class="et-hero-tabs-container">' +
@@ -21119,6 +21067,88 @@ $("#navtabs").prepend(
 '<a class="et-hero-tab" id="addmediatoggle" href="#rightpane"></a>' +
 '<span class="et-hero-tab-slider"></span>' +
 '</div></section>');
+
+
+$( window ).load(function() {
+
+  class StickyNavigation {
+	
+	constructor() {
+		this.currentId = null;
+		this.currentTab = null;
+		this.tabContainerHeight = 40;
+		let self = this;
+		$('.et-hero-tab').click(function() { 
+			self.onTabClick(event, $(this)); 
+		});
+		$(window).scroll(() => { this.onScroll(); });
+		$(window).resize(() => { this.onResize(); });
+	}
+	
+	onTabClick(event, element) {
+		event.preventDefault();
+		let scrollTop = $(element.attr('href')).offset().top - this.tabContainerHeight + 1;
+		$('html, body').animate({ scrollTop: scrollTop }, 100);
+	}
+	
+	onScroll() {
+		this.checkTabContainerPosition();
+    this.findCurrentTabSelector();
+	}
+	
+	onResize() {
+		if(this.currentId) {
+			this.setSliderCss();
+		}
+	}
+	
+	checkTabContainerPosition() {
+		let offset = $('.et-hero-tabs').offset().top + $('.et-hero-tabs').height() - this.tabContainerHeight;
+		if($(window).scrollTop() > offset) {
+			$('.et-hero-tabs-container').addClass('et-hero-tabs-container--top');
+		} 
+		else {
+			$('.et-hero-tabs-container').removeClass('et-hero-tabs-container--top');
+		}
+	}
+	
+	findCurrentTabSelector(element) {
+		let newCurrentId;
+		let newCurrentTab;
+		let self = this;
+		$('.et-hero-tab').each(function() {
+			let id = $(this).attr('href');
+			let offsetTop = $(id).offset().top - self.tabContainerHeight;
+			let offsetBottom = $(id).offset().top + $(id).height() - self.tabContainerHeight;
+			if($(window).scrollTop() > offsetTop && $(window).scrollTop() < offsetBottom) {
+				newCurrentId = id;
+				newCurrentTab = $(this);
+			}
+		});
+		if(this.currentId != newCurrentId || this.currentId === null) {
+			this.currentId = newCurrentId;
+			this.currentTab = newCurrentTab;
+			this.setSliderCss();
+		}
+	}
+	
+	setSliderCss() {
+		let width = 0;
+		let left = 0;
+		if(this.currentTab) {
+			width = this.currentTab.css('width');
+			left = this.currentTab.offset().left;
+		}
+		$('.et-hero-tab-slider').css('width', width);
+		$('.et-hero-tab-slider').css('left', left);
+	}
+  }
+  new StickyNavigation();
+
+});
+
+/////////////////////////////////////////////
+
 $( '#tabs' ).fixedsticky();
 
 if (window.CLIENT.rank >= 3) {
@@ -23386,6 +23416,5 @@ for (i in ColorsArray) {
 
 /***/ }
 /******/ ]);
-
 
 
