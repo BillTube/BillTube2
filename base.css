@@ -2081,11 +2081,14 @@ img.chat-avatar.chat-avatar_small:hover:after {
     border-radius: 8px;
     transform: scale(0.9);
     box-shadow: 0 20px 25px -20px #131313d1;
-	   -webkit-transition: all 1s ease-out;
+	-webkit-transition: all 1s ease-out;
    -moz-transition: all 1s ease-out;
    -o-transition: all 1s ease-out;
    -ms-transition: all 1s ease-out;
    transition: all 1s ease-out;
+    vertical-align: baseline;
+    display: list-item;
+    text-align: -webkit-match-parent;
 }
 .channel-emote:hover {
     transform: scale(1.2);
@@ -2257,7 +2260,9 @@ img.chat-picture {
     max-width: 150px;
     border-radius: 3px;
     transition: .8s ease;
-
+    vertical-align: baseline;
+    display: list-item;
+    text-align: -webkit-match-parent;
 }
 .chat-picture:hover {
   -webkit-transform: scale(1.70);
