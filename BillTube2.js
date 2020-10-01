@@ -21426,7 +21426,7 @@ function emoteToDialog(title, src) {
 	    var that = this;
 
 	    var defaultSettings = {
-	        defaultTheme: 'default', //default theme for user (until user do not change it)
+	        defaultTheme: 'Halloween', //default theme for user (until user do not change it)
 	        themeId: 'theme-css' //node id in DOM
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
@@ -22170,10 +22170,10 @@ return div;
 
 	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
 	    extraModules.add({
-	        title: 'Anime Quotes',
-	        name: 'anime-quotes',
-	        description: 'Boring anime quotes.',
-	        url: '//cdn.rawgit.com/kaba99/cytube-enhanced/master/extras/anime-quotes/anime-quotes.js'
+	        title: 'TBA',
+	        name: 'TBA',
+	        description: 'TBA.',
+	        url: 'TBA'
 	    });
 	});
 
@@ -22183,10 +22183,10 @@ return div;
 
 	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
 	    extraModules.add({
-	        title: 'Gdrive',
-	        name: 'pirate-quotes',
-	        description: 'Boring Pirate Quotes.',
-	        url: '//dl.dropbox.com/s/3vw0bbb02djvdrv/gdrive.js'
+	        title: 'TBA',
+	        name: 'TBA',
+	        description: 'TBA.',
+	        url: ''
 	    });
 	});
 
@@ -22196,11 +22196,11 @@ return div;
 
 	window.cytubeEnhanced.getModule('extras').done(function (extraModules) {
 	    extraModules.add({
-	        title: 'Pirate Script',
-	        name: 'pirate-script',
-	        description: "Well, in general, the scriptwriter here, screwed all kinds of buns. Now you can shit in the chat even more effectively, annoy the moderators even more and much more.",
-	        authorUrl: "https://github.com/Pirate505/animach-xtra",
-	        url: '//dl.dropbox.com/s/tzkfqj5po4x5fm2/userscript.js'
+	        title: 'TBA',
+	        name: 'TBA',
+	        description: "TBA",
+	        authorUrl: "TBA",
+	        url: 'TBA'
 	    });
 	});
 
