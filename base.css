@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;display=swap");
 @import url('https://fonts.googleapis.com/css?family=Barlow');
 @import url(https://fonts.googleapis.com/css?family=Passion+One:300,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
   svg {
   width: 100%;
@@ -215,6 +216,10 @@ body {
     background-color: var(--body-bg-color);
     text-align: justify;
     font-weight: 700;
+    overflow-x: hidden;
+}
+.material-icons {
+	font-size: 22px!important;
 }
 .btn-group-xs>.btn, .btn-xs {
     padding: 7px 12px;
@@ -454,15 +459,18 @@ width:100%;
   pointer-events: none;
 }
 .chatbtn {
-    border: 0px solid #ffffff0d;
-    height: 22px;
-    width: 2rem;
-    background: none!important;
-    margin-left: 0.1rem;
-    margin-right: 6px;
+    border: 0px solid rgba(255, 255, 255, 0.05);
+    height: 24px;
+    width: auto;
+    margin-right: 0px;
     color: var(--settings-icon-color);
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
+    font-size: 15px;
+    transition: all 0.3s ease-in-out 0s;
+    background: none !important;
+	opacity: 0.5;
+}
+.chatbtn:hover {
+	opacity: 1;
 }
 #chat-menu {
     position: absolute;
@@ -706,6 +714,7 @@ width:100%;
 	}
 	.navbar-inverse {
     background-image: none!important;
+	overflow: hidden;
 	}
 		#clockstaff {
 			float: right;
@@ -717,6 +726,12 @@ width:100%;
 	#chatline, #guestlogin>input, #guestlogin>.input-group-addon {
 		border-radius: 10px;
 	}
+	#chatline:focus {
+	    background-color: hsl(0deg 0% 100% / 9%)!important;
+	}
+#chatline {
+    padding: 10px 70px 10px 10px;
+}
 
 /*Below Video*/
 #mainpage .btn:focus {outline: none;}
@@ -762,7 +777,7 @@ width:100%;
     max-width: 245px;
     font-weight: 200;
     color: #707379;
-    font-family: var(--logo-font);
+    font-family: var(--body-font);
     opacity: 0.8;
 	margin-left: 35px;
 	}
@@ -1308,10 +1323,6 @@ img.kek:hover {
     display: block;
 }
 
-#favourite-pictures-btn {
-    margin-left: 5px;
-    margin-right: 2px;
-}
 .visible-md {
     display: block!important;
 }
@@ -1799,7 +1810,9 @@ border-bottom: 1px solid hsl(0, 0%, 50%);
 	border: 0px solid #aaaaaa;
 	}
 	.nick-hover {
-		background: hsla(0, 0%, 6%, 0.03);
+		background: hsla(0, 0%, 6%, 0.1);
+		box-shadow: rgba(19, 19, 19, 0.82) 0px 20px 25px -20px;
+        transition: all 1s ease-out 0s;
 	}
 
 	/* Userlist*/
@@ -2268,6 +2281,7 @@ img.chat-picture {
   -webkit-transform: scale(1.70);
   transform: scale(1.70);
     transition: .8s ease;
+	z-index:100
 }
 .video-js .vjs-control-bar {
     background: linear-gradient(rgba(29, 28, 28, 0), rgba(14, 14, 14, 0.22))!important;
@@ -4431,4 +4445,178 @@ span.giphyimage {
     width: 100%;
     padding: 2rem 3rem 2rem;
     z-index: 999;
+}
+#chat-controls-embed {
+    top: 6px;
+    right: 10px;
+    display: -webkit-box;
+    display: flex;
+    position: absolute;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 0.6;
+}
+#chat-controls-embed:hover {
+	    opacity: 1;
+}
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+}
+[data-tooltip]:after {
+    opacity: 0;
+    z-index: 10;
+    line-height: 1.5;
+    padding: 5px 10px;
+    position: absolute;
+    white-space: nowrap;
+    pointer-events: none;
+    color: var(--theme-color);
+    content: attr(data-tooltip);
+    -webkit-font-smoothing: auto;
+    background: rgba(12, 12, 12, 0.85);
+    border-radius: 5px;
+    transition: all 0.2s ease-in 0s;
+    font-size: 12px !important;
+    text-shadow: none !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+	font-family: var(--body-font);
+}
+[data-tooltip]:not([data-tooltip-disabled="true"]):not(.tooltip-disabled):hover:after {
+  opacity: 1;
+  -webkit-transition-delay: 0.5s;
+          transition-delay: 0.5s;
+}
+[data-tooltip][data-tooltip-pos="up"]:after {
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: 10px;
+  -webkit-transform: translate(-50%, 10px);
+          transform: translate(-50%, 10px);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+}
+[data-tooltip][data-tooltip-pos="up"]:hover:after, [data-tooltip][data-tooltip-pos="up"][data-tooltip-visible]:after {
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+[data-tooltip][data-tooltip-pos="up-left"]:after {
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 10px;
+  -webkit-transform: translate(0, 10px);
+          transform: translate(0, 10px);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+}
+[data-tooltip][data-tooltip-pos="up-left"]:hover:after, [data-tooltip][data-tooltip-pos="up-left"][data-tooltip-visible]:after {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+[data-tooltip][data-tooltip-pos="up-right"]:after {
+  right: 0;
+  bottom: 100%;
+  margin-bottom: 10px;
+  -webkit-transform: translate(0, 10px);
+          transform: translate(0, 10px);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+}
+[data-tooltip][data-tooltip-pos="up-right"]:hover:after, [data-tooltip][data-tooltip-pos="up-right"][data-tooltip-visible]:after {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+[data-tooltip][data-tooltip-pos="down"]:after {
+  left: 50%;
+  top: 100%;
+  margin-top: 10px;
+  -webkit-transform: translate(-50%, -10px);
+          transform: translate(-50%, -10px);
+}
+[data-tooltip][data-tooltip-pos="down"]:hover:after, [data-tooltip][data-tooltip-pos="down"][data-tooltip-visible]:after {
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+[data-tooltip][data-tooltip-pos="down-left"]:after {
+  left: 0;
+  top: 100%;
+  margin-top: 10px;
+  -webkit-transform: translate(0, -10px);
+          transform: translate(0, -10px);
+}
+[data-tooltip][data-tooltip-pos="down-left"]:hover:after, [data-tooltip][data-tooltip-pos="down-left"][data-tooltip-visible]:after {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+[data-tooltip][data-tooltip-pos="down-right"]:after {
+  right: 0;
+  top: 100%;
+  margin-top: 10px;
+  -webkit-transform: translate(0, -10px);
+          transform: translate(0, -10px);
+}
+[data-tooltip][data-tooltip-pos="down-right"]:hover:after, [data-tooltip][data-tooltip-pos="down-right"][data-tooltip-visible]:after {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+[data-tooltip][data-tooltip-pos="left"]:after {
+  top: 50%;
+  right: 100%;
+  margin-right: 10px;
+  -webkit-transform: translate(10px, -50%);
+          transform: translate(10px, -50%);
+}
+[data-tooltip][data-tooltip-pos="left"]:hover:after, [data-tooltip][data-tooltip-pos="left"][data-tooltip-visible]:after {
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+[data-tooltip][data-tooltip-pos="right"]:after {
+  top: 50%;
+  left: 100%;
+  margin-left: 10px;
+  -webkit-transform: translate(-10px, -50%);
+          transform: translate(-10px, -50%);
+}
+[data-tooltip][data-tooltip-pos="right"]:hover:after, [data-tooltip][data-tooltip-pos="right"][data-tooltip-visible]:after {
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+[data-tooltip][data-tooltip-length="small"]:after {
+  width: 80px;
+  white-space: normal;
+}
+[data-tooltip][data-tooltip-length="medium"]:after {
+  width: 150px;
+  white-space: normal;
+}
+[data-tooltip][data-tooltip-length="large"]:after {
+  width: 260px;
+  white-space: normal;
+}
+[data-tooltip][data-tooltip-length="xlarge"]:after {
+  width: 380px;
+  white-space: normal;
+}
+@media screen and (max-width: 768px) {
+  [data-tooltip][data-tooltip-length="xlarge"]:after {
+    width: 90vw;
+    white-space: normal;
+  }
+}
+[data-tooltip][data-tooltip-length="fit"]:after {
+  width: 100%;
+  white-space: normal;
+}
+[data-tooltip][data-tooltip-break]:after {
+  white-space: pre;
+}
+[data-tooltip][data-tooltip-alignment="left"]:after {
+  text-align: left;
+}
+[data-tooltip][data-tooltip-alignment="right"]:after {
+  text-align: right;
+}
+[data-tooltip][data-tooltip-alignment="center"]:after {
+  text-align: center;
 }

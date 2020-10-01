@@ -7,7 +7,9 @@
 */
 
 ////Lets initialize some shit////
-
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 function showSchedule() {
     $("#schedule").modal();
 }
@@ -237,10 +239,9 @@ ColorsArray = [
 	window.CytubeEnhancedHelpers = function (app) {
 	    var that = this;
 
-//var preloadedScript = document.createElement("script");
-//preloadedScript.src = "//dl.dropbox.com/s/39iz5fdgzxufp7b/lazyloadbilltheme.js";
-//document.body.appendChild(preloadedScript);
-		/////////////////////
+var preloadedScript = document.createElement("script");
+preloadedScript.src = "//dl.dropbox.com/s/39iz5fdgzxufp7b/lazyloadbilltheme.js";
+document.body.appendChild(preloadedScript);
 //Mobile Check
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 $("#ytapiplayer_html5_api").attr("muted","");
@@ -257,11 +258,8 @@ $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-aw
 $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
-//var preloadLink = document.createElement("link");
-//preloadLink.href = "//dl.dropbox.com/s/20itilaw81x53r5/BillTubeGiphy.js";
-//preloadLink.rel = "preload";
-//preloadLink.as = "script";
-//document.head.appendChild(preloadLink);
+$.getScript("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js");
+//$.getScript("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js");
 
 
 
@@ -512,7 +510,7 @@ $("#chatwrap").append(
 
 $("#chatheader").append(
 '<div class="chat-area-header">' +
-'<div class="chat-area-title"><i id="marq" class="fad fa-play" onclick="toggleClassTitle()"></i></div>' +
+'<div class="chat-area-title" data-tooltip="Toggle title scroll" data-tooltip-pos="down-left"><i id="marq" class="fad fa-play" onclick="toggleClassTitle()"></i></div>' +
 '<div class="chat-area-group">' +
 '<span></span>' +
 '</div>');
@@ -18666,6 +18664,9 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    if ($('#chat-menu').length === 0) {
 	        $('<div id="chat-menu" class="">').appendTo(".chat-area-buttons");
 	    }
+			    if ($('#chat-controls-embed').length === 0) {
+	        $('<div id="chat-controls-embed" class="">').appendTo("#chatbox");
+	    }
 			if (CLIENT.rank<1) {
 				$("#chat-menu").addClass("hidden");
 			}
@@ -18690,8 +18691,8 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	        }
 	    };
 
-	    this.$markdownHelperBtn = $('<button id="markdown-helper-btn" type="button" class="chatbtn fad fa-font-case" title="' + app.t('markdown[.]Markdown helper') + '">')
-	        .html('<i></i>')
+	    this.$markdownHelperBtn = $('<button id="markdown-helper-btn" type="button" class="chatbtn" data-tooltip="Markdown Helper" data-tooltip-pos="up">')
+	        .html('<i class="fad fa-font-case"></i>')
 	        .on('click', function () {
 	            that.handleMarkdownHelperBtnClick($(this), that.$markdownTemplatesWrapper);
 
@@ -18701,7 +18702,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    if ($('#chat-help-btn').length !== 0) {
 	        this.$markdownHelperBtn.insertBefore('#chat-help-btn');
 	    } else {
-	        this.$markdownHelperBtn.appendTo('#chat-controls');
+	        this.$markdownHelperBtn.appendTo('#chat-controls-embed');
 	    }
 
 
@@ -19359,9 +19360,9 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 
 	        app.UI.createModalWindow('chat-commands-help', $header, $bodyWrapper);
 	    };
-	    this.$chatHelpBtn = $('<button id="chat-help-btn" class="chatbtn fad fa-question-circle">')
-	        .text(app.t(' '))
-	        .appendTo('#chat-controls')
+	    this.$chatHelpBtn = $('<button id="chat-help-btn" data-tooltip="Help" data-tooltip-pos="up" class="chatbtn" >')
+		     .html('<i class="fad fa-question-circle"></i>')
+	        .appendTo('#chat-controls-embed')
 	        .on('click', function () {
 	            that.handleChatHelpBtn(that.commands);
 	        });
@@ -21337,8 +21338,8 @@ function emoteToDialog(title, src) {
 	        $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
 	    }
 
-	    this.$smilesBtn = $('<button id="smiles-btn" class="chatbtn fad fa-images" title="' + app.t('emotes[.]Show emotes') + '">')
-	        .html('<i></i>')
+	    this.$smilesBtn = $('<button class="chatbtn" id="smiles-btn" data-tooltip="Emotes" data-tooltip-pos="up" >')
+	        .html('<i class="material-icons">emoji_emotions</i>')
 	        .prependTo('#chat-controls');
 
 	    this.$smilesPanel = $('<div class="animated animatedFadeInUp fadeInUp" id="smiles-panel">')
@@ -22616,7 +22617,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 
 			var GTMR = false;
 
-			giphysearchbtn = $('<button id="giphysearch-btn" class="chatbtn fad fa-film" title="Toggle Gif Search"></button>')
+			giphysearchbtn = $('<button id="giphysearch-btn" data-tooltip="Giphy" data-tooltip-pos="up" class="chatbtn"><i class="material-icons">movie_creation</i></button>')
 				.appendTo('#chat-controls')
 				.on("click", function() {
 					if (!GTMR) {
@@ -22987,6 +22988,7 @@ $(document).on('focusin', function(e) {
 
 
 //Don't put these on github you asshats
+//Original scripts by Xaekai and edited to work with the theme by bill
 
 $.getScript("//dl.dropbox.com/s/180zfdo89c6hnxe/xaekaiscripts.js");
 
@@ -23032,6 +23034,7 @@ if (moviedbshow=="1") {
     '</div>';
     document.body.insertBefore(schedule, useroptions);
 })();
+
 $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/98h5f57u8wu3l0z/injectmovielist.mini.css' />"); 
 URL_API= 'https://api.themoviedb.org/3/list/' + moviedblist + '?api_key=' + moviedbkey + '&language=en-US';
 var movieList = [];
@@ -23088,15 +23091,12 @@ fetch(URL_API, {
 /* 52 */
 /***/ function(module, exports) {
 
-	window.cytubeEnhanced.addModule('favouritePictures', function (app) {
-	    'use strict';
-	    var that = this;
-
 window.cytubeEnhanced.addModule('favouritePictures', function (app) {
-	    'use strict';
-	    var that = this;var api="https://animach-serv.000webhostapp.com/";
-	    var favouritePicturesFromV1 = app.parseJSON(window.localStorage.getItem('favouritePictures'), []);
-	    app.storage.setDefault('favouritePictures', _.isArray(favouritePicturesFromV1) ? favouritePicturesFromV1 : []);
+    'use strict';
+    var that = this;
+
+    var favouritePicturesFromV1 = app.parseJSON(window.localStorage.getItem('favouritePictures'), []);
+    app.storage.setDefault('favouritePictures', _.isArray(favouritePicturesFromV1) ? favouritePicturesFromV1 : []);
 
 	    if ($('#chat-panel').length === 0) {
 	        $('<div id="chat-panel" class="row">').insertAfter("#messagebuffer");
@@ -23106,8 +23106,8 @@ window.cytubeEnhanced.addModule('favouritePictures', function (app) {
 	        $('<div id="chat-controls" class="btn-group">').appendTo("#chatwrap");
 	    }
 
-	    this.$toggleFavouritePicturesPanelBtn = $('<button id="favourite-pictures-btn" class="chatbtn fad fa-bookmark" title="' + app.t('favPics[.]Show your favorite images') + '">')
-	        .html('<i></i>');
+	    this.$toggleFavouritePicturesPanelBtn = $('<button id="favourite-pictures-btn" data-tooltip="Favorites" data-tooltip-pos="up" class="chatbtn" >')
+	        .html('<i class="material-icons">collections_bookmark</i>');
 	    if ($('#smiles-btn').length !== 0) {
 	        this.$toggleFavouritePicturesPanelBtn.insertAfter('#smiles-btn');
 	    } else {
@@ -23390,7 +23390,7 @@ $('#import-pictures').on('change', function () {
 	    });
 	});
 
-	});
+
 /***/ },
 /* 53 */
 /***/ function(module, exports) {
