@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;display=swap");
 @import url('https://fonts.googleapis.com/css?family=Barlow');
-@import url(https://fonts.googleapis.com/css?family=Passion+One:300,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
   svg {
@@ -2821,7 +2820,6 @@ input[type="range"]::-webkit-slider-thumb:active {
     bottom: 90px;
     height: auto;
     top: 50px;
-    max-height: 420px;
     overflow: auto;
     margin-left: 10px;
     margin-right: 10px;
