@@ -255,11 +255,10 @@ console.log("Loading Desktop Theme");
 
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
+$('head').append("<link rel='stylesheet' href='//rawcdn.githack.com/BillTube/BillTube2/b5827ef96125e9b2a60fe2fcfa3404ceb739aec9/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
-$.getScript("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js");
-//$.getScript("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js");
+
 
 
 
