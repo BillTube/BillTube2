@@ -259,9 +259,6 @@ $('head').append("<link rel='stylesheet' href='//rawcdn.githack.com/BillTube/Bil
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 
-
-
-
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
   autoA11y: { enabled: true },
@@ -22828,7 +22825,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 					'</span><button style="float:right padding: 1px 6px;" class="Trendingbutton" id="trending">Trending</button></center>' +
 					'<div style="height:40px"><center><button style="float:left;margin:5px 0 5px 0;" class="btn btn-sm btn-default gbackbutton fal fa-arrow-left" disabled></button><span class="text-info imagesearch"></span><button style="float:right;margin:5px 0 5px 0;" class="btn btn-sm btn-default gforwardbutton fal fa-arrow-right" disabled></button></center></div>' +
 					'<center><img id="single" style="cursor:pointer;max-width:500px;max-height:500px;display:none"/></center>' +
-					'<center><span style="max-height:420px;display:none" class="giphyimage">' +
+					'<center><span style="max-height:100%;display:none" class="giphyimage">' +
 					'<img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/>' +
 					'<img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/>' +
 					'<img class="GiphyCell"/>' +
