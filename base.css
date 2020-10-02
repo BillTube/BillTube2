@@ -4619,3 +4619,6 @@ span.giphyimage {
 [data-tooltip][data-tooltip-alignment="center"]:after {
   text-align: center;
 }
+span.giphyimage {
+    max-height: 100%!important;
+}
