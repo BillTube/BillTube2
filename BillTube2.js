@@ -1,5 +1,5 @@
 /*
-
+|NOT FOR GENERAL USE - BETA VERSION 
 |BillTube 2.0 Theme by BILL(2) , You can find me and theme instructions on my discord channel discord.gg/fwadWd9
 |Special thanks to: Kuer, Xaekai, ss7(supersaw7), kenblu24, Kaba99(Cytube Enhanced) & squabble and others.
 |If i forgot to credit someone, Let me know and i will add you.
@@ -7,6 +7,9 @@
 */
 
 ////Lets initialize some shit////
+
+var vplayer = videojs("ytapiplayer")
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -255,9 +258,11 @@ console.log("Loading Desktop Theme");
 
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='//rawcdn.githack.com/BillTube/BillTube2/b5827ef96125e9b2a60fe2fcfa3404ceb739aec9/base.css' />");
+$('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
+$.getScript("//dl.dropbox.com/s/hi96w4lvmn1f0u7/avatarletters.js");
+
 
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
@@ -491,19 +496,12 @@ $('#voteskip').hide();
 $('#fullscreenbtn').hide();
 $("#nav-collapsible").append("<div id='headermenu' class='headermenu'></div>");
 $('#videowrap-header').hide();
-
-//$("#VideoOverlay").append("<button id='flipButton' title='Flip the Video' class='btn btn-sm btn-default OLB hidden'>Mirror</button>");
-//$("flipButton").click(function() {
-//  $(ytapiplayer_html5_api).toggleClass("flip");
-//});
 $('body').removeClass('compact').removeClass('synchtube').removeClass('hd');
-
 $("#chatwrap").append(
 '<div class="chat-area-footer">' +
 '<div class="chat-area-buttons">' +
 '<div id="chatbox"></div>' +
 '</div></div>' );
-
 $("#chatheader").append(
 '<div class="chat-area-header">' +
 '<div class="chat-area-title" data-tooltip="Toggle title scroll" data-tooltip-pos="down-left"><i id="marq" class="fad fa-play" onclick="toggleClassTitle()"></i></div>' +
@@ -511,7 +509,9 @@ $("#chatheader").append(
 '<span></span>' +
 '</div>');
 
-
+$('div[class^="chat-msg-"], div[class*=" chat-msg-"]').css({
+    'min-height' : '20px'
+});
 
  var setImageSrc = function(imageData) {
     $placeholder.attr('src', imageData);
@@ -535,7 +535,7 @@ $("#userlisttoggle").text("");
 $("#showchansettings").text("Admin Settings");
 $("#controlsrow").after($("#motdrow"));
 $(".container-fluid").append($("#footer"));
-$('#footer').children('.container').append('<p class="text-muted credit">Copyrights and trademarks for the shows and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law. The author is not responsible for any contents linked or referred to from his pages, All CyTu.be does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google drive. All Google users signed a contract with the sites when they set up their accounts wich forces them not to upload illegal content.(<a href="https://www.lumendatabase.org/topics/14">DMCA Safe Harbor</a>)<h4><center><br>Theme By Bill</p>(<a href="https://github.com/BillTube/theme">Now on github!</a>)</center></h4>');
+$('#footer').children('.container').append('<p class="text-muted credit">Copyrights and trademarks for the shows and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law. The author is not responsible for any contents linked or referred to from his pages, All CyTu.be does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google drive. All Google users signed a contract with the sites when they set up their accounts wich forces them not to upload illegal content.(<a href="https://www.lumendatabase.org/topics/14">DMCA Safe Harbor</a>)<h4><center><br>Theme By Bill</p>(<a href="https://github.com/BillTube/theme">(Old version) Available on github! Check discord for the newest version!</a>)</center></h4>');
 $("#mainpage").prepend($("#chatwrap"));
 $("#userlist").prepend("<div id='connected'></div>");
 $("#userlisttoggle").append($("#usercount"));
@@ -1065,18 +1065,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-53755606-1', 'auto');
 ga('send', 'pageview');
 
-var vplayer = videojs("ytapiplayer")
-vplayer.on('error', function(e){
-window.setInterval(function(){
-
-    vplayer.pause();
-    vplayer.currentTime = 0;
-    vplayer.load(e);
-
-    console.log("reloading player");
-}, 1000000);
-
-});
 var myElement = document.querySelector("#videowrap");
 myElement.style.display = "block";
 $("body").addClass('fluid');
@@ -1154,9 +1142,10 @@ if (CLIENT.rank > 0) {
 	var li = $('<li class="centered" />').prependTo(ul);
 	var img = findUserlistItem(CLIENT.name).data().profile.image;
 	if (img == "") img = DROPBOX + 'xor4ykvsgrzys3d/noavatar.png';
-	$('<a href="/account/profile" />').html('<img id="useravatar" src="' + img + '" title="' + CLIENT.name + '" />')
+	$('<a href="/account/profile" target="_blank"/>').html('<img id="useravatar" src="' + img + '" title="' + CLIENT.name + '" />')
 	  .appendTo('.navbar-nav');
 }
+
 socket.on("closePoll", function() {
 	$("#closepolls").remove();
 	$('.well.muted').unbind().insertAfter("#navtabs");
@@ -1164,7 +1153,6 @@ socket.on("closePoll", function() {
 		$('.well.muted').remove();
 		$("#closepolls").remove();
 	});
-
 });
 $('#nav-collapsible a:contains("Layout")').remove();
 $('#us-general > form').hide();
@@ -19156,6 +19144,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
+	
 	    var namespace = 'avatars';
 	    this.scheme = {
 	        'avatars-mode': {
@@ -19212,22 +19201,26 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	            if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
 	                var $avatar = $("<img>").attr("src", newAvatar || cachedAvatar)
 	                    .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
-	                    .prependTo($messageBlock);
+	                    .prependTo($messageBlock).parent().addClass("nametitle");
 
 	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
 	                    $(this).css('display', 'none');
 	                    $avatar.attr('title', username);
 	                }
 	            }
-	        }
+	        } else {
+				if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
+	                var $avatar = $("<img>").attr("data-name", username).addClass("AvL")
+	                    .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
+	                    .prependTo($messageBlock).parent().addClass("nametitle");;
+
+	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+	                    $(this).css('display', 'none');
+	                    $avatar.attr('title', username);
+	                }
+	            }
+			}	
 	    };
-		
-
-
-//
-
-
-
 
 	    /**
 	     * Creating markup for settings
@@ -21065,6 +21058,8 @@ $("#navtabs").prepend(
 '<span class="et-hero-tab-slider"></span>' +
 '</div></section>');
 
+$('#nav-collapsible a:contains("Delete Account")').remove();
+$('#nav-collapsible a:contains("Account")').parent().detach().appendTo(".et-hero-tabs-container").addClass("et-hero-tab accountbutton");
 
 $( window ).load(function() {
 
@@ -21212,7 +21207,7 @@ function emoteToDialog(title, src) {
 		items++;
 	}
 	if(items >= 4){
-		$('#chatEmotes').children().last().remove();;
+		$('#chatEmotes').children().last().remove();
 		items--;
 	}
 	var btn = $('<div class="emoteicon" id="'+emoteID+'"title=/'+emoteID+' style="float:left;"><img src="' + src + '" id="' + emoteID + "_img'" + '" width="28" height="28" /></img></div>');
@@ -21359,7 +21354,8 @@ function emoteToDialog(title, src) {
 	        app.Helpers.addMessageToChatInput(' ' + smileName + ' ', 'end');
 	    };
 	    $(document.body).on('click', '.smile-on-panel', function () {
-	        that.insertSmile($(this).data('name'));
+	        that.insertSmile($(this).data('name'))
+			that.showSmilesPanel();
 	    });
 
 
@@ -23399,7 +23395,12 @@ $('<ul id="colors-wrap" class="dropdown-menu-colors hidden"></ul>').appendTo('#c
   $("#colors-btn").on("click", function(){
       $("#colors-wrap").toggleClass("hidden");
   });
-
+  
+$('body').on('click',function(event){
+   if(!$(event.target).is('#colors-wrap')){
+     $("#colors-wrap").addClass("hidden");
+   }
+});
 if (ColorsArray.length < 1) $colorsMenu.hide()
 else if (ColorsArray.length > 50) $colorsMenu.addClass('widecm');
 
