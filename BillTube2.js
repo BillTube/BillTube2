@@ -3,7 +3,7 @@
 |BillTube 2.0 Theme by BILL(2) , You can find me and theme instructions on my discord channel discord.gg/fwadWd9
 |Special thanks to: Kuer, Xaekai, ss7(supersaw7), kenblu24, Kaba99(Cytube Enhanced) & squabble and others.
 |If i forgot to credit someone, Let me know and i will add you.
-
+|Thanks for using the theme.
 */
 
 ////Lets initialize some shit////
