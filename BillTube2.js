@@ -21051,7 +21051,7 @@ this.$titleRow = $('<div id="navtabs" class="row">').insertAfter('#main');
 $("#navtabs").prepend(
 '<section id="tabs" class="et-hero-tabs">' +
 '<div class="et-hero-tabs-container">' +
-'<a class="et-hero-tab" href="#motdwrap">MOTD</a>' +
+'<a class="et-hero-tab" id="motdtab" href="#motdwrap">MOTD</a>' +
 '<a class="et-hero-tab" href="#queuecontainer">PLAYLIST</a>' +
 '<a class="et-hero-tab hidden" id="polltab" href="#pollwrap"></a>' +
 '<a class="et-hero-tab" id="addmediatoggle" href="#rightpane"></a>' +
@@ -21059,7 +21059,7 @@ $("#navtabs").prepend(
 '</div></section>');
 
 $('#nav-collapsible a:contains("Delete Account")').remove();
-$('#nav-collapsible a:contains("Account")').parent().detach().appendTo(".et-hero-tabs-container").addClass("et-hero-tab accountbutton");
+$('#nav-collapsible a:contains("Account")').parent().detach().appendTo(".et-hero-tabs-container").addClass("et-hero-tab accountbutton").insertBefore("#motdtab");
 
 $( window ).load(function() {
 
