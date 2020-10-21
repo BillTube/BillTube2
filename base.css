@@ -536,6 +536,9 @@ width:100%;
     margin-bottom: 15px;
     margin-top: 10px;
 }
+	#main {
+		height: 92vh;
+	}
 @media (min-width: 992px){
 	/*chat bar is 38 px high*/
 	#main {
@@ -2229,7 +2232,7 @@ a.qe_title {
     margin-right: 0px;
     margin-bottom: 2px;
     font-size: 1.4rem;
-    min-height: 35px;
+    min-height: 20px;
     line-height: 2rem;
 	text-align: initial;
 	max-height: 250px;
@@ -4634,4 +4637,25 @@ span.giphyimage {
 }
 span.giphyimage {
     max-height: 100%!important;
+}
+
+#chatwrap .nano {
+    height: calc(100% - 135px) !important;
+    overflow-x: hidden;
+}
+#chatwrap {
+    height: calc(100% - 50px) !important;
+    float: right;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0;
+}
+input#addfromurl-title-val {
+    font-size: 1.8rem;
+}
+.poll-menu {
+    background: #00000038;
+    max-width: 450px;
 }
