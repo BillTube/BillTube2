@@ -3,7 +3,7 @@
 |BillTube 2.0 Theme by BILL(2) , You can find me and theme instructions on my discord channel discord.gg/fwadWd9
 |Special thanks to: Kuer, Xaekai, ss7(supersaw7), kenblu24, Kaba99(Cytube Enhanced) & squabble and others.
 |If i forgot to credit someone, Let me know and i will add you.
-|Thanks for using the theme.
+
 */
 
 ////Lets initialize some shit////
@@ -1157,6 +1157,13 @@ socket.on("closePoll", function() {
 $('#nav-collapsible a:contains("Layout")').remove();
 $('#us-general > form').hide();
 $("#us-general > form").after('<div id="btscreen"><div class="card-frame"><div class="left"><div class="billtube">BillTube Theme 2.0</div><div class="billtubeinfo">For more information about this theme join my Discord at <a href="http://discord.gg/fwadWd9" target="_blank">Discord.gg/fwadWd9</a></div></div></div></div>');
+
+
+
+
+
+
+
 
 	    /**
 	     * Returns viewport size
@@ -18619,6 +18626,9 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	}
   });
 
+
+
+
 /***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
@@ -21793,7 +21803,7 @@ function emoteToDialog(title, src) {
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-
+if (UI_ChannelList=="1") {
 $("#motdrow").before(
 '<div id="scroll-feature" class="horiz-scroll">' +
 '<div class="scroller">' +
@@ -21817,6 +21827,7 @@ $("#motdrow").before(
 '<a href="'+ChannelSlide11URL+'"><img src="'+ChannelSlide11+'" class="kek" /></a>' +
 '<a href="'+ChannelSlide12URL+'"><img src="'+ChannelSlide12+'" class="kek" /></a>' +
 '</div></div></div>');
+}
 // The HorizontalScroller Class accepts a jQuery object as its only argument
 // The argument is the parent container of the scrolling element
 // The element requires an ID to differentiate HorizontalScroller instances
@@ -23413,5 +23424,3 @@ for (i in ColorsArray) {
 
 /***/ }
 /******/ ]);
-
-
