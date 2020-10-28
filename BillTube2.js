@@ -8,8 +8,6 @@
 
 ////Lets initialize some shit////
 
-var vplayer = videojs("ytapiplayer")
-
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -23424,3 +23422,11 @@ for (i in ColorsArray) {
 
 /***/ }
 /******/ ]);
+
+//the script ends here
+
+$(document).ready(function() {
+    setTimeout(function (){
+$('#mediarefresh').click();
+    }, 1000);
+});
