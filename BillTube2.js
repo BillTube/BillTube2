@@ -245,8 +245,8 @@ preloadedScript.src = "//dl.dropbox.com/s/39iz5fdgzxufp7b/lazyloadbilltheme.js";
 document.body.appendChild(preloadedScript);
 //Mobile Check
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-$("#ytapiplayer_html5_api").attr("muted","");
-$("#ytapiplayer_html5_api").attr("playsinline","");
+$("#ytapiplayer").attr("muted","");
+$("#ytapiplayer").attr("playsinline","");
 $("#main").after($("#chatwrap"));
 $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/sjb7rw59p0qnx6a/mobile.css' />");
 $.getScript("https://dl.dropbox.com/s/5h0liiwcqqdfbh0/mobile.js");
@@ -564,7 +564,6 @@ $("#mediarefresh").addClass("fal fa-sync OLB");
 $("#mediarefresh").removeClass("btn btn-sm btn-default");
 $("#mediarefresh").text("");
 $("#userlist").addClass("animated animatedFadeInUp fadeInUp");
-
 $("#queue").addClass("queue_sortable");
 $("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Up Next</p></div></div>");
 $("#queuecontainer").append($("#queue"));
@@ -605,8 +604,6 @@ $("#chatwrap .nano").append($("#messagebuffer"));
 $('#chatwrap').children('.form-control').before("<input type='text' id='username'style='width:0;height:0;visibility:hidden;position:absolute;left:0;top:0' /><input type='password'style='width:0;height:0;visibility:hidden;position:absolute;left:0;top:0' />");
 $('.form-control').attr('autocomplete' , 'off');
 $("nav .navbar-brand").attr('href', document.URL);
-//$("#mainpage").append("<div id='mHandle-left' class='mHandle'></div> <div id='mHandle-right' class='mHandle'></div><div id='mHandle-mid' class='mHandle'></div>");
-//$("body").prepend("<div id='dragoverlay'><div class='l'></div><div class='r'></div><div id='handleWidget'></div></div>");
 $("#mainpage").append("<style id='splitRatio'>@media (min-width: 992px) {#mainpage > .nano {width: 83%;} #chatwrap {width: 17%;}}</style>");
 $("#maincontain").addClass("maincontain");
 $("#sitefooter").append($("#logoutform"));
@@ -619,6 +616,12 @@ $(".chat-area-group").append($("#userlisttoggle"));
 $("#chatline").attr('autocomplete', 'off');
 $("#usercount").unbind();
 $('#announcements').detach().appendTo('#sitefooter');
+
+$(document).ready(function() {
+    setTimeout(function (){
+$('#mediarefresh').click();
+    }, 1000);
+});
 
 var EMOTELISTMODAL = $("#emotelist");
 $("#emotelistbutton").click(function () {
@@ -1123,15 +1126,18 @@ for (i=0;i<field.length;i++){
   
   
 
-$("#ytapiplayer_html5_api").attr("airplay","allow");
-$("#ytapiplayer_html5_api").attr("x-webkit-airplay","allow");
-$("#ytapiplayer_html5_api").attr("autoplay","true");
+$("#ytapiplayer").attr("airplay","allow");
+$("#ytapiplayer").attr("x-webkit-airplay","allow");
+$("#ytapiplayer").attr("autoplay","true");
 $("#maincontain").addClass("Overlay-Scrollbars");
 $("#maincontain").addClass("leftcontent");
 $("#chatwrap").addClass("rightcontent");
+
+$( document ).ready(function() {
 var myPlayer = videojs('ytapiplayer_html5_api');
 myPlayer.poster(Poster_URL);
 console.log(myPlayer.poster());
+});
 
 if (hasPermission("settemp")) $(".add-temp").prop('checked', false);
 
@@ -21637,7 +21643,7 @@ function emoteToDialog(title, src) {
         if ($hidePlayerBtn.hasClass('btn-default')) { //video visible
             var $playerWindow = $('#videowrap').find('.embed-responsive');
             $playerWindow.css({position: 'relative'});
-			videojs("ytapiplayer_html5_api").ready(function(){this.volume(0);});
+			videojs("ytapiplayer").ready(function(){this.volume(0);});
 
             $('<div id="player-overlay">').appendTo(videowrap);
             $hidePlayerBtn.html('<i class="glyphicon glyphicon-film">')
@@ -21647,7 +21653,7 @@ function emoteToDialog(title, src) {
             $('#player-overlay').remove();
 			var $playerWindow = $('#videowrap').find('.embed-responsive');
             $playerWindow.css({position: 'block'});
-			videojs("ytapiplayer_html5_api").ready(function(){this.volume(0.7);});
+			videojs("ytapiplayer").ready(function(){this.volume(0.7);});
             $hidePlayerBtn.html('<i class="glyphicon glyphicon-ban-circle">')
                 .removeClass('').addClass('btn-default');
         }
@@ -21662,7 +21668,7 @@ function emoteToDialog(title, src) {
     if (!settings.turnOffVideoOption) {
         this.$hidePlayerBtn.hide();
     }
-    videojs("ytapiplayer_html5_api").ready(function(){this.volume(1);});
+    videojs("ytapiplayer").ready(function(){this.volume(1);});
 
 	    this.settingsFix = function () {
 	        $("#us-theme").val(window.USEROPTS.theme);
@@ -21776,8 +21782,8 @@ function emoteToDialog(title, src) {
 	    }
 		socket.on("changeMedia", function(data) {
 	    setTimeout(function() {
-            $("#ytapiplayer_html5_api").attr("airplay","allow");
-            $("#ytapiplayer_html5_api").attr("x-webkit-airplay","allow");
+            $("#ytapiplayer").attr("airplay","allow");
+            $("#ytapiplayer").attr("x-webkit-airplay","allow");
         //    $("#ytapiplayer_html5_api").attr("autoplay","true");
           var myPlayer = videojs('ytapiplayer_html5_api');
           myPlayer.poster(Poster_URL);
@@ -23425,8 +23431,6 @@ for (i in ColorsArray) {
 
 //the script ends here
 
-$(document).ready(function() {
-    setTimeout(function (){
-$('#mediarefresh').click();
-    }, 1000);
-});
+
+
+
