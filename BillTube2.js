@@ -1133,11 +1133,7 @@ $("#maincontain").addClass("Overlay-Scrollbars");
 $("#maincontain").addClass("leftcontent");
 $("#chatwrap").addClass("rightcontent");
 
-$( document ).ready(function() {
-var myPlayer = videojs('ytapiplayer_html5_api');
-myPlayer.poster(Poster_URL);
-console.log(myPlayer.poster());
-});
+
 
 if (hasPermission("settemp")) $(".add-temp").prop('checked', false);
 
@@ -21784,8 +21780,7 @@ function emoteToDialog(title, src) {
 	    setTimeout(function() {
             $("#ytapiplayer").attr("airplay","allow");
             $("#ytapiplayer").attr("x-webkit-airplay","allow");
-        //    $("#ytapiplayer_html5_api").attr("autoplay","true");
-          var myPlayer = videojs('ytapiplayer_html5_api');
+          var myPlayer = videojs('ytapiplayer');
           myPlayer.poster(Poster_URL);
           console.log(myPlayer.poster());
 	}, 1);
@@ -23430,7 +23425,6 @@ for (i in ColorsArray) {
 /******/ ]);
 
 //the script ends here
-
 
 
 
