@@ -616,13 +616,12 @@ $(".chat-area-group").append($("#userlisttoggle"));
 $("#chatline").attr('autocomplete', 'off');
 $("#usercount").unbind();
 $('#announcements').detach().appendTo('#sitefooter');
-/*
+
 $(document).ready(function() {
     setTimeout(function (){
 $('#mediarefresh').click();
     }, 1000);
 });
-*/
 
 var EMOTELISTMODAL = $("#emotelist");
 $("#emotelistbutton").click(function () {
@@ -21429,7 +21428,7 @@ function emoteToDialog(title, src) {
 	    var that = this;
 
 	    var defaultSettings = {
-	        defaultTheme: 'Halloween', //default theme for user (until user do not change it)
+	        defaultTheme: 'default', //default theme for user (until user do not change it)
 	        themeId: 'theme-css' //node id in DOM
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
