@@ -1544,6 +1544,7 @@ img.kek:hover {
 .open>.dropdown-menu {
     display: block;
     font-size: 1rem;
+    text-align: center;
 }
 p#currenttitle {
     width: auto;
@@ -2677,9 +2678,6 @@ background-color: rgba(133, 115, 159, 0.25);
     -ms-filter: blur(0px);
     filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
 }
-.dropdown-menu {
-min-width: 50px;
-}
 .btn-default.disabled, .btn-default.disabled.active, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled], .btn-default[disabled].active, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default.active, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover {
     background-color: rgba(42, 45, 47, 0.18);
 }
@@ -2691,9 +2689,6 @@ min-width: 50px;
 }
 #playlistmanagerwrap {
     display: none;
-}
-#bg-wrapper {
-
 }
 .well {
     border: 0px solid #0c0d0e;
@@ -4051,7 +4046,7 @@ textarea:focus, input:focus{
     z-index: 1000;
     display: none;
     float: left;
-    min-width: 50px;
+    min-width: 100%;
     padding: 5px 0;
     margin: 2px 0 0;
     font-size: 14px;
@@ -4300,15 +4295,15 @@ html.compact #userlist {
     float: none;
 }
 .notifyjs-bootstrap-success {
-    color: #dee8ff!important;
-    font-size: 1.4rem!important;
-    background-color: var(--theme-bg-color)!important;
-    border-color: #d6e9c61c!important;
-    font-weight: 100!important;
-    background-image: none!important;
-    border: none!important;
-    text-shadow: 0 1px 0 rgb(23 23 23 / 58%)!important;
-    font-family: inherit;
+    font-family: 'Barlow';
+    color: rgb(222, 232, 255) !important;
+    font-size: 1.6rem !important;
+    background: radial-gradient( farthest-corner at top left, #9a52cd, transparent 600px), radial-gradient( farthest-side at top right, #5b69f8, transparent 500px), radial-gradient( farthest-corner at bottom right, transparent, transparent 500px), radial-gradient( farthest-corner at bottom left, rgba(147, 9, 243, 0.13), transparent 600px)!important;
+    background-color: rgba(35, 33, 59, 0.6)!important;
+    font-weight: 100 !important;
+    background-image: none !important;
+    border: none !important;
+    text-shadow: rgba(23, 23, 23, 0.58) 0px 1px 0px !important;
 	}
 .notifyjs-bootstrap-base {
     font-weight: bold;
