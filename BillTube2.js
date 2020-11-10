@@ -1126,9 +1126,9 @@ for (i=0;i<field.length;i++){
   
   
 
-$("#ytapiplayer").attr("airplay","allow");
-$("#ytapiplayer").attr("x-webkit-airplay","allow");
-$("#ytapiplayer").attr("autoplay","true");
+//$("#ytapiplayer").attr("airplay","allow");
+//$("#ytapiplayer").attr("x-webkit-airplay","allow");
+//$("#ytapiplayer").attr("autoplay","true");
 $("#maincontain").addClass("Overlay-Scrollbars");
 $("#maincontain").addClass("leftcontent");
 $("#chatwrap").addClass("rightcontent");
