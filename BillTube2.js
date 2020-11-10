@@ -256,7 +256,7 @@ console.log("Loading Desktop Theme");
 
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
+$('head').append("<link rel='stylesheet' href='//cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("//dl.dropbox.com/s/hi96w4lvmn1f0u7/avatarletters.js");
@@ -533,7 +533,7 @@ $("#userlisttoggle").text("");
 $("#showchansettings").text("Admin Settings");
 $("#controlsrow").after($("#motdrow"));
 $(".container-fluid").append($("#footer"));
-$('#footer').children('.container').append('<p class="text-muted credit">Copyrights and trademarks for the shows and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law. The author is not responsible for any contents linked or referred to from his pages, All CyTu.be does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google drive. All Google users signed a contract with the sites when they set up their accounts wich forces them not to upload illegal content.(<a href="https://www.lumendatabase.org/topics/14">DMCA Safe Harbor</a>)<h4><center><br>Theme By Bill</p>(<a href="https://github.com/BillTube/theme">(Old version) Available on github! Check discord for the newest version!</a>)</center></h4>');
+$('#footer').children('.container').append('<p class="text-muted credit">Copyrights and trademarks for the shows and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law. The author is not responsible for any contents linked or referred to from his pages, All CyTu.be does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google drive. All Google users signed a contract with the sites when they set up their accounts wich forces them not to upload illegal content.(<a href="https://www.lumendatabase.org/topics/14">DMCA Safe Harbor</a>)<h4><center><br>BillTube Theme 2</p>(<a href="http://discord.gg/fwadWd9">Available Now</a>)</center></h4>');
 $("#mainpage").prepend($("#chatwrap"));
 $("#userlist").prepend("<div id='connected'></div>");
 $("#userlisttoggle").append($("#usercount"));
@@ -1059,18 +1059,9 @@ function scrollerInit() {
 
 var LOADED = (typeof LOADED==="undefined") ? false : true;
 LOADED ? location.reload() : '';
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-53755606-1', 'auto');
-ga('send', 'pageview');
-
 var myElement = document.querySelector("#videowrap");
 myElement.style.display = "block";
 $("body").addClass('fluid');
-
-//could go terribly wrong!
 var field = document.querySelectorAll('[data-persist]')
 for (i=0;i<field.length;i++){
   var stored = localStorage.getItem(field[i].getAttribute('data-persist'))
@@ -1108,8 +1099,6 @@ for (i=0;i<field.length;i++){
     else {$('.no-result').hide();}
 		  });
 });
-  // -- Scroll to bottom when going AFK (stolen from xaekai, im lazy)
-// -- or when images or links are posted
     socket.on('setAFK', scrollChat);
 	    socket.on('chatMsg', scrollChat);
     socket.on('chatMsg', function (data) {
@@ -1123,17 +1112,14 @@ for (i=0;i<field.length;i++){
  window.addEventListener('resize', function() {
     scrollToBottom();
   });
-  
-  
 
+//lets disable this for now, youtube doenst like it
 //$("#ytapiplayer").attr("airplay","allow");
 //$("#ytapiplayer").attr("x-webkit-airplay","allow");
 //$("#ytapiplayer").attr("autoplay","true");
 $("#maincontain").addClass("Overlay-Scrollbars");
 $("#maincontain").addClass("leftcontent");
 $("#chatwrap").addClass("rightcontent");
-
-
 
 if (hasPermission("settemp")) $(".add-temp").prop('checked', false);
 
@@ -1157,12 +1143,6 @@ socket.on("closePoll", function() {
 $('#nav-collapsible a:contains("Layout")').remove();
 $('#us-general > form').hide();
 $("#us-general > form").after('<div id="btscreen"><div class="card-frame"><div class="left"><div class="billtube">BillTube Theme 2.0</div><div class="billtubeinfo">For more information about this theme join my Discord at <a href="http://discord.gg/fwadWd9" target="_blank">Discord.gg/fwadWd9</a></div></div></div></div>');
-
-
-
-
-
-
 
 
 	    /**
