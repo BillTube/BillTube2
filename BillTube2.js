@@ -260,7 +260,16 @@ $('head').append("<link rel='stylesheet' href='//cdn.jsdelivr.net/gh/BillTube/Bi
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("//dl.dropbox.com/s/hi96w4lvmn1f0u7/avatarletters.js");
+$.getScript("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
+
+//$.getScript("https://dl.dropbox.com/s/3qao2z00i2t3gbp/channelslider.js");
+
+
+if (UI_ChannelList=="4") {
+$("#motdrow").before(
+'<div class="wrapper" ng-app="main" ng-controller="mainCntr"><slider></slider></div>');
+}
 
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
@@ -616,12 +625,13 @@ $(".chat-area-group").append($("#userlisttoggle"));
 $("#chatline").attr('autocomplete', 'off');
 $("#usercount").unbind();
 $('#announcements').detach().appendTo('#sitefooter');
-
+/*
 $(document).ready(function() {
     setTimeout(function (){
 $('#mediarefresh').click();
     }, 1000);
 });
+*/
 
 var EMOTELISTMODAL = $("#emotelist");
 $("#emotelistbutton").click(function () {
@@ -23405,6 +23415,10 @@ for (i in ColorsArray) {
 /******/ ]);
 
 //the script ends here
+
+
+
+
 
 
 
