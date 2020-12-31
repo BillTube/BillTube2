@@ -716,7 +716,7 @@ if (myVideo.addEventListener) {
 }
 $("#mediaurl").on("paste", function() {
 	setTimeout(function() {
-		$("#mediaurl")[0].value = $("#mediaurl")[0].value.replace("//www.dropbox.com/s/", "//dl.dropbox.com/s/").replace("?dl=0","");
+		$("#mediaurl")[0].value = $("#mediaurl")[0].value.replace("//www.dropbox.com/s/", "//dl.dropbox.com/s/").replace("?dl=0","").replace("?a=view","");
 
 	}, 1);
 	setTimeout(function() {
@@ -732,6 +732,7 @@ $("#mediaurl").on("paste", function() {
 		}
 	}, 250);
 });
+
 
 location.href.charAt(location.href.length - 1) === '#' && chatOnly();
 _timeVIDEBLU = {raw: 0, ofs: 0, paused: false};//Define time object for ss7's video time display plugin
