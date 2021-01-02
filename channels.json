@@ -1,0 +1,59 @@
+{
+    "ok": true,
+    "list": {
+        "uuid": "939fbf65-9040-4392-ae06-5817dd84f57a",
+        "order_uuid": null,
+        "channels": [
+            {
+                "channel_url": "https://cytu.be/r/southparkhd",
+                "image_url": "https://s14.postimg.cc/m3rs2y1rl/C47_MQA3.png",
+                "title": "Visit the Southpark Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/seinfeldHD",
+                "image_url": "https://s14.postimg.cc/yv5y9gqz5/w3_WPXIa.png",
+                "title": "Visit the Seinfeld Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/Simpsons",
+                "image_url": "https://i.postimg.cc/8CqBZg1z/simps.png",
+                "title": "Visit the Simpsons Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/spookykidshows",
+                "image_url": "https://i.postimg.cc/HsnqdW7Y/spookyshow.png",
+                "title": "Visit the Are you afraid of the dark/goosebumps Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/KOTH",
+                "image_url": "https://i.postimg.cc/bwQ49jpK/koth.png",
+                "title": "Visit the KOTH Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/billcartoon",
+                "image_url": "https://s14.postimg.cc/c6gr9whb5/Bdr_UNQZ.png",
+                "title": "Visit the Cartoons Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/spookyshows",
+                "image_url": "https://s14.postimg.cc/twifuuuv5/2_LB9834.png",
+                "title": "Visit the Ghost Adventures Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/buffy",
+                "image_url": "https://s14.postimg.cc/6iagj0koh/Gx_CKt_EZ.png",
+                "title": "Visit the Buffy Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/futuramaSD",
+                "image_url": "https://i.postimg.cc/sXLy6ncF/futuram.png",
+                "title": "Visit the Futurama Channel"
+            },
+			{
+                "channel_url": "https://cytu.be/r/spooktober",
+                "image_url": "https://i.postimg.cc/HnVkSfqR/spookt.png",
+                "title": "Visit the Spooktober Channel"
+            }
+        ]
+    }
+}
