@@ -436,9 +436,6 @@ input[type="checkbox"]:checked:after {
 	width: 100%;
 	padding: 0;
 }
-.col-md-12 {
-    margin-top: 10px;
-}
 .OLBQuality {
 	font-size: 13px!important;
     font-weight: 200;
@@ -757,8 +754,8 @@ width:100%;
     margin-left: 8rem;
     margin-right: 8rem;
     border-radius: 10px;
-    padding: 35px;
-	 margin-top: 6rem;
+    padding: 4rem;
+	margin-top: 3rem;
 	}
 	/*drinkbar*/
 	#drinkbarwrap {
@@ -2692,10 +2689,9 @@ background-color: rgba(133, 115, 159, 0.25);
 }
 .well {
     border: 0px solid #0c0d0e;
-	padding: 5rem;
+	padding: 3rem;
     margin-left: 7rem;
     margin-right: 7rem;
-    margin-top: 2rem;
     border-radius: 10px;
 	background: var(--body-bg-color);
 }
