@@ -1,0 +1,38 @@
+img.kek {
+    border-radius: 7px;
+    opacity: 0.8;
+}
+img.kek:hover {
+  cursor: zoom-in;
+}
+#carousel img {
+  width: 100%;
+  height: auto;
+  padding: 0 1px;
+}
+.owl-wrapper-outer {
+    margin-top: 25px;
+}
+.arrow {
+  border: solid gray;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 10px;
+  margin: 0 20px;
+}
+
+.arrright {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.arrleft {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
