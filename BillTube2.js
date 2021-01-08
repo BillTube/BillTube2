@@ -21786,6 +21786,32 @@ function emoteToDialog(title, src) {
           console.log(myPlayer.poster());
 	}, 1);
 });
+const video = document.querySelectorAll('video')[0];
+const button = document.querySelector('#pipButton');
+
+
+if (!document.pictureInPictureEnabled) {
+  button.textContent = 'PiP is not supported in your browser.';
+  button.style.opacity = '0.5';
+  button.style.cursor = 'default';
+  button.disabled = true;
+}
+
+video.addEventListener('enterpictureinpicture', () => {
+    button.textContent = 'Exit Picture-in-Picture';
+});
+
+video.addEventListener('leavepictureinpicture', () => {
+    button.textContent = '';
+});
+
+button.addEventListener('click', () => {
+  if (document.pictureInPictureElement) {
+    document.exitPictureInPicture()
+  } else {
+    video.requestPictureInPicture()
+  }
+});
 
 	});
 
@@ -21822,7 +21848,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carous
 	lazyLoad : true,
 	autoHeight : true,
     transitionStyle:"fade",
-	autoPlay : 8000,
+	autoPlay : 12000,
     stopOnHover : true,
 	pagination : false,
     items : 6, 
