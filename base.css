@@ -220,7 +220,7 @@ body {
     overflow-x: hidden;
 }
 .material-icons {
-	font-size: 22px!important;
+	font-size: 20px!important;
 }
 .btn-group-xs>.btn, .btn-xs {
     padding: 7px 12px;
@@ -457,15 +457,17 @@ width:100%;
   pointer-events: none;
 }
 .chatbtn {
-    border: 0px solid rgba(255, 255, 255, 0.05);
+border: 0px solid rgba(255, 255, 255, 0.05);
     height: 24px;
     width: auto;
     margin-right: 0px;
-    color: var(--settings-icon-color);
-    font-size: 15px;
+    color: #ffffff;
+    font-size: 1.5rem;
     transition: all 0.3s ease-in-out 0s;
-    background: none !important;
-	opacity: 0.5;
+    opacity: 0.7;
+    background: #171a23;
+    border-radius: 4px;
+    margin: 2px;
 }
 .chatbtn:hover {
 	opacity: 1;
@@ -3266,12 +3268,14 @@ button#skip {
 }
 .label {
     display: inline;
-    padding: 0.5em 0.8em .5em;
-    font-size: 65%;
+    padding: 0.5em 0.8em 0.5em;
+    font-size: 1rem;
     color: #fff;
     border-radius: .25em;
-	display: flex;
+    display: flex;
     align-items: center;
+    background: #171a23;
+    margin: 2px;
 }
 
 .et-hero-tabs,
@@ -3506,12 +3510,12 @@ div#chat-panel {
 }
 #favourite-pictures-panel, #smiles-panel {
     text-align: center;
-    margin: 0px 10px 10px 15px;
+    margin: 0px 17px 10px 17px;
     border: 0px solid #30344c;
     background-color: var(--theme-bg-color);
-    border-radius: 10px;
+    border-radius: 7px;
     max-height: 350px;
-    height: 30rem;
+    height: 24rem;
     overflow-x: hidden;
     overflow-y: scroll;
     max-width: 362px;
@@ -3538,9 +3542,9 @@ div#chat-panel {
     border-radius: 10px;
 }
 #favourite-pictures-panel img, #smiles-panel img {
-    margin: 7px;
-    max-height: 65px;
-    max-width: 80px;
+margin: 2px;
+    max-height: 50px;
+    max-width: 50px;
     cursor: pointer;
     border-radius: 4px;
 }
