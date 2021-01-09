@@ -3384,7 +3384,7 @@ button#newpollbtn {
 }
 .rightcontent {
 	float: right;
-    display: flex;
+    display: inherit;
     right: 0px;
 }
 .leftcontent {
