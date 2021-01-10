@@ -1596,7 +1596,7 @@ form#logoutform {
     background: rgba(245, 28, 22, 0.6);
 }
 .label-success {
-  background-color: #5a3d6b;
+    background-color: #5a3d6b!important;
 }
 
 .ce-custom-editor-textarea {
