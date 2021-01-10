@@ -21791,7 +21791,7 @@ const button = document.querySelector('#pipButton');
 
 
 if (!document.pictureInPictureEnabled) {
-  button.textContent = 'PiP is not supported in your browser.';
+  button.textContent = '';
   button.style.opacity = '0.5';
   button.style.cursor = 'default';
   button.disabled = true;
@@ -23234,3 +23234,18 @@ for (i in ColorsArray) {
 /******/ ]);
 
 //the script ends here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
