@@ -49,6 +49,16 @@
                 "image_url": "https://i.postimg.cc/sXLy6ncF/futuram.png",
                 "title": "Visit the Futurama Channel"
             },
+					{
+                "channel_url": "https://cytu.be/r/billtube",
+                "image_url": "https://i.postimg.cc/ryCcNzPf/hansen.png",
+                "title": "Visit the TCAP Channel"
+            },
+							{
+                "channel_url": "https://cytu.be/r/copstube",
+                "image_url": "https://i.postimg.cc/Kc9BjcDH/yEn9W6E2.png",
+                "title": "Visit the COPS Channel"
+            },
 			{
                 "channel_url": "https://cytu.be/r/spooktober",
                 "image_url": "https://i.postimg.cc/HnVkSfqR/spookt.png",
