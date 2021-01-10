@@ -21786,17 +21786,27 @@ function emoteToDialog(title, src) {
           console.log(myPlayer.poster());
 	}, 1);
 });
+
+if (typeof PIP_Player == "undefined") {
+  var PIP_Player = 0;
+}
+if (PIP_Player == 1) {
+    EnablePIP();
+} else {
+$("#pipButton").addClass("hidden");
+}
+
+function EnablePIP() {
 const video = document.querySelectorAll('video')[0];
 const button = document.querySelector('#pipButton');
 
-
-if (!document.pictureInPictureEnabled) {
-  button.textContent = '';
-  button.style.opacity = '0.5';
-  button.style.cursor = 'default';
-  button.disabled = true;
-}
-
+     if (!document.pictureInPictureEnabled) {
+    button.textContent = '';
+    button.style.opacity = '0.5';
+    button.style.cursor = 'default';
+    button.disabled = true;
+    }
+	
 video.addEventListener('enterpictureinpicture', () => {
     button.textContent = 'Exit Picture-in-Picture';
 });
@@ -21810,10 +21820,14 @@ button.addEventListener('click', () => {
     document.exitPictureInPicture()
   } else {
     video.requestPictureInPicture()
-  }
-});
+	}	
+  });
+} 
+  
 
-	});
+
+
+});
 
 
 /***/ },
@@ -22390,7 +22404,6 @@ $("#chatline").keydown(tabSuggestions)
 
 
 	});
-
 /***/ },
 /* 45 */
 /***/ function(module, exports) {
@@ -22404,8 +22417,9 @@ $("#chatline").keydown(tabSuggestions)
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-
-
+if (BG_Stock=="1") {
+    var BGPics = ['https://i.ibb.co/tH1T2kM/3z9lp6.jpg', 'https://i.ibb.co/zZBdvW1/8oxmr2.jpg', 'https://i.ibb.co/wMfkcQx/9m6owx.png', 'https://i.ibb.co/PhrtPSW/ox2yd5.jpg', 'https://i.ibb.co/5sjxgRV/j5k8vq.jpg', 'https://i.ibb.co/VDnK4Pv/1kj9y1.jpg', 'https://i.ibb.co/CJ3hjJv/4xg9zv.jpg'];
+}
 	function randomHero() {
 
     $("#wrap").css({
@@ -22417,7 +22431,7 @@ $("#chatline").keydown(tabSuggestions)
 }
 randomHero();
 	});
-
+	
 /***/ },
 /* 47 */
 /***/ function(module, exports) {
@@ -23234,18 +23248,4 @@ for (i in ColorsArray) {
 /******/ ]);
 
 //the script ends here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
