@@ -1608,8 +1608,25 @@ form#logoutform {
     border: none;
     font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
 }
-
-
+#guestlogin .input-group-addon {
+    min-width: 120px;
+    display: none;
+}
+.vjs-loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    opacity: 0.85;
+    text-align: left;
+    border: 6px solid rgb(17 20 29);
+    box-shadow: 0 0 3.25em rgb(68 73 88);
+    box-sizing: border-box;
+    background-clip: padding-box;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 25px;
+}
 .ce-extras {
     font-size: 0;
 }
