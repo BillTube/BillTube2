@@ -54,9 +54,14 @@
                 "image_url": "https://i.postimg.cc/ryCcNzPf/hansen.png",
                 "title": "Visit the TCAP Channel"
             },
-							{
+               {
                 "channel_url": "https://cytu.be/r/copstube",
                 "image_url": "https://i.postimg.cc/Kc9BjcDH/yEn9W6E2.png",
+                "title": "Visit the COPS Channel"
+            },
+		{
+                "channel_url": "https://cytu.be/r/spookyshows2",
+                "image_url": "https://i.postimg.cc/prNbvjdh/SS2.png",
                 "title": "Visit the COPS Channel"
             },
 			{
