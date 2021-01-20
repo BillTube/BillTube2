@@ -2,9 +2,33 @@
 |BillTube 2.0 Theme by BILL(2) , You can find me and theme instructions on my discord channel discord.gg/fwadWd9
 |Special thanks to: Kuer, Xaekai, ss7(supersaw7), kenblu24, Kaba99(Cytube Enhanced) & squabble and others.
 |If i forgot to credit someone, Let me know and i will add you.
-*/
+  */
 
 ////Lets initialize some shit////
+var vplayer = videojs("ytapiplayer")
+
+function videofix(){
+var vplayer = videojs("ytapiplayer")
+vplayer.on('error', function(e){
+window.setTimeout(function(){
+
+    vplayer.createModal('reloading the player!');
+	refreshVideo();
+
+    console.log("reloading player");
+    }, 10000);
+ });
+}
+window.socket.on("changeMedia", function () {
+var myVideo = document.getElementById("ytapiplayer");
+if (myVideo.addEventListener) {
+    videofix();
+  }
+});
+
+refreshVideo = function () {
+     $('#mediarefresh').click();
+};
 
 function loadScript(src) {
   return new Promise(function (resolve, reject) {
@@ -18308,8 +18332,9 @@ fsVidButton.addEventListener('click', function(e) {
 
 $("#skip").click(function() {
     socket.emit("voteskip");
-    $("#skip").attr("disabled", true);
+//    $("#skip").attr("disabled", true);
 });
+
 $("#VideoOverlay").append("<div id='ss7time' title='--:--'></div>");
 
 
@@ -23250,3 +23275,4 @@ for (i in ColorsArray) {
 /******/ ]);
 
 //the script ends here
+
