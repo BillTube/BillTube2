@@ -4484,8 +4484,8 @@ span.giphyimage {
     z-index: 999;
 }
 #chat-controls-embed {
-    top: 6px;
-    right: 10px;
+    top: 4px;
+    right: 2px;
     display: -webkit-box;
     display: flex;
     position: absolute;
