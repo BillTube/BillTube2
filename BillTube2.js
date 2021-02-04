@@ -713,10 +713,10 @@ if ($('#usercount').length !== 0) {
 }
 
 if ($('#currenttitle').length !== 0) {
-    $('#currenttitle').text($('#currenttitle').text().replace('.' , ' ').replace('.' , ' '));
+    $('#currenttitle').text($('#currenttitle').text().replace(/[.]/g, ' '));
 		$('#currenttitle').text($('#currenttitle').text().replace('Currently Playing:' , ' ').replace('Currently Playing:' , ' '));
     window.socket.on('changeMedia', function () {
-    $('#currenttitle').text($('#currenttitle').text().replace('.' , ' ').replace('.' , ' '));
+    $('#currenttitle').text($('#currenttitle').text().replace(/[.]/g, ' '));
 	    $('#currenttitle').text($('#currenttitle').text().replace('Currently Playing:' , ' ').replace('Currently Playing:' , ' '));
     });
 }
@@ -762,7 +762,7 @@ $("#mediaurl").on("paste", function() {
 			for (i = 0; i < mediaUrl.length-1; i++) {
 				mediaTitle += mediaUrl[i] + ".";
 			}
-			mediaTitle = mediaTitle.substring(0, mediaTitle.length-1).replace(".", " ").replace("HDTV", "").replace("720p", "").replace("1080p", "").replace("-tNe", "").replace("x265", "").replace("x264", "").replace("q22", "").replace("Joy", "").replace("(", "").replace(")", "");
+			mediaTitle = mediaTitle.substring(0, mediaTitle.length-1).replace(/[.]/g, " ").replace("HDTV", "").replace("720p", "").replace("1080p", "").replace("-tNe", "").replace("x265", "").replace("x264", "").replace("q22", "").replace("Joy", "").replace("(", "").replace(")", "");
 			$("#addfromurl-title-val")[0].value = mediaTitle;
 		}
 	}, 250);
