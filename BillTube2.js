@@ -302,11 +302,6 @@ $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
-if (UI_ChannelList=="4") {
-$("#motdrow").before(
-'<div class="wrapper" ng-app="main" ng-controller="mainCntr"><slider></slider></div>');
-}
-
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
   autoA11y: { enabled: true },
