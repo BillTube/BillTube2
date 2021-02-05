@@ -1725,13 +1725,25 @@ form#logoutform {
     display: none;
 }
 .chat-avatar_small {
-    max-width: 29px;
-    max-height: 29px;
-    margin-left: 11px!important;
+    width: 29px!important;
+    height: 29px!important;
+    margin-left: 2px!important;
 }
 .chat-avatar_big {
-    max-height: 45px;
-    max-width: 45px;
+    height: 43px!important;
+    width: 43px!important;
+}
+.ChatAvatarBig {
+	margin-left:49px;
+}
+.ChatAvatarSmall {
+	margin-left:29px;
+}
+#Notif {
+    color: var(--theme-color);
+}
+#Notif:hover {
+    color: #fefeff;
 }
 .navbar-inverse .navbar-brand {
 cursor: pointer;
@@ -2251,7 +2263,6 @@ a.qe_title {
 }
 [class*="chat-msg"]:not(.drink):not(.consecutive) {
     margin-top: 5px;
-    margin-left: 48px;
     margin-right: 0px;
     margin-bottom: 2px;
     font-size: 1.4rem;
@@ -3480,10 +3491,6 @@ button#newpollbtn {
     -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzUiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAzNSAzNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAxNEMwIDguMzQzMTUgMC43NDI2NDEgNC4yNTczNiAyLjUgMi41QzQuMjU3MzYgMC43NDI2NDEgOCAwIDE0IDBIMjFDMjcgMCAzMC43NDI2IDAuNzQyNjQxIDMyLjUgMi41QzM0LjI1NzQgNC4yNTczNiAzNSA4IDM1IDE0VjIxQzM1IDI3IDM0LjI1NzQgMzAuNzQyNiAzMi41IDMyLjVDMzAuNzQyNiAzNC4yNTc0IDI3IDM1IDIxIDM1SDE0QzggMzUgNC4yNTczNiAzNC4yNTc0IDIuNSAzMi41QzAuNzQyNjQxIDMwLjc0MjYgMCAyNi42NTY5IDAgMjFWMTRaIiBmaWxsPSIjODA4MDgwIi8+PC9zdmc+);
     mask-size: 100%;
     mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzUiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAzNSAzNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAxNEMwIDguMzQzMTUgMC43NDI2NDEgNC4yNTczNiAyLjUgMi41QzQuMjU3MzYgMC43NDI2NDEgOCAwIDE0IDBIMjFDMjcgMCAzMC43NDI2IDAuNzQyNjQxIDMyLjUgMi41QzM0LjI1NzQgNC4yNTczNiAzNSA4IDM1IDE0VjIxQzM1IDI3IDM0LjI1NzQgMzAuNzQyNiAzMi41IDMyLjVDMzAuNzQyNiAzNC4yNTc0IDI3IDM1IDIxIDM1SDE0QzggMzUgNC4yNTczNiAzNC4yNTc0IDIuNSAzMi41QzAuNzQyNjQxIDMwLjc0MjYgMCAyNi42NTY5IDAgMjFWMTRaIiBmaWxsPSIjODA4MDgwIi8+PC9zdmc+);
-    max-width: 38px;
-    max-height: 38px;
-    width: auto;
-    height: auto;
     padding: 0px;
     margin-left: 5px;
     position: absolute;
