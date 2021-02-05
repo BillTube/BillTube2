@@ -296,7 +296,7 @@ console.log("Loading Desktop Theme");
 
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='//cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
+$('head').append("<link rel='stylesheet' href='https://dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
@@ -567,14 +567,11 @@ $(".server-msg-reconnect").addClass("fad fa-plug");
 $(".server-msg-reconnect").text("");
 $("body").addClass("darktheme");
 $("#userlisttoggle").removeClass("glyphicon glyphicon-chevron-down pull-left pointer");
-$("#newpollbtn").removeClass("btn btn-sm btn-default");
-$("#newpollbtn").addClass("headerbtn");
+$("#newpollbtn").removeClass("btn btn-sm btn-default").addClass("headerbtn");
 $("#leader").removeClass("btn btn-sm btn-default");
 $("#Notif").removeClass("btn btn-sm btn-default");
-$("#fullscreenbtn").removeClass("btn-default");
-$("#fullscreenbtn").addClass("fad fa-expand-arrows-alt");
-$("#userlisttoggle").addClass("fa fa-users ch");
-$("#userlisttoggle").text("");
+$("#fullscreenbtn").removeClass("btn-default").addClass("fad fa-expand-arrows-alt");
+$("#userlisttoggle").addClass("fa fa-users ch").text("");
 $("#showchansettings").text("Admin Settings");
 $("#controlsrow").after($("#motdrow"));
 $(".container-fluid").append($("#footer"));
@@ -586,14 +583,9 @@ $("#connected").append( "<span id='connectedText'>&nbsp Logged in users</span>" 
 $("#main").after($("#drinkbarwrap"));
 $("#nav-collapsible").append("<div id='headright'><div id='progbar'></div></div>");
 $(".chat-area-title").after($("#currenttitle"));
-$("#emotelistbtn").text("");
-$("#emotelistbtn").removeClass("btn btn-sm btn-default");
-$("#emotelistbtn").addClass("fa fa-picture-o ch");
-$("#fullscreenbtn").text("");
-$("#fullscreenbtn").addClass("fa fa-arrows-alt");
-$("#fullscreenbtn").removeClass("btn btn-sm");
+$("#emotelistbtn").text("").removeClass("btn btn-sm btn-default").addClass("fa fa-picture-o ch");
+$("#fullscreenbtn").text("").addClass("fa fa-arrows-alt").removeClass("btn btn-sm");
 $("#loginform").detach().after("#headermenu");
-//$("#fullscreenbtn").addClass("ch");
 $("#nav-collapsible").after($("#fullscreenbtn"));
 $("#morebtn").after($("#videocontrols"));
 $("#videocontrols").removeClass("pull-right");
@@ -605,15 +597,12 @@ $("#morebtn").after("<ul class='dropdown-menu'><li id='mediarefreshli'></li><li>
 $("#modli").append($("#modflair"));
 $("#videoinfo").after($("#rightpane"));
 $("#rightpane-inner").addClass("section");
-$("#mediarefresh").addClass("fal fa-sync OLB");
-$("#mediarefresh").removeClass("btn btn-sm btn-default");
-$("#mediarefresh").text("");
+$("#mediarefresh").addClass("fal fa-sync OLB").removeClass("btn btn-sm btn-default").text("");
 $("#userlist").addClass("animated animatedFadeInUp fadeInUp");
 $("#queue").addClass("queue_sortable");
 $("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Up Next</p></div></div>");
 $("#queuecontainer").append($("#queue"));
-$("#upnext").append($("#plmeta"));
-$("#upnext").after("<ul id='ploptions' class='menu hidden' role='menu'></ul>");
+$("#upnext").append($("#plmeta")).after("<ul id='ploptions' class='menu hidden' role='menu'></ul>");
 $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplaylist"));
 $("#upnext").before($("#qlockbtn"));
 //$("<div class='indicator'><svg width='16px' height='12px'><polyline id='back' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline><polyline id='front' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline></svg></div>").appendTo('.navbar-header');
@@ -655,19 +644,11 @@ $("#sitefooter").append($("#logoutform"));
 $("#logoutform").removeClass("pull-right");
 $('#modflair').detach().prependTo('#headermenu');
 $(".chat-area-header").after("<div class='nano'></div>");
-$("#chatbox").append($("#chatline"));
-$("#chatbox").append($("#guestlogin"));
+$("#chatbox").append($("#chatline")).append($("#guestlogin"));
 $(".chat-area-group").append($("#userlisttoggle"));
 $("#chatline").attr('autocomplete', 'off');
 $("#usercount").unbind();
 $('#announcements').detach().appendTo('#sitefooter');
-/*
-$(document).ready(function() {
-    setTimeout(function (){
-$('#mediarefresh').click();
-    }, 1000);
-});
-*/
 
 var EMOTELISTMODAL = $("#emotelist");
 $("#emotelistbutton").click(function () {
@@ -19187,7 +19168,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	            title: app.t('chatAvatars[.]Chat avatars'),
 	            default: 'big',
 	            options: [
-	                {value: 'small', title: app.t('chatAvatars[.]Disabled')},
+	                {value: '', title: app.t('chatAvatars[.]Disabled')},
 	                {value: 'small', title: app.t('chatAvatars[.]Small')},
 	                {value: 'big', title: app.t('chatAvatars[.]Big')}
 	            ]
@@ -19222,7 +19203,22 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    this.getAvatarFromUserlist = function (username) {
 	        return (window.findUserlistItem(username) && window.findUserlistItem(username).data('profile').image) ? window.findUserlistItem(username).data('profile').image : null;
 	    };
+if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
+}
+if (userSettings.get(namespace + '.avatars-mode') == 'small') {
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '29px');	
+}
+window.socket.on('chatMsg', function() {
+if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+  $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');}  
+});
+window.socket.on('chatMsg', function() {
+if (userSettings.get(namespace + '.avatars-mode') == 'small') {
+  $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '29px');}
+});
 
+	
 	    this.applyAvatar = function ($usernameBlock, username, newAvatar) {
 	        username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
 	        newAvatar = newAvatar || that.getAvatarFromUserlist(username);
@@ -19243,6 +19239,10 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	                    $(this).css('display', 'none');
 	                    $avatar.attr('title', username);
 	                }
+					if (userSettings.get(namespace + '.avatars-mode') == 'small') {
+	                    $(this).css('display', 'none');
+	                    $avatar.attr('title', username);
+	                }
 	            }
 	        } else {
 				if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
@@ -19251,6 +19251,10 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	                    .prependTo($messageBlock).parent().addClass("nametitle");;
 
 	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+	                    $(this).css('display', 'none');
+	                    $avatar.attr('title', username);
+	                }
+					if (userSettings.get(namespace + '.avatars-mode') == 'small') {
 	                    $(this).css('display', 'none');
 	                    $avatar.attr('title', username);
 	                }
