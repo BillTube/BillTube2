@@ -3474,6 +3474,7 @@ button#newpollbtn {
     /* grid-area: image; */
     /* display: inline-flex; */
     border-radius: 10px;
+	object-fit: cover;
     background-size: 100%;
     background-repeat: no-repeat;
     margin-right: 5px;
