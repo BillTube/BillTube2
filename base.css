@@ -3456,6 +3456,15 @@ button#newpollbtn {
     text-align: center;
     margin-top: 28px;
 }
+.vjs-polyzor-skin .vjs-live-control {
+    position: absolute;
+    height: auto;
+    top: 0;
+    right: 25px!important;
+}
+.vjs-live-display {
+    padding: 12px;
+}
 .profileImage2 {
   grid-area: image;
   display: inline-block;
