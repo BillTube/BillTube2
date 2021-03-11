@@ -283,6 +283,7 @@ ColorsArray = [
 var preloadedScript = document.createElement("script");
 preloadedScript.src = "https://cdn.jsdelivr.net/gh/BillTube/BillTube2/lazy.js";
 document.body.appendChild(preloadedScript);
+/*
 //Mobile Check
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 $("#ytapiplayer").attr("muted","");
@@ -291,12 +292,12 @@ $("#main").after($("#chatwrap"));
 $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/sjb7rw59p0qnx6a/mobile.css' />");
 $.getScript("https://dl.dropbox.com/s/5h0liiwcqqdfbh0/mobile.js");
 console.log("Loading Mobile Theme");
-}else {
+}else */{
 console.log("Loading Desktop Theme");
 
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
+$('head').append("<link rel='stylesheet' href='https://dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
@@ -600,15 +601,10 @@ $("#queuecontainer").append($("#queue"));
 $("#upnext").append($("#plmeta")).after("<ul id='ploptions' class='menu hidden' role='menu'></ul>");
 $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplaylist"));
 $("#upnext").before($("#qlockbtn"));
-//$("<div class='indicator'><svg width='16px' height='12px'><polyline id='back' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline><polyline id='front' points='1 6 4 6 6 11 10 1 12 6 15 6'></polyline></svg></div>").appendTo('.navbar-header');
 $('#queuecontainer').hover(function(){
-    $('#pllength').css({
-        'opacity':'0.9',
-    });
+    $('#pllength').css({'opacity':'0.9',});
 },function(){
-    $('#pllength').css({
-        'opacity':'0',
-    });
+    $('#pllength').css({'opacity':'0',});
 });
 if (window.CLIENT.rank >= 3) {
 	$("#ploptions").removeClass("hidden");
@@ -22443,21 +22439,41 @@ $("#chatline").keydown(tabSuggestions)
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-if (BG_Stock=="1") {
-    var BGPics = ['https://i.ibb.co/tH1T2kM/3z9lp6.jpg', 'https://i.ibb.co/zZBdvW1/8oxmr2.jpg', 'https://i.ibb.co/wMfkcQx/9m6owx.png', 'https://i.ibb.co/PhrtPSW/ox2yd5.jpg', 'https://i.ibb.co/5sjxgRV/j5k8vq.jpg', 'https://i.ibb.co/VDnK4Pv/1kj9y1.jpg', 'https://i.ibb.co/CJ3hjJv/4xg9zv.jpg'];
-}
-	function randomHero() {
 
+
+
+if (BG_Stock=="1") {
+    var BGPics1 = ['https://i.ibb.co/tH1T2kM/3z9lp6.jpg', 'https://i.ibb.co/zZBdvW1/8oxmr2.jpg', 'https://i.ibb.co/wMfkcQx/9m6owx.png', 'https://i.ibb.co/PhrtPSW/ox2yd5.jpg', 'https://i.ibb.co/5sjxgRV/j5k8vq.jpg', 'https://i.ibb.co/VDnK4Pv/1kj9y1.jpg', 'https://i.ibb.co/CJ3hjJv/4xg9zv.jpg'];
+    randomHero();
+} else {
+randomHero2();
+}
+
+
+
+function randomHero() {
+    $("#wrap").css({
+        'background' : 'url('+ BGPics1[Math.floor(Math.random() * BGPics.length)] + ') no-repeat',
+       'background-attachment' : 'scroll',
+       'background-position' : '50% 50%',
+       'background-size' : 'cover'
+   });
+}
+function randomHero2() {
     $("#wrap").css({
         'background' : 'url('+ BGPics[Math.floor(Math.random() * BGPics.length)] + ') no-repeat',
-        'background-attachment' : 'scroll',
-        'background-position' : '50% 50%',
-        'background-size' : 'cover'
-    });
+       'background-attachment' : 'scroll',
+       'background-position' : '50% 50%',
+       'background-size' : 'cover'
+   });
 }
-randomHero();
+
 	});
 	
+	
+
+
+
 /***/ },
 /* 47 */
 /***/ function(module, exports) {
