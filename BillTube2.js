@@ -283,7 +283,7 @@ ColorsArray = [
 var preloadedScript = document.createElement("script");
 preloadedScript.src = "https://cdn.jsdelivr.net/gh/BillTube/BillTube2/lazy.js";
 document.body.appendChild(preloadedScript);
-/*
+
 //Mobile Check
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 $("#ytapiplayer").attr("muted","");
@@ -292,16 +292,15 @@ $("#main").after($("#chatwrap"));
 $('head').append("<link rel='stylesheet' href='//dl.dropbox.com/s/sjb7rw59p0qnx6a/mobile.css' />");
 $.getScript("https://dl.dropbox.com/s/5h0liiwcqqdfbh0/mobile.js");
 console.log("Loading Mobile Theme");
-}else */{
+}else {
 console.log("Loading Desktop Theme");
-
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
 $('head').append("<link rel='stylesheet' href='https://dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
-$.getScript("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
+//$.getScript("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
@@ -610,7 +609,7 @@ if (window.CLIENT.rank >= 3) {
 	$("#ploptions").removeClass("hidden");
 }
 $("body").addClass("fluid");
-$("#videowrap").addClass("col-lg-7 col-md-7 vjs-polyzor-skin");
+$("#videowrap").addClass("col-lg-7 col-md-7");
 $("#mediabuttons").append($("#showmediaurl"), $("#showsearch"), $("#showplaylistmanager"), $("#showcustomembed"));
 $("#videowrap").removeClass("col-md-8 col-md-offset-2");
 $("body").removeClass("synchtube");
@@ -758,15 +757,6 @@ Callbacks.queue = function(data) {//currently for debugging purposes only. Doesn
 	console.log(data);
 }
 
-Callbacks.playlist = function(data) {//currently for debugging purposes only. Doesn't do anything.
-	console.log("Called Callbacks.playlist");
-	console.log(data);
-	_playlistVIDEBLU(data);
-	requeue(data);
-	globaLplaylistdata = data;
-	playlistinfo.length = data.length;
-}
-
 function requeue (data) {
 	/*for (var i = 0; i <= data.length - 1; i++) {//find information of current video in playlist
 		var e = data[i];
@@ -828,12 +818,11 @@ setvideotime = function() {
 }
 setvideotime();
 
-$("#morebtn").click(function(event){$("#headbottom .dropdown-menu").css("left", event.clientX - 50 + "px");});
-
 $("#drinkbar").click(function(){
   $("#drinkcount").remove();
 });
 
+/*
 function HorizontalScroller(elem) {
   this.scrollbox = elem; // The scrollers viewable area
   this.scrollImages = this.scrollbox.find("img");
@@ -1062,6 +1051,7 @@ function scrollerInit() {
   mapScrollers(scrollerIds);
   listenForScroll();
 }
+*/
  $(document).ready(function() {
     $("video").bind("contextmenu",function(){
         return false;
@@ -1137,8 +1127,45 @@ for (i=0;i<field.length;i++){
 $("#maincontain").addClass("Overlay-Scrollbars");
 $("#maincontain").addClass("leftcontent");
 $("#chatwrap").addClass("rightcontent");
+//if (hasPermission("settemp")) $(".add-temp").prop('checked', false);
+//var TempAdd = $(this) || 0;
 
-if (hasPermission("settemp")) $(".add-temp").prop('checked', false);
+//if (TempAdd == "" ) {
+//$(".add-temp").prop('checked', false);
+//} else { if (hasPermission("settemp")) $(".add-temp").prop('checked', true); }
+		
+// if (TempAdd=="1") {
+// $(".add-temp").prop('checked', true);
+// } else { if (hasPermission("settemp")) $(".add-temp").prop('checked', false); }
+/*
+$(".add-temp").attr("onclick","TempCheck()");
+
+
+$('.add-temp').toggleClass(localStorage.toggled);
+
+function TempCheck() {
+  /*DARK CLASS
+  if (localStorage.toggled != 'checked') {
+    $('.rightpane-inner').toggleClass('dark', true);
+    localStorage.toggled = "checked";
+  } else {
+    $('.rightpane-inner').toggleClass('dark', false);
+    localStorage.toggled = "";
+  }
+}
+
+/*Add 'checked' property to input if background == dark
+if ($('add-temp').hasClass('checked')) {
+$(".add-temp").prop('checked', true);
+} else {
+$(".add-temp").prop('checked', false);
+}
+*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 if (CLIENT.rank > 0) {
@@ -21622,17 +21649,6 @@ function emoteToDialog(title, src) {
 /* 31 */
 /***/ function(module, exports) {
 
-	window.cytubeEnhanced.addModule('uiRussianTranslate', function (app) {
-	    'use strict';
-	    var that = this;
-
-	    if (app.storage.get('language') !== 'ru') {
-	        return;
-	    }
-
-	});
-
-
 /***/ },
 /* 32 */
 /***/ function(module, exports) {
@@ -21882,7 +21898,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carous
 	lazyLoad : true,
 	autoHeight : true,
     transitionStyle:"fade",
-	autoPlay : 12000,
+	autoPlay : 22000,
     stopOnHover : true,
 	pagination : false,
     items : 6, 
@@ -21919,11 +21935,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carous
     owl.trigger('owl.prev');
   })
  });
-
-
-
-
-	});
+});
 
 
 /***/ },
