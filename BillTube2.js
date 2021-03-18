@@ -296,7 +296,7 @@ console.log("Loading Mobile Theme");
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='https://dl.dropbox.com/s/9ti12lw8czxpakl/base.css' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
