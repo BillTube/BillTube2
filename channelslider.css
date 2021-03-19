@@ -4,6 +4,7 @@ img.kek {
 }
 img.kek:hover {
   cursor: zoom-in;
+  border: 1px solid #6d6d6d;
 }
 #carousel img {
   width: 100%;
