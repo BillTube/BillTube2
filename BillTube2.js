@@ -639,6 +639,9 @@ $(".chat-area-group").append($("#userlisttoggle"));
 $("#chatline").attr('autocomplete', 'off');
 $("#usercount").unbind();
 $('#announcements').detach().appendTo('#sitefooter');
+$('#videowrap-header').remove();
+$('#resizewrap').remove();
+
 
 var EMOTELISTMODAL = $("#emotelist");
 $("#emotelistbutton").click(function () {
