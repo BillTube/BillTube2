@@ -1044,98 +1044,14 @@ border: 0px;
 		width: auto;
 
 	}
-	/*Message of the day*/
-	#motdwrap {
 
-	}
-
-/* Divider Dragger */
-.mHandle {
-	position: absolute;
-	width: 15px;
-	height: 25px;
-	left: 55%; /*default 55%*/
-	background: white;
-	cursor: col-resize;
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity ease .2s, visibility .05s;/*visibility hidden because opacity: 0 is not the same as display: block. */
-	/* Needs to be a delay because moving cursor from scroll would otherwise make mhandle disappear. Display cannot have transitions.*/
-}
-.scrollHover .mHandle, .mHover #mHandle-mid, .mHover .mHandle {
-	opacity: .99;
-	visibility: visible;
-}
-.scrolling .mHandle{
-	pointer-events: none;
-}
-#mHandle-left {
-	-webkit-transform: translate(-21px, 0px);
-	        transform: translate(-21px, 0px); /*default -21px, 0*/
-	border-radius: 3px 0 0 3px;
-}
-#mHandle-right {
-	-webkit-transform: translate(-1px, 0px);
-	        transform: translate(-1px, 0px); /*default -1px, 0*/
-	border-radius: 0 3px 3px 0;
-}
-#mHandle-mid {
-	width: 5px;
-	-webkit-transform: translate(-6px, 0px);
-	        transform: translate(-6px, 0px);
-	opacity: 0;
-	pointer-events: none;
-}
-/* Dragging */
-#dragoverlay {
-	position: absolute;
-	visibility: hidden;
-	width: 100%;
-	height: 100%;
-	background: none;
-	transition: background ease .5s, visibility 1s;
-	pointer-events: none;
-	z-index: 99999;
-}
-#dragoverlay.dragging {
-	visibility: visible;
-	pointer-events: auto;
-	background: hsla(0,0%,0%,0.3);
-}
-#handleWidget {
-	visibility: hidden;
-	position: absolute;
-	width: 35px;
-	height: 25px;
-	left: 55%; /*default 55%*/
-	border-radius: 3px;
-	background: white;
-	cursor: col-resize;
-}
-.dragging #handleWidget {
-	visibility: visible;
-}
 div#layout-config-form {
     display: none;
 }
 div#common-config-form {
     display: none;
 }
-//scroller
 
-img.kek {
-    opacity: 0.3;
-    border: 1px solid transparent;
-    -webkit-filter: grayscale(80%);
-}
-img.kek:hover {
-    opacity: 1;
-    	background: transparent linear-gradient(to bottom left, rgba(249,208,129,.25) 10%, rgba(227,2,62,.25) 30%, rgba(49,128,135,.25) 90%);
-	border-bottom: 0px solid transparent;
-        border-image: linear-gradient(to bottom left, rgba(249,208,129,1) 10%, rgba(227,2,62,1) 30%, rgba(49,128,135,1) 90%);
-	border-image-slice: 1;
-        -webkit-filter: grayscale(1%);
-}
 #responsive-sizing {
   text-align: center;
 }
