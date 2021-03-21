@@ -252,8 +252,8 @@ ColorsArray = [
 	__webpack_require__(33);
 	__webpack_require__(34);
 	__webpack_require__(35);
-	__webpack_require__(36);
-	__webpack_require__(37);
+//	__webpack_require__(36);
+//	__webpack_require__(37);
 	__webpack_require__(38);
 	__webpack_require__(39);
     __webpack_require__(40);
