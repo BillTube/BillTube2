@@ -997,6 +997,8 @@ border: 0px;
 	}
 	#rightpane-inner {
 		transition: height 0.3s;
+	margin-left: 8%;
+    margin-right: 8%;
 	}
 	.plcontrol-collapse {
 		padding-left: 0;
@@ -2132,7 +2134,7 @@ word-wrap: break-word;
     text-decoration: none;
 }
 .row {
-    margin-left: -15pxs;
+    margin-left: 0px;
     margin-right: 0px;
 }
 #userlist {
