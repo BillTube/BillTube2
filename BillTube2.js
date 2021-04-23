@@ -293,7 +293,7 @@ console.log("Loading Mobile Theme");
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2/base.css' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css' />");
 $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
@@ -901,19 +901,6 @@ $("#chatwrap").addClass("rightcontent");
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
-
-$( document ).ready(function() {
-  if (CLIENT.rank > 0) {
-	var li = $('<li class="centered" />').prependTo(ul);
-	var img = findUserlistItem(CLIENT.name).data().profile.image;
-	if (img == "") img = DROPBOX + 'xor4ykvsgrzys3d/noavatar.png';
-	$('<a href="/account/profile" target="_blank"/>').html('<img id="useravatar" src="' + img + '" title="' + CLIENT.name + '" />')
-	  .appendTo('.navbar-nav');
-  }
-});
-
 socket.on("closePoll", function() {
 	$("#closepolls").remove();
 	$('.well.muted').unbind().insertAfter("#navtabs");
@@ -22919,11 +22906,21 @@ for (i in ColorsArray) {
 	$('<button class="btn btn-default btn-sm cbtn" onclick="insertText(\'col:' + ColorsArray[i] + ':\')" />')
 	  .css('background-color', ColorsArray[i]).html('■').appendTo(colgroup);
 }
+var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
+
+// this thing kept throwing shit at me
+$( document ).ready(function() {
+  if (CLIENT.rank > 0) {
+	var li = $('<li class="centered" />').prependTo(ul);
+	var img = findUserlistItem(CLIENT.name).data().profile.image;
+	if (img == "") img = DROPBOX + 'xor4ykvsgrzys3d/noavatar.png';
+	$('<a href="/account/profile" target="_blank"/>').html('<img id="useravatar" src="' + img + '" title="' + CLIENT.name + '" />')
+	  .appendTo('.navbar-nav');
+  }
+});
 
 /***/ }
 /******/ ]);
 
 //the script ends here
-
-
 
