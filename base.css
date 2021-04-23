@@ -114,6 +114,8 @@ img.lazyloaded, .image.lazyloaded {filter:blur(0);}
     padding-left: 10px!important;
     padding-right: 10px!important;
     z-index: 100;
+	transition: transform 0.1s linear;
+
 }
 
 
@@ -4364,17 +4366,11 @@ span.giphyimage {
     border-radius: 2px;
     padding: 1px;
 }
-@keyframes marquee {
-  0% {transform: translateX(415px);}
-  100% {transform: translateX(-730px);}
-}
+
 .btn-primary {
     background: #1f1c21!important;
 }
-.marquee {
-  animation: marquee 25s linear infinite;
-  overflow: visible!important;
-}
+
 
 @keyframes up-down{
   from{
@@ -4626,3 +4622,41 @@ input#addfromurl-title-val {
     background: #00000038;
     max-width: 450px;
 }
+:root {
+  --marquee-duration: 14s;
+  --marquee-delay: 3s;
+}
+@keyframes marquee {
+  50% {
+    transform: translateZ(0) translateX(calc(-1 * var(--marquee-amount)));
+  }
+}
+
+@keyframes morph {
+  50% {
+    opacity: 1;
+  }
+}
+
+.marquee {
+--marquee-amount: 100%;
+display: inline-block;
+text-indent: 1px;
+animation: marquee var(--marquee-duration) var(--marquee-delay) infinite;
+max-width: 100% !important;
+width: max-content;
+overflow: visible !important;
+white-space: pre !important;
+}
+.marquee:before {
+  transform: translateX(-100%);
+}
+.marquee:after {
+  left: 100%;
+}
+.marqselect {
+	color: white;
+    font-size: 16px;
+	box-shadow: 0 10px 30px rgb(65 72 86 / 5%);
+}
+.marqselect:active { transform: scale(0.97);}
