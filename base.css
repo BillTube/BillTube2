@@ -598,7 +598,7 @@ border: 0px solid rgba(255, 255, 255, 0.05);
 	}
 	#videowrap {
 		padding: 0;
-		padding-left: 15px;
+		padding-left: 0px;
 		padding-right: 0px;
 	}
 	#leftpane, #leftpane-inner, #pollwrap {
