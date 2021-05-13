@@ -18180,7 +18180,7 @@ $("#VideoOverlay").append("<div id='ss7time' title='--:--'></div>");
 	            description: app.t('chatCommands[.]vote for the video skip'),
 	            value: function (msg) {
 	                window.socket.emit("voteskip");
-	                msg = app.t('chatCommands[.]you have been voted for the video skip');
+	                msg = app.t('chatCommands[.]you have voted to skip the video');
 
 	                return msg;
 	            },
