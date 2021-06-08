@@ -298,7 +298,6 @@ $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzo
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 
-
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
   autoA11y: { enabled: true },
@@ -18960,7 +18959,15 @@ window.socket.on('chatMsg', function() {
 if (userSettings.get(namespace + '.avatars-mode') == 'small') {
   $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '29px');}
 });
-
+window.socket.once('mediaUpdate', function (data) {
+  if (CLIENT.rank > 0) {
+	var li = $('<li class="centered" />').prependTo(ul);
+	var img = findUserlistItem(CLIENT.name).data().profile.image;
+	if (img == "") img = DROPBOX + 'xor4ykvsgrzys3d/noavatar.png';
+	$('<a href="/account/profile" target="_blank"/>').html('<img id="useravatar" src="' + img + '" title="' + CLIENT.name + '" />')
+	  .appendTo('.navbar-nav');
+  } 
+});
 	
 	    this.applyAvatar = function ($usernameBlock, username, newAvatar) {
 	        username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
@@ -22908,19 +22915,8 @@ for (i in ColorsArray) {
 }
 var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 
-// this thing kept throwing shit at me
-$( document ).ready(function() {
-  if (CLIENT.rank > 0) {
-	var li = $('<li class="centered" />').prependTo(ul);
-	var img = findUserlistItem(CLIENT.name).data().profile.image;
-	if (img == "") img = DROPBOX + 'xor4ykvsgrzys3d/noavatar.png';
-	$('<a href="/account/profile" target="_blank"/>').html('<img id="useravatar" src="' + img + '" title="' + CLIENT.name + '" />')
-	  .appendTo('.navbar-nav');
-  }
-});
 
 /***/ }
 /******/ ]);
 
 //the script ends here
-
