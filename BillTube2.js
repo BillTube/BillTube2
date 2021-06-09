@@ -298,6 +298,7 @@ $('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzo
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 
+
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
   autoA11y: { enabled: true },
@@ -22315,6 +22316,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 				}
 			}
 
+
 			function injectGiphy() {
 				createTemp('Giphy Gifs');
 				body.append('<div id="giphy_wrap" class="form-group"><span id="giphy_search"></span></div>');
@@ -22367,7 +22369,21 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 			}
 
 	});
+	//lets make the gifs not autoplay
+var e = $("#messagebuffer"),
+    fix = e.html().replace(/giphy.gif/g, "200_s.gif");
+e.html(fix);
 
+$(".chat-picture").on("mouseover", function () {
+    jQuery('.chat-picture').each(function() {
+    jQuery(this).attr('src', jQuery(this).attr('src').replace("200_s.gif", "giphy.gif"));
+}); 
+});
+$(".chat-picture").on("mouseout", function () {
+    jQuery('.chat-picture').each(function() {
+    jQuery(this).attr('src', jQuery(this).attr('src').replace("giphy.gif", "200_s.gif"));
+}); 
+});
 
 /***/ },
 /* 48 */
