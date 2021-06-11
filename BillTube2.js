@@ -878,7 +878,7 @@ for (i=0;i<field.length;i++){
 		  });
 });
     socket.on('setAFK', scrollChat);
-	    socket.on('chatMsg', scrollChat);
+	socket.on('chatMsg', scrollChat);
     socket.on('chatMsg', function (data) {
         if (data.msg.indexOf('<a') != -1 || data.msg.indexOf('<img') != -1) {
             setTimeout(scrollChat, 500);
@@ -22194,9 +22194,9 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 								if (SINGLE) {
 								$('.imagesearch').text('"' + gifterm + '"');
 									if (TRANSLATE) {
-										$("#single").attr('src', imagedata.images.original.url).attr('onclick', 'insertText(\'' + imagedata.images.original.url + '.pic \');clickPic()').show();
+										$("#single").attr('src', imagedata.images.original.url).attr('onclick', 'insertText(\'' + imagedata.images.original.url + ' \');clickPic()').show();
 									} else {
-										$("#single").attr('src', imagedata.image_url).attr('onclick', 'insertText(\'' + imagedata.image_url + '.pic \');clickPic()').show();
+										$("#single").attr('src', imagedata.image_url).attr('onclick', 'insertText(\'' + imagedata.image_url + ' \');clickPic()').show();
 									}
 								} else {
 									if (TRENDING) {
@@ -22224,7 +22224,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 													fixed = imagedata[gip].images.fixed_height.url;
 												}*/
 											}
-											$('.giphyimage').find('img').eq(gip).attr('onclick', 'insertText(\'' + imageurl + '.pic \');clickPic()').attr('src', fixed);
+											$('.giphyimage').find('img').eq(gip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
 										}
 										if (gip === 8) {
 											offset += gip + 1;
@@ -22255,7 +22255,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 														fixed = imagedata[fgip + offset].images.fixed_height.url;
 													}*/
 												}
-												$('.giphyimage').find('img').eq(fgip).attr('onclick', 'insertText(\'' + imageurl + '.pic \');clickPic()').attr('src', fixed);
+												$('.giphyimage').find('img').eq(fgip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
 											}
 											if (fgip === 8) {
 												offset += fgip + 1;
@@ -22369,21 +22369,14 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 			}
 
 	});
-	//lets make the gifs not autoplay
-var e = $("#messagebuffer"),
-    fix = e.html().replace(/giphy.gif/g, "200_s.gif");
-e.html(fix);
+//let the gifs play on hover!
 
-$(".chat-picture").on("mouseover", function () {
-    jQuery('.chat-picture').each(function() {
-    jQuery(this).attr('src', jQuery(this).attr('src').replace("200_s.gif", "giphy.gif"));
-}); 
+$('#messagebuffer').on('mouseenter', '.giphy', function() {
+  jQuery(this).attr('src', jQuery(this).attr('src').replace("200_s.gif", "giphy.gif"));
+}).on('mouseleave', '.giphy', function() {
+   jQuery(this).attr('src', jQuery(this).attr('src').replace("giphy.gif", "200_s.gif"));
 });
-$(".chat-picture").on("mouseout", function () {
-    jQuery('.chat-picture').each(function() {
-    jQuery(this).attr('src', jQuery(this).attr('src').replace("giphy.gif", "200_s.gif"));
-}); 
-});
+
 
 /***/ },
 /* 48 */
