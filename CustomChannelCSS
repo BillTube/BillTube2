@@ -1,0 +1,28 @@
+:root {
+ --body-bg-color: #0e1015fa;
+ --theme-bg-color: #040405;
+ --theme-bg-color2: #0e1015f7;
+ --theme-bg-menu: #07080af7;
+ --body-bg-modal: #0e1015fa;
+ --settings-icon-hover: #efefef;
+ --developer-color: #f9fafb;
+ --input-bg: hsla(0,0%,100%,.06);
+ --input-chat-color: #a2a2a2;
+ --border-color: #1b2023;
+ --body-font: "Quicksand";
+ --logo-font: "Quicksand";
+ --chat-font: "Quicksand";
+ --body-color: #8b93a7;
+ --scrollbar-width: 7px;
+ --settings-icon-color: #c1c7cd;
+ --msg-message: #adb0c3;
+ --chat-text-bg: #f1f2f6;
+ --theme-color: #cee8ff;
+ --msg-date: #c0c7d2;
+ --button-bg-color: #000000ba;
+ --button-bg-hover: #d0dcff;
+ --button-color: #dfefffe0;
+ --detail-font-color: #7289DA;
+ --chat-header-bg: #0e1015f7;
+ --msg-hover-bg: rgba(238, 242, 244, 0.4);
+};
