@@ -3479,7 +3479,7 @@ div#chat-panel {
     background-color: var(--theme-bg-color);
     border-radius: 7px;
     max-height: 350px;
-    height: 24rem;
+    height: 28rem;
     overflow-x: hidden;
     overflow-y: scroll;
     max-width: 362px;
