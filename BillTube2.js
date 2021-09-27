@@ -1559,10 +1559,10 @@ window.cytubeEnhanced.addModule("chatHistory",function(t,s){"use strict";var e=t
 	    if (settings.insertUsernameOnClick) {
 	        $('#messagebuffer')
 	            .on('click', '.username', function() {
-	                app.Helpers.addMessageToChatInput($(this).prepend("@").text().replace(": ", " "), 'begin');
+	                app.Helpers.addMessageToChatInput($(this).text().replace(": ", " "), 'begin');
 	            })
 	            .on('click', '.profileImage', function() {
-	                app.Helpers.addMessageToChatInput($(this).parent().find('.username').prepend("@").text().replace(": ", " "), 'begin');
+	                app.Helpers.addMessageToChatInput($(this).parent().find('.username').text().replace(": ", " "), 'begin');
 	            });
 	    }
 		
