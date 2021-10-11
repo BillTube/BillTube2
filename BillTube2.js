@@ -1282,7 +1282,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	            title: app.t('chatAvatars[.]Chat avatars'),
 	            default: 'big',
 	            options: [
-	                {value: '', title: app.t('chatAvatars[.]Disabled')},
+	                {value: 'none', title: app.t('chatAvatars[.]Disabled')},
 	                {value: 'small', title: app.t('chatAvatars[.]Small')},
 	                {value: 'big', title: app.t('chatAvatars[.]Big')}
 	            ]
@@ -1317,6 +1317,12 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	        return (window.findUserlistItem(username) && window.findUserlistItem(username).data('profile').image) ? window.findUserlistItem(username).data('profile').image : null;
 	    };
 		
+$(document).ready(function () {
+  $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
+});
+if (userSettings.get(namespace + '.avatars-mode') == 'none') {
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');	
+}
 if (userSettings.get(namespace + '.avatars-mode') == 'big') {
 $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
 }
@@ -1330,6 +1336,10 @@ if (userSettings.get(namespace + '.avatars-mode') == 'big') {
 window.socket.on('chatMsg', function() {
 if (userSettings.get(namespace + '.avatars-mode') == 'small') {
   $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '29px');}
+});
+window.socket.on('chatMsg', function() {
+if (userSettings.get(namespace + '.avatars-mode') == 'none') {
+  $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');}
 });
 
 window.socket.once('mediaUpdate', function (data) {
