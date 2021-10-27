@@ -5,7 +5,7 @@
   */
 
 ////Lets initialize some shit////
-var VERSION = '2.2.1';
+var VERSION = '2.2.2';
 
 var vplayer = videojs("ytapiplayer")
 function videofix(){
@@ -1318,10 +1318,12 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    };
 		
 $(document).ready(function () {
-  $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
 });
+
 if (userSettings.get(namespace + '.avatars-mode') == 'none') {
-$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');	
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');
+$(".profileImage").css('visibility', 'hidden');
 }
 if (userSettings.get(namespace + '.avatars-mode') == 'big') {
 $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
@@ -1339,8 +1341,15 @@ if (userSettings.get(namespace + '.avatars-mode') == 'small') {
 });
 window.socket.on('chatMsg', function() {
 if (userSettings.get(namespace + '.avatars-mode') == 'none') {
-  $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');}
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');
+$(".profileImage").css('visibility', 'hidden');}
 });
+
+setTimeout( function(){ 
+if (userSettings.get(namespace + '.avatars-mode') == 'none') {
+$('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px');
+$(".profileImage").css('visibility', 'hidden');}
+}  , 5000 );
 
 window.socket.once('mediaUpdate', function (data) {
   if (CLIENT.rank >= -1) {
