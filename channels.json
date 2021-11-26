@@ -24,11 +24,6 @@
                 "image_url": "https://i.postimg.cc/HsnqdW7Y/spookyshow.png",
                 "title": "Visit the Are you afraid of the dark/goosebumps Channel"
             },
-					{
-                "channel_url": "https://cytu.be/r/spooktober",
-                "image_url": "https://i.postimg.cc/9fywVyf4/spooktober3.png",
-                "title": "Visit the Spooktober Channel"
-            },
 			{
                 "channel_url": "https://cytu.be/r/KOTH",
                 "image_url": "https://i.postimg.cc/bwQ49jpK/koth.png",
@@ -68,6 +63,11 @@
                 "channel_url": "https://cytu.be/r/spookyshows2",
                 "image_url": "https://i.postimg.cc/prNbvjdh/SS2.png",
                 "title": "Visit the COPS Channel"
+            },
+	    {
+                "channel_url": "https://cytu.be/r/spooktober",
+                "image_url": "https://i.postimg.cc/9fywVyf4/spooktober3.png",
+                "title": "Visit the Spooktober Channel"
             }
         ]
     }
