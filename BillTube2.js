@@ -5,7 +5,7 @@
   */
 
 ////Lets initialize some shit////
-var VERSION = '2.2.2';
+var VERSION = '2.2.3';
 
 var vplayer = videojs("ytapiplayer")
 function videofix(){
@@ -293,7 +293,7 @@ console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css' />");
-$('head').append("<link rel='stylesheet' href='//billtube.github.io/theme/polyzor.css' />");
+$('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 
@@ -339,7 +339,7 @@ var setImageSrc = function(imageData) {
     imageWidth = $placeholder.get(0).naturalWidth;
     imageHeight = $placeholder.get(0).naturalHeight;
 }
-$("#videowrap").addClass("vjs-polyzor-skin");
+$("#videowrap").addClass("vjs-theme-city");
 $(".server-msg-reconnect").addClass("fad fa-plug");
 $(".server-msg-reconnect").text("");
 $("body").addClass("darktheme");
