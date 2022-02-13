@@ -2261,7 +2261,6 @@ img.chat-picture {
 }
 button#mediarefresh {
     float: right;
-	margin-right: 30px;
 }
 .btn-default.active.collapsed { text-shadow: none; }
 
@@ -4636,7 +4635,9 @@ input#addfromurl-title-val {
     opacity: 1;
   }
 }
-
+#fs-vid-button {
+    float: right;
+}
 .marquee {
 --marquee-amount: 100%;
 display: inline-block;

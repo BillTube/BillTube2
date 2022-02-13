@@ -297,6 +297,7 @@ $('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 
+
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
   autoA11y: { enabled: true },
@@ -754,7 +755,6 @@ window.cytubeEnhanced=new window.CytubeEnhanced(window.cytubeEnhancedSettings&&w
 	    settings = $.extend({}, defaultSettings, settings);
 
 $("#videowrap").append("<div id='VideoOverlay' class='fadein'><button class='fal fa-expand-alt OLB' id='fs-vid-button'></button></div>");
-$("#VideoOverlay").append("<button id='pipButton' title='Picture In Picture' class='fal fa-bring-forward OLB'></button>");
 $("#VideoOverlay").hide();
 var i = null;
 $("#videowrap").mousemove(function() {
@@ -811,7 +811,7 @@ $("#skip").click(function() {
 //    $("#skip").attr("disabled", true);
 });
 
-$("#VideoOverlay").append("<div id='ss7time' title='--:--'></div>"); });
+ });
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
@@ -1316,7 +1316,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	    this.getAvatarFromUserlist = function (username) {
 	        return (window.findUserlistItem(username) && window.findUserlistItem(username).data('profile').image) ? window.findUserlistItem(username).data('profile').image : null;
 	    };
-		
+
 $(document).ready(function () {
 $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '49px');	
 });
@@ -2726,7 +2726,7 @@ function emoteToDialog(title, src) {
                 .removeClass('').addClass('btn-default');
         }
     };
-    this.$hidePlayerBtn = $('<button id="hide-player-btn" class="OLB" title="' + app.t('video[.]Hide video') + '">')
+/*    this.$hidePlayerBtn = $('<button id="hide-player-btn" class="OLB" title="' + app.t('video[.]Hide video') + '">')
         .html('<i class="glyphicon glyphicon-ban-circle">')
         .appendTo(this.$topVideoControls)
 		.addClass('btn-default')
@@ -2736,6 +2736,7 @@ function emoteToDialog(title, src) {
     if (!settings.turnOffVideoOption) {
         this.$hidePlayerBtn.hide();
     }
+*/
     videojs("ytapiplayer").ready(function(){this.volume(1);});
 
 	    this.settingsFix = function () {
@@ -2855,42 +2856,6 @@ function emoteToDialog(title, src) {
 	}, 1);
 });
 
-if (typeof PIP_Player == "undefined") {
-  var PIP_Player = 0;
-}
-if (PIP_Player == 1) {
-    EnablePIP();
-} else {
-$("#pipButton").addClass("hidden");
-}
-
-function EnablePIP() {
-const video = document.querySelectorAll('video')[0];
-const button = document.querySelector('#pipButton');
-
-     if (!document.pictureInPictureEnabled) {
-    button.textContent = '';
-    button.style.opacity = '0.5';
-    button.style.cursor = 'default';
-    button.disabled = true;
-    }
-	
-video.addEventListener('enterpictureinpicture', () => {
-    button.textContent = 'Exit Picture-in-Picture';
-});
-
-video.addEventListener('leavepictureinpicture', () => {
-    button.textContent = '';
-});
-
-button.addEventListener('click', () => {
-  if (document.pictureInPictureElement) {
-    document.exitPictureInPicture()
-  } else {
-    video.requestPictureInPicture()
-	}	
-  });
-} 
 });
 /***/ },
 /* 33 */
@@ -3994,3 +3959,4 @@ var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 /******/ ]);
 
 //the script ends here
+
