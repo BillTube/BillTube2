@@ -4666,3 +4666,8 @@ white-space: pre !important;
     margin: 0 auto;
     padding: 30px;
 }
+.vjs-theme-city .vjs-play-control {flex: 30;}
+.vjs-theme-city .vjs-remaining-time {
+    flex: 1;
+    text-align: end;
+}
