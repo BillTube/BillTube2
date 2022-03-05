@@ -17,7 +17,7 @@ UI_Discord = 0;
 Discord_NAME = 'name';
 Discord_URL = 'discord url';
 
-UI_Favicon = 0;			
+UI_Favicon = 0;			//only enable when you have a valid url in favicon_url field
 Favicon_URL = 'favicon url';
 
 /* ----- Channel guide ----- */
@@ -32,9 +32,9 @@ var Poster_URL= ''; //this has to be a valid Jpg or png
 /* ----- channel background ----- */
 var BG_Dimmed = 0;
 var BGPics = ['wallpaper url', 'wallpaper url'];   //open and close the image with ' '
+var BG_Stock= 1; //uses the stock wallpapers and bgpics won't be used
 
-var BG_Stock= 1;
 
 /* ----- channels slider ----- */
-var UI_ChannelList= 0;
+var UI_ChannelList= 0; // only enable if you have a valid json that looks exactly like mine
 var Channel_JSON = 'https://cdn.jsdelivr.net/gh/BillTube/BillTube2/channels.json';
