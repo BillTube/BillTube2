@@ -7,7 +7,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 UI_ChannelName = 0;		
-ChannelName_Caption = 'Channel Name';
+ChannelName_Caption = 'ChannelName';
 
 UI_ChannelAnnouncement = 0;	
 ChannelAnnouncement_Title = 'custom announcement';
@@ -27,11 +27,12 @@ var moviedbkey = 'api key';
 var moviedblist = 'list key';
 
 /* ----- video player ----- */
-var Poster_URL= 'poster url';
+var Poster_URL= ''; //this has to be a valid Jpg or png
 
 /* ----- channel background ----- */
 var BG_Dimmed = 0;
-var BGPics = ['wallpaper url', 'wallpaper url'];
+var BGPics = ['wallpaper url', 'wallpaper url'];   //open and close the image with ' '
+
 var BG_Stock= 1;
 
 /* ----- channels slider ----- */
