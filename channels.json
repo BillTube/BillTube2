@@ -9,20 +9,25 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/C47MQA3.png",
                 "title": "Visit the Southpark Channel"
             },
-			{
-                "channel_url": "https://cytu.be/r/seinfeldHD",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/sf.png",
-                "title": "Visit the Seinfeld Channel"
-            },
-			{
-                "channel_url": "https://cytu.be/r/Simpsons",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/simps.png",
-                "title": "Visit the Simpsons Channel"
+			    {
+                "channel_url": "https://cytu.be/r/spooktober",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spooktober3.png",
+                "title": "Visit the Spooktober Channel"
             },
 			{
                 "channel_url": "https://cytu.be/r/spookykidshows",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spookyshow.png",
                 "title": "Visit the Are you afraid of the dark/goosebumps Channel"
+            },
+				{
+                "channel_url": "https://cytu.be/r/spookyshows2",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/SS2.png",
+                "title": "Visit the Spooky 2 Channel"
+            },
+					{
+                "channel_url": "https://cytu.be/r/spookyshows",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/2LB9834.png",
+                "title": "Visit the Ghost Adventures Channel"
             },
 			{
                 "channel_url": "https://cytu.be/r/KOTH",
@@ -35,19 +40,24 @@
                 "title": "Visit the Cartoons Channel"
             },
 			{
-                "channel_url": "https://cytu.be/r/spookyshows",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/2LB9834.png",
-                "title": "Visit the Ghost Adventures Channel"
-            },
-			{
                 "channel_url": "https://cytu.be/r/buffy",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/GxCKtEZ.png",
                 "title": "Visit the Buffy Channel"
+            },
+					{
+                "channel_url": "https://cytu.be/r/seinfeldHD",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/sf.png",
+                "title": "Visit the Seinfeld Channel"
             },
 			{
                 "channel_url": "https://cytu.be/r/futuramaSD",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/futuram.png",
                 "title": "Visit the Futurama Channel"
+            },
+					{
+                "channel_url": "https://cytu.be/r/Simpsons",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/simps.png",
+                "title": "Visit the Simpsons Channel"
             },
 					{
                 "channel_url": "https://cytu.be/r/billtube",
@@ -58,17 +68,8 @@
                 "channel_url": "https://cytu.be/r/copstube",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/yEn9W6E2.png",
                 "title": "Visit the COPS Channel"
-            },
-		{
-                "channel_url": "https://cytu.be/r/spookyshows2",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/SS2.png",
-                "title": "Visit the Spooky 2 Channel"
-            },
-	    {
-                "channel_url": "https://cytu.be/r/spooktober",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spooktober3.png",
-                "title": "Visit the Spooktober Channel"
             }
+
         ]
     }
 }
