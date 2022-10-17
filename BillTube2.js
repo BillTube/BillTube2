@@ -5,7 +5,7 @@
   */
 
 ////Lets initialize some shit////
-var VERSION = '2.2.3';
+var VERSION = '2.2.5';
 
 var vplayer = videojs("ytapiplayer")
 function videofix(){
@@ -2196,7 +2196,7 @@ $("#navtabs").prepend(
 '<section id="tabs" class="et-hero-tabs">' +
 '<div class="et-hero-tabs-container">' +
 '<a class="et-hero-tab" id="motdtab" href="#motdwrap">MOTD</a>' +
-'<a class="et-hero-tab" href="#queuecontainer">PLAYLIST</a>' +
+'<a class="et-hero-tab" id="playlisttoggle" href="#queuecontainer">PLAYLIST</a>' +
 '<a class="et-hero-tab hidden" id="polltab" href="#pollwrap"></a>' +
 '<a class="et-hero-tab" id="addmediatoggle" href="#rightpane"></a>' +
 '<span class="et-hero-tab-slider"></span>' +
@@ -2298,6 +2298,23 @@ $("#addmediatoggle").click(function(){ //Add Media button action
 	}
 	else {
 		$("#rightpane").slideUp(trnsdelay);
+	}
+var trnsdelay = 400;//Defines trnsdelay, transition time (in ms)
+});
+$("#playlisttoggle").click(function(){ //Add Media button action
+	if ($("#queuecontainer").css('display') == 'none'){//if add media is hidden
+		$("#mediabuttons button").each(function() {
+			if ($(this).css("display") != "none") {
+				if ($(this).hasClass("collapsed")){
+					$(this).trigger("click");
+				}
+				return false;
+			}//if button is clickable
+		})
+		$("#queuecontainer").slideDown(trnsdelay);
+	}
+	else {
+		$("#queuecontainer").slideUp(trnsdelay);
 	}
 var trnsdelay = 400;//Defines trnsdelay, transition time (in ms)
 });
@@ -3239,7 +3256,7 @@ if (UI_Favicon=="1" && Favicon_URL!="") {
 
 if (UI_Discord=="1" && Discord_URL!="") {
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2/discord.css' />");
-$("#motd").after("<div class='discordoverlay'><div class='discordmain'><img class='discord' src='//s14.postimg.cc/fel8mtljl/J6_RTf6_P.png' /><div class=discordtext><h1>Join the community!</h1><h2><a href='"+Discord_URL+"' target='_blank'>"+Discord_NAME+"</a></h2></div><div class='Darrows Darrows-1'></div><div class='Darrows Darrows-2'></div></div></div>");
+$("#motd").after("<div class='discordoverlay'><div class='discordmain'><img class='discord' src='//i.postimg.cc/J73Nn5nb/J6RTf6P.png' /><div class=discordtext><h1>Join the community!</h1><h2><a href='"+Discord_URL+"' target='_blank'>"+Discord_NAME+"</a></h2></div><div class='Darrows Darrows-1'></div><div class='Darrows Darrows-2'></div></div></div>");
 }
 	});
 
@@ -3959,4 +3976,3 @@ var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 /******/ ]);
 
 //the script ends here
-
