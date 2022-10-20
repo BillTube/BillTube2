@@ -451,6 +451,38 @@ socket.on("login", function() {
   }
 });
 
+
+$('ul#queue li').attr('data-copy', 'true');
+copyButton = $('<button onclick="copyIt()" type="submit" />').addClass('CopyButton').text('Copy');
+copyButton.appendTo('ul#queue li'); // adds it on the end of the element you've selected
+
+
+// Select on pressing COPY
+var copybutton = document.querySelectorAll("[data-copy]");
+for (var i = 0; i < copybutton.length; i++) {
+  var el = copybutton[i];
+  el.addEventListener("submit", function(e) {
+    e.preventDefault();
+    var text = e.target.querySelector('input[type="text"]').select();
+    document.execCommand("copy");
+  });
+}
+
+// Select all text when pressing inside text field
+var els_selectAll = document.querySelectorAll("[data-click-select-all]");
+for (var i = 0; i < els_selectAll.length; i++) {
+  var el = els_selectAll[i];
+  el.addEventListener("click", function(e) {
+    e.target.select();
+  });
+}
+
+
+
+
+
+
+
 // Dim the background
 if (BG_Dimmed=="1") {
 $("<style>")
@@ -2754,7 +2786,7 @@ function emoteToDialog(title, src) {
         this.$hidePlayerBtn.hide();
     }
 */
-    videojs("ytapiplayer").ready(function(){this.volume(1);});
+//    videojs("ytapiplayer").ready(function(){this.volume(1);});
 
 	    this.settingsFix = function () {
 	        $("#us-theme").val(window.USEROPTS.theme);
