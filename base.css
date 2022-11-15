@@ -4678,3 +4678,40 @@ white-space: pre !important;
 iframe#ytapiplayer_html5_api {
     z-index: 10;
 }
+
+.vjs-theme-city .vjs-progress-control {
+bottom: 4px!important;
+top: auto!important;
+z-index: 1000!important;
+height: 10px!important;
+}
+.vjs-theme-city .vjs-fullscreen-control, .vjs-theme-city .vjs-picture-in-picture-control, .vjs-theme-city .vjs-volume-panel {
+    order: 4!important;
+    flex: 2!important;
+}
+.vjs-theme-city .vjs-play-control {
+    order: 2!important;
+    flex: 15!important;
+    font-size: 1.75em!important;
+}
+.vjs-menu-button.vjs-menu-button-popup.vjs-control.vjs-button {
+    order: 4!important;
+    flex: 2!important;
+}
+.vjs-theme-city .vjs-fullscreen-control, .vjs-theme-city .vjs-picture-in-picture-control, .vjs-theme-city .vjs-volume-panel {
+    order: 3!important;
+    flex: 1!important;
+}
+.vjs-theme-city .vjs-remaining-time {
+    order: 1!important;
+    line-height: 50px!important;
+    flex: 4!important;
+    text-align: center!important;
+}
+.vjs-progress-holder.vjs-slider.vjs-slider-horizontal {
+	height: 6px!important;
+}
+.vjs-theme-city .vjs-progress-control .vjs-progress-holder {
+    top: 8px!important;
+}
+.vjs-slider { background: none!important;}
