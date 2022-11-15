@@ -25,4 +25,5 @@
  --detail-font-color: #7289DA;
  --chat-header-bg: #0e1015f7;
  --msg-hover-bg: rgba(238, 242, 244, 0.4);
-};
+}
+
