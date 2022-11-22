@@ -350,7 +350,7 @@ $("#leader").removeClass("btn btn-sm btn-default");
 $("#Notif").removeClass("btn btn-sm btn-default");
 $("#fullscreenbtn").removeClass("btn-default").addClass("fad fa-expand-arrows-alt");
 $("#userlisttoggle").addClass("fa fa-users ch").text("");
-$("#showchansettings").text("Admin Settings");
+$("#showchansettings").text("Channel Settings");
 $("#controlsrow").after($("#motdrow"));
 $(".container-fluid").append($("#footer"));
 $('#footer').children('.container').append('<p class="text-muted credit">Copyrights and trademarks for the shows and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law. The author is not responsible for any contents linked or referred to from his pages, All CyTu.be does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google drive. All Google users signed a contract with the sites when they set up their accounts wich forces them not to upload illegal content.(<a href="https://www.lumendatabase.org/topics/14">DMCA Safe Harbor</a>)<h4><center><br>BillTube Theme 2</p>(<a href="http://discord.gg/fwadWd9">Available Now</a>)</center></h4>');
