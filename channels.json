@@ -9,16 +9,6 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/C47MQA3.png",
                 "title": "Visit the Southpark Channel"
             },
-			{
-                "channel_url": "https://cytu.be/r/KOTH",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/koth.png",
-                "title": "Visit the KOTH Channel"
-            },
-			{
-                "channel_url": "https://cytu.be/r/billcartoon",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/crtn.png",
-                "title": "Visit the Cartoons Channel"
-            },
 		{
                 "channel_url": "https://cytu.be/r/spookyshows",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/2LB9834.png",
@@ -33,6 +23,16 @@
                 "channel_url": "https://cytu.be/r/futuramaSD",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/futuram.png",
                 "title": "Visit the Futurama Channel"
+            },
+		{
+                "channel_url": "https://cytu.be/r/copstube",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/yEn9W6E2.png",
+                "title": "Visit the COPS Channel"
+            },
+		{
+                "channel_url": "https://cytu.be/r/KOTH",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/koth.png",
+                "title": "Visit the KOTH Channel"
             },
 					{
                 "channel_url": "https://cytu.be/r/Simpsons",
@@ -49,15 +49,15 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/hansen.png",
                 "title": "Visit the TCAP Channel"
             },
-               {
-                "channel_url": "https://cytu.be/r/copstube",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/yEn9W6E2.png",
-                "title": "Visit the COPS Channel"
-            },
 		{
                 "channel_url": "https://cytu.be/r/spooktober",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spooktober3.png",
                 "title": "Visit the Spooktober Channel"
+            },
+					{
+                "channel_url": "https://cytu.be/r/billcartoon",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/crtn.png",
+                "title": "Visit the Cartoons Channel"
             },
 			{
                 "channel_url": "https://cytu.be/r/spookykidshows",
