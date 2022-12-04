@@ -396,7 +396,7 @@ $("#videowrap").addClass("col-lg-7 col-md-7");
 $("#mediabuttons").append($("#showmediaurl"), $("#showsearch"), $("#showplaylistmanager"), $("#showcustomembed"));
 $("#videowrap").removeClass("col-md-8 col-md-offset-2");
 $("body").removeClass("synchtube");
-$("#usertheme").attr("href", "/css/themes/slate.css");
+$("#usertheme").attr("href", "/css/themes/modern.css");
 $("#main").append($("#videowrap"));
 $("#maincontain .nano-content").append($("#mainpage > .container"));
 $("#videowrap").after($("#pollwrap"));
@@ -404,7 +404,7 @@ $("#mainpage").append("<div class='nano' id='maincontain'></div>");
 $("#maincontain").append("<div class='nano-content'></div>");
 $("#maincontain .nano-content").append($("#mainpage > .container-fluid"));
 $('video').attr('crossOrigin' , 'anonymous');
-$("#usertheme").attr("href", "/css/themes/slate.css");
+$("#usertheme").attr("href", "/css/themes/modern.css");
 $("#maincontain .nano-content").append($("#mainpage > .container"));
 $("#messagebuffer").after("<div class='nano'></div>");
 $("#chatwrap .nano").append($("#messagebuffer"));
@@ -2559,9 +2559,9 @@ function emoteToDialog(title, src) {
 	    settings = $.extend({}, defaultSettings, settings);
 
 
-	    $('#us-theme').closest('.form-group').hide().val('/css/themes/slate.css');
-	    if (window.createCookie) {
-	        window.createCookie('cytube-theme', '/css/themes/slate.css', 1000);
+	    $('#us-theme').closest('.form-group').hide().val('/css/themes/modern.css');
+		if (window.createCookie) {
+	        window.createCookie('cytube-theme', '/css/themes/modern.css', 1000);
 	    }
 
 
