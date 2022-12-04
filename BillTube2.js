@@ -2207,8 +2207,7 @@ $("#navtabs").prepend(
 '<a class="et-hero-tab" id="addmediatoggle" href="#rightpane"></a>' +
 '<span class="et-hero-tab-slider"></span>' +
 '</div></section>');
-$('#nav-collapsible a:contains("Delete Account")').remove();
-$('#nav-collapsible a:contains("Account")').parent().detach().appendTo(".et-hero-tabs-container").addClass("et-hero-tab accountbutton").insertBefore("#motdtab");
+
 $( window ).load(function() {
 
   class StickyNavigation {
