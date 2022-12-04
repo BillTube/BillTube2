@@ -3975,7 +3975,6 @@ for (i in ColorsArray) {
 	$('<button class="btn btn-default btn-sm cbtn" onclick="insertText(\'col:' + ColorsArray[i] + ':\')" />')
 	  .css('background-color', ColorsArray[i]).html('â– ').appendTo(colgroup);
 }
-var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 
 /***/ }
 /******/ ]);
