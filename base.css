@@ -3565,7 +3565,7 @@ textarea:focus, input:focus{
     border-radius: 10px!important;
 	font-size: 1rem;
 }
-.userlist_owner::before{          background:url('https://img.pngio.com/an-crown-crown-glasses-icon-with-png-a-572051-png-images-pngio-crown-icon-png-512_365.png');}
+.userlist_owner::before{          background:url('https://cdn-icons-png.flaticon.com/512/6941/6941697.png');}
 
 .userlist_owner::before{
     content: "AA";
