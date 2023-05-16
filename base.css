@@ -4715,3 +4715,14 @@ height: 10px!important;
     top: 8px!important;
 }
 .vjs-slider { background: none!important;}
+.vjs-text-track-settings .vjs-modal-dialog-content {
+    display: block!important;
+    margin-top: 50px;
+    color: #383838!important;
+}
+.vjs-modal-dialog.vjs-text-track-settings {
+    background-color: rgb(43 51 63 / 19%);
+    height: 50%;
+    width: 40%;
+    top: 100px;
+}
