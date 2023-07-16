@@ -3231,7 +3231,7 @@ $.getScript("https://dl.dropbox.com/s/h8kazctox05u2o7/cytube.js");
 if (UI_ChannelAnnouncement=="1") {
 	ChannelAnnouncement_Title=="" ? ChannelAnnouncement_Title='Administration Message' : '';
 	ChannelAnnouncement_HTML=="" ? ChannelAnnouncement_HTML='<i>no messages</i>' : '';
-	makeAlert(ChannelAnnouncement_Title, ChannelAnnouncement_HTML).insertAfter(".slider");
+	makeAlert(ChannelAnnouncement_Title, ChannelAnnouncement_HTML).insertBefore("#motdrow");
 }
 
 if (UI_ChannelName=="1" && ChannelName_Caption!="") {
