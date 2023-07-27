@@ -1,4 +1,7 @@
- (function ($) {
+/* The code `(function ($) { ... })` is a self-invoking anonymous function that takes in the jQuery
+object as a parameter. This is a common pattern used in JavaScript to create a private scope for
+variables and functions, preventing them from polluting the global namespace. */
+(function ($) {
 
     var unicode_charAt = function(string, index) {
         var first = string.charCodeAt(index);
@@ -12,6 +15,10 @@
         return string[index];
     };
 
+/* The `unicode_slice` function is used to extract a portion of a string based on Unicode characters
+instead of individual characters. It takes three parameters: `string` (the input string), `start`
+(the starting index of the portion to extract), and `end` (the ending index of the portion to
+extract). */
     var unicode_slice = function(string, start, end) {
         var accumulator = "";
         var character;
@@ -30,6 +37,8 @@
         return accumulator;
     };
 
+    /* The code `$.fn.initial = function (options) { ... }` is defining a new jQuery plugin called
+    "initial". This plugin can be used to generate initial avatars based on the provided options. */
     $.fn.initial = function (options) {
 
         // Defining Colors
@@ -54,10 +63,12 @@
                 radius: 12
             }, options);
 
-            // overriding from data attributes
+            /* The code `settings = $.extend(settings, e.data());` is using the jQuery `$.extend()`
+            function to merge the `settings` object with the `data` attributes of the element `e`. */
             settings = $.extend(settings, e.data());
 
-            // making the text object
+            /* The code is creating a text element (`<text>`) and setting its attributes and styles
+            based on the provided settings. */
             var c = unicode_slice(settings.name, 0, settings.charCount).toUpperCase();
             var cobj = $('<text text-anchor="middle"></text>').attr({
                 'y': '50%',
@@ -73,6 +84,13 @@
               'border-radius': settings.radius+'px',
             });
 
+            /* The code is checking if the `color` property in the `settings` object is `null`. If it
+            is `null`, it generates a random color based on the first character of the `name`
+            property and the `seed` value. The `charCodeAt(0)` method is used to get the Unicode
+            value of the first character of the `name` property. The `seed` value is added to the
+            Unicode value, and then the modulo operator `%` is used to ensure the result is within
+            the range of the `colors` array length. The resulting color is then assigned to the
+            `finalColor` variable. */
             if(settings.color == null){
                 var colorIndex = Math.floor((c.charCodeAt(0) + settings.seed) % colors.length);
                 finalColor = colors[colorIndex]
@@ -80,6 +98,8 @@
                 finalColor = settings.color
             }
 
+            /* The code is creating a new SVG element using jQuery. The SVG element is defined using
+            the `<svg>` tag. */
             var svg = $('<svg></svg>').attr({
                 'xmlns': 'http://www.w3.org/2000/svg',
                 'pointer-events':'none',
@@ -106,6 +126,9 @@
 
 }(jQuery));
 
+/* The code `$(function(){ ... })` is a shorthand for `$(document).ready(function(){ ... })`, which
+means it will execute the enclosed code when the DOM (Document Object Model) is fully loaded and
+ready. */
 $(function(){
   $('.AvL').initial(); 
  console.log('initial loading avatars')
