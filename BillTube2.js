@@ -292,7 +292,7 @@ console.log("Loading Mobile Theme");
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/intentionallyIncomplete/BadMovieCytube@ec9533c9422a2b7bc8c9e8ca0d787b1ec1e296cf/base.css' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/intentionallyIncomplete/BadMovieCytube@2219c2f33d5a9189632e4b3ae3d47a1f3a23cb1b/base.css' />");
 $('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
