@@ -2243,8 +2243,8 @@ code {
     }
 }
 img.chat-picture {
-    max-height: 110px;
-    max-width: 150px;
+    max-height: 200px;
+    max-width: 320px;
     border-radius: 3px;
     transition: .8s ease;
     vertical-align: baseline;
