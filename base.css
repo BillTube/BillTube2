@@ -2527,7 +2527,7 @@ background-color: rgba(133, 115, 159, 0.25);
     /* color: white; */
 }
 #VideoOverlay {
-    background: linear-gradient(180deg,rgba(0, 0, 0, 0.94) 0,rgba(0,0,0,.35) 50%,transparent);
+    background: linear-gradient(180deg,rgba(0, 0, 0, 0.99) 0,rgba(0,0,0,.75) 60%,transparent);
     -moz-transition: opacity 1000ms ease;
     transition: opacity 1000ms ease;
     top: 0px;
@@ -4725,4 +4725,56 @@ height: 10px!important;
     height: 50%;
     width: 40%;
     top: 100px;
+}
+.VIP {
+  text-shadow: 1px 1px 15px rgb(255 0 224 / 88%);
+  font-weight: bold;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: border-box,border-box,text;
+  background-image: url(https://i.imgur.com/cWvW3KS.gif), url(https://i.imgur.com/jxlCmc9.gif), linear-gradient(200deg, rgb(254 39 191) 20%, rgb(254 39 191) 30%, rgb(254 39 191) 40%, rgb(254 39 91) 50%, rgb(254 39 191) 60%, rgb(255, 31, 110) 70%, rgb(255, 55, 255) 80%);
+  background-size: 10em,10em,5em;
+  animation: playboy 3.5s cubic-bezier(0.4, 0, 1, 1) 0s running;
+  transition: .3s;
+}
+.VIP2 {
+  font-weight: bold;
+  --bg-pos: .2em -.07em;
+  text-shadow: 1px 2px 12px rgba(98, 207, 203, 0.2);
+  position: relative;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: border-box, text;
+  background-image: url(https://media.giphy.com/media/eYRGWfchREFUUlXT7P/giphy.gif), linear-gradient(302deg, #24599d 0%, #fff 100%);
+  background-size: 10em, 17em;
+  animation: starkrdp-anim 3s linear infinite;
+}
+.VIP3 {
+  text-shadow: 1px 1px 5px #2aff00;
+  font-weight: bold;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: border-box,border-box,text;
+  background-image: url(https://i.ibb.co/R60RZRS/sparkling.gif), url(https://i.ibb.co/R60RZRS/sparkling.gif), linear-gradient(178deg,#199800,#2aff00,#199800);
+  background-size: 10em,10em,5em;
+  border-bottom: 5px dotted #2aff00;
+}
+.VIP4 {
+  padding: 13px;
+  border-radius: 11px;
+  font-weight: 600 !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: border-box,text !important;
+  background-image: url(https://i.ibb.co/fQh97LR/particles-log-fo.gif),repeating-linear-gradient(90deg,#fff 0%,#FF0000 15%,#FF8000 25%,#F7FF00 35%,#FF0000 45%,#55FF00 55%,#03FFFF 65%,#0022FF 75%,#A100FF 85%,#FF00E6 95%,#fff 100%) !important;
+  background-size: 4em,500px !important;
+  filter: saturate(2) !important;
+  text-shadow: 2px 2px 15px #000000 !important;
+  animation: logfo-animation 4s linear infinite !important;
+}
+.VIP5 {
+  font-weight: 1000;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text,text,border-box,border-box,border-box;
+  background-image: url(https://i.imgur.com/k6rhOtN.gif),radial-gradient(circle,rgba(21,170,255,1)8%,rgba(85,208,255,1)19%,rgba(173,247,242,1)35%,rgba(156,238,243,1)60%,rgba(21,170,255,1)70%,rgba(8,8,255,1)87%,rgba(255,255,255,1)100%),url(https://i.ibb.co/DtJBDNy/white-lightning.gif),url(https://i.imgur.com/afWakbq.gif);
+  background-size: 5em,15%800%,10em,25em;
+  animation: myproxiesanim 5s linear infinite;
+  transition: .3s;
+  position: relative;
 }
