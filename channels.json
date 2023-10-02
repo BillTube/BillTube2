@@ -4,7 +4,12 @@
         "uuid": "939fbf65-9040-4392-ae06-5817dd84f57a",
         "order_uuid": null,
         "channels": [
-            {
+           	{
+                "channel_url": "https://cytu.be/r/spooktober",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spooktober3.png",
+                "title": "Visit the Spooktober Channel"
+            },
+		{
                 "channel_url": "https://cytu.be/r/southparkhd",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/C47MQA3.png",
                 "title": "Visit the Southpark Channel"
@@ -13,6 +18,11 @@
                 "channel_url": "https://cytu.be/r/spookyshows",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/2LB9834.png",
                 "title": "Visit the Ghost Adventures Channel"
+            },
+					{
+                "channel_url": "https://cytu.be/r/spookykidshows",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spookyshow.png",
+                "title": "Visit the Are you afraid of the dark/goosebumps Channel"
             },
 					{
                 "channel_url": "https://cytu.be/r/seinfeldHD",
@@ -49,20 +59,10 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/hansen.png",
                 "title": "Visit the TCAP Channel"
             },
-		{
-                "channel_url": "https://cytu.be/r/spooktober",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spooktober3.png",
-                "title": "Visit the Spooktober Channel"
-            },
 					{
                 "channel_url": "https://cytu.be/r/billcartoon",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/crtn.png",
                 "title": "Visit the Cartoons Channel"
-            },
-			{
-                "channel_url": "https://cytu.be/r/spookykidshows",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spookyshow.png",
-                "title": "Visit the Are you afraid of the dark/goosebumps Channel"
             },
 				{
                 "channel_url": "https://cytu.be/r/spookyshows2",
