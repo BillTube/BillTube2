@@ -4,7 +4,6 @@
 @import url(https://fonts.googleapis.com/css?family=Passion+One:300,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700,800,900');
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
   svg {
   width: 100%;
@@ -15,26 +14,24 @@
  }
 /* Animation */
 @keyframes fadeInUp {
-  from {
-    -webkit-transform: translate3d(0, 40px, 0);
-            transform: translate3d(0, 40px, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+	from {
+		opacity: 0;
+		transform: translate3d(0, -20%, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
 }
 @-webkit-keyframes fadeInUp {
-  from {
-    -webkit-transform: translate3d(0, 40px, 0);
-            transform: translate3d(0, 40px, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+	from {
+		opacity: 0;
+		transform: translate3d(0, -20%, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
 }
 .animated {
   animation-duration: 1s;
@@ -3476,14 +3473,14 @@ div#chat-panel {
 #favourite-pictures-panel, #smiles-panel {
     text-align: center;
     margin: 0px 17px 10px 17px;
-    border: 0px solid #30344c;
+    border: 1px solid #343434;
     background-color: var(--theme-bg-color);
     border-radius: 7px;
-    max-height: 350px;
-    height: 24rem;
+    max-height: 400px;
+    height: 28rem;
     overflow-x: hidden;
     overflow-y: scroll;
-    max-width: 362px;
+    max-width: 28rem;
     backdrop-filter: saturate(100%) blur(1px);
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
 }

@@ -768,7 +768,7 @@ $("#videowrap").mousemove(function() {
 });
 $("#VideoOverlay").append($("#mediarefresh"));
 $("#VideoOverlay").append("<button id='skip' title='Voteskip the video' class='fal fa-arrow-alt-to-right OLB'></button>");
-$("#VideoOverlay").append("<button id='Ambient' title='Ambient Mode beta' style='float: right;' class='fal fa-popcorn OLB'></button>");
+$("#VideoOverlay").append("<button id='Ambient' title='Ambient Mode' style='float: right;' class='fal fa-popcorn OLB'></button>");
 $("#Ambient").click(function(){
   $.getScript("https://dl.dropbox.com/s/bwocup9ggrr5n7f/ambient.js");
 });
@@ -2448,13 +2448,6 @@ function emoteToDialog(title, src) {
 	                $('#smiles-btn').click();
 	                $('#favourite-pictures-btn').click();
 
-	                if ($(this).hasClass('btn-default')) {
-	                    $(this).removeClass('btn-default');
-	                    $(this).addClass('btn-success');
-	                } else {
-	                    $(this).removeClass('btn-success');
-	                    $(this).addClass('btn-default');
-	                }
 	            });
 	    }
 	});
@@ -2475,7 +2468,7 @@ function emoteToDialog(title, src) {
 	        $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
 	    }
 	    this.$smilesBtn = $('<button class="chatbtn" id="smiles-btn" data-tooltip="Emotes" data-tooltip-pos="up" >')
-	        .html('<i class="material-icons">emoji_emotions</i>')
+	        .html('<i class="material-icons">image_search</i>')
 	        .prependTo('#chat-controls');
 
 	    this.$smilesPanel = $('<div class="animated animatedFadeInUp fadeInUp" id="smiles-panel">')
@@ -2725,41 +2718,10 @@ function emoteToDialog(title, src) {
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-	    //$('#mediarefresh').hide();
+//$('#mediarefresh').hide();
 
     this.$topVideoControls = $('<div id="top-video-controls" class="btn-group">').appendTo("#VideoOverlay");
 
-
- this.hidePlayer = function ($hidePlayerBtn) {
-        if ($hidePlayerBtn.hasClass('btn-default')) { //video visible
-            var $playerWindow = $('#videowrap').find('.embed-responsive');
-            $playerWindow.css({position: 'relative'});
-			videojs("ytapiplayer").ready(function(){this.volume(0);});
-
-            $('<div id="player-overlay">').appendTo(videowrap);
-            $hidePlayerBtn.html('<i class="glyphicon glyphicon-film">')
-                .removeClass('btn-default')
-                .addClass('');
-        } else { //video hidden
-            $('#player-overlay').remove();
-			var $playerWindow = $('#videowrap').find('.embed-responsive');
-            $playerWindow.css({position: 'block'});
-			videojs("ytapiplayer").ready(function(){this.volume(0.7);});
-            $hidePlayerBtn.html('<i class="glyphicon glyphicon-ban-circle">')
-                .removeClass('').addClass('btn-default');
-        }
-    };
-/*    this.$hidePlayerBtn = $('<button id="hide-player-btn" class="OLB" title="' + app.t('video[.]Hide video') + '">')
-        .html('<i class="glyphicon glyphicon-ban-circle">')
-        .appendTo(this.$topVideoControls)
-		.addClass('btn-default')
-        .on('click', function() {
-            that.hidePlayer($(this));
-        });
-    if (!settings.turnOffVideoOption) {
-        this.$hidePlayerBtn.hide();
-    }
-*/
 //    videojs("ytapiplayer").ready(function(){this.volume(1);});
 
 	    this.settingsFix = function () {
@@ -3481,7 +3443,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 			*/
 			var GTMR = false;
 
-			giphysearchbtn = $('<button id="giphysearch-btn" data-tooltip="Giphy" data-tooltip-pos="up" class="chatbtn"><i class="material-icons">movie_creation</i></button>')
+			giphysearchbtn = $('<button id="giphysearch-btn" data-tooltip="Giphy" data-tooltip-pos="up" class="chatbtn"><i class="material-icons">video_library</i></button>')
 				.appendTo('#chat-controls')
 				.on("click", function() {
 					if (!GTMR) {
@@ -3497,6 +3459,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 				});
 				function clickPic() {
 				outer.modal('hide');
+				
 			}
 
 			DONTSPAMGIPHY = true;
@@ -3530,10 +3493,10 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 					TRANSLATE = false;
 					RANDOM = false;
 					if (TRENDING) {
-						searchtype = 'trending?limit=50';
+						searchtype = 'trending?limit=80';
 					} else {
 						if ($("#search").prop('checked')) {
-							searchtype = 'search?q=' + giff + '&limit=50';
+							searchtype = 'search?q=' + giff + '&limit=100';
 						} else if ($("#translate").prop('checked')) {
 							searchtype = 'translate?s=' + giff;
 							SINGLE = true;
@@ -3570,7 +3533,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 									offset = 0;
 									imagelength = imagedata.length;
 									$('.giphyimage').show();
-									$('.imagesearch').text('Showing' + gifterm + ' 1-9 of 99');
+									$('.imagesearch').text('Showing' + gifterm + ' 1-9 of 100');
 									for (var gip = 0; gip < 9; gip++) {
 										if (imagedata[gip] !== undefined) {
 											imageurl = imagedata[gip].images.original.url;
@@ -3619,6 +3582,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 													}*/
 												}
 												$('.giphyimage').find('img').eq(fgip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
+												
 											}
 											if (fgip === 8) {
 												offset += fgip + 1;
@@ -3654,6 +3618,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 													}*/
 												}
 												$('.giphyimage').find('img').eq(ggip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
+												
 											}
 											if (ggip === 8) {
 												offset -= ggip + 1;
@@ -3950,7 +3915,7 @@ fetch(URL_API, {
 /***/ },
 /* 52 */
 /***/ function(module, exports) {
-window.cytubeEnhanced.addModule("favouritePictures",function(t){"use strict";var e=this,i=t.parseJSON(window.localStorage.getItem("favouritePictures"),[]);t.storage.setDefault("favouritePictures",_.isArray(i)?i:[]),0===$("#chat-panel").length&&$('<div id="chat-panel" class="row">').insertAfter("#messagebuffer"),0===$("#chat-controls").length&&$('<div id="chat-controls" class="btn-group">').appendTo("#chatwrap"),this.$toggleFavouritePicturesPanelBtn=$('<button id="favourite-pictures-btn" data-tooltip="Favorites" data-tooltip-pos="up" class="chatbtn" >').html('<i class="material-icons">collections_bookmark</i>'),0!==$("#smiles-btn").length?this.$toggleFavouritePicturesPanelBtn.insertAfter("#smiles-btn"):this.$toggleFavouritePicturesPanelBtn.prependTo("#chat-controls"),this.$favouritePicturesPanel=$('<div id="favourite-pictures-panel">').appendTo("#chat-panel").hide(),this.$favouritePicturesPanelRow=$('<div class="favourite-pictures-panel-row">').appendTo(this.$favouritePicturesPanel),this.$favouritePicturesTrash=$('<div id="pictures-trash" title="'+t.t("favPics[.]Drop the picture here to remove it")+'">').append('<i class="pictures-trash-icon glyphicon glyphicon-trash">').appendTo(this.$favouritePicturesPanelRow),this.$favouritePicturesBodyPanel=$('<div id="pictures-body-panel">').appendTo(this.$favouritePicturesPanelRow),this.$favouritePicturesControlPanel=$('<div id="pictures-control-panel" class="row">').appendTo(this.$favouritePicturesPanel),this.$favouritePicturesControlPanelForm=$('<div class="col-md-12 picmenu">').html('<div class="input-group-pic"><input type="text" id="picture-address" class="form-control input-sm" placeholder="'+t.t("favPics[.]Picture url")+'"><span class="input-group-btn"><button id="add-picture-btn" class="btn btn-sm btn-default fal fa-plus" style="border-radius:2rem;padding:10px;" type="button"></button></span><span class="input-group-btn"><button id="help-pictures-btn" class="btn btn-sm btn-default fas fa-question" style="border-radius:2rem;padding:10px;" type="button"></button></span></div>').appendTo(this.$favouritePicturesControlPanel),this.makeSmilesAndPicturesTogether=function(){e.smilesAndPicturesTogether=!0,e.$toggleFavouritePicturesPanelBtn.hide(),e.$favouritePicturesPanel.hide()},this.entityMap={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},this.replaceUnsafeSymbol=function(t){return e.entityMap[t]},this.renderFavouritePictures=function(){var e=t.storage.get("favouritePictures")||[];this.$favouritePicturesBodyPanel.empty();for(var i=0,a=e.length;i<a;i++){var r=e[i].replace(/[&<>"']/g,this.replaceUnsafeSymbol);$('<img class="favourite-picture-on-panel">').attr({src:r}).appendTo(this.$favouritePicturesBodyPanel)}},this.insertFavouritePicture=function(e){t.Helpers.addMessageToChatInput(" "+e+" ","end")},$(document.body).on("click",".favourite-picture-on-panel",function(){e.insertFavouritePicture($(this).attr("src"))}),this.handleFavouritePicturesPanel=function(t){var e=this.smilesAndPicturesTogether||!1;0===$("#smiles-panel").length||e||$("#smiles-panel").hide(),this.$favouritePicturesPanel.toggle(),e||(t.hasClass("btn-default")?(0!==$("#smiles-btn").length&&$("#smiles-btn").hasClass("btn-success")&&($("#smiles-btn").removeClass("btn-success"),$("#smiles-btn").addClass("btn-default")),t.removeClass("btn-default"),t.addClass("btn-success")):(t.removeClass("btn-success"),t.addClass("btn-default")))},this.$toggleFavouritePicturesPanelBtn.on("click",function(){e.handleFavouritePicturesPanel($(this))}),this.addFavouritePicture=function(e){if(""!==(e=_.trim(e))){var i=t.storage.get("favouritePictures")||[];if(-1!==i.indexOf(e))return window.makeAlert(t.t("favPics[.]The image already exists")).prependTo(this.$favouritePicturesBodyPanel),$("#picture-address").val(""),!1;""!==e&&i.push(e),$("#picture-address").val(""),t.storage.set("favouritePictures",i),this.renderFavouritePictures()}},$("#add-picture-btn").on("click",function(t){t.preventDefault(),e.addFavouritePicture($("#picture-address").val().trim())}),$("#picture-address").on("keypress",function(t){13==t.which&&e.addFavouritePicture($("#picture-address").val().trim())}),this.showHelp=function(){var e=$('<div class="modal-header__inner">');e.append($('<h3 class="modal-title">').text(t.t("Help")));var i=$('<div class="help-pictures-content">');i.append($("<p>"+t.t("favPics[.]<p>Favourite pictures feature if for saving favourite pictures like browser bookmarks.</p><p>Features:<ul><li><strong>Only links to images can be saved</strong>, so if image from link was removed, it also removes from your panel.</li><li>Image links are storing in browser.</li><li>Favorite images transfer over to other channels using this theme </li>")+"</p>"));var a=$('<button type="button" id="help-pictures-exit-btn" class="btn btn-info" data-dismiss="modal">'+t.t("favPics[.]Exit")+"</button>"),r=$('<div class="help-pictures-footer">');return r.append(a),t.UI.createModalWindow("chat-history",e,i,r)},$("#help-pictures-btn").on("click",function(t){t.preventDefault(),e.showHelp()}),this.exportPictures=function(){var e=$("<a>").attr({href:"data:text/plain;charset=utf-8,"+encodeURIComponent(t.toJSON(t.storage.get("favouritePictures")||[])),download:"pururin_favourite_images.txt"}).hide().appendTo($(document.body));e[0].click(),e.remove()},$("#export-pictures").on("click",function(){e.exportPictures()}),e.mistakeAjaxEnd=!0,$("#upload-pictures").on("click",function(i){i.preventDefault(),e.mistakeAjaxEnd&&(e.mistakeAjaxEnd=!1,$.ajax({type:$(this).attr("method"),url:$(this).attr("action"),dataType:"html",data:{userName:username,userRank:CLIENT.rank,userData:t.storage.get("favouritePictures")||[],g:CLIENT.guest,action:"upload"}}).done(function(i){e.mistakeAjaxEnd=!0,t.UI.createAlertWindow(t.t(`favPics[.]${i}`))}))}),$("#load-pictures").on("click",function(i){i.preventDefault(),e.mistakeAjaxEnd&&(e.mistakeAjaxEnd=!1,$.ajax({type:$(this).attr("method"),url:$(this).attr("action"),dataType:"html",data:{userName:username,userRank:CLIENT.rank,g:CLIENT.guest,action:"get"}}).done(function(i){e.mistakeAjaxEnd=!0;var a=t.parseJSON(i);_.isArray(a)?(t.storage.set("favouritePictures",t.parseJSON(i)),e.renderFavouritePictures()):t.UI.createAlertWindow(t.t(`favPics[.]${i}`))}))}),this.importPictures=function(i){var a=new FileReader;a.addEventListener("load",function(i){var a=t.parseJSON(i.target.result);_.isArray(a)?(t.storage.set("favouritePictures",t.parseJSON(i.target.result)),e.renderFavouritePictures()):t.UI.createAlertWindow(t.t("favPics[.]Can't detect any pictures in this file."))}),a.readAsText(i)},$("#import-pictures").on("change",function(){var i=$(this)[0].files[0];t.UI.createConfirmWindow(t.t("favPics[.]Your old pictures will be removed and replaced with the images from uploaded file (file must correspond to format of the file from export button of this panel).<br>Are you sure you want to continue?"),function(t){t&&i&&e.importPictures(i)})}),this.renderFavouritePictures(),this.$favouritePicturesBodyPanel.sortable({containment:this.$favouritePicturesPanelRow,revert:!0,update:function(e,i){var a,r=$(i.item).attr("src"),s=$(i.item).next().attr("src"),o=t.storage.get("favouritePictures");if(-1!==(a=o.indexOf(r))){var n;if(o.splice(a,1),void 0!==s)-1!==(n=o.indexOf(s))&&o.splice(n,0,r);else o.push(r);t.storage.set("favouritePictures",o)}}}),this.$favouritePicturesTrash.droppable({accept:".favourite-picture-on-panel",hoverClass:"favourite-picture-drop-hover",drop:function(e,i){var a,r=i.draggable.attr("src"),s=t.storage.get("favouritePictures");-1!==(a=s.indexOf(r))&&(s.splice(a,1),t.storage.set("favouritePictures",s)),i.draggable.remove()}})});
+window.cytubeEnhanced.addModule("favouritePictures",function(t){"use strict";var e=this,i=t.parseJSON(window.localStorage.getItem("favouritePictures"),[]);t.storage.setDefault("favouritePictures",_.isArray(i)?i:[]),0===$("#chat-panel").length&&$('<div id="chat-panel" class="row">').insertAfter("#messagebuffer"),0===$("#chat-controls").length&&$('<div id="chat-controls" class="btn-group">').appendTo("#chatwrap"),this.$toggleFavouritePicturesPanelBtn=$('<button id="favourite-pictures-btn" data-tooltip="Favorites" data-tooltip-pos="up" class="chatbtn" >').html('<i class="material-icons">perm_media</i>'),0!==$("#smiles-btn").length?this.$toggleFavouritePicturesPanelBtn.insertAfter("#smiles-btn"):this.$toggleFavouritePicturesPanelBtn.prependTo("#chat-controls"),this.$favouritePicturesPanel=$('<div id="favourite-pictures-panel">').appendTo("#chat-panel").hide(),this.$favouritePicturesPanelRow=$('<div class="favourite-pictures-panel-row">').appendTo(this.$favouritePicturesPanel),this.$favouritePicturesTrash=$('<div id="pictures-trash" title="'+t.t("favPics[.]Drop the picture here to remove it")+'">').append('<i class="pictures-trash-icon glyphicon glyphicon-trash">').appendTo(this.$favouritePicturesPanelRow),this.$favouritePicturesBodyPanel=$('<div id="pictures-body-panel">').appendTo(this.$favouritePicturesPanelRow),this.$favouritePicturesControlPanel=$('<div id="pictures-control-panel" class="row">').appendTo(this.$favouritePicturesPanel),this.$favouritePicturesControlPanelForm=$('<div class="col-md-12 picmenu">').html('<div class="input-group-pic"><input type="text" id="picture-address" class="form-control input-sm" placeholder="'+t.t("favPics[.]Picture url")+'"><span class="input-group-btn"><button id="add-picture-btn" class="btn btn-sm btn-default fal fa-plus" style="border-radius:2rem;padding:10px;" type="button"></button></span><span class="input-group-btn"><button id="help-pictures-btn" class="btn btn-sm btn-default fas fa-question" style="border-radius:2rem;padding:10px;" type="button"></button></span></div>').appendTo(this.$favouritePicturesControlPanel),this.makeSmilesAndPicturesTogether=function(){e.smilesAndPicturesTogether=!0,e.$toggleFavouritePicturesPanelBtn.hide(),e.$favouritePicturesPanel.hide()},this.entityMap={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},this.replaceUnsafeSymbol=function(t){return e.entityMap[t]},this.renderFavouritePictures=function(){var e=t.storage.get("favouritePictures")||[];this.$favouritePicturesBodyPanel.empty();for(var i=0,a=e.length;i<a;i++){var r=e[i].replace(/[&<>"']/g,this.replaceUnsafeSymbol);$('<img class="favourite-picture-on-panel">').attr({src:r}).appendTo(this.$favouritePicturesBodyPanel)}},this.insertFavouritePicture=function(e){t.Helpers.addMessageToChatInput(" "+e+" ","end")},$(document.body).on("click",".favourite-picture-on-panel",function(){e.insertFavouritePicture($(this).attr("src"))}),this.handleFavouritePicturesPanel=function(t){var e=this.smilesAndPicturesTogether||!1;0===$("#smiles-panel").length||e||$("#smiles-panel").hide(),this.$favouritePicturesPanel.toggle(),e||(t.hasClass("btn-default")?(0!==$("#smiles-btn").length&&$("#smiles-btn").hasClass("btn-success")&&($("#smiles-btn").removeClass("btn-success"),$("#smiles-btn").addClass("btn-default")),t.removeClass("btn-default"),t.addClass("btn-success")):(t.removeClass("btn-success"),t.addClass("btn-default")))},this.$toggleFavouritePicturesPanelBtn.on("click",function(){e.handleFavouritePicturesPanel($(this))}),this.addFavouritePicture=function(e){if(""!==(e=_.trim(e))){var i=t.storage.get("favouritePictures")||[];if(-1!==i.indexOf(e))return window.makeAlert(t.t("favPics[.]The image already exists")).prependTo(this.$favouritePicturesBodyPanel),$("#picture-address").val(""),!1;""!==e&&i.push(e),$("#picture-address").val(""),t.storage.set("favouritePictures",i),this.renderFavouritePictures()}},$("#add-picture-btn").on("click",function(t){t.preventDefault(),e.addFavouritePicture($("#picture-address").val().trim())}),$("#picture-address").on("keypress",function(t){13==t.which&&e.addFavouritePicture($("#picture-address").val().trim())}),this.showHelp=function(){var e=$('<div class="modal-header__inner">');e.append($('<h3 class="modal-title">').text(t.t("Help")));var i=$('<div class="help-pictures-content">');i.append($("<p>"+t.t("favPics[.]<p>Favourite pictures feature if for saving favourite pictures like browser bookmarks.</p><p>Features:<ul><li><strong>Only links to images can be saved</strong>, so if image from link was removed, it also removes from your panel.</li><li>Image links are storing in browser.</li><li>Favorite images transfer over to other channels using this theme </li>")+"</p>"));var a=$('<button type="button" id="help-pictures-exit-btn" class="btn btn-info" data-dismiss="modal">'+t.t("favPics[.]Exit")+"</button>"),r=$('<div class="help-pictures-footer">');return r.append(a),t.UI.createModalWindow("chat-history",e,i,r)},$("#help-pictures-btn").on("click",function(t){t.preventDefault(),e.showHelp()}),this.exportPictures=function(){var e=$("<a>").attr({href:"data:text/plain;charset=utf-8,"+encodeURIComponent(t.toJSON(t.storage.get("favouritePictures")||[])),download:"pururin_favourite_images.txt"}).hide().appendTo($(document.body));e[0].click(),e.remove()},$("#export-pictures").on("click",function(){e.exportPictures()}),e.mistakeAjaxEnd=!0,$("#upload-pictures").on("click",function(i){i.preventDefault(),e.mistakeAjaxEnd&&(e.mistakeAjaxEnd=!1,$.ajax({type:$(this).attr("method"),url:$(this).attr("action"),dataType:"html",data:{userName:username,userRank:CLIENT.rank,userData:t.storage.get("favouritePictures")||[],g:CLIENT.guest,action:"upload"}}).done(function(i){e.mistakeAjaxEnd=!0,t.UI.createAlertWindow(t.t(`favPics[.]${i}`))}))}),$("#load-pictures").on("click",function(i){i.preventDefault(),e.mistakeAjaxEnd&&(e.mistakeAjaxEnd=!1,$.ajax({type:$(this).attr("method"),url:$(this).attr("action"),dataType:"html",data:{userName:username,userRank:CLIENT.rank,g:CLIENT.guest,action:"get"}}).done(function(i){e.mistakeAjaxEnd=!0;var a=t.parseJSON(i);_.isArray(a)?(t.storage.set("favouritePictures",t.parseJSON(i)),e.renderFavouritePictures()):t.UI.createAlertWindow(t.t(`favPics[.]${i}`))}))}),this.importPictures=function(i){var a=new FileReader;a.addEventListener("load",function(i){var a=t.parseJSON(i.target.result);_.isArray(a)?(t.storage.set("favouritePictures",t.parseJSON(i.target.result)),e.renderFavouritePictures()):t.UI.createAlertWindow(t.t("favPics[.]Can't detect any pictures in this file."))}),a.readAsText(i)},$("#import-pictures").on("change",function(){var i=$(this)[0].files[0];t.UI.createConfirmWindow(t.t("favPics[.]Your old pictures will be removed and replaced with the images from uploaded file (file must correspond to format of the file from export button of this panel).<br>Are you sure you want to continue?"),function(t){t&&i&&e.importPictures(i)})}),this.renderFavouritePictures(),this.$favouritePicturesBodyPanel.sortable({containment:this.$favouritePicturesPanelRow,revert:!0,update:function(e,i){var a,r=$(i.item).attr("src"),s=$(i.item).next().attr("src"),o=t.storage.get("favouritePictures");if(-1!==(a=o.indexOf(r))){var n;if(o.splice(a,1),void 0!==s)-1!==(n=o.indexOf(s))&&o.splice(n,0,r);else o.push(r);t.storage.set("favouritePictures",o)}}}),this.$favouritePicturesTrash.droppable({accept:".favourite-picture-on-panel",hoverClass:"favourite-picture-drop-hover",drop:function(e,i){var a,r=i.draggable.attr("src"),s=t.storage.get("favouritePictures");-1!==(a=s.indexOf(r))&&(s.splice(a,1),t.storage.set("favouritePictures",s)),i.draggable.remove()}})});
 /***/ },
 /* 53 */
 /***/ function(module, exports) {
@@ -3982,6 +3947,3 @@ var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 /******/ ]);
 
 //the script ends here
-
-
-
