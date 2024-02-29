@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;display=swap");
-@import url('https://fonts.googleapis.com/css?family=Barlow');
-@import url(https://fonts.googleapis.com/css?family=Passion+One:300,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700,800,900');
 
@@ -3575,7 +3573,7 @@ textarea:focus, input:focus{
     height: 12px;
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	    font-family: "Inter", sans-serif;
+	    font-family: "Quicksand", sans-serif;
 	    color: var (--theme-color);
 }
 .btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open>.dropdown-toggle.btn-default {
@@ -4263,7 +4261,7 @@ html.compact #userlist {
     float: none;
 }
 .notifyjs-bootstrap-success {
-    font-family: 'Barlow';
+    font-family: 'Quicksand';
     color: rgb(222, 232, 255) !important;
     font-size: 1.6rem !important;
     background: radial-gradient( farthest-corner at top left, #9a52cd, transparent 600px), radial-gradient( farthest-side at top right, #5b69f8, transparent 500px), radial-gradient( farthest-corner at bottom right, transparent, transparent 500px), radial-gradient( farthest-corner at bottom left, rgba(147, 9, 243, 0.13), transparent 600px)!important;
