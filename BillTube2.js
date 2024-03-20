@@ -240,10 +240,10 @@ ColorsArray = [
 	__webpack_require__(20);
 	__webpack_require__(21);
 //	__webpack_require__(22);
-	__webpack_require__(25);
+//	__webpack_require__(25);
 	__webpack_require__(26);
 	__webpack_require__(27);
-	__webpack_require__(28);
+//	__webpack_require__(28);
 	__webpack_require__(29);
 	__webpack_require__(30);
 	__webpack_require__(31);
@@ -294,6 +294,15 @@ console.log("Loading Desktop Theme");
 $('head').append("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css' />");
 $('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-contextmenu-ui@7.0.0/dist/videojs-contextmenu-ui.min.js' />");
+$('head').append("<link rel='stylesheet' href='https://dl.dropbox.com/scl/fi/ld3gq6hsqpj5zds90jf2m/demoplayersvg.js?rlkey=clh4rgbtxxfb5egqhtz6lrrv6' />");
+$('head').append("<link rel='stylesheet' href='' />");
+
+
+
+
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 
@@ -717,7 +726,7 @@ window.CytubeEnhancedStorage=function(e,t,n){var r=this;t=void 0===t||t,n=void 0
 /***/ },
 /* 3 */
 /***/ function(module, exports) {
-window.CytubeEnhancedUISettings=function(t){"use strict";var e=this;this.$navbar=$("#nav-collapsible").find(".navbar-nav"),this.tabs={},this.$tabsContainerHeader=$('<div class="'+t.prefix+'ui__header"></div>'),this.$tabsContainerBody=$('<div class="'+t.prefix+'ui__body tab-content"></div>'),this.$tabsContainerTabs=$('<ul class="nav nav-tabs">'),this.$tabsContainerFooter=$('<div class="'+t.prefix+'ui__footer"></div>'),this.$tabsContainerOpenButton=$('<a href="#" id="'+t.prefix+'ui"></a>').text(t.t("settings[.]Theme settings")).on("click",function(t){t.preventDefault(),t.stopPropagation(),e.openSettings()}),$("#settings").click(function(t){t.preventDefault(),t.stopPropagation(),e.openSettings()});var n=$("#useroptions .modal-header .nav-tabs");n.length,this.$tabsContainerOpenButton.appendTo(e.$navbar).wrap("<li>"),this.themeTabName="theme-settings",this.themeTabTitle=t.t("themes[.]Theme settings"),this.storage=new CytubeEnhancedStorage("settings",!1);var s=!1;$("<h4>"+t.t("settings[.]Extended settings")+"</h4>").appendTo(e.$tabsContainerHeader),e.$tabsContainerTabs.appendTo(e.$tabsContainerHeader),$('<button type="button" data-dismiss="modal" class="btn btn-success">'+t.t("settings[.]Save")+"</button>").appendTo(e.$tabsContainerFooter).on("click",function(){e.save()}),$('<button type="button" data-dismiss="modal" class="'+t.prefix+'user-settings btn btn-default">'+t.t("settings[.]Cancel")+"</button>").appendTo(e.$tabsContainerFooter),this.onSave=function(n){$(document).on(t.prefix+"settings.save",function(){n(e.storage)})},this.save=function(){$(document).trigger(t.prefix+"settings.save"),e.storage.save(),s&&t.UI.createConfirmWindow(t.t("settings[.]Some settings need to refresh the page to get to work. Do it now?"),function(){window.location.reload()})},this.reset=function(){e.storage.reset(),t.UI.createConfirmWindow(t.t("settings[.]Some settings need to refresh the page to get to work. Do it now?"),function(){window.location.reload()})};this.getTab=function(n,s,a){return void 0!==e.tabs[n]?e.tabs[n]:s?function(n,s,a){var o=new window.CytubeEnhancedUITab(t,n,s,a);return o.$button.appendTo(e.$tabsContainerTabs),o.$content.appendTo(e.$tabsContainerBody),e.tabs[n]=o,e.sortTabs(),o}(n,s,a):null},this.configureTheme=function(n){var s=e.getTab(e.themeTabName,e.themeTabTitle,99999),a=new CytubeEnhancedStorage("themes."+t.Settings.storage.get("themes.selected"),!0,!0);n(t,s,a)},this.openTab=function(t){return!!e.tabs[t]&&(e.tabs[t].show(),!0)},e.removeTab=function(t){return!!e.tabs[t]&&(e.tabs[t].remove(),delete e.tabs[t],!0)},this.sortTabs=function(){var t=[];for(var n in e.tabs)t.push(e.tabs[n]);for(var s=0,a=(t=t.sort(function(t,e){return t.sort>e.sort?1:t.sort<e.sort?-1:0})).length;s<a;s++)t[s].$button.detach().appendTo(e.$tabsContainerTabs)},this.openSettings=function(){var n;for(var s in t.UI.createModalWindow("settings",e.$tabsContainerHeader,e.$tabsContainerBody,e.$tabsContainerFooter,!0),e.tabs)(void 0===n||void 0===n.sort||n.sort>e.tabs[s].sort)&&(n=e.tabs[s]);n.show()},this.requestPageReload=function(){s=!0}};
+window.CytubeEnhancedUISettings=function(t){"use strict";var e=this;this.$navbar=$("#nav-collapsible").find(".navbar-nav"),this.tabs={},this.$tabsContainerHeader=$('<div class="'+t.prefix+'ui__header"></div>'),this.$tabsContainerBody=$('<div class="'+t.prefix+'ui__body tab-content"></div>'),this.$tabsContainerTabs=$('<ul class="nav nav-tabs">'),this.$tabsContainerFooter=$('<div class="'+t.prefix+'ui__footer"></div>'),this.$tabsContainerOpenButton=$('<a href="#" id="'+t.prefix+'ui"></a>').text(t.t("settings[.]Theme settings")).on("click",function(t){t.preventDefault(),t.stopPropagation(),e.openSettings()}),$("#settings").click(function(t){t.preventDefault(),t.stopPropagation(),e.openSettings()});var n=$("#useroptions .modal-header .nav-tabs");n.length,this.$tabsContainerOpenButton.appendTo(e.$navbar).wrap("<li>"),this.themeTabName="theme-settings",this.themeTabTitle=t.t("themes[.]General"),this.storage=new CytubeEnhancedStorage("settings",!1);var s=!1;$("<h4>"+t.t("settings[.]Theme Settings")+"</h4>").appendTo(e.$tabsContainerHeader),e.$tabsContainerTabs.appendTo(e.$tabsContainerHeader),$('<button type="button" data-dismiss="modal" class="btn btn-success">'+t.t("settings[.]Save")+"</button>").appendTo(e.$tabsContainerFooter).on("click",function(){e.save()}),$('<button type="button" data-dismiss="modal" class="'+t.prefix+'user-settings btn btn-default">'+t.t("settings[.]Cancel")+"</button>").appendTo(e.$tabsContainerFooter),this.onSave=function(n){$(document).on(t.prefix+"settings.save",function(){n(e.storage)})},this.save=function(){$(document).trigger(t.prefix+"settings.save"),e.storage.save(),s&&t.UI.createConfirmWindow(t.t("settings[.]Some settings need to refresh the page to get to work. Do it now?"),function(){window.location.reload()})},this.reset=function(){e.storage.reset(),t.UI.createConfirmWindow(t.t("settings[.]Some settings need to refresh the page to get to work. Do it now?"),function(){window.location.reload()})};this.getTab=function(n,s,a){return void 0!==e.tabs[n]?e.tabs[n]:s?function(n,s,a){var o=new window.CytubeEnhancedUITab(t,n,s,a);return o.$button.appendTo(e.$tabsContainerTabs),o.$content.appendTo(e.$tabsContainerBody),e.tabs[n]=o,e.sortTabs(),o}(n,s,a):null},this.configureTheme=function(n){var s=e.getTab(e.themeTabName,e.themeTabTitle,2),a=new CytubeEnhancedStorage("themes."+t.Settings.storage.get("themes.selected"),!0,!0);n(t,s,a)},this.openTab=function(t){return!!e.tabs[t]&&(e.tabs[t].show(),!0)},e.removeTab=function(t){return!!e.tabs[t]&&(e.tabs[t].remove(),delete e.tabs[t],!0)},this.sortTabs=function(){var t=[];for(var n in e.tabs)t.push(e.tabs[n]);for(var s=0,a=(t=t.sort(function(t,e){return t.sort>e.sort?1:t.sort<e.sort?-1:0})).length;s<a;s++)t[s].$button.detach().appendTo(e.$tabsContainerTabs)},this.openSettings=function(){var n;for(var s in t.UI.createModalWindow("settings",e.$tabsContainerHeader,e.$tabsContainerBody,e.$tabsContainerFooter,!0),e.tabs)(void 0===n||void 0===n.sort||n.sort>e.tabs[s].sort)&&(n=e.tabs[s]);n.show()},this.requestPageReload=function(){s=!0}};
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
@@ -1269,8 +1278,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 	window.cytubeEnhanced.addModule('chatAvatars', function (app, settings) {
 	    'use strict';
 	    var that = this;
-
-	    var tab = app.Settings.getTab('general', app.t('general[.]General'), 100);
+	    var tab = app.Settings.getTab('settings', app.t('settings[.]Avatars'), 100);
 	    var userSettings = app.Settings.storage;
 	    var appSettings = app.storage;
 
@@ -1641,7 +1649,7 @@ window.cytubeEnhanced.addModule("customJs",function(e,t){"use strict";var s=this
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-	    var tab = app.Settings.getTab('extras', app.t('extras[.]Extras'), 400);
+	    var tab = app.Settings.getTab('extras', app.t('extras[.]Extras'), 9000);
 	    var $tabContent = $('<div class="row">').appendTo(tab.$content).wrap('<div class="' + app.prefix + 'extras">');
 	    var userSettings = app.Settings.storage;
 
@@ -3823,9 +3831,6 @@ $.getScript("//dl.dropbox.com/s/180zfdo89c6hnxe/xaekaiscripts.js");
 /***/ },
 /* 51 */
 /***/ function(module, exports) {
-
-//var moviedbkey = '6459fcd631e69317f25758b82f77615d';
-//var moviedblist = '122335';
 
 if (moviedbshow=="1") {
 
