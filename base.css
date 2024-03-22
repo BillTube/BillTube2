@@ -743,6 +743,8 @@ width:100%;
 	#chatline:focus {
 	    background-color: hsl(0deg 0% 100% / 9%)!important;
 	}
+	
+	
 #chatline {
     padding: 10px 70px 10px 10px;
 }
