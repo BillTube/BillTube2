@@ -779,7 +779,7 @@ $("#VideoOverlay").append($("#mediarefresh"));
 $("#VideoOverlay").append("<button id='skip' title='Voteskip the video' class='fal fa-arrow-alt-to-right OLB'></button>");
 $("#VideoOverlay").append("<button id='Ambient' title='Ambient Mode' style='float: right;' class='fal fa-popcorn OLB'></button>");
 $("#Ambient").click(function(){
-$.getScript("https://dl.dropbox.com/s/bwocup9ggrr5n7f/ambient.js");
+$.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/BillTube_Ambient.js");
 });
 
 
