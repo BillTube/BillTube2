@@ -46,6 +46,10 @@ function loadScript(src) {
     }
   });
 }
+[...document.querySelectorAll("#currenttitle")].forEach(el => {
+  // We just need the length of the string as a CSS variable...
+  el.style.setProperty("--length", el.innerText.length);
+});
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -3950,10 +3954,7 @@ for (i in ColorsArray) {
 var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 
 
-[...document.querySelectorAll("#currenttitle")].forEach(el => {
-  // We just need the length of the string as a CSS variable...
-  el.style.setProperty("--length", el.innerText.length);
-});
+
 
 	
 	
