@@ -455,17 +455,16 @@ width:100%;
   pointer-events: none;
 }
 .chatbtn {
-border: 0px solid rgba(255, 255, 255, 0.05);
-    height: 24px;
+    border: 0px solid rgb(255 255 255 / 3%);
+    height: 27px;
     width: auto;
-    margin-right: 0px;
     color: var(--theme-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     transition: all 0.3s ease-in-out 0s;
-    opacity: 0.7;
-    background: #ffffff0a;
-    border-radius: 4px;
-    margin: 2px;
+    opacity: 0.9;
+    background: #0000004a;
+    border-radius: 5px;
+    margin: 0.2rem;
 }
 .chatbtn:hover {
 	opacity: 1;
@@ -664,6 +663,15 @@ border: 0px solid rgba(255, 255, 255, 0.05);
 		margin-left: 5px;
 		margin-right: 5px;
 	}
+	.server-msg-disconnect {
+    border: none;
+    line-height: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #df7676;
+    text-align: center;
+    background: none;
+}
 	/*Userlist*/
 	#mainpage #userlist {
 		border: 0;
@@ -779,16 +787,15 @@ border: 0px solid rgba(255, 255, 255, 0.05);
 	/*Video Description*/
 	#currenttitle {
     background: none;
-    position: absolute;
-    white-space: nowrap;
+    position: relative;
+    white-space: break-spaces;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: clip;
     max-width: fit-content;
     font-weight: 100;
     color: var(--theme-color);
     font-family: var(--chat-font);
-    opacity: 0.7;
-	margin-left: 35px;
+    opacity: 0.4;
 	}
 #chatheader, #videowrap-header {
 	border: 0px solid #ccc!important;
@@ -1388,13 +1395,13 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: none!important;
 }
 .server-msg-reconnect {
-    border: 0px solid #3C3C3C;
-    line-height: 3;
+    border: none;
+    line-height: 1;
     margin-top: 5px;
     margin-bottom: 5px;
     color: #87A287;
     text-align: center;
-    background-color: rgba(18, 100, 18, 0);
+    background: none;
 }
 /* Inputs */
 	/* Text Inputs */
@@ -4729,6 +4736,15 @@ height: 10px!important;
 }
 .Bigchat {font-size: 2rem!important;}
 .Smallchat {font-size: 1.2rem!important;}
+
+[data-fit-text] {
+    --width: 95vw;
+    --scale: 0.004;
+    font-size: calc(var(--width) /(var(--length, 1)* 0.5)* var(--scale, 1));
+    font-weight: 600;
+    line-height: 1;
+    margin: 1rem 0;
+}
 
 .VIP {
   text-shadow: 1px 1px 15px rgb(255 0 224 / 88%);
