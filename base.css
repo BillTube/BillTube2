@@ -58,7 +58,7 @@ img.lazyloaded, .image.lazyloaded {filter:blur(0);}
     display: flex;
     position: absolute;
     top: 0;
-	height: 44px;
+	height: auto;
     left: 0;
     z-index: 2;
     width: 100%;
@@ -788,7 +788,7 @@ width:100%;
 	#currenttitle {
     background: none;
     position: relative;
-    white-space: break-spaces;
+    white-space: normal;
     overflow: hidden;
     text-overflow: clip;
     max-width: fit-content;
@@ -4737,13 +4737,10 @@ height: 10px!important;
 .Bigchat {font-size: 2rem!important;}
 .Smallchat {font-size: 1.2rem!important;}
 
-[data-fit-text] {
-    --width: 95vw;
-    --scale: 0.004;
+#currenttitle {
+    --width: 100vw;
+    --scale: 0.15;
     font-size: calc(var(--width) /(var(--length, 1)* 0.5)* var(--scale, 1));
-    font-weight: 600;
-    line-height: 1;
-    margin: 1rem 0;
 }
 
 .VIP {

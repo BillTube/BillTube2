@@ -391,7 +391,6 @@ $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplayli
 $("#upnext").before($("#qlockbtn"));
 $("#currenttitle").attr("data-fit-text");
 $("#currenttitle").data("data-fit-text");
-$("#currenttitle").addClass("data-fit-text");
 
 $('#queuecontainer').hover(function(){
     $('#pllength').css({'opacity':'0.9',});
