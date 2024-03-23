@@ -68,6 +68,8 @@ img.lazyloaded, .image.lazyloaded {filter:blur(0);}
     background: var(--chat-header-bg);
 	backdrop-filter: saturate(100%) blur(8px);
 	border-bottom: 1px solid #b6c9ff14;
+	max-height: 65px;
+    min-height: 40px;
 }
 .chat-area-title {
     font-size: 18px;
@@ -551,7 +553,7 @@ width:100%;
 		overflow-x: hidden;
 	}
 	#chatwrap .nano #messagebuffer {
-		padding-bottom: 5px;
+		padding-bottom: 15px;
         padding-top: 15px;
 		/*width: 100% DO NOT UNCOMMENT FOR COMPATIBILITY WITH NANOSCROLLER*/
 	}
