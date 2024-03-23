@@ -4744,7 +4744,9 @@ height: 10px!important;
 #currenttitle {
     --width: 100vw;
     --scale: 0.15;
-    font-size: calc(var(--width) /(var(--length, 1)* 0.5)* var(--scale, 1));
+    --text: calc(var(--width) /(var(--length, 1)* 0.5)* var(--scale, 1));
+    font-size: clamp(1.5rem, var(--text), 2.5rem);
+	padding: 0px 10px 0px 10px;
 }
 
 .VIP {
