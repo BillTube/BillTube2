@@ -64,11 +64,12 @@ img.lazyloaded, .image.lazyloaded {filter:blur(0);}
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 0px 0px 0px;
+    padding: 4px 0px 4px 0px;
     background: var(--chat-header-bg);
 	backdrop-filter: saturate(100%) blur(8px);
 	border-bottom: 1px solid #b6c9ff14;
     min-height: 44px;
+	max-height: 115px;
 }
 .chat-area-title {
     font-size: 18px;
@@ -4747,7 +4748,7 @@ height: 10px!important;
     --width: 100vw;
     --scale: 0.15;
     --text: calc(var(--width) /(var(--length, 1)* 0.5)* var(--scale, 1));
-    font-size: clamp(1.5rem, var(--text), 2.5rem);
+    font-size: clamp(1.5rem, var(--text), 2rem);
 	padding: 0px 10px 0px 10px;
 }
 
