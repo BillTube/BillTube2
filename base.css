@@ -184,7 +184,7 @@ img.lazyloaded, .image.lazyloaded {filter:blur(0);}
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
     color: var(--theme-color);
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 1.3rem;
     font-weight: 400;
     opacity: 0.9;
 }
@@ -461,12 +461,13 @@ width:100%;
     height: 27px;
     width: auto;
     color: var(--theme-color);
-    font-size: 1.8rem;
+    font-size: 2rem;
     transition: all 0.3s ease-in-out 0s;
     opacity: 0.9;
     background: #0000004a;
     border-radius: 5px;
-    margin: 0.2rem;
+    margin: 0.1rem;
+    margin-right: 5px;
 }
 .chatbtn:hover {
 	opacity: 1;
@@ -2163,6 +2164,7 @@ a.qe_title {
     white-space: nowrap;
     display: inline-block;
     overflow: hidden;
+    font-size: clamp(1.2rem, -0.575rem + 1.6vw, 2.4rem);
 }
 [class*="chat-msg"] .username .chatAvatar{
     width:auto;
@@ -3523,11 +3525,12 @@ div#chat-panel {
     border-radius: 10px;
 }
 #favourite-pictures-panel img, #smiles-panel img {
-    margin: 5px;
-    max-height: 65px;
-    max-width: 65px;
+    margin: 1%;
+    max-height: 75px;
+    max-width: 75px;
+    height: clamp(40px, 15% + 10px, 75px);
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 .navbar-nav>li>a:hover {
     background-image: none;
