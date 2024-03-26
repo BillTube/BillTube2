@@ -296,12 +296,12 @@ console.log("Loading Mobile Theme");
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css' />");
-$('head').append("<link rel='stylesheet' href='https://raw.githubusercontent.com/BillTube/BillTube2/master/base.css?v=1.3' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css?v=1.2' />");
 $('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-contextmenu-ui@7.0.0/dist/videojs-contextmenu-ui.min.js' />");
-$('head').append("<link rel='stylesheet' href='' />");
+
 
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
