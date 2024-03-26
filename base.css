@@ -2071,19 +2071,18 @@ img.chat-avatar.chat-avatar_small:hover:after {
   }
 }
 .channel-emote {
-    width: clamp(10.5rem, 7vw, 11em);
-    height: clamp(10.5rem, 7vw, 11em);
-	max-width: 150px;
-    max-height: 150px;
+    width: clamp(10.5rem, 8vw, 14rem);
+    max-width: 160px;
+    max-height: 160px;
     display: inline-block;
     border-radius: 8px;
     transform: scale(0.9);
     box-shadow: 0 20px 25px -20px #131313d1;
-	-webkit-transition: all 1s ease-out;
-   -moz-transition: all 1s ease-out;
-   -o-transition: all 1s ease-out;
-   -ms-transition: all 1s ease-out;
-   transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    -ms-transition: all 1s ease-out;
+    transition: all 1s ease-out;
     vertical-align: baseline;
     display: list-item;
     text-align: -webkit-match-parent;
@@ -2260,9 +2259,8 @@ code {
 }
 img.chat-picture {
     height: clamp(10.5rem, 8vw, 11em);
-    width: 160px;
-	max-height: 150px;
-    max-width: 150px;
+	max-height: 160px;
+    max-width: 160px;
     border-radius: 3px;
     transition: .8s ease;
     vertical-align: baseline;
