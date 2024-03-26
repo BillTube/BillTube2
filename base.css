@@ -93,10 +93,9 @@ img.lazyloaded, .image.lazyloaded {filter:blur(0);}
     object-fit: cover;
 }
 .chat-area-footer {
-    display: flex;
-    border-top: 1px solid var(--border-color);
+display: flex;
     width: 100%;
-    padding: 5px 10px;
+    padding: 3px 10px;
     align-items: center;
     position: absolute;
     bottom: 0;
@@ -2260,7 +2259,7 @@ code {
 img.chat-picture {
     height: clamp(10.5rem, 8vw, 11em);
 	max-height: 160px;
-    max-width: 160px;
+    max-width: 300px;
     border-radius: 3px;
     transition: .8s ease;
     vertical-align: baseline;
