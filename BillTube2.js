@@ -295,13 +295,12 @@ console.log("Loading Mobile Theme");
 }else {
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.2-web/css/all.min.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css?v=1.31' />");
 $('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-contextmenu-ui@7.0.0/dist/videojs-contextmenu-ui.min.js' />");
-
 
 $.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
@@ -2525,8 +2524,8 @@ function emoteToDialog(title, src) {
 
 	            if (!smilesAndPicturesTogether) {
 	                if (that.$smilesBtn.hasClass('btn-default')) {
-	                    if ($('#favourite-pictures-btn').length !== 0 && $('#favourite-pictures-btn').hasClass('')) {
-	                        $('#favourite-pictures-btn').removeClass('').addClass('');
+	                    if ($('#favourite-pictures-btn').length !== 0 && $('#favourite-pictures-btn').hasClass('btn-success')) {
+	                        $('#favourite-pictures-btn').removeClass('btn-success').addClass('');
 	                    }
 
 	                    that.$smilesBtn.removeClass('');
