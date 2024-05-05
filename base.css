@@ -1864,7 +1864,7 @@ filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.8));
     position: relative;
     display: initial;
     left: 0px;
-    bottom: 0px;
+    bottom: 5px;
     height: 20px;
 }
 
@@ -2256,6 +2256,10 @@ code {
         box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
     }
 }
+#cs-jstext {
+min-height: 440px; 
+}
+
 img.chat-picture {
     height: clamp(10.5rem, 8vw, 11em);
 	max-height: 160px;
