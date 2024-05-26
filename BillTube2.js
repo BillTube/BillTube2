@@ -295,7 +295,7 @@ console.log("Loading Mobile Theme");
 }else {
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.2-web/css/all.min.css' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/ElBeyonder/font-awesome-6.5.2-pro-full@master/css/all.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css?v=1.31' />");
 $('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js' />");
