@@ -26,7 +26,13 @@ if (myVideo.addEventListener) {
 });
 
 refreshVideo = function () {
-     $('#mediarefresh').click();
+	 $('#mediarefresh').click(function(){
+  var btn = $(this);
+  btn.prop('disabled', true);
+  setTimeout(function(){
+    btn.prop('disabled', false);
+  },7000);
+});
 };
 
 function loadScript(src) {
@@ -296,13 +302,11 @@ console.log("Loading Mobile Theme");
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/ElBeyonder/font-awesome-6.5.2-pro-full@master/css/all.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css?v=1.31' />");
-$('head').append("<link rel='stylesheet' href='https://unpkg.com/@videojs/themes@1/dist/city/index.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/videojs-contextmenu-ui@7.0.0/dist/videojs-contextmenu-ui.min.js' />");
-
-$.getScript("//dl.dropbox.com/s/m5kd8r2slhnfu1c/notifications.js");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css?v=1.36' />");
+$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/PlayerTheme.min.css' />");
+//$.getScript("https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js");
+$.getScript("https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js");
+$.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
 
 
@@ -336,7 +340,7 @@ $("#chatwrap").append(
 '</div></div>' );
 $("#chatheader").append(
 '<div class="chat-area-header">' +
-'<div class="chat-area-title" data-tooltip="Toggle title scroll" data-tooltip-pos="down-left"><i id="marq" class="fa fa-play" onclick="toggleClassTitle()"></i></div>' +
+'<div class="chat-area-title" data-tooltip="Currently Playing" data-tooltip-pos="down-left"><i id="marq" class="fa fa-play"></i></div>' +
 '<div class="chat-area-group">' +
 '<span></span>' +
 '</div>');
@@ -348,7 +352,9 @@ var setImageSrc = function(imageData) {
     imageWidth = $placeholder.get(0).naturalWidth;
     imageHeight = $placeholder.get(0).naturalHeight;
 }
-$("#videowrap").addClass("vjs-theme-city");
+//$("#videowrap").addClass("vjs-theme-city");
+$("#videowrap").addClass("vjs-luxmty");
+//$("#ytapiplayer").addClass("vjs-luxmty");
 $(".server-msg-reconnect").addClass("fa-solid fa-popcorn");
 $(".server-msg-reconnect").text("");
 $("body").addClass("darktheme");
@@ -765,7 +771,7 @@ window.cytubeEnhanced=new window.CytubeEnhanced(window.cytubeEnhancedSettings&&w
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-$("#videowrap").append("<div id='VideoOverlay' class='fadein'><button class='fal fa-expand-alt OLB' id='fs-vid-button'></button></div>");
+$("#videowrap").append("<div id='VideoOverlay' class='fadein'><button data-tooltip='Fullscreen the video' data-tooltip-pos='down' class='fal fa-expand-alt OLB' id='fs-vid-button'></button></div>");
 $("#VideoOverlay").hide();
 var i = null;
 $("#videowrap").mousemove(function() {
@@ -777,12 +783,20 @@ $("#videowrap").mousemove(function() {
     $("#VideoOverlay").hide();
 });
 $("#VideoOverlay").append($("#mediarefresh"));
-$("#VideoOverlay").append("<button id='skip' title='Voteskip the video' class='fal fa-arrow-alt-to-right OLB'></button>");
-$("#VideoOverlay").append("<button id='Ambient' title='Ambient Mode' style='float: right;' class='fal fa-popcorn OLB'></button>");
+$("#VideoOverlay").append("<button id='skip' data-tooltip='Voteskip the video (Has A Cooldown)' data-tooltip-pos='down' class='fal fa-arrow-alt-to-right OLB'></button>");
+$("#VideoOverlay").append("<button id='Ambient' data-tooltip='Ambient Mode' data-tooltip-pos='down' style='float: right;' class='fal fa-popcorn OLB'></button>");
 $("#Ambient").click(function(){
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/BillTube_Ambient.js");
 });
 
+$('#skip').click(function(){
+  var btn = $(this);
+  socket.emit("voteskip");
+  btn.prop('disabled', true);
+  setTimeout(function(){
+    btn.prop('disabled', false);
+  },15000);
+});
 
 function fullscreen() {
     var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
@@ -821,11 +835,6 @@ fsVidButton.addEventListener('click', function(e) {
 	fullscreen('videowrap');
 });
 
-
-$("#skip").click(function() {
-    socket.emit("voteskip");
-//    $("#skip").attr("disabled", true);
-});
 
  });
 /***/ },
@@ -1060,7 +1069,7 @@ $("#skip").click(function() {
 
 	                if (that.IS_COMMAND) {
 	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
-	                    window.socket.emit("chatMsg", {msg: 'ðŸ¤– ' + msgForCommand});
+	                    window.socket.emit("chatMsg", {msg: '🤓 ' + msgForCommand});
 
 	                    that.IS_COMMAND = false;
 	                } else {
@@ -1491,7 +1500,7 @@ window.cytubeEnhanced.addModule("chatCommandsHelp",function(a,t){"use strict";va
 /***/ },
 /* 16 */
 /***/ function(module, exports) {
-window.cytubeEnhanced.addModule("chatControls",function(t,a){"use strict";var n=this;a=$.extend({},{afkButton:!0,clearChatButton:!1},a),this.handleAfkBtn=function(){window.socket.emit("chatMsg",{msg:"/afk"})},this.$afkBtn=$('<span id="afk-btn" class="label label-default pull-right pointer">').text(t.t("AFK")).appendTo("#chat-menu").on("click",function(){n.handleAfkBtn()}),this.handleAfk=function(t){t.name===window.CLIENT.name&&(t.afk?(n.$afkBtn.removeClass("label-default"),n.$afkBtn.addClass("label-success")):(n.$afkBtn.addClass("label-default"),n.$afkBtn.removeClass("label-success")))},a.afkButton?window.socket.on("setAFK",function(t){n.handleAfk(t)}):this.$afkBtn.hide(),this.handleClearBtn=function(){window.confirm(t.t("Are you sure, that you want to clear the chat?"))&&window.socket.emit("chatMsg",{msg:"/clear"})},this.$clearChatBtn=$('<span id="clear-chat-btn" class="label label-default pull-right pointer fa fa-solid fa-trash">').text(t.t(" ")).insertAfter(this.$afkBtn).on("click",function(){n.handleClearBtn()}),window.hasPermission("chatclear")||this.$clearChatBtn.hide(),this.handleChatClear=function(){window.hasPermission("chatclear")&&a.clearChatButton?n.$clearChatBtn.show():n.$clearChatBtn.hide()},window.socket.on("setUserRank",function(){n.handleChatClear()})});
+window.cytubeEnhanced.addModule("chatControls",function(t,a){"use strict";var n=this;a=$.extend({},{afkButton:!0,clearChatButton:!1},a),this.handleAfkBtn=function(){window.socket.emit("chatMsg",{msg:"/afk"})},this.$afkBtn=$('<span id="afk-btn" class="label label-default pull-right pointer">').text(t.t("AFK")).appendTo("#chat-menu").on("click",function(){n.handleAfkBtn()}),this.handleAfk=function(t){t.name===window.CLIENT.name&&(t.afk?(n.$afkBtn.removeClass("label-default"),n.$afkBtn.addClass("label-success")):(n.$afkBtn.addClass("label-default"),n.$afkBtn.removeClass("label-success")))},a.afkButton?window.socket.on("setAFK",function(t){n.handleAfk(t)}):this.$afkBtn.hide(),this.handleClearBtn=function(){window.confirm(t.t("Are you sure, that you want to clear the chat?"))&&window.socket.emit("chatMsg",{msg:"/clear"})},this.$clearChatBtn=$('<span id="clear-chat-btn" class="label label-default pull-right pointer fa fa-solid fa-broom-wide">').text(t.t(" ")).insertAfter(this.$afkBtn).on("click",function(){n.handleClearBtn()}),window.hasPermission("chatclear")||this.$clearChatBtn.hide(),this.handleChatClear=function(){window.hasPermission("chatclear")&&a.clearChatButton?n.$clearChatBtn.show():n.$clearChatBtn.hide()},window.socket.on("setUserRank",function(){n.handleChatClear()})});
 /***/ },
 /* 17 */
 /***/ function(module, exports) {
@@ -2723,11 +2732,21 @@ function emoteToDialog(title, src) {
 	        selectQualityOption: true,
 	        expandPlaylistOption: true,
 	        showVideoContributorsOption: true,
-	        playlistHeight: 500
+	        playlistHeight: 800
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-//$('#mediarefresh').hide();
+	  $('<span id="clean" data-tooltip="Clean up server messages" data-tooltip-pos="up" class="label label-default pull-right pointer fa fa-solid fa-trash" aria-hidden="true"> </span>')
+    .appendTo("#chat-menu")
+    .on("click", function() {
+      let $messagebuffer = $("#messagebuffer");
+      $messagebuffer.find("[class^=chat-msg-\\\\\\$server]").each(function() { $(this).remove(); });
+      $messagebuffer.find("[class^=chat-msg-\\\\\\$voteskip]").each(function() { $(this).remove(); });
+      $messagebuffer.find("[class^=server-msg]").each(function() { $(this).remove(); });
+      $messagebuffer.find("[class^=poll-notify]").each(function() { $(this).remove(); });
+      $(".chat-msg-Video:not(:last)").each(function() { $(this).remove(); });
+    });
+	
 
     this.$topVideoControls = $('<div id="top-video-controls" class="btn-group">').appendTo("#VideoOverlay");
 
@@ -3957,8 +3976,14 @@ var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 
 
 
-	
-	
+
+
+
+
+
+
+
+
 /***/ }
 /******/ ]);
 
