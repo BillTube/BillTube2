@@ -355,7 +355,7 @@ order: 6;
 .video-js .vjs-volume-panel:focus,
 .video-js .vjs-volume-panel.vjs-slider-active,
 .video-js.vjs-no-flex .vjs-volume-panel {width: 12em;}
-.vjs-volume-bar.vjs-slider-horizontal {margin: 16.5px 5px 0 40px !important;background: rgba(255, 255, 255, 0.42);height: 2px;} 
+.vjs-volume-bar.vjs-slider-horizontal {margin: 14.5px 4px 0 44px !important;background: rgba(255, 255, 255, 0.42);height: 2px;} 
 .video-js .vjs-volume-control {width: 100%;display: block;opacity: 0;-moz-transition: all 0.4s ease-in-out;-o-transition: all 0.4s ease-in-out;-webkit-transition: all 0.4s ease-in-out;transition: all 0.4s ease-in-out;}
 .video-js .vjs-volume-panel {overflow:hidden;opacity: 1;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-webkit-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
 /*Live*/
