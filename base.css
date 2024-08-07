@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;display=swap");
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700,800,900');
 
   svg {
@@ -2565,12 +2565,13 @@ background-color: rgba(133, 115, 159, 0.25);
     margin: 10px 10px;
     padding: 12px 0px;
     background: rgba(177, 187, 184, 0.08);
-    border: 0px solid;
+    border: 1px solid;
     border-radius: 13px;
-    left: 20px;
+    left: 20px !important;
     right: 20px;
-    margin-left: 30px;
-    height: 60px;
+    margin-left: 5rem;
+    height: auto;
+    font-size: 2rem;
 }
 .chat-msg-\$server\$ {
     font-style: italic;
@@ -2594,13 +2595,14 @@ background-color: rgba(133, 115, 159, 0.25);
     transition: bottom 0.5s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 }
 #prompt-install-drive-userscript {
-    padding: 100px;
+padding: 100px;
     margin-top: 10%;
     margin-left: 100px;
     width: 80%;
     position: absolute;
-    font-size: 16px;
+    font-size: 18px;
     background: rgba(39, 38, 38, 0.18);
+    z-index: 10000;
 }
 .server-whisper {
     text-align: center;
@@ -3003,12 +3005,7 @@ input[type="range"]::-webkit-slider-thumb:active {
     max-height: 50px!important;
 	width: 100%;
 }
-.vjs-menu-button.vjs-menu-button-popup.vjs-control.vjs-button.vjs-resolution-button {
-    left: 110px;
-    margin-right: 30px;
-    float: right;
-    bottom: 5px;
-}
+
 @keyframes flickering {
   0% {
     border-color: transparent;
@@ -3100,12 +3097,7 @@ color: #ff6f27;
     margin-top: 1rem;
 	}
   }
-.vjs-subtitles-button.vjs-menu-button.vjs-menu-button-popup.vjs-control.vjs-button {
-    right: 66px;
-    text-align: right;
-    position: absolute;
-    bottom: 26px;
-}
+
 .leftchat {
 float:left!important;
 left:0!important;
@@ -4286,16 +4278,29 @@ html.compact #userlist {
     float: none;
 }
 .notifyjs-bootstrap-success {
-    font-family: 'Quicksand';
     color: rgb(222, 232, 255) !important;
-    font-size: 1.6rem !important;
-    background: radial-gradient( farthest-corner at top left, #9a52cd, transparent 600px), radial-gradient( farthest-side at top right, #5b69f8, transparent 500px), radial-gradient( farthest-corner at bottom right, transparent, transparent 500px), radial-gradient( farthest-corner at bottom left, rgba(147, 9, 243, 0.13), transparent 600px)!important;
-    background-color: rgba(35, 33, 59, 0.6)!important;
+    font-size: 1.8rem !important;
+    background-color: rgb(30 30 32) !important;
     font-weight: 100 !important;
     background-image: none !important;
     border: none !important;
-    text-shadow: rgba(23, 23, 23, 0.58) 0px 1px 0px !important;
+    background: linear-gradient(90deg, #1f2333, #22232b);
+    padding: 1rem 2rem 1rem 2rem !important;
+	border: 0.15rem solid #fff2 !important;
+    box-shadow: inset 0 0 0.5rem 0 #1d1e26;
 	}
+	.notifyjs-bootstrap-base.notifyjs-bootstrap-success:before {
+    content: "";
+    position: absolute;
+    width: 6.5rem;
+    height: 6.15rem;
+    bottom: -0.15rem;
+    left: -0.15rem;
+    z-index: 0;
+    border-radius: 0.35rem;
+    background: radial-gradient(circle at 0% 50%, var(--clr), #fff0 5rem), radial-gradient(circle at -50% 50%, var(--bg), #fff0 5rem);
+    opacity: 0.5;
+}
 .notifyjs-bootstrap-base {
     font-weight: bold;
     padding: 10px 20px 10px 20px;
@@ -4690,63 +4695,12 @@ white-space: pre !important;
     margin: 0 auto;
     padding: 30px;
 }
-.vjs-theme-city .vjs-play-control {flex: 30;}
-.vjs-theme-city .vjs-remaining-time {
-    flex: 1;
-    text-align: end;
-}
+
 iframe#ytapiplayer_html5_api {
     z-index: 10;
 }
 
-.vjs-theme-city .vjs-progress-control {
-bottom: 4px!important;
-top: auto!important;
-z-index: 1000!important;
-height: 10px!important;
-}
-.vjs-theme-city .vjs-fullscreen-control, .vjs-theme-city .vjs-picture-in-picture-control, .vjs-theme-city .vjs-volume-panel {
-    order: 4!important;
-    flex: 2!important;
-}
-.vjs-theme-city .vjs-play-control {
-    order: 2!important;
-    flex: 15!important;
-    font-size: 1.75em!important;
-}
-.vjs-menu-button.vjs-menu-button-popup.vjs-control.vjs-button {
-    order: 4!important;
-    flex: 2!important;
-}
-.vjs-theme-city .vjs-fullscreen-control, .vjs-theme-city .vjs-picture-in-picture-control, .vjs-theme-city .vjs-volume-panel {
-    order: 3!important;
-    flex: 1!important;
-}
-.vjs-theme-city .vjs-remaining-time {
-    order: 1!important;
-    line-height: 50px!important;
-    flex: 4!important;
-    text-align: center!important;
-}
-.vjs-progress-holder.vjs-slider.vjs-slider-horizontal {
-	height: 6px!important;
-}
-.vjs-theme-city .vjs-progress-control .vjs-progress-holder {
-    top: 8px!important;
-}
 .vjs-slider { background: none!important;}
-.vjs-text-track-settings .vjs-modal-dialog-content {
-    display: block!important;
-    margin-top: 50px;
-    color: #383838!important;
-}
-.vjs-modal-dialog.vjs-text-track-settings {
-    background-color: rgb(43 51 63 / 19%);
-    height: 50%;
-    width: 40%;
-    top: 100px;
-}
-
 
 #currenttitle {
     --width: 100vw;
@@ -4754,6 +4708,23 @@ height: 10px!important;
     --text: calc(var(--width) /(var(--length, 1)* 0.5)* var(--scale, 1));
     font-size: clamp(1.5rem, var(--text), 2rem);
 	padding: 0px 10px 0px 10px;
+}
+button#skip:disabled,button#mediarefresh:disabled {
+    color: red;
+	cursor: default;
+    box-shadow: inset 3px 3px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.chat-msg-bill2 .username {
+    font-weight: 1000;
+    --bg-pos: .2em -.07em;
+    text-shadow: 1px 2px 12px rgb(98 207 203 / 50%);
+    position: relative;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: border-box, text;
+    background-image: url(https://media.giphy.com/media/eYRGWfchREFUUlXT7P/giphy.gif), linear-gradient(302deg, #24599d 0%, #fff 100%);
+    background-size: 10em, 17em;
+    animation: starkrdp-anim 3s linear infinite;
 }
 
 .VIP {
