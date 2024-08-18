@@ -338,20 +338,20 @@ function loadScriptAsync(url, shouldLoad, callback) {
     document.head.appendChild(script);
 }
 
-//if (typeof PlaylistPollbtn !== 'undefined') {
-//    loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', PlaylistPollbtn, function() {
-//        console.log('PlaylistPollAdder loaded successfully!');
-//    });
-//} else {
-//    console.warn('PlaylistPollbtn is not defined. The script will not load.');
-//}
-//if (typeof MovieFetcher !== 'undefined') {
-//    loadScriptAsync('https://dl.dropbox.com/scl/fi/auhn9g1kl4gzq0qd86p48/Fetcher.js?rlkey=jfozmx1eshrq23kgi2zzow2ae&dl=0', MovieFetcher, function() {
-//        console.log('PlaylistPollAdder loaded successfully!');
-//    });
-//} else {
-//    console.warn('MovieFetcher is not defined. The script will not load.');
-//}
+if (typeof PlaylistPollbtn !== 'undefined') {
+    loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', PlaylistPollbtn, function() {
+        console.log('PlaylistPollAdder loaded successfully!');
+    });
+} else {
+    console.warn('PlaylistPollbtn is not defined. The script will not load.');
+}
+if (typeof MovieFetcher !== 'undefined') {
+    loadScriptAsync('https://dl.dropbox.com/scl/fi/auhn9g1kl4gzq0qd86p48/Fetcher.js?rlkey=jfozmx1eshrq23kgi2zzow2ae&dl=0', MovieFetcher, function() {
+        console.log('PlaylistPollAdder loaded successfully!');
+    });
+} else {
+    console.warn('MovieFetcher is not defined. The script will not load.');
+}
 
 
 
