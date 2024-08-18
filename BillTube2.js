@@ -512,15 +512,29 @@ socket.on("login", function() {
   }
 });
 
-
-// Dim the background
-if (BG_Dimmed=="1") {
-$("<style>")
-    .attr("type","text/css")
-    .appendTo("#wrap")
-    .text(`
-#wrap:before{background-color:rgba(0, 0, 0, 0.8);}`);
+if (typeof BG_Dimmed !== 'undefined') {
+    loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', PlaylistPollbtn, function() {
+        console.log('PlaylistPollAdder loaded successfully!');
+    });
+} else {
+    console.warn('PlaylistPollbtn is not defined. The script will not load.');
 }
+// Check if BG_Dimmed is defined
+if (typeof BG_Dimmed !== 'undefined') {
+    // Dim the background if BG_Dimmed is set to "1"
+    if (BG_Dimmed === "1") {
+        $("<style>")
+            .attr("type", "text/css")
+            .appendTo("#wrap")
+            .text(`
+#wrap:before { background-color: rgba(0, 0, 0, 0.8); }`);
+    }
+} else {
+    // Log a warning to the console if BG_Dimmed is not defined
+    console.warn('BG_Dimmed is not defined. The background dimming code will not run.');
+}
+
+
 if ($('#usercount').length !== 0) {
     $('#usercount').text($('#usercount').text().replace('connected users' , ' ').replace('connected user' , ' '));
     window.socket.on('usercount', function () {
@@ -3273,8 +3287,16 @@ if (UI_ChannelAnnouncement=="1") {
 	makeAlert(ChannelAnnouncement_Title, ChannelAnnouncement_HTML).insertBefore("#motdrow");
 }
 
-if (typeof UI_ChannelName !== 'undefined' && UI_ChannelName === "1" && ChannelName_Caption !== "") {
-	$(".navbar-brand").html(ChannelName_Caption);
+// Ensure that UI_ChannelName is defined and set to 1 (as a string or number)
+if (typeof UI_ChannelName !== 'undefined' && (UI_ChannelName === "1" || UI_ChannelName === 1)) {
+    // Ensure ChannelName_Caption is defined and not empty
+    if (typeof ChannelName_Caption !== 'undefined' && ChannelName_Caption !== "") {
+        $(".navbar-brand").html(ChannelName_Caption);
+    } else {
+        console.warn('ChannelName_Caption is either undefined or empty.');
+    }
+} else {
+    console.warn('UI_ChannelName is either undefined or not set to "1".');
 }
 
 if (typeof UI_Favicon !== 'undefined' && UI_Favicon === "1" && Favicon_URL !== "") {
@@ -3300,11 +3322,15 @@ if (typeof UI_Favicon !== 'undefined' && UI_Favicon === "1" && Favicon_URL !== "
 	    settings = $.extend({}, defaultSettings, settings);
 
 
-if (typeof UI_Discord !== 'undefined' && UI_Discord === "1" && Discord_URL !== "") {
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2/discord.css' />");
-$("#motd").after("<div class='discordoverlay'><div class='discordmain'><img class='discord' src='//i.postimg.cc/J73Nn5nb/J6RTf6P.png' /><div class=discordtext><h1>Join the community!</h1><h2><a href='"+Discord_URL+"' target='_blank'>"+Discord_NAME+"</a></h2></div><div class='Darrows Darrows-1'></div><div class='Darrows Darrows-2'></div></div></div>");
+// Ensure that UI_Discord is defined and set to 1 (as a string or number)
+if (typeof UI_Discord !== 'undefined' && (UI_Discord === "1" || UI_Discord === 1) && typeof Discord_URL !== 'undefined' && Discord_URL !== "") {
+    $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2/discord.css' />");
+    $("#motd").after("<div class='discordoverlay'><div class='discordmain'><img class='discord' src='//i.postimg.cc/J73Nn5nb/J6RTf6P.png' /><div class='discordtext'><h1>Join the community!</h1><h2><a href='" + Discord_URL + "' target='_blank'>" + Discord_NAME + "</a></h2></div><div class='Darrows Darrows-1'></div><div class='Darrows Darrows-2'></div></div></div>");
+} else {
+    console.warn('UI_Discord is either undefined, not set to 1, or Discord_URL is empty.');
 }
-	});
+
+});
 
 /***/ },
 /* 44 */
@@ -3484,28 +3510,38 @@ $("#chatline").keydown(tabSuggestions)
 	    settings = $.extend({}, defaultSettings, settings);
 		
 
-if (typeof BG_Stock !== 'undefined' && BG_Stock === "1") {
+// Check if BG_Stock is either undefined or set to "1" (as string or number)
+if (typeof BG_Stock === 'undefined' || BG_Stock === "1" || BG_Stock === 1) {
     var BGPics1 = ['https://i.ibb.co/tH1T2kM/3z9lp6.jpg', 'https://i.ibb.co/zZBdvW1/8oxmr2.jpg', 'https://i.ibb.co/wMfkcQx/9m6owx.png', 'https://i.ibb.co/PhrtPSW/ox2yd5.jpg', 'https://i.ibb.co/5sjxgRV/j5k8vq.jpg', 'https://i.ibb.co/VDnK4Pv/1kj9y1.jpg', 'https://i.ibb.co/CJ3hjJv/4xg9zv.jpg'];
     randomHero();
-} else {
+    console.warn('hero1');
+} else if (BG_Stock === "0" || BG_Stock === 0) { // Check for both string and numeric 0
     randomHero2();
+    console.warn('hero2');
+} else {
+    console.warn('BG_Stock has an unexpected value: ', BG_Stock);
 }
+
 function randomHero() {
+    // Implement the randomHero functionality here
     $("#wrap").css({
-       'background' : 'url('+ BGPics1[Math.floor(Math.random() * BGPics.length)] + ') no-repeat',
+       'background' : 'url('+ BGPics1[Math.floor(Math.random() * BGPics1.length)] + ') no-repeat',
        'background-attachment' : 'scroll',
        'background-position' : '50% 50%',
        'background-size' : 'cover'
    });
-  }
+}
+
 function randomHero2() {
+    // Implement the randomHero2 functionality here
     $("#wrap").css({
        'background' : 'url('+ BGPics[Math.floor(Math.random() * BGPics.length)] + ') no-repeat',
        'background-attachment' : 'scroll',
        'background-position' : '50% 50%',
        'background-size' : 'cover'
    });
-  }
+}
+
 });
 /***/ },
 /* 47 */
