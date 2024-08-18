@@ -5,7 +5,7 @@
   */
 
 ////Lets initialize some shit////
-var VERSION = '2.3';
+var VERSION = '2.4';
 
 var vplayer = videojs("ytapiplayer")
 function videofix(){
@@ -338,12 +338,12 @@ function loadScriptAsync(url, shouldLoad, callback) {
     document.head.appendChild(script);
 }
 
-loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', PlaylistPollbtn, function() {
-    console.log('PlaylistPollAdder loaded successfully!');
-});
-loadScriptAsync('https://dl.dropbox.com/scl/fi/auhn9g1kl4gzq0qd86p48/Fetcher.js?rlkey=jfozmx1eshrq23kgi2zzow2ae&dl=0', MovieFetcher, function() {
-    console.log('MovieFetcher loaded successfully!');
-});
+//loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', PlaylistPollbtn, function() {
+//    console.log('PlaylistPollAdder loaded successfully!');
+//});
+//loadScriptAsync('https://dl.dropbox.com/scl/fi/auhn9g1kl4gzq0qd86p48/Fetcher.js?rlkey=jfozmx1eshrq23kgi2zzow2ae&dl=0', MovieFetcher, function() {
+//    console.log('MovieFetcher loaded successfully!');
+//});
 
 
 window.FontAwesomeKitConfig = {
