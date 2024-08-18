@@ -748,7 +748,7 @@ width:100%;
 	
 	
 #chatline {
-    padding: 10px 70px 10px 10px;
+    padding: 10px 9rem 10px 10px;
 }
 .userlist_item {
     cursor: pointer;
@@ -2516,9 +2516,10 @@ background-color: rgba(133, 115, 159, 0.25);
 #customSettingsStaging {
     padding: 25px;
     position: fixed;
-    z-index: 100;
+    z-index: 10000;
     top: 95px;
     width: 48rem;
+	left: 2em;
 }
 #quickQuality {
     display: none;
@@ -3490,8 +3491,8 @@ div#chat-panel {
     border: 1px solid #343434;
     background-color: var(--theme-bg-color);
     border-radius: 7px;
-    max-height: 400px;
-    height: 28rem;
+    max-height: 500px;
+    height: 33rem;
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -3499,7 +3500,7 @@ div#chat-panel {
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
 }
 #pictures-trash {
-    height: 35px;
+    height: 55px;
     padding: 10px;
 }
 #pictures-body-panel {
