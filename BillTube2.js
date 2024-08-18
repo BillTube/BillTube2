@@ -513,11 +513,11 @@ socket.on("login", function() {
 });
 
 if (typeof BG_Dimmed !== 'undefined') {
-    loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', PlaylistPollbtn, function() {
-        console.log('PlaylistPollAdder loaded successfully!');
+    loadScriptAsync('https://dl.dropbox.com/scl/fi/dukipbbsn8b60todbbysz/Paster.js?rlkey=6o1jki6clscvapz4rkml0e929&dl=0', BG_Dimmed, function() {
+        console.log('BG_Dimmed loaded successfully!');
     });
 } else {
-    console.warn('PlaylistPollbtn is not defined. The script will not load.');
+    console.warn('BG_Dimmed is not defined. The script will not load.');
 }
 // Check if BG_Dimmed is defined
 if (typeof BG_Dimmed !== 'undefined') {
