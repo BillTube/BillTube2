@@ -515,7 +515,7 @@ socket.on("login", function() {
 // Check if BG_Dimmed is defined
 if (typeof BG_Dimmed !== 'undefined') {
     // Dim the background if BG_Dimmed is set to "1"
-    if (BG_Dimmed === "1") {
+    if (BG_Dimmed === "1" || BG_Dimmed === 1) {
         $("<style>")
             .attr("type", "text/css")
             .appendTo("#wrap")
