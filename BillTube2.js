@@ -443,7 +443,6 @@ $("#upnext").append($("#plmeta")).after("<ul id='ploptions' class='menu hidden' 
 $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplaylist"));
 $("#upnext").before($("#qlockbtn"));
 $("#currenttitle").attr("data-fit-text");
-
 $('#queuecontainer').hover(function(){
     $('#pllength').css({'opacity':'0.9',});
 },function(){
@@ -4133,11 +4132,55 @@ const player = videojs('ytapiplayer');
             }
         });
 
+// Function to remove the 'vjs-hidden' class from the subtitle button
+function showSubtitleButton() {
+    // Select the subtitle button with the class 'vjs-subs-caps-button'
+    var subtitleButton = document.querySelector('.vjs-subs-caps-button');
+
+    // Check if the subtitle button exists and has the 'vjs-hidden' class
+    if (subtitleButton && subtitleButton.classList.contains('vjs-hidden')) {
+        // Remove the 'vjs-hidden' class
+        subtitleButton.classList.remove('vjs-hidden');
+    }
+}
+
+// Run the function when the page is loaded
+document.addEventListener('DOMContentLoaded', showSubtitleButton);
+
+// Ensure the text track display is properly used for subtitles
+function correctSubtitlePlacement() {
+    var player = videojs('ytapiplayer');
+
+    player.ready(function() {
+        // Ensure the text track display is being used
+        var textTrackDisplay = player.el().querySelector('.vjs-text-track-display');
+
+        if (textTrackDisplay) {
+            // Move the cue elements to the correct location if they aren't there
+            var cues = player.el().querySelectorAll('.vjs-text-track-cue');
+            cues.forEach(function(cue) {
+                if (!textTrackDisplay.contains(cue)) {
+                    textTrackDisplay.appendChild(cue);
+                }
+            });
+        }
+    });
+}
+
+// Run the function when the page is loaded or when the video is ready
+document.addEventListener('DOMContentLoaded', correctSubtitlePlacement);
 
 
+player.ready(function() {
+    var tracks = player.textTracks(); // Get all text tracks
 
-
-
+    for (var i = 0; i < tracks.length; i++) {
+        var track = tracks[i];
+        if (track.kind === 'subtitles' || track.kind === 'captions') {
+            track.mode = 'showing'; // Ensure the subtitles are visible
+        }
+    }
+});
 
 
 /***/ }
