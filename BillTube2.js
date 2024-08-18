@@ -306,7 +306,7 @@ console.log("Loading Mobile Theme");
 console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/ElBeyonder/font-awesome-6.5.2-pro-full@master/css/all.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/base.css?v=1.36' />");
+$('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/base.css' />");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/PlayerTheme.min.css' />");
 //$.getScript("https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js");
 $.getScript("https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js");
