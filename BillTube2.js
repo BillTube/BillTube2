@@ -18,17 +18,12 @@ window.setTimeout(function(){
     }, 10000);
  });
 }
-
-
-
-
 window.socket.on("changeMedia", function () {
 var myVideo = document.getElementById("ytapiplayer");
 if (myVideo.addEventListener) {
     videofix();
   }
 });
-
 refreshVideo = function () {
 	 $('#mediarefresh').click(function(){
   var btn = $(this);
@@ -38,7 +33,6 @@ refreshVideo = function () {
   },7000);
 });
 };
-
 function loadScript(src) {
   return new Promise(function (resolve, reject) {
     if ($("script[src='" + src + "']").length === 0) {
@@ -4167,37 +4161,133 @@ function correctSubtitlePlacement() {
     });
 }
 
-// Run the function when the page is loaded or when the video is ready
-document.addEventListener('DOMContentLoaded', correctSubtitlePlacement);
+/////////////experimental subtitle local///////////////
+videojs('ytapiplayer_html5_api').ready(function() {
+  console.log('Player is ready');
+  // Initialize the Video.js player
+  var player = videojs('ytapiplayer');
 
-
-player.ready(function() {
-    var tracks = player.textTracks(); // Get all text tracks
-
-    for (var i = 0; i < tracks.length; i++) {
-        var track = tracks[i];
-        if (track.kind === 'subtitles' || track.kind === 'captions') {
-            track.mode = 'showing'; // Ensure the subtitles are visible
-        }
+  // Function to remove old subtitles
+  function removeOldSubtitles() {
+    const tracks = player.remoteTextTracks();
+    while (tracks.length > 0) {
+      player.removeRemoteTextTrack(tracks[0]);
     }
+  }
+
+  // Event listener for changeMedia event
+  socket.on("changeMedia", function() {
+    console.log('changeMedia event detected, clearing old subtitles');
+    removeOldSubtitles();
+  });
+
+  // Function to add the import button to the VideoOverlay
+  function addImportButtonToOverlay() {
+    // Check if VideoOverlay is present
+    var overlay = document.getElementById('VideoOverlay');
+    if (overlay) {
+      console.log('VideoOverlay found! Adding button.');
+
+      // Create a file input element
+      var subtitleInput = document.createElement('input');
+      subtitleInput.type = 'file';
+      subtitleInput.id = 'subtitleInput';
+      subtitleInput.accept = '.vtt, .srt';  // Accept both VTT and SRT files
+      subtitleInput.style.display = 'none';
+
+      // Create a button element for importing subtitles
+      var importButton = document.createElement('button');
+      importButton.textContent = '';
+      importButton.className = 'fal fa-regular fa-subtitles OLB';
+      importButton.style.zIndex = 1000;          // Make sure it appears on top
+      importButton.style.Float = 'right';
+
+      // Append the input and button to the overlay
+      overlay.appendChild(subtitleInput);
+      overlay.appendChild(importButton);
+
+      // Add event listener to the button
+      importButton.addEventListener('click', function() {
+        console.log('Import Subtitles button clicked');
+        subtitleInput.click();
+      });
+
+      // Handle file input changes
+      subtitleInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file && (file.name.endsWith('.vtt') || file.name.endsWith('.srt'))) {
+          console.log('Subtitle file selected:', file.name);
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let subtitleContent = event.target.result;
+
+            // Convert SRT to VTT if necessary
+            if (file.name.endsWith('.srt')) {
+              subtitleContent = convertSRTtoVTT(subtitleContent);
+            }
+
+            const vttBlob = new Blob([subtitleContent], { type: 'text/vtt' });
+            const vttUrl = URL.createObjectURL(vttBlob);
+
+            // Remove old subtitles before adding new ones
+            removeOldSubtitles();
+
+            // Add the new subtitle track
+            player.addRemoteTextTrack({
+              kind: 'subtitles',
+              src: vttUrl,
+              default: true,
+              label: 'English',
+            }, false);
+          };
+          reader.readAsText(file);
+        } else {
+          alert('Please select a valid VTT or SRT file.');
+        }
+      });
+    } else {
+      console.log('VideoOverlay not found, retrying...');
+      // If the overlay is not present, wait and try again
+      setTimeout(addImportButtonToOverlay, 500);
+    }
+  }
+
+  // Function to convert SRT to VTT
+  function convertSRTtoVTT(srt) {
+    // Replace the SRT formatting with VTT formatting
+    let vtt = "WEBVTT\n\n" + srt
+      .replace(/\r+/g, '')  // Remove carriage returns
+      .replace(/^\d+\s+|\n\d+\s+/g, '')  // Remove index numbers
+      .replace(/(\d{2}):(\d{2}):(\d{2}),(\d{3})/g, '$1:$2:$3.$4');  // Replace time format
+
+    return vtt;
+  }
+
+  // Use MutationObserver to detect when VideoOverlay is added to the DOM
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes.length > 0) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.id === 'VideoOverlay') {
+            console.log('VideoOverlay detected via MutationObserver');
+            addImportButtonToOverlay();
+          }
+        });
+      }
+    });
+  });
+
+  // Start observing the body for changes (can be adjusted to a specific parent element)
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Also attempt to add the button when the player is ready
+  player.ready(function() {
+    console.log('Player is ready');
+    addImportButtonToOverlay();
+  });
 });
 
-function forceSubtitlesInDisplay() {
-    var player = videojs('ytapiplayer');
-    player.ready(function() {
-        var cues = document.querySelectorAll('.vjs-text-track-cue');
-        var textTrackDisplay = document.querySelector('.vjs-text-track-display');
 
-        if (cues && textTrackDisplay) {
-            cues.forEach(function(cue) {
-                textTrackDisplay.appendChild(cue);
-            });
-        }
-    });
-}
-
-// Run this function after the page has loaded
-document.addEventListener('DOMContentLoaded', forceSubtitlesInDisplay);
 
 /***/ }
 /******/ ]);
