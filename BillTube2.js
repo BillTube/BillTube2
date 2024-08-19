@@ -4200,7 +4200,7 @@ videojs('ytapiplayer_html5_api').ready(function() {
       importButton.textContent = '';
       importButton.className = 'fal fa-regular fa-subtitles OLB';
       importButton.style.zIndex = 1000;          // Make sure it appears on top
-      importButton.style.Float = 'right';
+      importButton.style.float = 'right';
 
       // Append the input and button to the overlay
       overlay.appendChild(subtitleInput);
