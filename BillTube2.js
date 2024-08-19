@@ -3813,7 +3813,7 @@ $(document).ready(function() {
     // Function to add the favorite button to images
     function addFavoriteButtonToImages() {
         // Find all images with the class "chat-picture" or "channel-emote" inside the "messagebuffer"
-        $('#messagebuffer .chat-picture, #messagebuffer .channel-emote').each(function() {
+        $('#messagebuffer .chat-picture').each(function() {
             var $img = $(this);
             // Check if the button has already been added to avoid duplicates
             if ($img.parent().find('.chat-img-btn').length === 0) {
@@ -4182,6 +4182,22 @@ player.ready(function() {
     }
 });
 
+function forceSubtitlesInDisplay() {
+    var player = videojs('ytapiplayer');
+    player.ready(function() {
+        var cues = document.querySelectorAll('.vjs-text-track-cue');
+        var textTrackDisplay = document.querySelector('.vjs-text-track-display');
+
+        if (cues && textTrackDisplay) {
+            cues.forEach(function(cue) {
+                textTrackDisplay.appendChild(cue);
+            });
+        }
+    });
+}
+
+// Run this function after the page has loaded
+document.addEventListener('DOMContentLoaded', forceSubtitlesInDisplay);
 
 /***/ }
 /******/ ]);
