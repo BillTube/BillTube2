@@ -62,8 +62,13 @@ function showSchedule() {
     $("#schedule").modal();
 }
 function insertText(str) {
-	$("#chatline").val($("#chatline").val() + str).focus();
+    // Update the text box with the new string
+    $("#chatline").val($("#chatline").val() + str).focus();
+    // Emit the message using socket
+    socket.emit("chatMsg", { msg: str });
+	$("#chatline").val('').focus();
 }
+
 function clickPic() {
 	outer.modal('hide');
 }
@@ -3559,7 +3564,7 @@ window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( com
 				});
 				function clickPic() {
 				outer.modal('hide');
-				
+
 			}
 
 			DONTSPAMGIPHY = true;
@@ -4268,6 +4273,84 @@ videojs('ytapiplayer_html5_api').ready(function() {
     console.log('Player is ready');
     addImportButtonToOverlay();
   });
+});
+
+/////subsettings////
+
+videojs('ytapiplayer_html5_api').ready(function() {
+  var player = this;
+
+  // Function to check if any subtitle tracks are available
+  function checkForSubtitles() {
+    var tracks = player.textTracks();
+    var hasSubtitles = false;
+
+    for (var i = 0; i < tracks.length; i++) {
+      if (tracks[i].kind === 'subtitles') {
+        hasSubtitles = true;
+        break;
+      }
+    }
+
+    toggleSubtitleSettingsButton(hasSubtitles);
+  }
+
+  // Function to show/hide the subtitle settings button
+  function toggleSubtitleSettingsButton(enable) {
+    var settingsButton = document.getElementById('subtitleSettingsButton');
+
+    if (settingsButton) {
+      if (enable) {
+        settingsButton.style.display = 'block'; // Show the button
+      } else {
+        settingsButton.style.display = 'none'; // Hide the button
+      }
+    }
+  }
+
+  // Create the Subtitle Settings Button
+  function createSubtitleSettingsButton() {
+    var menuContent = document.querySelector('.vjs-menu-content');
+
+    if (menuContent) {
+      var settingsButton = document.createElement('li');
+      settingsButton.id = 'subtitleSettingsButton';
+      settingsButton.className = 'vjs-menu-item';
+      settingsButton.setAttribute('role', 'menuitem');
+      settingsButton.innerText = 'Subtitle Settings';
+      settingsButton.style.display = 'none'; // Initially hidden
+
+      // Append the button to the menu content
+      menuContent.appendChild(settingsButton);
+
+      // Handle the button click to open the subtitle settings modal
+      settingsButton.addEventListener('click', function() {
+        console.log('Subtitle Settings Button Clicked');
+
+        // Find and show the modal dialog
+        var modal = player.getChild('ModalDialog');
+        if (modal) {
+          modal.open();
+        } else {
+          console.log('ModalDialog not found');
+        }
+      });
+    } else {
+      console.log('vjs-menu-content not found, retrying...');
+      setTimeout(createSubtitleSettingsButton, 500); // Retry every 500ms
+    }
+  }
+
+  // Event listener for when a text track is added or changed
+  player.on('texttrackchange', function() {
+    checkForSubtitles();
+  });
+
+  // Initial check when the player is ready
+  checkForSubtitles();
+
+  // Create the Subtitle Settings Button inside vjs-menu-content
+  createSubtitleSettingsButton();
 });
 
 
