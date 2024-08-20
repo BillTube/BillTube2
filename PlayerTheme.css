@@ -288,10 +288,6 @@ order: 1;
 }
 .vjs-seek-button{font-family:'bzicons';cursor:pointer}
 
-/*Captions*/
-.vjs-texttrack-settings {
-display: none;
-}
 .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
 background-color: rgba(0, 0, 0, 0.65);
 position: absolute;
@@ -317,10 +313,7 @@ pointer-events: none;
 .video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display{
 bottom: 5em !important;
 }
-/*Captions*/
-.vjs-texttrack-settings {
-display: none;
-}
+
 .vjs-menu-button-popup .vjs-menu .vjs-menu-content {background-color: rgba(115, 133, 159, 0.45);position: absolute;border-radius: 2px;width: 100%;padding: 4px;bottom: 15px;font-family: 'Open Sans', sans-serif;font-size: 13px;font-weight: 600;}
 .vjs-icon-captions, .video-js .vjs-captions-button {
 font-weight: normal;
