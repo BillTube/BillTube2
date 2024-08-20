@@ -313,7 +313,21 @@ pointer-events: none;
 .video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display{
 bottom: 5em !important;
 }
-
+.vjs-track-settings-colors {
+    margin-top: 100px;
+}
+.vjs-track-settings-font {
+    margin-top: 100px;
+}
+.vjs-track-setting > select {
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+    color: black;
+}
+.vjs-text-track-settings fieldset span > select {
+    max-width: 7.3em;
+    color: black;
+}
 .vjs-menu-button-popup .vjs-menu .vjs-menu-content {background-color: rgba(115, 133, 159, 0.45);position: absolute;border-radius: 2px;width: 100%;padding: 4px;bottom: 15px;font-family: 'Open Sans', sans-serif;font-size: 13px;font-weight: 600;}
 .vjs-icon-captions, .video-js .vjs-captions-button {
 font-weight: normal;
@@ -506,9 +520,9 @@ button.vjs-icon-cog:before {
 .vjs-marker{position:absolute;left:0;bottom:0;opacity:1;height:100%;transition:opacity .2s ease;-webkit-transition:opacity .2s ease;-moz-transition:opacity .2s ease;z-index:100}.vjs-marker:hover{cursor:pointer;-webkit-transform:scale(1.3,1.3);-moz-transform:scale(1.3,1.3);-o-transform:scale(1.3,1.3);-ms-transform:scale(1.3,1.3);transform:scale(1.3,1.3)}.vjs-tip{visibility:hidden;display:block;opacity:.8;padding:5px;font-size:10px;position:absolute;bottom:14px;z-index:100000}.vjs-tip .vjs-tip-arrow{background:url(data:image/gif;base64,R0lGODlhCQAJAIABAAAAAAAAACH5BAEAAAEALAAAAAAJAAkAAAIRjAOnwIrcDJxvwkplPtchVQAAOw==) no-repeat top left;bottom:0;left:50%;margin-left:-4px;background-position:bottom left;position:absolute;width:9px;height:5px}.vjs-tip .vjs-tip-inner{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding: 0 10px;background-color:#000;color:#fff;font-size: 12px;text-align:center;font-family: 'Open Sans', sans-serif;}.vjs-break-overlay{visibility:hidden;position:absolute;bottom: 61px;width: 100%;font-size: 16px;padding: 20px;font-family: 'Open Sans', sans-serif;}.vjs-break-overlay .vjs-break-overlay-text{text-align:center;}
 /*Modal*/
 .vjs-modal-dialog .vjs-modal-dialog-content {
-    font-size: 1.2em;
-    line-height: 1.5;
-    padding: 20px 24px;
+font-size: 1.4em;
+    line-height: 0.5;
+    padding: 30px 24px;
     z-index: 1;
     font-family: 'Open Sans', sans-serif;
 }
