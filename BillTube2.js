@@ -301,7 +301,7 @@ console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/ElBeyonder/font-awesome-6.5.2-pro-full@master/css/all.css' />");
 $('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/base.css' />");
-$('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/PlayerTheme.min.css' />");
+$('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/PlayerTheme.css' />");
 //$.getScript("https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js");
 $.getScript("https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/notifications.js");
@@ -4108,23 +4108,6 @@ var ul = $('#nav-collapsible a:contains("Account")').parent().find("ul");
 
 // safeguard
 
-const player = videojs('ytapiplayer');
-
-        player.on('error', function() {
-            const error = player.error();
-            console.error('Video error detected:', error);
-
-            // Attempt to reload the video
-            const currentSrc = player.src();
-            if (currentSrc) {
-                console.log('Reloading video source:', currentSrc);
-                player.src(currentSrc); // Reset the source
-                player.load(); // Load the new source
-                player.play(); // Attempt to play again
-            } else {
-                console.log('No source available to reload.');
-            }
-        });
 
 // Function to remove the 'vjs-hidden' class from the subtitle button
 function showSubtitleButton() {
