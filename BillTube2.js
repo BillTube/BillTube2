@@ -4176,10 +4176,10 @@ videojs('ytapiplayer_html5_api').ready(function() {
   }
 
   // Event listener for changeMedia event
-  socket.on("changeMedia", function() {
-    console.log('changeMedia event detected, clearing old subtitles');
-    removeOldSubtitles();
-  });
+//  socket.on("changeMedia", function() {
+//    console.log('changeMedia event detected, clearing old subtitles');
+//    removeOldSubtitles();
+//  });
 
   // Function to add the import button to the VideoOverlay
   function addImportButtonToOverlay() {
