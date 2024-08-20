@@ -406,12 +406,7 @@ display: none;
 .vjs-mouse-display .vjs-time-tooltip:after{border: 5px solid transparent;border-top-color: rgba(39, 42, 47, 0.83);content: '';height: 0;right: 50%;margin-right: -5px;position: absolute;top: 100%;width: 0;}
 /*Big play button*/
 .video-js .vjs-big-play-button:before {display: block;height: 80px;width: 80px;background-color: white;}
-/*Play*/
-.vjs-icon-play:before, .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before {
- content: ' ';
- -webkit-mask: url(./svg/play.svg);
- mask: url(./svg/play.svg);
-}
+
 /*Pause*/
 /*Volume*/
 .vjs-mute-control{
@@ -455,9 +450,7 @@ display: none;
  width: 18px;
 }
 /*Picture in picture*/
-.vjs-icon-picture-in-picture-enter:before, .video-js .vjs-picture-in-picture-control .vjs-icon-placeholder:before {display: block!important;margin-left: 9px;height: 16px;width: 16px;transition: all 200ms ease-in-out;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-webkit-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
-.vjs-icon-picture-in-picture-exit:before, .video-js.vjs-picture-in-picture .vjs-picture-in-picture-control .vjs-icon-placeholder:before {content: ' ';background-color: #14b9ff;-webkit-mask: url(./svg/pip-close.svg);mask: url(./svg/pip-close.svg);-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-webkit-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
-button.vjs-picture-in-picture-control {display:none;}
+
 /*Download button*/
 .video-js.vjs-vjsdownload .vjs-button.vjs-vjsdownload{cursor:pointer;display:block;font-family:VideoJs;border: none !important;order: 6;}
 .video-js.vjs-vjsdownload .vjs-button.vjs-vjsdownload:before{content: ' ';margin-top: 9px;margin-left: 9px;height: 18px;width: 18px;-webkit-mask: url(./svg/download.svg);mask: url(./svg/download.svg);}
@@ -477,12 +470,7 @@ button.vjs-icon-cog:before {
     height: 18px !important;
     width: 18px !important;
 }
-/*Share*/
-.vjs-icon-share:before { 
- content: ' ';
- -webkit-mask: url(./svg/share.svg);
- mask: url(./svg/share.svg);
-}
+
 /*Fullscreen*/
 .vjs-icon-fullscreen-enter:before, .video-js .vjs-fullscreen-control:before {
  height: 36px;
