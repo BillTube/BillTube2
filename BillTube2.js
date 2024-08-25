@@ -8,22 +8,28 @@
 var VERSION = '2.4';
 
 var vplayer = videojs("ytapiplayer")
+
 function videofix(){
-var vplayer = videojs("ytapiplayer")
-vplayer.on('error', function(e){
-window.setTimeout(function(){
-    vplayer.createModal('reloading the player!');
-	refreshVideo();
-    console.log("reloading player");
-    }, 10000);
- });
+    var vplayer = videojs("ytapiplayer");
+    // Commented out for testing
+    // vplayer.on('error', function(e){
+    //     window.setTimeout(function(){
+    //         vplayer.createModal('reloading the player!');
+    //         refreshVideo();
+    //         console.log("reloading player");
+    //     }, 10000);
+    // });
 }
+
+
 window.socket.on("changeMedia", function () {
-var myVideo = document.getElementById("ytapiplayer");
-if (myVideo.addEventListener) {
-    videofix();
-  }
+    console.log("changeMedia event triggered");
+    var myVideo = document.getElementById("ytapiplayer");
+    if (myVideo.addEventListener) {
+        videofix();
+    }
 });
+
 refreshVideo = function () {
 	 $('#mediarefresh').click(function(){
   var btn = $(this);
@@ -902,7 +908,95 @@ fsVidButton.addEventListener('click', function(e) {
 	    settings.permittedCommands = _.isArray(settings.permittedCommands) ? settings.permittedCommands : [];
 	    settings.permittedCommands = _.map(settings.permittedCommands, function (value) { return _.toLower(value); });
 
-	    this.$chatline = $('#chatline');
+	this.$chatline = $('#chatline');
+    this.currentTitle = '';
+	
+	// Cloudflare Worker URL
+    const workerUrl = 'https://trivia-worker.billtube.workers.dev';
+	
+    // Timer to automatically close trivia
+    let triviaTimeout = null;
+	
+     // Function to update user score via the Cloudflare Worker
+    async function updateScore(username) {
+        try {
+            await fetch(`${workerUrl}/updateScore`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username })
+            });
+        } catch (error) {
+            console.error('Error updating score:', error);
+        }
+    }
+
+    // Function to display the leaderboard by fetching it from the Cloudflare Worker
+    async function displayLeaderboard() {
+        try {
+            const response = await fetch(`${workerUrl}/leaderboard`);
+            const leaderboard = await response.json();
+            let message = '🎉 Leaderboard:\n';
+            leaderboard.forEach(({ username, score }) => {
+                message += `${username}: ${score} points\n`;
+            });
+            window.socket.emit("chatMsg", { msg: message });
+        } catch (error) {
+            console.error('Error fetching leaderboard:', error);
+        }
+    }
+
+    // Function to extract movie name and release year from the title
+    this.extractTitleAndYear = function (title) {
+        // Regular expression to extract the title and year
+        const match = title.match(/^(.*)\s\((\d{4})\)$/);
+        if (match) {
+            return { name: match[1], year: match[2] };
+        } else {
+            // If no match, return the title as is without a year
+            return { name: title, year: null };
+        }
+    };
+	
+	    // Function to truncate text to a specified length without cutting off mid-word
+    this.truncateText = function (text, maxLength) {
+        if (text.length > maxLength) {
+            return text.slice(0, text.lastIndexOf(' ', maxLength)) + '...';
+        }
+        return text;
+    };
+	
+       // Fetch the movie/TV show summary and rating from TMDB
+    this.fetchTMDBSummary = async function (title) {
+        const apiKey = typeof moviedbkey !== 'undefined' && moviedbkey ? moviedbkey : null;
+        
+        if (!apiKey) {
+            return 'Provide a TMDB API key in the theme config.';
+        }
+
+        const { name, year } = that.extractTitleAndYear(title);
+        let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(name)}`;
+
+        if (year) {
+            searchUrl += `&year=${year}`;
+        }
+
+        try {
+            const response = await fetch(searchUrl);
+            const data = await response.json();
+            if (data.results && data.results.length > 0) {
+                const movie = data.results[0];
+                const truncatedOverview = that.truncateText(movie.overview, 220);  // Truncate overview to 200 characters	
+                return `🎥[b]${movie.title} [/b](${movie.release_date}) ⭐ Rating: ${movie.vote_average}/10: 📄 [i]${truncatedOverview}[/i]`;
+            } else {
+                return '[i]No summary found for the current title.[/i]';
+            }
+        } catch (error) {
+            console.error('Error fetching from TMDB:', error);
+            return 'Error fetching summary from TMDB.';
+        }
+    };
 
 
 	    this.isCommandPermitted = function (commandName) {
@@ -951,6 +1045,17 @@ fsVidButton.addEventListener('click', function(e) {
 	            },
 	            canBeOmitted: true
 	        },
+
+        // New Command: !summary
+        '!summary': {
+            description: 'Fetch and display the summary of the current playing video',
+            value: async function () {
+                const summary = await that.fetchTMDBSummary(that.currentTitle);
+                return summary;
+            },
+            canBeOmitted: true
+        },
+
 	        '!ask': {
 	            description: app.t('chatCommands[.]asking a question with yes/no/... type answer (e.g. <i>!ask Will i be rich?</i>)'),
 	            value: function () {
@@ -1077,84 +1182,205 @@ fsVidButton.addEventListener('click', function(e) {
 	                return smilesArray[Math.floor(Math.random() * smilesArray.length)] + ' ';
 	            },
 	            canBeOmitted: true
-	        }
+	        },
+			 '!leaderboard': {
+            description: 'Display the current trivia leaderboard',
+            value: function () {
+                displayLeaderboard();
+                return 'Leaderboard displayed!';
+            },
+            canBeOmitted: true
+        }
 	    };
-	    this.IS_COMMAND = false;
-	    this.prepareMessage = function (msg) {
-	        that.IS_COMMAND = false;
+		
+		  // Trivia-specific variables
+    let triviaActive = false;
+    let correctAnswer = '';
+    let answeredUsers = new Set();  // To prevent spamming
 
-	        for (var command in that.commandsList) {
-	            if (this.commandsList.hasOwnProperty(command) && _.toLower(_.trim(msg)).indexOf(command) === 0) {
-	                if (that.isCommandPermitted(command) && (that.commandsList[command].isAvailable ? that.commandsList[command].isAvailable() : true)) {
-	                    that.IS_COMMAND = true;
+    // Open Trivia Database API URL (Movie category)
+    const triviaAPIUrl = 'https://opentdb.com/api.php?amount=1&category=11&type=multiple';
 
-	                    msg = that.commandsList[command].value(msg);
-	                }
+// Function to fetch trivia question from the API
+async function fetchTriviaQuestion() {
+    try {
+        const response = await fetch(triviaAPIUrl);
+        const data = await response.json();
 
-	                break;
-	            }
-	        }
+        if (data.results && data.results.length > 0) {
+            const questionData = data.results[0];
+            correctAnswer = decodeHTMLEntities(questionData.correct_answer.toLowerCase());
 
-	        return msg;
-	    };
-	    this.sendUserChatMessage = function (e) {
-	        if(e.keyCode === 13) {
-	            if (window.CHATTHROTTLE) {
-	                return;
-	            }
-	            var msg = that.$chatline.val().trim();
-	            if(msg !== '') {
-	                var meta = {};
-	                if (window.USEROPTS.adminhat && window.CLIENT.rank >= 255) {
-	                    msg = "/a " + msg;
-	                } else if (window.USEROPTS.modhat && window.CLIENT.rank >= window.Rank.Moderator) {
-	                    meta.modflair = window.CLIENT.rank;
-	                }
-	                // The /m command no longer exists, so emulate it clientside
-	                if (window.CLIENT.rank >= 2 && msg.indexOf("/m ") === 0) {
-	                    meta.modflair = window.CLIENT.rank;
-	                    msg = msg.substring(3);
-	                }
-	                var msgForCommand = this.prepareMessage(msg);
+            // Combine correct answer with incorrect answers for a multiple choice question
+            const allAnswers = [...questionData.incorrect_answers, questionData.correct_answer];
+            // Decode HTML entities in all answers
+            const decodedAnswers = allAnswers.map(answer => decodeHTMLEntities(answer));
+            // Shuffle the answers
+            decodedAnswers.sort(() => Math.random() - 0.5);
 
-	                if (that.IS_COMMAND) {
-	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
-	                    window.socket.emit("chatMsg", {msg: '🤓 ' + msgForCommand});
+            // Decode HTML entities in the question
+            const decodedQuestion = decodeHTMLEntities(questionData.question);
+            return `🎬 [code]Trivia: ${decodedQuestion}[/code] \nOptions: ${decodedAnswers.join(', ')}`;
+        } else {
+            return '[i]No trivia question available at the moment.[/i]';
+        }
+    } catch (error) {
+        console.error('Error fetching trivia question:', error);
+        return 'Error fetching trivia question. Please try again later.';
+    }
+}
 
-	                    that.IS_COMMAND = false;
-	                } else {
-	                    window.socket.emit("chatMsg", {msg: msg, meta: meta});
-	                }
-	                window.CHATHIST.push(that.$chatline.val());
-	                window.CHATHISTIDX = window.CHATHIST.length;
-	                that.$chatline.val('');
-	            }
-	            return;
-	        } else if(e.keyCode === 9) { // Tab completion
-	            window.chatTabComplete();
-	            e.preventDefault();
-	            return false;
-	        } else if(e.keyCode === 38) { // Up arrow (input history)
-	            if(window.CHATHISTIDX === window.CHATHIST.length) {
-	                window.CHATHIST.push(that.$chatline.val());
-	            }
-	            if(window.CHATHISTIDX > 0) {
-	                window.CHATHISTIDX--;
-	                that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
-	            }
 
-	            e.preventDefault();
-	            return false;
-	        } else if(e.keyCode === 40) { // Down arrow (input history)
-	            if(window.CHATHISTIDX < window.CHATHIST.length - 1) {
-	                window.CHATHISTIDX++;
-	                that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
-	            }
+    // New command: !trivia
+this.commandsList['!trivia'] = {
+    description: 'Start a trivia question',
+    value: async function () {
+        if (window.CLIENT.rank < 2) {
+            return '[b]You do not have permission to start a trivia question.[/b]';
+        }
 
-	            e.preventDefault();
-	            return false;
-	        }
-	    };
+        if (triviaActive) {
+            return 'A trivia question is already active!';
+        }
+
+        const triviaQuestion = await fetchTriviaQuestion();
+        triviaActive = true;
+        answeredUsers.clear();
+        window.socket.emit("chatMsg", { msg: `!trivia`, meta: { color: "#0000FF" } });  // Show the !trivia command in chat
+        window.socket.emit("chatMsg", { msg: triviaQuestion });
+
+        triviaTimeout = setTimeout(() => {
+            if (triviaActive) {
+                triviaActive = false;
+                window.socket.emit("chatMsg", { msg: `⏰ [b]Time's up! The correct answer was: ${correctAnswer}[/b]` });
+            }
+        }, 30000);
+
+        return '';  // Return an empty string to prevent double emission
+    },
+    canBeOmitted: true
+};
+
+// Function to handle trivia answers
+this.handleTriviaAnswer = async function (username, message) {
+    // Ensure that the trivia is active and the user hasn't already answered
+    if (triviaActive && !answeredUsers.has(username)) {
+        if (message.toLowerCase().trim() === correctAnswer) {
+            answeredUsers.add(username);  // Add the user to the answered set
+            triviaActive = false;  // End the current trivia question
+            clearTimeout(triviaTimeout);  // Clear the timeout since the question has been answered
+            await updateScore(username);  // Update the user's score in the KV storage
+            window.socket.emit("chatMsg", { msg: `🎉 [b]Correct! ${username} got the right answer! Their score has been updated.[/b]` });
+            displayLeaderboard();  // Optionally display the leaderboard after each correct answer
+        }
+    }
+};
+	
+function decodeHTMLEntities(text) {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+}
+
+// Capture chat messages to check for correct trivia answers and command processing
+this.prepareMessage = async function (msg) {
+    that.IS_COMMAND = false;
+
+    // Process commands
+    for (var command in that.commandsList) {
+        if (this.commandsList.hasOwnProperty(command) && _.toLower(_.trim(msg)).indexOf(command) === 0) {
+            if (that.isCommandPermitted(command) && (that.commandsList[command].isAvailable ? that.commandsList[command].isAvailable() : true)) {
+                that.IS_COMMAND = true;
+                msg = await that.commandsList[command].value(msg);  // Await the result here
+            }
+            break;
+        }
+    }
+
+    // If it's not a command, check if it's an answer to the trivia question
+    if (!that.IS_COMMAND) {
+        const username = window.CLIENT.name;
+        this.handleTriviaAnswer(username, msg);  // Allow everyone to answer, regardless of rank
+    }
+
+    return msg;
+};
+
+ // Handle sending chat messages
+this.sendUserChatMessage = async function (e) {
+    if (e.keyCode === 13) {
+        if (window.CHATTHROTTLE) {
+            return;
+        }
+        var msg = that.$chatline.val().trim();
+        if (msg !== '') {
+            var meta = {};
+            if (window.USEROPTS.adminhat && window.CLIENT.rank >= 255) {
+                msg = "/a " + msg;
+            } else if (window.USEROPTS.modhat && window.CLIENT.rank >= window.Rank.Moderator) {
+                meta.modflair = window.CLIENT.rank;
+            }
+            if (window.CLIENT.rank >= 2 && msg.indexOf("/m ") === 0) {
+                meta.modflair = window.CLIENT.rank;
+                msg = msg.substring(3);
+            }
+            var msgForCommand = await this.prepareMessage(msg);
+
+            if (that.IS_COMMAND) {
+                window.socket.emit("chatMsg", { msg: msg, meta: meta });
+                that.IS_COMMAND = false;  // Reset command flag
+            } else {
+                window.socket.emit("chatMsg", { msg: msg, meta: meta });
+            }
+            window.CHATHIST.push(that.$chatline.val());
+            window.CHATHISTIDX = window.CHATHIST.length;
+            that.$chatline.val('');
+        }
+        return;
+    } else if (e.keyCode === 9) {
+        window.chatTabComplete();
+        e.preventDefault();
+        return false;
+    } else if (e.keyCode === 38) {
+        if (window.CHATHISTIDX === window.CHATHIST.length) {
+            window.CHATHIST.push(that.$chatline.val());
+        }
+        if (window.CHATHISTIDX > 0) {
+            window.CHATHISTIDX--;
+            that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
+        }
+
+        e.preventDefault();
+        return false;
+    } else if (e.keyCode === 40) {
+        if (window.CHATHISTIDX < window.CHATHIST.length - 1) {
+            window.CHATHISTIDX++;
+            that.$chatline.val(window.CHATHIST[window.CHATHISTIDX]);
+        }
+
+        e.preventDefault();
+        return false;
+    }
+};
+
+// Listen for incoming messages to capture other users' responses
+window.socket.on('chatMsg', function(data) {
+    const username = data.username;
+    const message = data.msg;
+
+    // Process the message as a possible trivia answer
+    this.handleTriviaAnswer(username, message);
+}.bind(this));
+
+
+		
+		    // Update the current title when media changes
+    window.socket.on("changeMedia", function (data) {
+        that.currentTitle = data.title;
+        console.log('Current title updated to:', that.currentTitle);
+    });
+	
+	
 	    that.$chatline.off().on('keydown', function (e) {
 	        that.sendUserChatMessage(e);
 	    });
