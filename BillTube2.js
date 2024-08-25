@@ -1231,12 +1231,11 @@ async function fetchTriviaQuestion() {
 }
 
 
-    // New command: !trivia
 this.commandsList['!trivia'] = {
     description: 'Start a trivia question',
     value: async function () {
         if (window.CLIENT.rank < 2) {
-            return '[b]You do not have permission to start a trivia question.[/b]';
+            return 'You do not have permission to start a trivia question.';
         }
 
         if (triviaActive) {
@@ -1246,13 +1245,13 @@ this.commandsList['!trivia'] = {
         const triviaQuestion = await fetchTriviaQuestion();
         triviaActive = true;
         answeredUsers.clear();
-        window.socket.emit("chatMsg", { msg: `!trivia`, meta: { color: "#0000FF" } });  // Show the !trivia command in chat
+        window.socket.emit("chatMsg", { msg: `!trivia` });  // Show the !trivia command in chat
         window.socket.emit("chatMsg", { msg: triviaQuestion });
 
         triviaTimeout = setTimeout(() => {
             if (triviaActive) {
                 triviaActive = false;
-                window.socket.emit("chatMsg", { msg: `⏰ [b]Time's up! The correct answer was: ${correctAnswer}[/b]` });
+                window.socket.emit("chatMsg", { msg: `⏰ Time's up! The correct answer was: ${correctAnswer}` });
             }
         }, 30000);
 
@@ -1263,17 +1262,39 @@ this.commandsList['!trivia'] = {
 
 // Function to handle trivia answers
 this.handleTriviaAnswer = async function (username, message) {
-    // Ensure that the trivia is active and the user hasn't already answered
     if (triviaActive && !answeredUsers.has(username)) {
         if (message.toLowerCase().trim() === correctAnswer) {
-            answeredUsers.add(username);  // Add the user to the answered set
-            triviaActive = false;  // End the current trivia question
-            clearTimeout(triviaTimeout);  // Clear the timeout since the question has been answered
-            await updateScore(username);  // Update the user's score in the KV storage
-            window.socket.emit("chatMsg", { msg: `🎉 [b]Correct! ${username} got the right answer! Their score has been updated.[/b]` });
-            displayLeaderboard();  // Optionally display the leaderboard after each correct answer
+            answeredUsers.add(username);
+            triviaActive = false;
+            clearTimeout(triviaTimeout);
+            await updateScore(username);
+            window.socket.emit("chatMsg", { msg: `🎉 Correct! ${username} got the right answer! Their score has been updated.` });
+            displayLeaderboard();
         }
     }
+};
+
+// Capture chat messages to check for correct trivia answers and command processing
+this.prepareMessage = async function (msg) {
+    that.IS_COMMAND = false;
+
+    for (var command in that.commandsList) {
+        if (this.commandsList.hasOwnProperty(command) && _.toLower(_.trim(msg)).indexOf(command) === 0) {
+            if (that.isCommandPermitted(command) && (that.commandsList[command].isAvailable ? that.commandsList[command].isAvailable() : true)) {
+                that.IS_COMMAND = true;
+                msg = await that.commandsList[command].value(msg);
+                break;
+            }
+        }
+    }
+
+    if (!that.IS_COMMAND) {
+        const username = window.CLIENT.name;
+        this.handleTriviaAnswer(username, msg);  // Allow everyone to answer, regardless of rank
+    }
+
+    // If it's not a command, return the original message to be sent as a normal chat message
+    return msg;
 };
 	
 function decodeHTMLEntities(text) {
@@ -1282,31 +1303,8 @@ function decodeHTMLEntities(text) {
     return textarea.value;
 }
 
-// Capture chat messages to check for correct trivia answers and command processing
-this.prepareMessage = async function (msg) {
-    that.IS_COMMAND = false;
 
-    // Process commands
-    for (var command in that.commandsList) {
-        if (this.commandsList.hasOwnProperty(command) && _.toLower(_.trim(msg)).indexOf(command) === 0) {
-            if (that.isCommandPermitted(command) && (that.commandsList[command].isAvailable ? that.commandsList[command].isAvailable() : true)) {
-                that.IS_COMMAND = true;
-                msg = await that.commandsList[command].value(msg);  // Await the result here
-            }
-            break;
-        }
-    }
-
-    // If it's not a command, check if it's an answer to the trivia question
-    if (!that.IS_COMMAND) {
-        const username = window.CLIENT.name;
-        this.handleTriviaAnswer(username, msg);  // Allow everyone to answer, regardless of rank
-    }
-
-    return msg;
-};
-
- // Handle sending chat messages
+// Handle sending chat messages
 this.sendUserChatMessage = async function (e) {
     if (e.keyCode === 13) {
         if (window.CHATTHROTTLE) {
@@ -1324,14 +1322,19 @@ this.sendUserChatMessage = async function (e) {
                 meta.modflair = window.CLIENT.rank;
                 msg = msg.substring(3);
             }
-            var msgForCommand = await this.prepareMessage(msg);
+            var msgForCommand = await this.prepareMessage(msg);  // Prepare the message (handle commands)
 
+            // If the message is a command and was processed, send the command result (if any)
             if (that.IS_COMMAND) {
-                window.socket.emit("chatMsg", { msg: msg, meta: meta });
+                if (msgForCommand !== '') {
+                    window.socket.emit("chatMsg", { msg: msgForCommand, meta: meta });
+                }
                 that.IS_COMMAND = false;  // Reset command flag
             } else {
-                window.socket.emit("chatMsg", { msg: msg, meta: meta });
+                // Otherwise, send the original message as a normal chat message
+                window.socket.emit("chatMsg", { msg: msgForCommand, meta: meta });
             }
+
             window.CHATHIST.push(that.$chatline.val());
             window.CHATHISTIDX = window.CHATHIST.length;
             that.$chatline.val('');
