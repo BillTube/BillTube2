@@ -4292,6 +4292,49 @@ $(document).on('focusin', function(e) {
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
+// Function to format the text in the input field
+function formatInputText(inputElement) {
+    // Add paste event listener
+    inputElement.addEventListener("paste", function(e) {
+        e.preventDefault();
+        let pastedText = (e.clipboardData || window.clipboardData).getData('text');
+        let formattedText = pastedText.replace(/\./g, ' ').replace(/(\d{4})/, '($1)');
+        inputElement.value = formattedText;
+    });
+
+    // Add form submission event listener if the form exists
+    let formElement = inputElement.closest('form');
+    if (formElement) {
+        formElement.addEventListener('submit', function() {
+            let inputValue = inputElement.value;
+            let formattedValue = inputValue.replace(/\./g, ' ').replace(/(\d{4})/, '($1)');
+            inputElement.value = formattedValue;
+        });
+    }
+}
+
+// Use MutationObserver to detect when the input element is added to the DOM
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1 && node.id === "addfromurl-title-val") {
+                formatInputText(node);
+            }
+        });
+    });
+});
+
+// Start observing the document body for added nodes
+observer.observe(document.body, { childList: true, subtree: true });
+
+// If the element is already present when the script runs, format it immediately
+document.addEventListener("DOMContentLoaded", function() {
+    let existingInput = document.getElementById("addfromurl-title-val");
+    if (existingInput) {
+        formatInputText(existingInput);
+    }
+});
+
 
 //Don't put these on github you asshats
 //Original scripts by Xaekai and edited to work with the theme by bill
