@@ -382,7 +382,6 @@ if (typeof MovieFetcher !== 'undefined') {
 }
 
 
-
 window.FontAwesomeKitConfig = {
   asyncLoading: { enabled: true },
   autoA11y: { enabled: true },
@@ -808,14 +807,12 @@ $(document).ready(function() {
     performSearch();
 });
 
-
-
 //socket garbage whenever images are posted
-    socket.on('setAFK', scrollChat);
+/*  socket.on('setAFK', scrollChat);
 	socket.on('chatMsg', scrollChat);
     socket.on('chatMsg', function (data) {
         if (data.msg.indexOf('<a') != -1 || data.msg.indexOf('<img') != -1) {
-            setTimeout(scrollChat, 500);
+            setTimeout(scrollChat, 5);
         }
     });
       function scrollToBottom() {
@@ -824,6 +821,8 @@ $(document).ready(function() {
  window.addEventListener('resize', function() {
     scrollToBottom();
   });
+  
+  */
 
 //lets disable this for now, youtube doenst like it
 //$("#ytapiplayer").attr("airplay","allow");
@@ -937,7 +936,7 @@ $("#videowrap").mousemove(function() {
     $("#VideoOverlay").hide();
 });
 $("#VideoOverlay").append($("#mediarefresh"));
-$("#VideoOverlay").append("<button id='skip' data-tooltip='Voteskip the video (Has A Cooldown)' data-tooltip-pos='down' class='fal fa-arrow-alt-to-right OLB'></button>");
+$("#VideoOverlay").append("<button id='skip' data-tooltip='Voteskip the video' data-tooltip-pos='down' class='fal fa-arrow-alt-to-right OLB'></button>");
 $("#VideoOverlay").append("<button id='Ambient' data-tooltip='Ambient Mode' data-tooltip-pos='down' style='float: right;' class='fal fa-popcorn OLB'></button>");
 
 $(document).ready(() => {
@@ -953,37 +952,70 @@ $(document).ready(() => {
 
     if ($mediaRefreshButton.length === 0) {
         console.warn("Element with ID 'mediarefresh' not found.");
-
+        // Depending on your use case, you might want to return here
+        // return;
     }
 
-
+    // Flag to prevent multiple script loads
     let isAmbientScriptLoaded = false;
+    let isLoading = false;
 
+    // Debounce function to limit the rate at which a function can fire.
+    const debounce = (func, delay) => {
+        let debounceTimer;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => func.apply(context, args), delay);
+        };
+    };
 
-    $ambientButton.on("click", () => {
-        if (isAmbientScriptLoaded) {
-            console.log("Ambient script already loaded.");
+    // Function to load the ambient script
+    const loadAmbientScript = () => {
+        return new Promise((resolve, reject) => {
+            $.getScript("https://billtube.github.io/BillTube2/BillTube_Ambient.js")
+                .done((script, textStatus) => {
+                    console.log("Ambient script loaded successfully.");
+                    resolve();
+                })
+                .fail((jqxhr, settings, exception) => {
+                    console.error("Failed to load the ambient script:", exception);
+                    reject(exception);
+                });
+        });
+    };
 
+    // Debounced click handler to prevent rapid multiple clicks
+    const handleAmbientClick = debounce(async () => {
+        if (isAmbientScriptLoaded || isLoading) {
+            console.log("Ambient script already loaded or loading.");
             return;
         }
 
-        $.getScript("https://billtube.github.io/BillTube2/BillTube_Ambient.js")
-            .done((script, textStatus) => {
-                isAmbientScriptLoaded = true;
-                console.log("Ambient script loaded successfully.");
+        isLoading = true;
 
-                if ($mediaRefreshButton.length) {
-                    $mediaRefreshButton.trigger('click');
-                    console.log("#mediarefresh button clicked.");
-                } else {
-                    console.warn("Cannot click #mediarefresh because it does not exist.");
-                }
-            })
-            .fail((jqxhr, settings, exception) => {
-                console.error("Failed to load the ambient script:", exception);
-            });
-    });
+        try {
+            await loadAmbientScript();
+            isAmbientScriptLoaded = true;
+
+            if ($mediaRefreshButton.length) {
+                $mediaRefreshButton.trigger('click');
+                console.log("#mediarefresh button clicked.");
+            } else {
+                console.warn("Cannot click #mediarefresh because it does not exist.");
+            }
+        } catch (error) {
+            console.error("Error loading ambient script:", error);
+        } finally {
+            isLoading = false;
+        }
+    }, 300); // Adjust delay as necessary
+
+    // Attach the event handler
+    $ambientButton.on("click", handleAmbientClick);
 });
+
 
 
 $('#skip').click(function(){
@@ -1795,6 +1827,7 @@ $('[class*="chat-msg"]:not(.drink):not(.consecutive)').css('margin-left', '2px')
 $(".profileImage").css('visibility', 'hidden');}
 }  , 5000 );
 
+/*
 window.socket.once('mediaUpdate', function (data) {
   if (CLIENT.rank >= -1) {
 	var li = $('<li class="centered" />').prependTo('.navbar-nav');
@@ -1804,6 +1837,125 @@ window.socket.once('mediaUpdate', function (data) {
 	  .appendTo('.navbar-nav');
   } 
 });
+*/
+// Immediately Invoked Function Expression (IIFE) to execute as soon as possible
+(function() {
+    /**
+     * Adds the user's avatar to the navbar.
+     */
+    const addUserAvatar = () => {
+        const $navbarNav = $('.navbar-nav');
+
+        // Check if .navbar-nav exists
+        if ($navbarNav.length === 0) {
+            console.error("Element with class 'navbar-nav' not found.");
+            return;
+        }
+
+        // Prevent adding multiple avatars
+        if ($('#useravatar').length > 0) {
+            console.log("User avatar already exists in the navbar.");
+            return;
+        }
+
+        // Check user rank
+        if (typeof CLIENT === 'undefined' || CLIENT.rank < -1) {
+            console.log("User does not have sufficient rank to add avatar.");
+            return;
+        }
+
+        // Retrieve the user's profile image
+        let img = '';
+        const userListItem = findUserlistItem(CLIENT.name);
+        if (userListItem && userListItem.data && userListItem.data().profile) {
+            img = userListItem.data().profile.image;
+        }
+
+        // Use default avatar if none is set
+        if (!img) {
+            img = `${DROPBOX}xor4ykvsgrzys3d/noavatar.png`;
+        }
+
+        // Construct the avatar HTML using template literals
+        const avatarHtml = `
+            <li class="centered">
+                <a href="/account/profile" target="_blank">
+                    <img id="useravatar" src="${img}" title="${CLIENT.name}" alt="User Avatar" />
+                </a>
+            </li>
+        `;
+
+        // Append the avatar to the navbar
+        $navbarNav.append(avatarHtml);
+        console.log("User avatar added to the navbar.");
+    };
+
+    /**
+     * Handles the initial socket connection.
+     */
+    const handleSocketConnection = () => {
+        console.log("Socket connected to Cytube server.");
+        addUserAvatar();
+    };
+
+    /**
+     * Handles socket reconnection.
+     */
+    const handleSocketReconnection = () => {
+        console.log("Socket reconnected to Cytube server.");
+        addUserAvatar();
+    };
+
+    /**
+     * Initializes the avatar addition script.
+     */
+    const initializeScript = () => {
+        // Ensure that the socket is available
+        if (!window.socket) {
+            console.error("Socket is not defined.");
+            return;
+        }
+
+        // Check if the socket is already connected
+        if (window.socket.connected) {
+            // If connected, add the avatar immediately
+            handleSocketConnection();
+        } else {
+            // If not connected, listen for the 'connect' event
+            window.socket.once('connect', handleSocketConnection);
+        }
+
+        // Listen for the 'reconnect' event to handle future reconnections
+        window.socket.on('reconnect', handleSocketReconnection);
+    };
+
+    /**
+     * Waits for the CLIENT object to be available before initializing the script.
+     */
+    const waitForClient = () => {
+        if (typeof CLIENT !== 'undefined' && CLIENT.name && typeof CLIENT.rank !== 'undefined') {
+            clearInterval(clientCheckInterval);
+            initializeScript();
+        }
+    };
+
+    // Periodically check if CLIENT is defined
+    const clientCheckInterval = setInterval(waitForClient, 500); // Check every 500ms
+
+    // Optional: Implement a timeout to stop checking after a certain period
+    setTimeout(() => {
+        if (typeof CLIENT === 'undefined' || !CLIENT.name || typeof CLIENT.rank === 'undefined') {
+            clearInterval(clientCheckInterval);
+            console.warn("CLIENT object not found or incomplete after timeout.");
+        }
+    }, 10000); // Stop checking after 10 seconds
+})();
+
+
+
+
+
+
 	
 	    this.applyAvatar = function ($usernameBlock, username, newAvatar) {
 	        username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
