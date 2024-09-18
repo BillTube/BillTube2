@@ -5042,14 +5042,31 @@ player.on('playing', function() {
 
 //add casting capabilities
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).ready(function() {
     // Initialize cast variables
     var session = null;
     var castPlayer = null;
-    var CHECK_INTERVAL = 30000; // Sync every 30 seconds
-    var SYNC_THRESHOLD = 1; // Sync if time difference is more than 1 second
+    var CHECK_INTERVAL = 60000; // Sync every 60 seconds
+    var SYNC_THRESHOLD = 5; // Sync if time difference is more than 5 seconds
     var player = null;
     var castAvailable = false; // Flag to check if Cast API is available
+    var syncInterval = null; // To store the synchronization interval ID
 
     // Function to initialize the Video.js player
     function initializePlayer() {
@@ -5119,8 +5136,8 @@ $(document).ready(function() {
                 var currentTime = player.currentTime();
                 console.log(`Seeking... Setting Chromecast to time: ${currentTime}`);
 
-                // Check if the castPlayer and media session are valid
-                if (castPlayer.media && castPlayer.media.sessionId === session.getSessionId()) {
+                // Corrected: Compare castPlayer.sessionId with session.getSessionId()
+                if (castPlayer && castPlayer.sessionId === session.getSessionId()) {
                     var seekRequest = new chrome.cast.media.SeekRequest();
                     seekRequest.currentTime = currentTime;
                     castPlayer.seek(seekRequest,
@@ -5200,10 +5217,22 @@ $(document).ready(function() {
             // Hide the cast button if it's a YouTube video
             $('#castButton').css('display', 'none');
             console.log('YouTube video detected. Cast button hidden.');
+
+            // **Modified:** Instead of ending the cast session, stop synchronization
+            if (session) {
+                console.log('Stopping synchronization due to YouTube video load.');
+                stopSync();
+            }
         } else {
             // Show the cast button if it's not a YouTube video
             $('#castButton').css('display', 'block');
             console.log('Non-YouTube video detected. Cast button displayed.');
+
+            // **Ensure synchronization is running if a session is active**
+            if (session && !syncInterval) {
+                console.log('Starting synchronization for regular video.');
+                startSync();
+            }
         }
     }
 
@@ -5236,6 +5265,12 @@ $(document).ready(function() {
             case cast.framework.SessionState.SESSION_RESUMED:
                 session = cast.framework.CastContext.getInstance().getCurrentSession();
                 console.log('Session started or resumed.');
+
+                // Assign castPlayer
+                if (session) {
+                    castPlayer = session.getMediaSession();
+                    console.log('castPlayer assigned:', castPlayer);
+                }
 
                 // Ensure player is initialized
                 waitForPlayer(function() {
@@ -5353,6 +5388,7 @@ $(document).ready(function() {
                 function() {
                     console.log('Media loaded successfully at time:', currentTime);
                     castPlayer = session.getMediaSession(); // Update castPlayer
+                    console.log('castPlayer assigned:', castPlayer);
 
                     // Update cast button visibility after casting
                     updateCastButtonVisibility();
@@ -5386,7 +5422,6 @@ $(document).ready(function() {
     }
 
     // Sync playback time periodically
-    var syncInterval;
     function startSync() {
         if (!syncInterval) {
             syncInterval = setInterval(syncPlaybackTime, CHECK_INTERVAL);
@@ -5414,8 +5449,8 @@ $(document).ready(function() {
                 if (Math.abs(localTime - castTime) > SYNC_THRESHOLD) {
                     console.log(`Difference exceeds threshold. Syncing...`);
 
-                    // Check if the castPlayer and media session are valid
-                    if (castPlayer.media && castPlayer.media.sessionId === session.getSessionId()) {
+                    // **Corrected:** Compare castPlayer.sessionId with session.getSessionId()
+                    if (castPlayer && castPlayer.sessionId === session.getSessionId()) {
                         var seekRequest = new chrome.cast.media.SeekRequest();
                         seekRequest.currentTime = localTime;
 
@@ -5425,6 +5460,8 @@ $(document).ready(function() {
                         );
                     } else {
                         console.error('Cannot sync: Invalid cast player session.');
+                        // **Optionally:** Stop synchronization to prevent repeated errors
+                        stopSync();
                     }
                 } else {
                     console.log('No sync needed.');
@@ -5434,6 +5471,8 @@ $(document).ready(function() {
             }
         } else {
             console.log('No active session or castPlayer; cannot sync playback time.');
+            // **Optionally:** Stop synchronization if cast session is not active
+            stopSync();
         }
     }
 
@@ -5506,7 +5545,50 @@ $(document).ready(function() {
             console.log('Cast session ended on unload.');
         }
     });
+
+    // **Modified: Update Cast Button Visibility Function**
+    function updateCastButtonVisibility() {
+        var videoSrc = getCurrentVideoSrc();
+        console.log('Current video source:', videoSrc);
+
+        var isYouTubeVideo = false;
+        if (videoSrc) {
+            // Check if 'youtube' is present in the src (case-insensitive)
+            isYouTubeVideo = videoSrc.toLowerCase().includes('youtube');
+        } else {
+            console.warn('Video source is not available.');
+        }
+
+        console.log('Is YouTube video playing:', isYouTubeVideo);
+
+        if (isYouTubeVideo) {
+            // Hide the cast button if it's a YouTube video
+            $('#castButton').css('display', 'none');
+            console.log('YouTube video detected. Cast button hidden.');
+
+            // **Modified:** Instead of ending the cast session, stop synchronization
+            if (session) {
+                console.log('Stopping synchronization due to YouTube video load.');
+                stopSync();
+            }
+        } else {
+            // Show the cast button if it's not a YouTube video
+            $('#castButton').css('display', 'block');
+            console.log('Non-YouTube video detected. Cast button displayed.');
+
+            // **Ensure synchronization is running if a session is active**
+            if (session && !syncInterval) {
+                console.log('Starting synchronization for regular video.');
+                startSync();
+            }
+        }
+    }
 });
+
+
+
+
+
 
 /***/ }
 /******/ ]);
