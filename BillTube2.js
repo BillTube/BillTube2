@@ -4834,6 +4834,8 @@ videojs('ytapiplayer_html5_api').ready(function() {
       importButton.className = 'fal fa-regular fa-subtitles OLB';
       importButton.style.zIndex = 1000;          // Make sure it appears on top
       importButton.style.float = 'right';
+	  importButton.setAttribute('data-tooltip-pos', 'down');
+      importButton.setAttribute('data-tooltip', 'Local Subtitles');
 
       // Append the input and button to the overlay
       overlay.appendChild(subtitleInput);
@@ -4997,8 +4999,514 @@ videojs('ytapiplayer_html5_api').ready(function() {
   // Create the Subtitle Settings Button inside vjs-menu-content
   createSubtitleSettingsButton();
 });
+var player = videojs('ytapiplayer');
+var retryCount = 0;
+var maxRetries = 3;
+var retryDelay = 2000;
 
+//fix html5 errors 
+function handlePlayerError() {
+    var error = player.error();
+    if (error && error.code === 4) {
+        if (retryCount < maxRetries) {
+            retryCount++;
+            console.log('Error detected. Attempting retry ' + retryCount + ' of ' + maxRetries);
+            setTimeout(function() {
+                var refreshButton = document.getElementById('mediarefresh');
+                if (refreshButton) {
+                    refreshButton.click();
+                } else {
+                    console.error('Button with ID "mediarefresh" not found.');
+                }
+            }, retryDelay);
+        } else {
+            console.log('Max retry attempts reached. Not retrying further.');
+        }
+    }
+}
 
+player.on('error', function() {
+    handlePlayerError();
+});
+
+if (player.error()) {
+    handlePlayerError();
+}
+
+player.on('playing', function() {
+    if (retryCount > 0) {
+        console.log('Video is playing. Resetting retry count.');
+    }
+    retryCount = 0;
+});
+
+//add casting capabilities
+
+$(document).ready(function() {
+    // Initialize cast variables
+    var session = null;
+    var castPlayer = null;
+    var CHECK_INTERVAL = 30000; // Sync every 30 seconds
+    var SYNC_THRESHOLD = 1; // Sync if time difference is more than 1 second
+    var player = null;
+    var castAvailable = false; // Flag to check if Cast API is available
+
+    // Function to initialize the Video.js player
+    function initializePlayer() {
+        // Check if ytapiplayer exists
+        if ($('#ytapiplayer').length) {
+            player = videojs('ytapiplayer');
+            console.log('Video.js player initialized.');
+
+            // Attach event listeners
+            attachPlayerEventListeners();
+
+            // Update cast button visibility based on current video src
+            updateCastButtonVisibility();
+        } else {
+            console.log('ytapiplayer not found. Waiting...');
+            // Wait and try again
+            setTimeout(initializePlayer, 500);
+        }
+    }
+
+    // Function to initialize the cast button
+    function initializeCastButton() {
+        // Check if VideoOverlay exists and Cast API is available
+        if ($('#VideoOverlay').length && castAvailable) {
+            createCastButton();
+
+            // Update cast button visibility based on current video src
+            updateCastButtonVisibility();
+        } else if (!castAvailable) {
+            console.log('Cast API not available. Cast button will not be displayed.');
+        } else {
+            console.log('VideoOverlay not found. Waiting...');
+            // Wait and try again
+            setTimeout(initializeCastButton, 500);
+        }
+    }
+
+    // Function to attach event listeners to the player
+    function attachPlayerEventListeners() {
+        // Only attach if player is valid
+        if (!player) return;
+
+        // Event listeners
+        player.on('play', function() {
+            console.log('Player triggered play event.');
+            if (session && castPlayer && castPlayer.playerState !== chrome.cast.media.PlayerState.PLAYING) {
+                castPlayer.play(
+                    function() { console.log('Cast player resumed'); },
+                    function(error) { console.error('Error playing cast player:', error); }
+                );
+            }
+        });
+
+        player.on('pause', function() {
+            console.log('Player triggered pause event.');
+            if (session && castPlayer && castPlayer.playerState !== chrome.cast.media.PlayerState.PAUSED) {
+                castPlayer.pause(
+                    function() { console.log('Cast player paused'); },
+                    function(error) { console.error('Error pausing cast player:', error); }
+                );
+            }
+        });
+
+        player.on('seeked', function() {
+            console.log('Player triggered seeked event.');
+            if (session && castPlayer) {
+                var currentTime = player.currentTime();
+                console.log(`Seeking... Setting Chromecast to time: ${currentTime}`);
+
+                // Check if the castPlayer and media session are valid
+                if (castPlayer.media && castPlayer.media.sessionId === session.getSessionId()) {
+                    var seekRequest = new chrome.cast.media.SeekRequest();
+                    seekRequest.currentTime = currentTime;
+                    castPlayer.seek(seekRequest,
+                        function() { console.log('Cast player synced after seek'); },
+                        function(error) { console.error('Error syncing cast player after seek:', error); }
+                    );
+                } else {
+                    console.error('Cannot seek: Invalid cast player session.');
+                }
+            }
+        });
+
+        player.on('loadstart', function() {
+            console.log('Video.js player is loading a new source.');
+            // Stop synchronization until the new source is loaded
+            stopSync();
+        });
+
+        player.on('loadeddata', function() {
+            console.log('Video.js player has loaded data.');
+            // Restart synchronization
+            startSync();
+            // If casting session is active, cast the new video
+            if (session) {
+                castCurrentVideo(0);
+            }
+
+            // Update cast button visibility based on new video src
+            updateCastButtonVisibility();
+        });
+    }
+
+    // Initialize the Video.js player
+    initializePlayer();
+
+    // Initialize the cast button
+    initializeCastButton();
+
+    // Function to create the cast button and append it to the VideoOverlay div
+    function createCastButton() {
+        // Prevent multiple cast buttons from being created
+        if ($('#castButton').length) {
+            console.log('Cast button already exists.');
+            return;
+        }
+
+        var castButton = $('<button id="castButton" class="fal fa-regular fa-screencast OLB" style="z-index: 1000; float: right; display: none;" data-tooltip-pos="down" data-tooltip="Google Cast"></button>');
+
+        // Append the button to the VideoOverlay div
+        $('#VideoOverlay').append(castButton);
+        console.log('Cast button created and appended.');
+
+        // Add the event listener to the cast button to start casting
+        castButton.on('click', function() {
+            console.log('Cast button clicked.');
+            // Start the casting process when the button is clicked
+            cast.framework.CastContext.getInstance().requestSession();
+        });
+    }
+
+    // Function to update the visibility of the cast button based on video src
+    function updateCastButtonVisibility() {
+        var videoSrc = getCurrentVideoSrc();
+        console.log('Current video source:', videoSrc);
+
+        var isYouTubeVideo = false;
+        if (videoSrc) {
+            // Check if 'youtube' is present in the src (case-insensitive)
+            isYouTubeVideo = videoSrc.toLowerCase().includes('youtube');
+        } else {
+            console.warn('Video source is not available.');
+        }
+
+        console.log('Is YouTube video playing:', isYouTubeVideo);
+
+        if (isYouTubeVideo) {
+            // Hide the cast button if it's a YouTube video
+            $('#castButton').css('display', 'none');
+            console.log('YouTube video detected. Cast button hidden.');
+        } else {
+            // Show the cast button if it's not a YouTube video
+            $('#castButton').css('display', 'block');
+            console.log('Non-YouTube video detected. Cast button displayed.');
+        }
+    }
+
+    // Function to initialize the cast framework
+    function initializeCastApi() {
+        castAvailable = true; // Cast API is available
+        var context = cast.framework.CastContext.getInstance();
+        context.setOptions({
+            receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+            autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+        });
+
+        console.log('Cast API initialized.');
+
+        // Listen for session changes
+        context.addEventListener(
+            cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
+            sessionStateChanged
+        );
+
+        // Now that Cast API is available, initialize the cast button
+        initializeCastButton();
+    }
+
+    // Function to handle session state changes
+    function sessionStateChanged(event) {
+        console.log('sessionStateChanged:', event.sessionState);
+        switch (event.sessionState) {
+            case cast.framework.SessionState.SESSION_STARTED:
+            case cast.framework.SessionState.SESSION_RESUMED:
+                session = cast.framework.CastContext.getInstance().getCurrentSession();
+                console.log('Session started or resumed.');
+
+                // Ensure player is initialized
+                waitForPlayer(function() {
+                    // Cast current video
+                    var currentTime = 0;
+                    if (player && typeof player.currentTime === 'function') {
+                        currentTime = player.currentTime();
+                        console.log('Current playback time:', currentTime);
+                    }
+                    castCurrentVideo(currentTime);
+                });
+
+                startSync();
+                break;
+            case cast.framework.SessionState.SESSION_ENDED:
+                session = null;
+                castPlayer = null;
+                stopSync();
+                console.log('Session ended.');
+                break;
+            default:
+                console.log('Unhandled session state:', event.sessionState);
+        }
+    }
+
+    // Function to wait for the player to be initialized
+    function waitForPlayer(callback) {
+        if (player) {
+            callback();
+        } else {
+            console.log('Player not initialized yet. Waiting...');
+            setTimeout(function() {
+                waitForPlayer(callback);
+            }, 500);
+        }
+    }
+
+    // Function to get the current video source from the <video> or <iframe> tag inside 'ytapiplayer'
+    function getCurrentVideoSrc() {
+        var videoElement = $('#ytapiplayer video');
+        var iframeElement = $('#ytapiplayer iframe');
+        var videoSrc = null;
+
+        if (videoElement.length > 0) {
+            // Check for 'src' attribute
+            videoSrc = videoElement.attr('src');
+            console.log('Video src attribute:', videoSrc);
+            if (!videoSrc) {
+                // Check for <source> elements
+                var sourceElements = videoElement.find('source');
+                sourceElements.each(function() {
+                    var src = $(this).attr('src');
+                    if (src) {
+                        videoSrc = src;
+                        console.log('Found <source> element with src:', src);
+                        return false; // Break out of the loop
+                    }
+                });
+            }
+            // If still no src, check for 'data-src' attribute (if used)
+            if (!videoSrc) {
+                videoSrc = videoElement.attr('data-src');
+                console.log('Video data-src attribute:', videoSrc);
+            }
+        }
+
+        if (!videoSrc && iframeElement.length > 0) {
+            videoSrc = iframeElement.attr('src');
+            console.log('Iframe src attribute:', videoSrc);
+        }
+
+        if (!videoSrc) {
+            console.error('Unable to get current video source from ytapiplayer.');
+        }
+        return videoSrc;
+    }
+
+    // Function to cast the current video
+    function castCurrentVideo(currentTime) {
+        if (session) {
+            var videoSrc = getCurrentVideoSrc();
+            if (!videoSrc) {
+                console.error('Cannot cast video: Video source not found.');
+                return;
+            }
+
+            var isYouTubeVideo = videoSrc.toLowerCase().includes('youtube');
+            console.log('Is YouTube video detected before casting:', isYouTubeVideo);
+            if (isYouTubeVideo) {
+                console.log('YouTube video detected. Skipping casting.');
+                return; // Do not cast YouTube videos
+            }
+
+            var mimeType = getMimeType(videoSrc);
+            console.log('Determined MIME type:', mimeType);
+
+            var mediaInfo = new chrome.cast.media.MediaInfo(videoSrc, mimeType);
+
+            // Get the video name from the div with ID 'currenttitle'
+            var videoName = $('#currenttitle').text() || 'Unknown Title';
+            var fullTitle = 'BillTube Cast: ' + videoName;
+
+            // Set metadata for display on Chromecast
+            var metadata = new chrome.cast.media.GenericMediaMetadata();
+            metadata.title = fullTitle;
+            mediaInfo.metadata = metadata;
+
+            var request = new chrome.cast.media.LoadRequest(mediaInfo);
+            request.currentTime = currentTime;
+            request.autoplay = true;
+
+            console.log('Loading media on Chromecast:', request);
+
+            session.loadMedia(request).then(
+                function() {
+                    console.log('Media loaded successfully at time:', currentTime);
+                    castPlayer = session.getMediaSession(); // Update castPlayer
+
+                    // Update cast button visibility after casting
+                    updateCastButtonVisibility();
+                },
+                function(error) {
+                    console.error('Error loading media:', error);
+                }
+            );
+        } else {
+            console.log('No active session to cast current video.');
+        }
+    }
+
+    // Helper function to determine MIME type based on file extension
+    function getMimeType(url) {
+        var extension = url.split('.').pop().split(/\#|\?/)[0].toLowerCase();
+        switch (extension) {
+            case 'mp4':
+                return 'video/mp4';
+            case 'webm':
+                return 'video/webm';
+            case 'ogg':
+            case 'ogv':
+                return 'video/ogg';
+            case 'mov':
+                return 'video/quicktime';
+            default:
+                console.warn('Unknown video extension. Defaulting to video/mp4');
+                return 'video/mp4';
+        }
+    }
+
+    // Sync playback time periodically
+    var syncInterval;
+    function startSync() {
+        if (!syncInterval) {
+            syncInterval = setInterval(syncPlaybackTime, CHECK_INTERVAL);
+            console.log('Started synchronization interval.');
+        }
+    }
+
+    function stopSync() {
+        if (syncInterval) {
+            clearInterval(syncInterval);
+            syncInterval = null;
+            console.log('Stopped synchronization interval.');
+        }
+    }
+
+    function syncPlaybackTime() {
+        if (session && castPlayer) {
+            if (player && typeof player.currentTime === 'function') {
+                var localTime = player.currentTime();  // Time from Video.js player
+                var castTime = castPlayer.getEstimatedTime();  // Time from Chromecast
+
+                console.log(`Sync Check - Local Time: ${localTime}, Cast Time: ${castTime}`);
+
+                // Check if the difference between local and cast time exceeds the threshold
+                if (Math.abs(localTime - castTime) > SYNC_THRESHOLD) {
+                    console.log(`Difference exceeds threshold. Syncing...`);
+
+                    // Check if the castPlayer and media session are valid
+                    if (castPlayer.media && castPlayer.media.sessionId === session.getSessionId()) {
+                        var seekRequest = new chrome.cast.media.SeekRequest();
+                        seekRequest.currentTime = localTime;
+
+                        castPlayer.seek(seekRequest,
+                            function() { console.log('Cast player synced to local player'); },
+                            function(error) { console.error('Error syncing cast player:', error); }
+                        );
+                    } else {
+                        console.error('Cannot sync: Invalid cast player session.');
+                    }
+                } else {
+                    console.log('No sync needed.');
+                }
+            } else {
+                console.log('Cannot sync playback time: Video.js player is not ready.');
+            }
+        } else {
+            console.log('No active session or castPlayer; cannot sync playback time.');
+        }
+    }
+
+    // Handle the socket event for media change
+    socket.on("changeMedia", function() {
+        console.log('Received changeMedia event.');
+
+        // Wait until ytapiplayer is available
+        waitForYtapiplayer(function() {
+            // Re-initialize the player
+            initializePlayer();
+
+            // Wait for the player to be ready
+            player.ready(function() {
+                console.log('Player is ready after media change.');
+
+                // Cast the new video to Chromecast if casting session is active
+                if (session) {
+                    castCurrentVideo(0);
+                } else {
+                    console.log('No active session; cannot cast new media.');
+                }
+
+                // Update cast button visibility based on new video src
+                updateCastButtonVisibility();
+            });
+        });
+    });
+
+    // Function to wait for ytapiplayer to be available
+    function waitForYtapiplayer(callback) {
+        if ($('#ytapiplayer').length > 0) {
+            callback();
+        } else {
+            console.log('ytapiplayer not found. Waiting...');
+            setTimeout(function() {
+                waitForYtapiplayer(callback);
+            }, 500);
+        }
+    }
+
+    // Load the Google Cast SDK dynamically
+    var castScript = document.createElement('script');
+    castScript.type = 'text/javascript';
+    castScript.src = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1';
+    castScript.onload = function() {
+        console.log('Google Cast SDK loaded.');
+    };
+    castScript.onerror = function() {
+        console.error('Failed to load Google Cast SDK.');
+    };
+    document.head.appendChild(castScript);
+
+    // Initialize the cast framework when available
+    window['__onGCastApiAvailable'] = function(isAvailable) {
+        if (isAvailable) {
+            console.log('Cast API is available.');
+            initializeCastApi();
+        } else {
+            console.log('Cast API not available.');
+            // Since Cast API is not available, do not display the cast button
+            castAvailable = false;
+        }
+    };
+
+    // Cleanup when the page is unloaded
+    $(window).on('beforeunload', function() {
+        if (session) {
+            session.endSession(true);
+            console.log('Cast session ended on unload.');
+        }
+    });
+});
 
 /***/ }
 /******/ ]);
