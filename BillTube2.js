@@ -939,9 +939,52 @@ $("#videowrap").mousemove(function() {
 $("#VideoOverlay").append($("#mediarefresh"));
 $("#VideoOverlay").append("<button id='skip' data-tooltip='Voteskip the video (Has A Cooldown)' data-tooltip-pos='down' class='fal fa-arrow-alt-to-right OLB'></button>");
 $("#VideoOverlay").append("<button id='Ambient' data-tooltip='Ambient Mode' data-tooltip-pos='down' style='float: right;' class='fal fa-popcorn OLB'></button>");
-$("#Ambient").click(function(){
-$.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2@latest/BillTube_Ambient.js");
+
+$(document).ready(() => {
+    // Cache jQuery selectors
+    const $ambientButton = $("#Ambient");
+    const $mediaRefreshButton = $("#mediarefresh");
+
+    // Check if elements exist
+    if ($ambientButton.length === 0) {
+        console.error("Element with ID 'Ambient' not found.");
+        return;
+    }
+
+    if ($mediaRefreshButton.length === 0) {
+        console.warn("Element with ID 'mediarefresh' not found.");
+
+    }
+
+
+    let isAmbientScriptLoaded = false;
+
+
+    $ambientButton.on("click", () => {
+        if (isAmbientScriptLoaded) {
+            console.log("Ambient script already loaded.");
+
+            return;
+        }
+
+        $.getScript("https://billtube.github.io/BillTube2/BillTube_Ambient.js")
+            .done((script, textStatus) => {
+                isAmbientScriptLoaded = true;
+                console.log("Ambient script loaded successfully.");
+
+                if ($mediaRefreshButton.length) {
+                    $mediaRefreshButton.trigger('click');
+                    console.log("#mediarefresh button clicked.");
+                } else {
+                    console.warn("Cannot click #mediarefresh because it does not exist.");
+                }
+            })
+            .fail((jqxhr, settings, exception) => {
+                console.error("Failed to load the ambient script:", exception);
+            });
+    });
 });
+
 
 $('#skip').click(function(){
   var btn = $(this);
