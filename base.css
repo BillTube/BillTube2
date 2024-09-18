@@ -2269,7 +2269,7 @@ min-height: 440px;
 }
 
 img.chat-picture {
-    height: clamp(10.5rem, 8vw, 11em);
+    height: clamp(10.5rem, 8vw, 9em);
 	max-height: 160px;
     max-width: 300px;
     border-radius: 3px;
