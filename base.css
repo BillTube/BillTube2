@@ -1436,17 +1436,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 	/* Buttons */
 	.input-group .input-group-btn, .input-group .input-group-btn button {
-		background: var (--button-bg-color);
 		border: 0;
 		box-shadow: none;
-		color: var (--button-color);
+		color: var(--button-color);
 		-webkit-font-smoothing: antialiased
 	}
+	button#queue_next {
+    border-radius: 10px;
+    height: 50px;
+    padding: 15px;
+    bottom: 0px;
+    top: 10px;
+}
+	button#queue_end {
+    border-radius: 10px;
+    height: 50px;
+    padding: 15px;
+    bottom: 0px;
+    top: 10px;
+}
+
 	.input-group .input-group-btn > button {
 		border: 0px solid hsl(0,0%,31%);
 	}
 	.input-group .input-group-btn button:hover {
-		background: var (--button-bg-hover);
+		background: var(--button-bg-hover);
 	}
 	.input-group > span:first-of-type.input-group-btn > button {
 		border-left: 0;
@@ -1468,7 +1482,9 @@ h1, h2, h3, h4, h5, h6 {
 		color: hsl(0, 0%, 56%);
 	}
 
-
+input#mediaurl {
+    height: 50px;
+}
 
 /* Dropdowns and Context Menus */
 	/* Bootstrap Dropdowns */
@@ -1938,10 +1954,10 @@ filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.8));
 			    border-bottom: 2px solid hsla(0, 0%, 0%, 0.22);
 		}
 		#mediabuttons .btn span {
-			color: var (--body-color);
+			color: var(--body-color);
 		}
 		#mediabuttons .btn:not(.collapsed) span {
-			color: var (--body-color);
+			color: var(--body-color);
 		}
 		#mediabuttons .btn:not(.collapsed) {
 		    border-bottom: 2px solid hsla(144, 91%, 72%, 0.96);
@@ -2131,7 +2147,7 @@ word-wrap: break-word;
     transition: all 0.3s ease-in-out;
 	}
 	.ch:hover {
-	color: var (--button-color);
+	color: var(--button-color);
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
@@ -2389,8 +2405,8 @@ padding-left: 20px;
     font-family: inherit;
 }
 .queue_sortable li:hover {
-    border-bottom: var (--theme-color);
-    background-color: var (--button-bg-color);
+    border-bottom: var(--theme-color);
+    background-color: var(--button-bg-color);
 }
 a:focus, a:hover {
     color: #ffffff;
@@ -3606,7 +3622,7 @@ textarea:focus, input:focus{
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
 	    font-family: "Quicksand", sans-serif;
-	    color: var (--theme-color);
+	    color: var(--theme-color);
 }
 .btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open>.dropdown-toggle.btn-default {
     color: #fff;
