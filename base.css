@@ -4842,6 +4842,17 @@ button#skip:disabled,button#mediarefresh:disabled {
   initial-value: white;
   inherits: false;
 }
+.chat-msg-CherryRound .username {
+    font-weight: 1000;
+    --bg-pos: .2em -.07em;
+    text-shadow: 1px 2px 12px rgb(255 0 0 / 50%);
+    position: relative;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: border-box, text;
+    background-image: url(https://media.giphy.com/media/eYRGWfchREFUUlXT7P/giphy.gif), linear-gradient(302deg, #cd0000 0%, #6f0202 100%);
+    background-size: 10em, 17em;
+    animation: starkrdp-anim 3s linear infinite;
+}
 
 .shiny-cta {
   --animation: gradient-angle linear infinite;
