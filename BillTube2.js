@@ -95,94 +95,98 @@ function createTemp(title) {
 	});
 	outer.modal();
 }
+///////////color some names 
+
 var stringToColour = function(str) {
-
-for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
-
-for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
-
-return colour;
+    for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+    for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+    return colour;
 }
-$messagebuffer		= $("#messagebuffer");
+
+$messagebuffer = $("#messagebuffer");
 
 function formatChatMessage(data, last) {
-if (!data.meta || data.msgclass) {
-data.meta = {
-addClass: data.msgclass,
-addClassToNameAndTimestamp: data.msgclass
-};
+    if (!data.meta || data.msgclass) {
+        data.meta = {
+            addClass: data.msgclass,
+            addClassToNameAndTimestamp: data.msgclass
+        };
+    }
+    var skip = data.username === last.name;
+    if(data.meta.addClass === "server-whisper")
+        skip = true;
+    if(data.msg && typeof data.msg === 'string' && data.msg.match(/^\s*<strong>\w+\s*:\s*<\/strong>\s*/))
+        skip = false;
+    if (data.meta.forceShowName)
+        skip = false;
+    data.msg = (typeof data.msg === 'string' && typeof execEmotes === 'function') ? execEmotes(data.msg) : data.msg;
+    last.name = data.username;
+    var div = $("<div/>");
+    if (data.meta.addClass === "drink") {
+        div.addClass("drink");
+        data.meta.addClass = "";
+    }
+    if (USEROPTS.show_timestamps) {
+        var time = $("<span/>").addClass("timestamp").appendTo(div);
+        var timestamp = new Date(data.time).toTimeString().split(" ")[0];
+        time.text("["+timestamp+"] ");
+        if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+            time.addClass(data.meta.addClass);
+        }
+    }
+    var name = $("<span/>");
+    if (!skip) {
+        name.appendTo(div);
+    }
+    $("<strong/>").addClass("username clr_" + data.username).text(data.username + ": ").css("color", stringToColour(data.username)).appendTo(name);
+    if (data.meta.modflair)
+    {
+        name.addClass(getNameColor(data.meta.modflair));
+    }
+    if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+        name.addClass(data.meta.addClass);
+    }
+    if (data.meta.superadminflair) {
+        name.addClass("label")
+            .addClass(data.meta.superadminflair.labelclass);
+        $("<span/>").addClass(data.meta.superadminflair.icon)
+            .addClass("glyphicon")
+            .css("margin-right", "3px")
+            .prependTo(name);
+    }
+    var message = $("<span/>").appendTo(div);
+    message[0].innerHTML = data.msg || '';
+    if (data.meta.action) {
+        name.remove();
+        message[0].innerHTML = data.username + " " + (data.msg || '');
+    }
+    if (data.meta.addClass) {
+        message.addClass(data.meta.addClass);
+    }
+    if (data.meta.shadow) {
+        div.addClass("chat-shadow");
+    }
+    div.find("img").load(function () {
+        if (SCROLLCHAT) {
+            scrollChat();
+        }
+    });
+    return div;
 }
-var skip = data.username === last.name;
-if(data.meta.addClass === "server-whisper")
-skip = true;
-if(data.msg.match(/^\s*<strong>\w+\s*:\s*<\/strong>\s*/))
-skip = false;
-if (data.meta.forceShowName)
-skip = false;
 
-data.msg = execEmotes(data.msg);
-
-last.name = data.username;
-var div = $("<div/>");
-if (data.meta.addClass === "drink") {
-div.addClass("drink");
-data.meta.addClass = "";
+function applyUsernameColors() {
+    $("#messagebuffer").find(".username").each(function() {
+        var $username = $(this);
+        var username = $username.text().replace(':', '').trim();
+        $username.css("color", stringToColour(username));
+    });
 }
 
-if (USEROPTS.show_timestamps) {
-var time = $("<span/>").addClass("timestamp").appendTo(div);
-var timestamp = new Date(data.time).toTimeString().split(" ")[0];
-time.text("["+timestamp+"] ");
-if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
-time.addClass(data.meta.addClass);
- }
-}
-
-var name = $("<span/>");
-if (!skip) {
-name.appendTo(div);
-}
-$("<strong/>").addClass("username clr_" + data.username).text(data.username + ": ").css("color", stringToColour(data.username)).appendTo(name);
-
-
-if (data.meta.modflair)
-{
-name.addClass(getNameColor(data.meta.modflair));
-}
-
-if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
-name.addClass(data.meta.addClass);
-}
-if (data.meta.superadminflair) {
-name.addClass("label")
-.addClass(data.meta.superadminflair.labelclass);
-$("<span/>").addClass(data.meta.superadminflair.icon)
-.addClass("glyphicon")
-.css("margin-right", "3px")
-.prependTo(name);
-}
-
-var message = $("<span/>").appendTo(div);
-message[0].innerHTML = data.msg;
-
-if (data.meta.action) {
-name.remove();
-message[0].innerHTML = data.username + " " + data.msg;
-}
-if (data.meta.addClass) {
-message.addClass(data.meta.addClass);
-}
-if (data.meta.shadow) {
-div.addClass("chat-shadow");
-}
-div.find("img").load(function () {
-if (SCROLLCHAT) {
-scrollChat();
-}
+$(document).ready(function() {
+    applyUsernameColors();
 });
-return div;
 
-}
+
 $(document).ready(function() {
     // Function to check media type and hide or show the poster accordingly
     function togglePoster() {
@@ -472,7 +476,7 @@ var setImageSrc = function(imageData) {
     $mainpage.prepend($("#chatwrap"));
     $("#main").after($("#drinkbarwrap"));
     $(".chat-area-title").after($("#currenttitle"));
-    $("#loginform").detach().insertAfter("#headermenu");
+    $("#loginform").detach().insertAfter(".slider");
     $navCollapsible.after($fullscreenbtn);
     $("#morebtn").after($("#videocontrols").removeClass("pull-right"));
 
