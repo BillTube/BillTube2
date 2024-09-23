@@ -4791,7 +4791,6 @@ button#skip:disabled,button#mediarefresh:disabled {
 }
 .chat-msg-Zeb-Dev .username {
     font-weight: 1000;
-    text-shadow: 1px 1px 5px #2aff00;
     font-weight: bold;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: border-box, border-box, text;
