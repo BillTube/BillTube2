@@ -4778,7 +4778,16 @@ button#skip:disabled,button#mediarefresh:disabled {
     background-size: 10em, 17em;
     animation: starkrdp-anim 3s linear infinite;
 }
-
+.chat-msg-Zeb-Dev .username {
+    font-weight: 1000;
+    text-shadow: 1px 1px 5px #2aff00;
+    font-weight: bold;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: border-box, border-box, text;
+    background-image: url(https://i.ibb.co/R60RZRS/sparkling.gif), url(https://i.ibb.co/R60RZRS/sparkling.gif), linear-gradient(178deg, #199800, #2aff00, #199800);
+    background-size: 10em, 10em, 5em;
+    border-bottom: 3px dotted #2aff00;
+}
 .VIP {
   text-shadow: 1px 1px 15px rgb(255 0 224 / 88%);
   font-weight: bold;
