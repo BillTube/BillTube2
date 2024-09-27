@@ -1967,12 +1967,10 @@ this.applyAvatar = function ($usernameBlock, username, newAvatar) {
     var cachedAvatar = that.getAvatarFromCache(username);
     var $messageBlock = $usernameBlock.parent();
 
-    // Your stock image URL
-    var stockImageUrl = 'https://i.ibb.co/hf1d87z/discord-avatar-512-CNXOI.png'; // Replace with your stock image URL
+    var stockImageUrl = 'https://i.ibb.co/hf1d87z/discord-avatar-512-CNXOI.png'; 
 
-    // Function to check if the URL is a Discord link
     function isDiscordUrl(url) {
-        return url && (url.includes('discordapp.com') || url.includes('discord.gg'));
+        return url && (url.includes('xdiscordapp.com') || url.includes('xdiscord.gg'));
     }
 
     if (cachedAvatar || newAvatar) {
@@ -1982,7 +1980,6 @@ this.applyAvatar = function ($usernameBlock, username, newAvatar) {
 
         var avatarToDisplay = cachedAvatar || newAvatar;
 
-        // Check if the avatar is a Discord link
         if (isDiscordUrl(avatarToDisplay)) {
             avatarToDisplay = stockImageUrl; // Use the stock image instead
         }
