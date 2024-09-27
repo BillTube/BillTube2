@@ -1961,48 +1961,81 @@ window.socket.once('mediaUpdate', function (data) {
 
 
 	
-	    this.applyAvatar = function ($usernameBlock, username, newAvatar) {
-	        username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
-	        newAvatar = newAvatar || that.getAvatarFromUserlist(username);
-	        var cachedAvatar = that.getAvatarFromCache(username);
-	        var $messageBlock = $usernameBlock.parent();
+this.applyAvatar = function ($usernameBlock, username, newAvatar) {
+    username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
+    newAvatar = newAvatar || that.getAvatarFromUserlist(username);
+    var cachedAvatar = that.getAvatarFromCache(username);
+    var $messageBlock = $usernameBlock.parent();
 
-	        if (cachedAvatar || newAvatar) {
-	            if (!cachedAvatar) {
-	                that.cacheAvatar(username, newAvatar);
-	            }
+    // Your stock image URL
+    var stockImageUrl = 'https://i.ibb.co/hf1d87z/discord-avatar-512-CNXOI.png'; // Replace with your stock image URL
 
-	            if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
-	                var $avatar = $("<img>").attr("src", newAvatar || cachedAvatar)
-	                    .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
-	                    .prependTo($messageBlock).parent().addClass("nametitle");
+    // Function to check if the URL is a Discord link
+    function isDiscordUrl(url) {
+        return url && (url.includes('discordapp.com') || url.includes('discord.gg'));
+    }
 
-	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
-	                    $(this).css('display', 'none');
-	                    $avatar.attr('title', username);
-	                }
-					if (userSettings.get(namespace + '.avatars-mode') == 'small') {
-	                    $(this).css('display', 'none');
-	                    $avatar.attr('title', username);
-	                }
-	            }
-	        } else {
-				if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
-	                var $avatar = $("<img>").attr("data-name", username).addClass("AvL")
-	                    .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
-	                    .prependTo($messageBlock).parent().addClass("nametitle");;
+    if (cachedAvatar || newAvatar) {
+        if (!cachedAvatar) {
+            that.cacheAvatar(username, newAvatar);
+        }
 
-	                if (userSettings.get(namespace + '.avatars-mode') == 'big') {
-	                    $(this).css('display', 'none');
-	                    $avatar.attr('title', username);
-	                }
-					if (userSettings.get(namespace + '.avatars-mode') == 'small') {
-	                    $(this).css('display', 'none');
-	                    $avatar.attr('title', username);
-	                }
-	            }
-			}	
-	    };
+        var avatarToDisplay = cachedAvatar || newAvatar;
+
+        // Check if the avatar is a Discord link
+        if (isDiscordUrl(avatarToDisplay)) {
+            avatarToDisplay = stockImageUrl; // Use the stock image instead
+        }
+
+        if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
+            var $avatar = $("<img>")
+                .attr("src", avatarToDisplay)
+                .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
+                .on('error', function () {
+                    $(this).attr('src', stockImageUrl); // Fallback to stock image on error
+                })
+                .prependTo($messageBlock).parent().addClass("nametitle");
+
+            if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+                $(this).css('display', 'none');
+                $avatar.attr('title', username);
+            }
+            if (userSettings.get(namespace + '.avatars-mode') == 'small') {
+                $(this).css('display', 'none');
+                $avatar.attr('title', username);
+            }
+        }
+    } else {
+        if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
+            var $avatar = $("<img>")
+                .attr("data-name", username)
+                .addClass("AvL")
+                .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
+                .on('error', function () {
+                    $(this).attr('src', stockImageUrl); // Fallback to stock image on error
+                })
+                .prependTo($messageBlock).parent().addClass("nametitle");
+
+            // Check if the avatar is a Discord link
+            if (isDiscordUrl(stockImageUrl)) {
+                $avatar.attr('src', stockImageUrl);
+            } else {
+                $avatar.attr('src', avatarToDisplay);
+            }
+
+            if (userSettings.get(namespace + '.avatars-mode') == 'big') {
+                $(this).css('display', 'none');
+                $avatar.attr('title', username);
+            }
+            if (userSettings.get(namespace + '.avatars-mode') == 'small') {
+                $(this).css('display', 'none');
+                $avatar.attr('title', username);
+            }
+        }
+    }
+};
+
+
 
 	    /**
 	     * Creating markup for settings
