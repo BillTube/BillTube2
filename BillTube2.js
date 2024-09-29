@@ -4783,8 +4783,28 @@ $("#chatline").on("focus keyup", function() {
 });
 
 
-
-
+const chatBuffer = document.getElementById('messagebuffer');
+function isScrolledToBottom() {
+    return chatBuffer.scrollHeight - chatBuffer.scrollTop === chatBuffer.clientHeight;
+}
+function isUserScrolledUp() {
+    const scrollPercentage = (chatBuffer.scrollTop / (chatBuffer.scrollHeight - chatBuffer.clientHeight)) * 100;
+    return scrollPercentage <= 50;  
+}
+function scrollToBottom() {
+    chatBuffer.scrollTop = chatBuffer.scrollHeight;
+}
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length) {
+            if (isScrolledToBottom() || isUserScrolledUp()) {
+                scrollToBottom();
+            }
+        }
+    });
+});
+observer.observe(chatBuffer, { childList: true });
+scrollToBottom();
 
 
 
