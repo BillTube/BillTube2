@@ -1960,7 +1960,6 @@ window.socket.once('mediaUpdate', function (data) {
 
 
 
-	
 this.applyAvatar = function ($usernameBlock, username, newAvatar) {
     username = username || $usernameBlock.text().replace(/^\s+|[:]?\s+$/g, '');
     newAvatar = newAvatar || that.getAvatarFromUserlist(username);
@@ -1970,67 +1969,42 @@ this.applyAvatar = function ($usernameBlock, username, newAvatar) {
     var stockImageUrl = 'https://i.ibb.co/hf1d87z/discord-avatar-512-CNXOI.png'; 
 
     function isDiscordUrl(url) {
-        return url && (url.includes('xdiscordapp.com') || url.includes('xdiscord.gg'));
+        return url && (url.includes('discordapp.com') || url.includes('discord.gg'));
     }
 
-    if (cachedAvatar || newAvatar) {
-        if (!cachedAvatar) {
-            that.cacheAvatar(username, newAvatar);
-        }
+    // Function to check if the avatar URL is valid
+    function isValidAvatar(url) {
+        return url && url !== stockImageUrl; // More checks can be added if needed
+    }
 
-        var avatarToDisplay = cachedAvatar || newAvatar;
+    if (newAvatar && (!cachedAvatar || !isValidAvatar(cachedAvatar))) {
+        // If no cached avatar or invalid cached avatar, update the cache with new avatar
+        cachedAvatar = newAvatar;
+        that.cacheAvatar(username, newAvatar); // Update cache with new avatar
+    }
 
-        if (isDiscordUrl(avatarToDisplay)) {
-            avatarToDisplay = stockImageUrl; // Use the stock image instead
-        }
+    var avatarToDisplay = cachedAvatar || newAvatar;
 
-        if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
-            var $avatar = $("<img>")
-                .attr("src", avatarToDisplay)
-                .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
-                .on('error', function () {
-                    $(this).attr('src', stockImageUrl); // Fallback to stock image on error
-                })
-                .prependTo($messageBlock).parent().addClass("nametitle");
+    if (isDiscordUrl(avatarToDisplay)) {
+        avatarToDisplay = stockImageUrl; // Use the stock image instead if it's a Discord link
+    }
 
-            if (userSettings.get(namespace + '.avatars-mode') == 'big') {
-                $(this).css('display', 'none');
-                $avatar.attr('title', username);
-            }
-            if (userSettings.get(namespace + '.avatars-mode') == 'small') {
-                $(this).css('display', 'none');
-                $avatar.attr('title', username);
-            }
-        }
-    } else {
-        if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
-            var $avatar = $("<img>")
-                .attr("data-name", username)
-                .addClass("AvL")
-                .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
-                .on('error', function () {
-                    $(this).attr('src', stockImageUrl); // Fallback to stock image on error
-                })
-                .prependTo($messageBlock).parent().addClass("nametitle");
+    if ($messageBlock.find('.' + settings.avatarClass).length === 0) {
+        var $avatar = $("<img>")
+            .attr("src", avatarToDisplay)
+            .addClass(settings.avatarClass + ' ' + ((userSettings.get(namespace + '.avatars-mode') == 'big') ? settings.bigAvatarClass : settings.smallAvatarClass))
+            .on('error', function () {
+                $(this).attr('src', stockImageUrl); // Fallback to stock image on error
+            })
+            .prependTo($messageBlock).parent().addClass("nametitle");
 
-            // Check if the avatar is a Discord link
-            if (isDiscordUrl(stockImageUrl)) {
-                $avatar.attr('src', stockImageUrl);
-            } else {
-                $avatar.attr('src', avatarToDisplay);
-            }
-
-            if (userSettings.get(namespace + '.avatars-mode') == 'big') {
-                $(this).css('display', 'none');
-                $avatar.attr('title', username);
-            }
-            if (userSettings.get(namespace + '.avatars-mode') == 'small') {
-                $(this).css('display', 'none');
-                $avatar.attr('title', username);
-            }
+        if (userSettings.get(namespace + '.avatars-mode') == 'big' || userSettings.get(namespace + '.avatars-mode') == 'small') {
+            $(this).css('display', 'none');
+            $avatar.attr('title', username);
         }
     }
 };
+
 
 
 
