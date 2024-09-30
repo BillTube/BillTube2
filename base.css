@@ -3,13 +3,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700,800,900');
 
-  svg {
-  width: 100%;
-  fill: transparent;
-  transition: 0.5s;
-  width: 16px;
-  height: 16px;
- }
+
 /* Animation */
 @keyframes fadeInUp {
 	from {
