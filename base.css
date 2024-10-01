@@ -4753,12 +4753,12 @@ button#skip:disabled,button#mediarefresh:disabled {
 .chat-msg-bill2 .username {
     font-weight: 1000;
     --bg-pos: .2em -.07em;
-    text-shadow: 1px 2px 12px rgb(98 207 203 / 50%);
+    text-shadow: 1px 2px 12px rgb(108 199 0 / 50%);
     position: relative;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: border-box, text;
-    background-image: url(https://media.giphy.com/media/eYRGWfchREFUUlXT7P/giphy.gif), linear-gradient(302deg, #24599d 0%, #fff 100%);
-    background-size: 10em, 17em;
+    background-image: url(https://shadow-of-valtus.neocities.org/Graphics/Dividers/kingluludeer_eyedivider.gif), linear-gradient(323deg, #a33000 0%, #ff8d00d9 100%);
+    background-size: 14em, 18em;
     animation: starkrdp-anim 3s linear infinite;
 }
 .chat-msg-bill .username {
