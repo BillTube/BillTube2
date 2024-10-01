@@ -445,7 +445,8 @@ var setImageSrc = function(imageData) {
     $("#newpollbtn").addClass("headerbtn");
 
     // Text modifications
-    $(".server-msg-reconnect").addClass("fa-solid fa-popcorn").text("");
+    //$(".server-msg-reconnect").addClass("fa-solid fa-popcorn").text("");
+    $(".server-msg-reconnect").addClass("fa-duotone fa-solid fa-jack-o-lantern").text(""); //spooky halloween mode
     $userlisttoggle.text("");
     $("#showchansettings").text("Admin Settings");
 
