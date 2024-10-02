@@ -344,6 +344,8 @@ $('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTu
 $.getScript("https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
+//$.getScript("https://cdnjs.cloudflare.com/ajax/libs/jQuery-Selection/1.0.1/jquery.selection.min.js");
+
 
 function loadScriptAsync(url, shouldLoad, callback) {
     // Check if the variable is set to 1
@@ -1592,149 +1594,756 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(13);
-	window.cytubeEnhanced.addModule('bbCodesHelper', function (app, settings) {
-	    'use strict';
-	    var that = this;
+    // Include any required modules or plugins
+    // If you have specific modules to include, replace the following line accordingly
+    // __webpack_require__(13); // Replace with actual module if needed
 
-	    var defaultSettings = {
-	        templateButtons: ['b', 'i', 'sp', 'code', 's'],
-	        templateButtonsAnimationSpeed: 150
-	    };
-	    settings = $.extend({}, defaultSettings, settings);
+    window.cytubeEnhanced.addModule('bbCodesHelper', function (app, settings) {
+        'use strict';
+        var that = this;
 
+        var defaultSettings = {
+            templateButtons: ['b', 'i', 'sp', 'code', 's'],
+            templateButtonsAnimationSpeed: 150,
+            afkButton: true,
+            clearChatButton: true, // Set to true to enable clear chat button
+            itemsInHistory: 50 // Number of items to keep in chat history
+        };
+        settings = $.extend({}, defaultSettings, settings);
 
-	    if ($('#chat-controls').length === 0) {
-	        $('<div id="chat-controls" class="">').appendTo(".chat-area-buttons");
-	    }
-			if (CLIENT.rank<1) {
-				$("#chat-controls").addClass("hidden");
-			}
-			 window.socket.on('login', function ()  {
-				$("#chat-controls").removeClass("hidden");
-			});
-			
-	    if ($('#chat-menu').length === 0) {
-	        $('<div id="chat-menu" class="">').appendTo(".chat-area-buttons");
-	    }
-			    if ($('#chat-controls-embed').length === 0) {
-	        $('<div id="chat-controls-embed" class="">').appendTo("#chatbox");
-	    }
-			if (CLIENT.rank<1) {
-				$("#chat-menu").addClass("hidden");
-			}
-			 window.socket.on('login', function ()  {
-				$("#chat-menu").removeClass("hidden");
-			});
-			
-	    this.handleMarkdownHelperBtnClick = function ($markdownHelperBtn, $markdownTemplatesWrapper) {
-	        if ($markdownHelperBtn.hasClass('chatbtn-default')) { //closed
-	            $markdownHelperBtn.removeClass('chatbtn-default');
-	            $markdownHelperBtn.addClass('chatbtn-success');
+        // Initialize chat history storage
+        app.storage.setDefault('pmHistory', []);
 
-	            $markdownTemplatesWrapper.show();
-	            $markdownTemplatesWrapper.children().animate({left: 0}, settings.templateButtonsAnimationSpeed);
-	        } else { //opened
-	            $markdownHelperBtn.removeClass('chatbtn-success');
-	            $markdownHelperBtn.addClass('chatbtn-default');
+        // Listen for chat messages and store those that mention the user
+        window.socket.on('chatMsg', function(e) {
+            if (window.CLIENT.name && e.msg.toLowerCase().indexOf(window.CLIENT.name.toLowerCase()) !== -1) {
+                var history = app.storage.get('pmHistory');
+                if (!$.isArray(history)) {
+                    history = [];
+                }
+                if (history.length >= settings.itemsInHistory) {
+                    history = history.slice(0, settings.itemsInHistory - 1);
+                }
+                history.unshift({
+                    username: e.username,
+                    msg: e.msg,
+                    time: e.time
+                });
+                app.storage.set('pmHistory', history);
+            }
+        });
 
-	            $markdownTemplatesWrapper.children().animate({left: -$markdownTemplatesWrapper.width()}, settings.templateButtonsAnimationSpeed, function () {
-	                $markdownTemplatesWrapper.hide();
-	            });
-	        }
-	    };
+        // Create the settings button (cogwheel icon)
+        if ($('#settings-button').length === 0) {
+            this.$settingsButton = $('<button id="settings-button" type="button" class="chatbtn" style="float: right; bottom: 4px;" data-tooltip="Settings" data-tooltip-pos="up">')
+                .html('<i class="fas fa-cog"></i>')
+                .appendTo(".chat-area-buttons");
+        }
+        if (CLIENT.rank < 1) {
+            $("#settings-button").addClass("hidden");
+        }
+        window.socket.on('login', function ()  {
+            $("#settings-button").removeClass("hidden");
+        });
 
-	    this.$markdownHelperBtn = $('<button id="markdown-helper-btn" type="button" class="chatbtn" data-tooltip="Markdown Helper" data-tooltip-pos="up">')
-	        .html('<i class="fad fa-font-case"></i>')
-	        .on('click', function () {
-	            that.handleMarkdownHelperBtnClick($(this), that.$markdownTemplatesWrapper);
+        // Create the modal container (hidden by default)
+        this.$settingsModal = $('<div id="settings-modal" class="settings-modal">')
+            .css({
+                'position': 'absolute',
+                'bottom': '90px',
+                'left': '50%',
+                'transform': 'translateX(-50%)',
+                'width': 'var(--chatwidth)',
+                'background-color': 'var(--theme-bg-menu)',
+                'border': '1px solid rgba(35, 39, 42, 0.65)',
+                'padding': '10px',
+                'display': 'none',
+                'z-index': '1000',
+                'border-radius': '5px'
+            })
+            .appendTo('.chat-area-footer'); // Append to chat-area-footer
 
-	            app.storage.toggle('bb-codes-opened');
-	        });
+        // Create a close button for the modal
+        this.$modalCloseButton = $('<button type="button" class="modal-close-button">')
+            .html('&times;')
+            .css({
+                'position': 'absolute',
+                'top': '10px',
+                'right': '10px',
+                'background': 'none',
+                'border': 'none',
+                'color': '#fff',
+                'font-size': '24px',
+                'cursor': 'pointer'
+            })
+            .appendTo(this.$settingsModal);
 
-	    if ($('#chat-help-btn').length !== 0) {
-	        this.$markdownHelperBtn.insertBefore('#chat-help-btn');
-	    } else {
-	        this.$markdownHelperBtn.appendTo('#chat-controls-embed');
-	    }
+        // Add the color selection component (initially hidden)
+        if (typeof ColorsArray !== 'undefined' && ColorsArray.length > 0) {
 
+            // Create the container for color selection
+            this.$colorSelection = $('<div id="color-selection" class="color-selection">')
+                .css({
+                    'display': 'none', // Initially hidden
+                    'flex-direction': 'column',
+                    'align-items': 'center',
+                    'margin-bottom': '10px'
+                })
+                .appendTo(this.$settingsModal); // Append to the modal at the top
 
-	    this.$markdownTemplatesWrapper = $('<div class="btn-group markdown-helper-templates-wrapper">')
-	        .insertAfter(this.$markdownHelperBtn)
-	        .hide();
+            // Add a title for the color selection
+            $('<div>')
+                .text('Select Text Color')
+                .css({
+                    'color': '#fff',
+                    'font-size': '16px',
+                    'margin-bottom': '5px'
+                })
+                .appendTo(this.$colorSelection);
 
-	    if (app.storage.get('bb-codes-opened')) {
-	        this.handleMarkdownHelperBtnClick(this.$markdownHelperBtn, this.$markdownTemplatesWrapper);
-	    }
+            // Create the container for color buttons
+            this.$colorButtonsContainer = $('<div class="color-buttons-container">')
+                .css({
+                    'display': 'flex',
+                    'flex-wrap': 'wrap',
+                    'justify-content': 'center',
+                    'max-height': '150px',
+                    'overflow-y': 'auto'
+                })
+                .appendTo(this.$colorSelection);
 
+            var selectedColor = null;
+            var $chatline = $("#chatline");
 
-	    /**
-	     * Markdown templates
-	     *
-	     * To add your template you need to also add your template key into settings.templateButtons
-	     * @type {object}
-	     */
-	    this.markdownTemplates = {
-	        'b': {
-	            text: '<b>B</b>',
-	            title: app.t('markdown[.]Bold text')
-	        },
-	        'i': {
-	            text: '<i>I</i>',
-	            title: app.t('markdown[.]Cursive text')
-	        },
-	        'sp': {
-	            text: 'SP',
-	            title: app.t('markdown[.]Spoiler')
-	        },
-	        'code': {
-	            text: '<code>CODE</code>',
-	            title: app.t('markdown[.]Monospace')
-	        },
-	        's': {
-	            text: '<s>S</s>',
-	            title: app.t('markdown[.]Strike')
-	        }
-	    };
+            // Populate the color buttons
+            ColorsArray.forEach(function(color) {
+                $('<button class="color-button">')
+                    .css({
+                        'background-color': color,
+                        'width': '30px',
+                        'height': '30px',
+                        'margin': '2px',
+                        'border': 'none',
+                        'cursor': 'pointer',
+                        'border-radius': '3px'
+                    })
+                    .on('click', function() {
+                        selectedColor = color; // Store the selected color
+                        // Insert the color tag into the chatline
+                        var currentVal = $chatline.val();
+                        if (!currentVal.startsWith('col:' + selectedColor + ':')) {
+                            $chatline.val('col:' + selectedColor + ':' + currentVal);
+                        }
+                        $chatline.focus();
+                        // Optionally hide the color selection after choosing a color
+                        that.$colorSelection.slideUp(150);
+                    })
+                    .appendTo(that.$colorButtonsContainer);
+            });
 
-	    var template;
-	    for (var templateIndex = 0, templatesLength = settings.templateButtons.length; templateIndex < templatesLength; templateIndex++) {
-	        template = settings.templateButtons[templateIndex];
+            // Add a 'Clear Color' button
+            $('<button id="clear-color" class="btn btn-default">Clear Color</button>')
+                .css({
+                    'margin-top': '5px',
+                    'background-color': '#7289da',
+                    'color': '#fff',
+                    'border': 'none',
+                    'padding': '8px 12px',
+                    'font-size': '14px',
+                    'cursor': 'pointer',
+                    'border-radius': '3px',
+                    'text-align': 'center'
+                })
+                .hover(
+                    function() { $(this).css('background-color', '#99aab5'); },
+                    function() { $(this).css('background-color', '#7289da'); }
+                )
+                .on('click', function() {
+                    selectedColor = null;
+                    var currentVal = $chatline.val();
+                    // Remove the color tag if present
+                    if (currentVal.startsWith('col:')) {
+                        var parts = currentVal.split(':');
+                        parts.shift(); // Remove 'col'
+                        parts.shift(); // Remove color value
+                        $chatline.val(parts.join(':'));
+                    }
+                    $chatline.focus();
+                    // Optionally hide the color selection after clearing
+                    that.$colorSelection.slideUp(150);
+                })
+                .appendTo(this.$colorSelection);
 
-	        $('<button type="button" class="btn btn-sm btn-default" title="' + this.markdownTemplates[template].title + '">')
-	            .html(this.markdownTemplates[template].text)
-	            .data('template', template)
-	            .appendTo(this.$markdownTemplatesWrapper);
-	    }
+        } else {
+            console.error('ColorsArray is undefined or empty.');
+        }
 
+        // Create the container for the BB code buttons (top row)
+        this.$modalBBCodeRow = $('<div class="modal-bbcode-row">')
+            .css({
+                'display': 'flex',
+                'justify-content': 'center',
+                'margin-bottom': '10px'
+            })
+            .appendTo(this.$settingsModal);
 
-	    this.handleMarkdown = function (templateType) {
-	        if (this.markdownTemplates.hasOwnProperty(templateType)) {
-	            $('#chatline')
-	                .selection('insert', {
-	                    text: '[' + templateType + ']',
-	                    mode: 'before'
-	                })
-	                .selection('insert', {
-	                    text: '[/' + templateType + ']',
-	                    mode: 'after'
-	                });
-	        }
-	    };
-	    this.$markdownTemplatesWrapper.on('click', 'button', function () {
-	        that.handleMarkdown($(this).data('template'));
+        // Add the "Color" button to the BB code buttons row
+        this.$colorToggleButton = $('<button type="button" class="btn btn-default" title="Text Color">')
+            .html('<i class="fas fa-palette"></i>')
+            .css({
+                'margin': '0 5px',
+                'background-color': 'rgb(255 255 255 / 7%)',
+                'color': '#fff',
+                'border': 'none',
+                'padding': '10px 15px',
+                'font-size': '14px',
+                'cursor': 'pointer',
+                'border-radius': '3px',
+                'text-align': 'center'
+            })
+            .hover(
+                function() { $(this).css('background-color', '#99aab5'); },
+                function() { $(this).css('background-color', 'rgb(255 255 255 / 7%)'); }
+            )
+            .appendTo(this.$modalBBCodeRow)
+            .on('click', function(e) {
+                e.stopPropagation();
+                that.$colorSelection.slideToggle(150); // Toggle the color selection component
+            });
 
-	        return false;
-	    });
-			function insertText(str) {
-				$("#chatline").val($("#chatline").val() + str).focus();
-			}
-		
+        // Now add the BB code buttons
+        this.markdownTemplates = {
+            'b': {
+                text: '<b>B</b>',
+                title: app.t('markdown[.]Bold text')
+            },
+            'i': {
+                text: '<i>I</i>',
+                title: app.t('markdown[.]Italic text')
+            },
+            'sp': {
+                text: 'SP',
+                title: app.t('markdown[.]Spoiler')
+            },
+            'code': {
+                text: '<code>CODE</code>',
+                title: app.t('markdown[.]Monospace')
+            },
+            's': {
+                text: '<s>S</s>',
+                title: app.t('markdown[.]Strikethrough')
+            }
+        };
 
-	});
+        var template;
+        for (var templateIndex = 0, templatesLength = settings.templateButtons.length; templateIndex < templatesLength; templateIndex++) {
+            template = settings.templateButtons[templateIndex];
 
+            $('<button type="button" class="btn btn-default" title="' + this.markdownTemplates[template].title + '">')
+                .html(this.markdownTemplates[template].text)
+                .data('template', template)
+                .css({
+                    'margin': '0 5px',
+                    'background-color': 'rgb(255 255 255 / 7%)',
+                    'color': '#fff',
+                    'border': 'none',
+                    'padding': '10px 15px',
+                    'font-size': '14px',
+                    'cursor': 'pointer',
+                    'border-radius': '3px',
+                    'text-align': 'center'
+                })
+                .hover(
+                    function() { $(this).css('background-color', '#99aab5'); },
+                    function() { $(this).css('background-color', 'rgb(255 255 255 / 7%)'); }
+                )
+                .appendTo(this.$modalBBCodeRow)
+                .on('click', function(e) {
+                    e.stopPropagation();
+                    that.handleMarkdown($(this).data('template'));
+                    that.$settingsModal.fadeOut(200);
+                    return false;
+                });
+        }
+
+        // Create the container for the settings buttons (vertical list)
+        this.$modalSettingsList = $('<div class="modal-settings-list">')
+            .css({
+                'margin-top': '10px',
+                'display': 'flex',
+                'flex-direction': 'column',
+                'align-items': 'center'
+            })
+            .appendTo(this.$settingsModal);
+
+        // **Add the AFK Button**
+        if (settings.afkButton) {
+            this.$afkButton = $('<button type="button" id="afk-btn" class="btn btn-default">')
+                .text('AFK')
+                .css({
+                    'margin': '5px 0',
+                    'width': '80%',
+                    'background-color': '#2c2f33',
+                    'color': '#fff',
+                    'border': '1px solid #23272a',
+                    'padding': '10px',
+                    'font-size': '14px',
+                    'cursor': 'pointer',
+                    'border-radius': '3px',
+                    'text-align': 'center'
+                })
+                .hover(
+                    function() { $(this).css('background-color', '#3b3e44'); },
+                    function() { $(this).css('background-color', '#2c2f33'); }
+                )
+                .on('click', function(e) {
+                    e.stopPropagation();
+                    that.handleAfkBtn();
+                })
+                .appendTo(that.$modalSettingsList);
+
+            // Function to handle AFK button click
+            this.handleAfkBtn = function() {
+                window.socket.emit("chatMsg", { msg: "/afk" });
+            };
+
+            // Function to handle AFK status change
+            this.handleAfk = function(data) {
+                if (data.name === window.CLIENT.name) {
+                    if (data.afk) {
+                        // User is AFK
+                        that.$afkButton.text('AFK (On)');
+                        that.$afkButton.css('background-color', '#3b3e44');
+                    } else {
+                        // User is not AFK
+                        that.$afkButton.text('AFK');
+                        that.$afkButton.css('background-color', '#2c2f33');
+                    }
+                }
+            };
+
+            // Listen for AFK status changes
+            window.socket.on("setAFK", function(data) {
+                that.handleAfk(data);
+            });
+
+            // Check initial AFK status
+            if (window.CLIENT.afk) {
+                that.$afkButton.text('AFK (On)');
+                that.$afkButton.css('background-color', '#3b3e44');
+            }
+
+        }
+
+        // **Add the Clear Chat Button**
+        if (settings.clearChatButton) {
+            this.$clearChatButton = $('<button type="button" id="clear-chat-btn" class="btn btn-default">')
+                .text('Clear Chat')
+                .css({
+                    'margin': '5px 0',
+                    'width': '80%',
+                    'background-color': '#2c2f33',
+                    'color': '#fff',
+                    'border': '1px solid #23272a',
+                    'padding': '10px',
+                    'font-size': '14px',
+                    'cursor': 'pointer',
+                    'border-radius': '3px',
+                    'text-align': 'center'
+                })
+                .hover(
+                    function() { $(this).css('background-color', '#3b3e44'); },
+                    function() { $(this).css('background-color', '#2c2f33'); }
+                )
+                .on('click', function(e) {
+                    e.stopPropagation();
+                    that.handleClearBtn();
+                })
+                .appendTo(that.$modalSettingsList);
+
+            // Function to handle Clear Chat button click
+            this.handleClearBtn = function() {
+                if (window.confirm("Are you sure that you want to clear the chat?")) {
+                    window.socket.emit("chatMsg", { msg: "/clear" });
+                }
+            };
+
+            // Function to handle visibility of Clear Chat button
+            this.handleChatClear = function() {
+                if (window.hasPermission("chatclear") && settings.clearChatButton) {
+                    that.$clearChatButton.show();
+                } else {
+                    that.$clearChatButton.hide();
+                }
+            };
+
+            // Initial visibility
+            this.handleChatClear();
+
+            // Update visibility when user rank changes
+            window.socket.on("setUserRank", function() {
+                that.handleChatClear();
+            });
+
+        }
+
+        // **Add the Chat History Button**
+        $('<button type="button" id="chat-history-btn" class="btn btn-default">')
+            .text('Chat History')
+            .css({
+                'margin': '5px 0',
+                'width': '80%',
+                'background-color': '#2c2f33',
+                'color': '#fff',
+                'border': '1px solid #23272a',
+                'padding': '10px',
+                'font-size': '14px',
+                'cursor': 'pointer',
+                'border-radius': '3px',
+                'text-align': 'center'
+            })
+            .hover(
+                function() { $(this).css('background-color', '#3b3e44'); },
+                function() { $(this).css('background-color', '#2c2f33'); }
+            )
+            .on('click', function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                that.showChatHistory();
+            })
+            .appendTo(this.$modalSettingsList);
+
+        // Function to format a history message for display
+        this.formatHistoryMessage = function(message) {
+            var $messageDiv = $('<div class="pm-history-message">')
+                .css({
+                    'border-bottom': '1px solid #444',
+                    'padding': '5px 0'
+                });
+            var date = new Date(message.time);
+            var day = date.getDate();
+            day = day < 10 ? '0' + day : day;
+            var month = date.getMonth() + 1; // Months are zero-based
+            month = month < 10 ? '0' + month : month;
+            var year = date.getFullYear();
+            var hours = date.getHours();
+            hours = hours < 10 ? '0' + hours : hours;
+            var minutes = date.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var seconds = date.getSeconds();
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var timestamp = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+            $messageDiv.append($('<div class="pm-history-message-time">').text('[' + timestamp + '] ').css('color', '#ccc'));
+            $messageDiv.append($('<span class="pm-history-message-username">').text(message.username + ': ').css('color', '#fff'));
+            $messageDiv.append($('<span class="pm-history-message-content">').html(message.msg).css('color', '#ddd'));
+            return $messageDiv;
+        };
+
+        // Function to display the chat history in a modal
+        this.showChatHistory = function() {
+            var history = app.storage.get('pmHistory');
+            if (!$.isArray(history)) {
+                history = [];
+            }
+
+            var $modalTitle = $('<h3 class="modal-title">').text('Chat History');
+            var $modalDescription = $('<div class="modal-description">').text('Your chat messages history.');
+
+            var $modalContent = $('<div class="pm-history-content">').css({
+                'max-height': '400px',
+                'overflow-y': 'auto',
+                'margin-top': '10px'
+            });
+            for (var i = 0; i < history.length; i++) {
+                $modalContent.append(that.formatHistoryMessage(history[i]));
+            }
+
+            // Add Reset and Exit buttons
+            var $resetButton = $('<button type="button" id="pm-history-reset-btn" class="btn btn-danger">Reset History</button>')
+                .on('click', function(e) {
+                    e.stopPropagation();
+                    if (window.confirm('Are you sure that you want to clear messages history?')) {
+                        that.resetChatHistory();
+                        $modalContent.empty(); // Clear the content
+                    }
+                });
+
+            var $exitButton = $('<button type="button" id="pm-history-exit-btn" class="btn btn-default">Exit</button>')
+                .on('click', function(e) {
+                    e.stopPropagation();
+                    $historyModal.fadeOut(200, function() {
+                        $(this).remove();
+                    });
+                    $(document).off('click.historyModal');
+                });
+
+            var $modalFooter = $('<div class="pm-history-footer">')
+                .css({
+                    'margin-top': '10px',
+                    'text-align': 'right'
+                })
+                .append($resetButton)
+                .append($exitButton);
+
+            // Create and display the chat history modal
+            var $historyModal = $('<div class="chat-history-modal">')
+                .css({
+                    'position': 'fixed',
+                    'top': '50%',
+                    'left': '50%',
+                    'transform': 'translate(-50%, -50%)',
+                    'background-color': '#2c2f33',
+                    'border': '1px solid #23272a',
+                    'padding': '20px',
+                    'z-index': '1002',
+                    'border-radius': '5px',
+                    'width': '500px',
+                    'max-width': '90%',
+                    'color': '#fff',
+                    'overflow': 'hidden',
+                    'max-height': '80vh'
+                })
+                .appendTo('body');
+
+            $historyModal.append($modalTitle).append($modalDescription).append($modalContent).append($modalFooter);
+
+            // Close the history modal when clicking outside of it
+            $(document).on('click.historyModal', function(e) {
+                if (!$(e.target).closest('.chat-history-modal').length) {
+                    $historyModal.fadeOut(200, function() {
+                        $(this).remove();
+                    });
+                    $(document).off('click.historyModal');
+                }
+            });
+        };
+
+        // Function to reset chat history
+        this.resetChatHistory = function() {
+            app.storage.set('pmHistory', app.storage.getDefault('pmHistory'));
+        };
+
+        // **Add the Help button to the settings list**
+        $('<button type="button" id="chat-help-btn" class="btn btn-default">')
+            .text('Chat Commands')
+            .css({
+                'margin': '5px 0',
+                'width': '80%',
+                'background-color': '#2c2f33',
+                'color': '#fff',
+                'border': '1px solid #23272a',
+                'padding': '10px',
+                'font-size': '14px',
+                'cursor': 'pointer',
+                'border-radius': '3px',
+                'text-align': 'center'
+            })
+            .hover(
+                function() { $(this).css('background-color', '#3b3e44'); },
+                function() { $(this).css('background-color', '#2c2f33'); }
+            )
+            .on('click', function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                that.showChatCommandsHelp();
+            })
+            .appendTo(this.$modalSettingsList);
+
+// Define the function to show or toggle chat commands help
+this.showChatCommandsHelp = function() {
+    var $helpModal = $('.chat-commands-help-modal');
+
+    if ($helpModal.length > 0) {
+        // If the modal already exists, toggle its visibility
+        if ($helpModal.is(':visible')) {
+            $helpModal.fadeOut(200);
+            $(document).off('click.helpModal'); // Remove the event handler when modal is hidden
+        } else {
+            $helpModal.fadeIn(200);
+            // Reattach the click outside handler
+            $(document).on('click.helpModal', function(e) {
+                if (!$(e.target).closest('.chat-commands-help-modal').length && !$(e.target).closest('#chat-help-btn').length) {
+                    $helpModal.fadeOut(200);
+                    $(document).off('click.helpModal');
+                }
+            });
+        }
+        return;
+    }
+
+    // If the modal doesn't exist, create it
+    var commands = {};
+
+    // **Include Standard Commands**
+    commands['Standard commands'] = {
+        '/me': '%username% action (e.g: <i>/me is dancing</i>)',
+        '/sp': 'Spoiler text',
+        '/afk': 'Sets your status to AFK',
+        // Add more standard commands as needed
+    };
+
+    // **Include Extra Commands from 'additionalChatCommands' Module**
+    if (app.isModulePermitted('additionalChatCommands')) {
+        app.getModule('additionalChatCommands').done(function(module) {
+            var extraCommands = {};
+            for (var cmd in module.commandsList) {
+                if (module.commandsList.hasOwnProperty(cmd) && module.isCommandPermitted(cmd) && (!module.commandsList[cmd].isAvailable || module.commandsList[cmd].isAvailable())) {
+                    extraCommands[cmd] = module.commandsList[cmd].description || '';
+                }
+            }
+            if (Object.keys(extraCommands).length > 0) {
+                commands['Extra commands'] = extraCommands;
+            }
+
+            // Now create and display the modal with both standard and extra commands
+            that.displayChatCommandsModal(commands);
+        });
+    } else {
+        // If no extra commands, just display standard commands
+        that.displayChatCommandsModal(commands);
+    }
+};
+
+        // Function to display the chat commands modal
+        this.displayChatCommandsModal = function(commands) {
+            var $modalTitle = $('<h3 class="modal-title">').text('List of Chat Commands');
+            var $modalContent = $('<div>');
+
+            for (var category in commands) {
+                if (commands.hasOwnProperty(category)) {
+                    $('<h3>').html(category).appendTo($modalContent);
+                    var $commandList = $('<ul>');
+                    for (var command in commands[category]) {
+                        if (commands[category].hasOwnProperty(command)) {
+                            $('<li>').html('<code>' + command + '</code> - ' + commands[category][command] + '.').appendTo($commandList);
+                        }
+                    }
+                    $commandList.appendTo($modalContent);
+                }
+            }
+
+            // Create and display the chat commands help modal
+            var $helpModal = $('<div class="chat-commands-help-modal">')
+                .css({
+                    'position': 'fixed',
+                    'top': '50%',
+                    'left': '50%',
+                    'transform': 'translate(-50%, -50%)',
+                    'background-color': '#2c2f33',
+                    'border': '1px solid #23272a',
+                    'padding': '20px',
+                    'z-index': '1001',
+                    'border-radius': '5px',
+                    'width': 'auto',
+                    'max-width': '90%',
+                    'color': '#fff',
+                    'overflow-y': 'auto',
+                    'max-height': '80vh'
+                })
+                .appendTo('body');
+
+            // Append title and content to the help modal
+            $helpModal.append($modalTitle).append($modalContent);
+
+            // Add a close button to the help modal
+            var $helpModalCloseButton = $('<button type="button" class="help-modal-close-button">')
+                .html('&times;')
+                .css({
+                    'position': 'absolute',
+                    'top': '10px',
+                    'right': '10px',
+                    'background': 'none',
+                    'border': 'none',
+                    'color': '#fff',
+                    'font-size': '24px',
+                    'cursor': 'pointer'
+                })
+                .appendTo($helpModal)
+                .on('click', function() {
+                    $helpModal.fadeOut(200, function() {
+                        $(this).remove();
+                    });
+                    $(document).off('click.helpModal');
+                });
+
+            // Close the help modal when clicking outside of it
+            $(document).on('click.helpModal', function(e) {
+                if (!$(e.target).closest('.chat-commands-help-modal').length) {
+                    $helpModal.fadeOut(200, function() {
+                        $(this).remove();
+                    });
+                    $(document).off('click.helpModal');
+                }
+            });
+        };
+
+// Toggle the settings modal when the settings button is clicked
+this.$settingsButton.on('click', function (e) {
+    e.stopPropagation(); // Prevent event bubbling
+    that.$settingsModal.fadeToggle(200); // Use fadeToggle instead of fadeIn
+});
+
+        // Close the settings modal when the close button is clicked
+        this.$modalCloseButton.on('click', function (e) {
+            e.stopPropagation(); // Prevent event bubbling
+            that.$settingsModal.fadeOut(200);
+        });
+
+        // Close the settings modal when clicking outside of it
+        $(document).on('click.settingsModal', function (e) {
+            if (!$(e.target).closest('#settings-modal').length && !$(e.target).closest('#settings-button').length && !$(e.target).closest('.chat-commands-help-modal').length && !$(e.target).closest('.chat-history-modal').length) {
+                that.$settingsModal.fadeOut(200);
+            }
+        });
+
+// Function to insert BBCode into the chat line without using the selection plugin
+this.handleMarkdown = function (templateType) {
+    var $chatline = $('#chatline');
+    var chatlineVal = $chatline.val();
+    var selectionStart = $chatline[0].selectionStart;
+    var selectionEnd = $chatline[0].selectionEnd;
+
+    var beforeSelection = chatlineVal.substring(0, selectionStart);
+    var selectedText = chatlineVal.substring(selectionStart, selectionEnd);
+    var afterSelection = chatlineVal.substring(selectionEnd);
+
+    var openingTag = '[' + templateType + ']';
+    var closingTag = '[/' + templateType + ']';
+
+    // Construct the new value
+    var newChatlineVal = beforeSelection + openingTag + selectedText + closingTag + afterSelection;
+
+    // Set the new value
+    $chatline.val(newChatlineVal);
+
+    var cursorPosition;
+
+    if (selectionStart === selectionEnd) {
+        // No text selected; place cursor between the tags
+        cursorPosition = selectionStart + openingTag.length;
+    } else {
+        // Text was selected; place cursor after the closing tag
+        cursorPosition = selectionEnd + openingTag.length + closingTag.length;
+    }
+
+    $chatline[0].setSelectionRange(cursorPosition, cursorPosition);
+
+    $chatline.focus();
+};
+
+    });
 
 /***/ },
+
+
+
+
+
+
+
+
+
+
+
+
 /* 13 */
 /***/ function(module, exports) {
 !function(t,e,r){var n=function(t){var n={text:"",start:0,end:0};if(!t.value)return n;try{if(e.getSelection)n.start=t.selectionStart,n.end=t.selectionEnd,n.text=t.value.slice(n.start,n.end);else if(r.selection){t.focus();var s=r.selection.createRange(),a=r.body.createTextRange();n.text=s.text;try{a.moveToElementText(t),a.setEndPoint("StartToStart",s)}catch(e){(a=t.createTextRange()).setEndPoint("StartToStart",s)}n.start=t.value.length-a.text.length,n.end=n.start+s.text.length}}catch(t){}return n},s={getPos:function(t){var e=n(t);return{start:e.start,end:e.end}},setPos:function(t,r,n){"start"===(n=this._caretMode(n))?r.end=r.start:"end"===n&&(r.start=r.end),t.focus();try{if(t.createTextRange){var s=t.createTextRange();e.navigator.userAgent.toLowerCase().indexOf("msie")>=0&&(r.start=t.value.substr(0,r.start).replace(/\r/g,"").length,r.end=t.value.substr(0,r.end).replace(/\r/g,"").length),s.collapse(!0),s.moveStart("character",r.start),s.moveEnd("character",r.end-r.start),s.select()}else t.setSelectionRange&&t.setSelectionRange(r.start,r.end)}catch(t){}},getText:function(t){return n(t).text},_caretMode:function(t){switch(!1===(t=t||"keep")&&(t="end"),t){case"keep":case"start":case"end":break;default:t="keep"}return t},replace:function(e,r,s){var a=n(e),c=e.value,o=t(e).scrollTop(),i={start:a.start,end:a.start+r.length};e.value=c.substr(0,a.start)+r+c.substr(a.end),t(e).scrollTop(o),this.setPos(e,i,s)},insertBefore:function(e,r,s){var a=n(e),c=e.value,o=t(e).scrollTop(),i={start:a.start+r.length,end:a.end+r.length};e.value=c.substr(0,a.start)+r+c.substr(a.start),t(e).scrollTop(o),this.setPos(e,i,s)},insertAfter:function(e,r,s){var a=n(e),c=e.value,o=t(e).scrollTop(),i={start:a.start,end:a.end};e.value=c.substr(0,a.end)+r+c.substr(a.end),t(e).scrollTop(o),this.setPos(e,i,s)}};t.extend({selection:function(n){var s="text"===(n||"text").toLowerCase();try{if(e.getSelection){if(s)return e.getSelection().toString();var a,c=e.getSelection();return c.getRangeAt?a=c.getRangeAt(0):((a=r.createRange()).setStart(c.anchorNode,c.anchorOffset),a.setEnd(c.focusNode,c.focusOffset)),t("<div></div>").append(a.cloneContents()).html()}if(r.selection)return s?r.selection.createRange().text:r.selection.createRange().htmlText}catch(t){}return""}}),t.fn.extend({selection:function(t,e){switch(e=e||{},t){case"getPos":return s.getPos(this[0]);case"setPos":return this.each(function(){s.setPos(this,e)});case"replace":return this.each(function(){s.replace(this,e.text,e.caret)});case"insert":return this.each(function(){"before"===e.mode?s.insertBefore(this,e.text,e.caret):s.insertAfter(this,e.text,e.caret)});case"get":default:return s.getText(this[0])}return this}})}(jQuery,window,window.document);
@@ -2072,11 +2681,11 @@ window.socket.once('mediaUpdate', function (data) {
 /***/ },
 /* 15 */
 /***/ function(module, exports) {
-window.cytubeEnhanced.addModule("chatCommandsHelp",function(a,t){"use strict";var n=this,o={commands:{"/me":a.t("chatCommands[.]%username% action (e.g: <i>/me is dancing</i>)"),"/sp":a.t("chatCommands[.]spoiler"),"/afk":a.t("chatCommands[.]sets your status to AFK")}};t=$.extend({},o,t),0===$("#chat-controls").length&&$('<div id="chat-controls" class="">').appendTo(".chat-area-buttons"),this.commands={},this.commands[a.t("Standard commands")]=t.commands,a.isModulePermitted("additionalChatCommands")&&a.getModule("additionalChatCommands").done(function(t){var o={};for(var s in t.commandsList)t.commandsList.hasOwnProperty(s)&&t.isCommandPermitted(s)&&(!t.commandsList[s].isAvailable||t.commandsList[s].isAvailable())&&(o[s]=t.commandsList[s].description||"");n.commands[a.t("Extra commands")]=o}),this.handleChatHelpBtn=function(t){var n=$('<h3 class="modal-title">').text(a.t("The list of chat commands")),o=$("<div>");for(var s in t)if(t.hasOwnProperty(s)){$("<h3>").html(s).appendTo(o);var d=$("<ul>");for(var i in t[s])t[s].hasOwnProperty(i)&&$("<li>").html("<code>"+i+"</code> - "+t[s][i]+".").appendTo(d);d.appendTo(o)}a.UI.createModalWindow("chat-commands-help",n,o)},this.$chatHelpBtn=$('<button id="chat-help-btn" data-tooltip="Help" data-tooltip-pos="up" class="chatbtn" >').html('<i class="fad fa-question-circle"></i>').appendTo("#chat-controls-embed").on("click",function(){n.handleChatHelpBtn(n.commands)})});
+//window.cytubeEnhanced.addModule("chatCommandsHelp",function(a,t){"use strict";var n=this,o={commands:{"/me":a.t("chatCommands[.]%username% action (e.g: <i>/me is dancing</i>)"),"/sp":a.t("chatCommands[.]spoiler"),"/afk":a.t("chatCommands[.]sets your status to AFK")}};t=$.extend({},o,t),0===$("#chat-controls").length&&$('<div id="chat-controls" class="">').appendTo(".chat-area-buttons"),this.commands={},this.commands[a.t("Standard commands")]=t.commands,a.isModulePermitted("additionalChatCommands")&&a.getModule("additionalChatCommands").done(function(t){var o={};for(var s in t.commandsList)t.commandsList.hasOwnProperty(s)&&t.isCommandPermitted(s)&&(!t.commandsList[s].isAvailable||t.commandsList[s].isAvailable())&&(o[s]=t.commandsList[s].description||"");n.commands[a.t("Extra commands")]=o}),this.handleChatHelpBtn=function(t){var n=$('<h3 class="modal-title">').text(a.t("The list of chat commands")),o=$("<div>");for(var s in t)if(t.hasOwnProperty(s)){$("<h3>").html(s).appendTo(o);var d=$("<ul>");for(var i in t[s])t[s].hasOwnProperty(i)&&$("<li>").html("<code>"+i+"</code> - "+t[s][i]+".").appendTo(d);d.appendTo(o)}a.UI.createModalWindow("chat-commands-help",n,o)},this.$chatHelpBtn=$('<button id="chat-help-btn" data-tooltip="Help" data-tooltip-pos="up" class="chatbtn" >').html('<i class="fad fa-question-circle"></i>').appendTo("#chat-controls-embed").on("click",function(){n.handleChatHelpBtn(n.commands)})});
 /***/ },
 /* 16 */
 /***/ function(module, exports) {
-window.cytubeEnhanced.addModule("chatControls",function(t,a){"use strict";var n=this;a=$.extend({},{afkButton:!0,clearChatButton:!1},a),this.handleAfkBtn=function(){window.socket.emit("chatMsg",{msg:"/afk"})},this.$afkBtn=$('<span id="afk-btn" class="label label-default pull-right pointer">').text(t.t("AFK")).appendTo("#chat-menu").on("click",function(){n.handleAfkBtn()}),this.handleAfk=function(t){t.name===window.CLIENT.name&&(t.afk?(n.$afkBtn.removeClass("label-default"),n.$afkBtn.addClass("label-success")):(n.$afkBtn.addClass("label-default"),n.$afkBtn.removeClass("label-success")))},a.afkButton?window.socket.on("setAFK",function(t){n.handleAfk(t)}):this.$afkBtn.hide(),this.handleClearBtn=function(){window.confirm(t.t("Are you sure, that you want to clear the chat?"))&&window.socket.emit("chatMsg",{msg:"/clear"})},this.$clearChatBtn=$('<span id="clear-chat-btn" data-tooltip-pos="up" data-tooltip="Clear the chat for everybody" class="label label-default pull-right pointer fa fa-solid fa-broom-wide">').text(t.t(" ")).insertAfter(this.$afkBtn).on("click",function(){n.handleClearBtn()}),window.hasPermission("chatclear")||this.$clearChatBtn.hide(),this.handleChatClear=function(){window.hasPermission("chatclear")&&a.clearChatButton?n.$clearChatBtn.show():n.$clearChatBtn.hide()},window.socket.on("setUserRank",function(){n.handleChatClear()})});
+//window.cytubeEnhanced.addModule("chatControls",function(t,a){"use strict";var n=this;a=$.extend({},{afkButton:!0,clearChatButton:!1},a),this.handleAfkBtn=function(){window.socket.emit("chatMsg",{msg:"/afk"})},this.$afkBtn=$('<span id="afk-btn" class="label label-default pull-right pointer">').text(t.t("AFK")).appendTo("#chat-menu").on("click",function(){n.handleAfkBtn()}),this.handleAfk=function(t){t.name===window.CLIENT.name&&(t.afk?(n.$afkBtn.removeClass("label-default"),n.$afkBtn.addClass("label-success")):(n.$afkBtn.addClass("label-default"),n.$afkBtn.removeClass("label-success")))},a.afkButton?window.socket.on("setAFK",function(t){n.handleAfk(t)}):this.$afkBtn.hide(),this.handleClearBtn=function(){window.confirm(t.t("Are you sure, that you want to clear the chat?"))&&window.socket.emit("chatMsg",{msg:"/clear"})},this.$clearChatBtn=$('<span id="clear-chat-btn" data-tooltip-pos="up" data-tooltip="Clear the chat for everybody" class="label label-default pull-right pointer fa fa-solid fa-broom-wide">').text(t.t(" ")).insertAfter(this.$afkBtn).on("click",function(){n.handleClearBtn()}),window.hasPermission("chatclear")||this.$clearChatBtn.hide(),this.handleChatClear=function(){window.hasPermission("chatclear")&&a.clearChatButton?n.$clearChatBtn.show():n.$clearChatBtn.hide()},window.socket.on("setUserRank",function(){n.handleChatClear()})});
 /***/ },
 /* 17 */
 /***/ function(module, exports) {
@@ -3312,16 +3921,7 @@ function emoteToDialog(title, src) {
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-	  $('<span id="clean" data-tooltip="Clean up server messages" data-tooltip-pos="up" class="label label-default pull-right pointer fa fa-solid fa-trash" aria-hidden="true"> </span>')
-    .appendTo("#chat-menu")
-    .on("click", function() {
-      let $messagebuffer = $("#messagebuffer");
-      $messagebuffer.find("[class^=chat-msg-\\\\\\$server]").each(function() { $(this).remove(); });
-      $messagebuffer.find("[class^=chat-msg-\\\\\\$voteskip]").each(function() { $(this).remove(); });
-      $messagebuffer.find("[class^=server-msg]").each(function() { $(this).remove(); });
-      $messagebuffer.find("[class^=poll-notify]").each(function() { $(this).remove(); });
-      $(".chat-msg-Video:not(:last)").each(function() { $(this).remove(); });
-    });
+
 	
 
     this.$topVideoControls = $('<div id="top-video-controls" class="btn-group">').appendTo("#VideoOverlay");
@@ -4656,101 +5256,6 @@ window.cytubeEnhanced.addModule("favouritePictures",function(t){"use strict";var
 /***/ },
 /* 53 */
 /***/ function(module, exports) {
-// Just adding some colors to the chat cus why not
-
-
-// Store the selected color globally
-var selectedColor = null;
-
-// Ensure ColorsArray is defined
-if (typeof ColorsArray !== 'undefined' && ColorsArray.length > 0) {
-    var html = '<button id="colors-btn" class="btn btn-sm btn-default btn-chatctrl dropdown-toggle">Colors</button>';
-    var $colorsMenu = $('<div id="colors-menu" class="dropup btn-group" />').appendTo('.markdown-helper-templates-wrapper').html(html);
-    $('<ul id="colors-wrap" class="dropdown-menu-colors hidden"></ul>').appendTo('#chatwrap');
-
-    // Toggle the color menu on button click
-    $("#colors-btn").on("click", function() {
-        $("#colors-wrap").toggleClass("hidden");
-    });
-
-    // Close the menu if clicking outside of it
-    $('body').on('click', function(event) {
-        if (!$(event.target).closest('#colors-menu, #colors-wrap').length) {
-            $("#colors-wrap").addClass("hidden");
-        }
-    });
-
-    // Adjust menu size based on the number of colors
-    if (ColorsArray.length > 50) {
-        $colorsMenu.addClass('widecm');
-    }
-
-    // Populate the color buttons
-    console.log("ColorsArray length: ", ColorsArray.length);
-    ColorsArray.forEach(function(color, index) {
-        console.log("Adding color: ", color);
-        // Determine how many buttons should be in a row
-        var j = ColorsArray.length > 50 ? 8 : 5;
-        
-        // Create colgroup if needed
-        if (index % j === 0) {
-            console.log("Creating new colgroup for index:", index);
-            var colgroup = $('<li class="btn-group btn-colors" />');
-            $('#colors-wrap').append(colgroup);
-        }
-        
-        // Create and append the button
-        var button = $('<button class="btn btn-default btn-sm cbtn" />')
-            .css('background-color', color)
-            .html('&nbsp;')
-            .on('click', function() {
-                selectedColor = color; // Store the selected color
-                $("#colors-wrap").addClass("hidden"); // Hide the color menu after selection
-            });
-        $('#colors-wrap .btn-colors:last').append(button);
-        console.log("Button appended:", button);
-    });
-
-    // Add clear-color button in a new row at the end
-    var clearColgroup = $('<li class="btn-group btn-colors" />');
-    $('#colors-wrap').append(clearColgroup);
-    var clearButton = $('<button id="clear-color" class="btn btn-default btn-sm">Clear Color</button>')
-        .on('click', function() {
-            selectedColor = null;
-            $("#colors-wrap").addClass("hidden");
-        });
-    clearColgroup.append(clearButton);
-
-    // Ensure color menu is visible only if colors are available
-    if (ColorsArray.length < 1) {
-        $colorsMenu.hide();
-    }
-} else {
-    console.error('ColorsArray is undefined or empty.');
-}
-
-// Function to insert text into the chat input field
-function insertText(text) {
-    var $chatline = $("#chatline");
-    var currentVal = $chatline.val();
-    var cursorPos = $chatline[0].selectionStart;
-    var textBefore = currentVal.substring(0, cursorPos);
-    var textAfter = currentVal.substring(cursorPos, currentVal.length);
-    
-    $chatline.val(textBefore + text + textAfter);
-    $chatline.focus();
-    $chatline[0].setSelectionRange(cursorPos + text.length, cursorPos + text.length);
-}
-
-// Add event listener to chatline input
-$("#chatline").on("focus keyup", function() {
-    if (selectedColor) {
-        var currentVal = $(this).val();
-        if (!currentVal.startsWith('col:' + selectedColor + ':')) {
-            $(this).val('col:' + selectedColor + ':' + currentVal);
-        }
-    }
-});
 
 
 const chatBuffer = document.getElementById('messagebuffer');
@@ -5070,6 +5575,360 @@ player.on('playing', function() {
 });
 
 
+(function($) {
+    // Ensure the script runs after the DOM is fully loaded
+    $(document).ready(function() {
+        // Configuration Constants
+        const SETTINGS_MODAL_SELECTOR = '#settings-modal'; // Selector for the settings modal
+        const SETTINGS_LIST_SELECTOR = '.modal-settings-list'; // Selector for the modal settings list
+        const TOGGLE_BUTTON_ID = 'gif-autoplay-toggle'; // ID for the toggle button
+        const BUTTON_ICON_PLAY = 'fa-regular fa-circle-play'; // Font Awesome class for play icon
+        const BUTTON_ICON_PAUSE = 'fa-regular fa-circle-pause'; // Font Awesome class for pause icon
+        const GIF_SELECTOR = 'img.giphy.chat-picture'; // Selector for Giphy GIFs
+        const GIF_URL_PATTERN = /https:\/\/media\.giphy\.com\/media\/[^/]+\/(200_s\.gif|giphy\.gif)/; // Regex to match Giphy GIF URLs
+        const CHAT_MSG_CLASS_PREFIX = 'chat-msg-'; // Prefix for chat message classes
+
+        let autoplayEnabled = false; // Initial autoplay state
+
+        /**
+         * Adds the toggle button to the settings modal.
+         */
+        function addToggleButton() {
+            const $settingsList = $(SETTINGS_LIST_SELECTOR);
+            if ($settingsList.length === 0) {
+                console.error(`Element with selector "${SETTINGS_LIST_SELECTOR}" not found.`);
+                return;
+            }
+
+            // Prevent adding multiple buttons
+            if ($(`#${TOGGLE_BUTTON_ID}`).length > 0) {
+                console.log('Toggle button already exists. Skipping creation.');
+                return;
+            }
+
+            // Create the button
+            const $button = $('<button>', {
+                id: TOGGLE_BUTTON_ID,
+                type: 'button',
+                class: 'btn btn-default',
+                text: 'GIPHY Autoplay',
+                css: {
+                    'margin': '5px 0',
+                    'width': '80%',
+                    'background-color': '#2c2f33',
+                    'color': '#fff',
+                    'border': '1px solid #23272a',
+                    'padding': '10px',
+                    'font-size': '14px',
+                    'cursor': 'pointer',
+                    'border-radius': '3px',
+                    'text-align': 'center'
+                }
+            }).hover(
+                function() { $(this).css('background-color', '#3b3e44'); },
+                function() { $(this).css('background-color', '#2c2f33'); }
+            );
+
+            // Create the icon
+            const $icon = $('<i>', {
+                class: autoplayEnabled ? BUTTON_ICON_PAUSE : BUTTON_ICON_PLAY,
+                css: {
+                    'margin-right': '8px'
+                }
+            });
+
+            $button.prepend($icon);
+
+            // Click event to toggle autoplay
+            $button.on('click', function(e) {
+                e.stopPropagation();
+                autoplayEnabled = !autoplayEnabled;
+                toggleAutoplay(autoplayEnabled);
+                toggleButtonIcon($icon, autoplayEnabled);
+                // Save the state in localStorage
+                localStorage.setItem('gifAutoplayEnabled', autoplayEnabled);
+                console.log(`Autoplay enabled: ${autoplayEnabled}`);
+            });
+
+            // Append the button to the settings list
+            $settingsList.append($button);
+            console.log('Toggle button added to settings modal.');
+        }
+
+        /**
+         * Toggles the button icon based on the autoplay state.
+         * @param {jQuery} $icon - The icon element within the button.
+         * @param {boolean} enabled - Whether autoplay is enabled.
+         */
+        function toggleButtonIcon($icon, enabled) {
+            if (enabled) {
+                $icon.removeClass(BUTTON_ICON_PLAY).addClass(BUTTON_ICON_PAUSE);
+            } else {
+                $icon.removeClass(BUTTON_ICON_PAUSE).addClass(BUTTON_ICON_PLAY);
+            }
+        }
+
+        /**
+         * Toggles autoplay state for all existing GIFs.
+         * @param {boolean} enable - Whether to enable or disable autoplay.
+         */
+        function toggleAutoplay(enable) {
+            // Select all Giphy GIFs with the specified class
+            const $gifs = $(GIF_SELECTOR);
+
+            $gifs.each(function() {
+                updateGifUrl($(this), enable);
+                if (enable) {
+                    // Disable JavaScript hover functionality by stopping event propagation
+                    $(this).on('mouseenter.autoplayBlock', function(event) {
+                        event.stopImmediatePropagation();
+                    });
+                    $(this).on('mouseleave.autoplayBlock', function(event) {
+                        event.stopImmediatePropagation();
+                    });
+                } else {
+                    // Re-enable JavaScript hover functionality by removing the blocking handlers
+                    $(this).off('mouseenter.autoplayBlock mouseleave.autoplayBlock');
+                }
+            });
+
+            console.log(`Autoplay state toggled to ${enable}. Updated ${$gifs.length} existing GIF(s).`);
+        }
+
+        /**
+         * Updates a single GIF's src attribute based on the autoplay state.
+         * @param {jQuery} $img - The image element representing the GIF.
+         * @param {boolean} enable - Whether to enable or disable autoplay.
+         */
+        function updateGifUrl($img, enable) {
+            const src = $img.attr('src');
+            if (!src) return;
+
+            const match = src.match(GIF_URL_PATTERN);
+            if (!match) return;
+
+            if (enable && match[1] === '200_s.gif') {
+                const newSrc = src.replace('200_s.gif', 'giphy.gif');
+                $img.attr('src', newSrc);
+                console.log(`Autoplay enabled: Updated GIF URL from ${src} to ${newSrc}`);
+            } else if (!enable && match[1] === 'giphy.gif') {
+                const originalSrc = src.replace('giphy.gif', '200_s.gif');
+                $img.attr('src', originalSrc);
+                console.log(`Autoplay disabled: Reverted GIF URL from ${src} to ${originalSrc}`);
+            }
+        }
+
+        /**
+         * Processes all existing GIFs in the chat to set their autoplay state.
+         */
+        function processExistingMessages() {
+            // Select all elements with classes starting with "chat-msg-"
+            const $chatMsgs = $(`[class^="${CHAT_MSG_CLASS_PREFIX}"], [class*=" ${CHAT_MSG_CLASS_PREFIX}"]`);
+
+            $chatMsgs.each(function() {
+                const $msg = $(this);
+                const $imgs = $msg.find(GIF_SELECTOR);
+                $imgs.each(function() {
+                    updateGifUrl($(this), autoplayEnabled);
+                    if (autoplayEnabled) {
+                        // Disable JavaScript hover functionality by stopping event propagation
+                        $(this).on('mouseenter.autoplayBlock', function(event) {
+                            event.stopImmediatePropagation();
+                        });
+                        $(this).on('mouseleave.autoplayBlock', function(event) {
+                            event.stopImmediatePropagation();
+                        });
+                    } else {
+                        // Re-enable JavaScript hover functionality by removing the blocking handlers
+                        $(this).off('mouseenter.autoplayBlock mouseleave.autoplayBlock');
+                    }
+                });
+            });
+
+            console.log(`Processed existing messages. Total messages: ${$chatMsgs.length}`);
+        }
+
+        /**
+         * Handles new chat messages via the 'chatMsg' socket event.
+         * @param {Object} data - The data object from the chat message event.
+         */
+        function handleNewChatMsg(data) {
+            // Delay execution to ensure the DOM has been updated
+            setTimeout(function() {
+                // Find the latest GIF with the class "giphy chat-picture"
+                const $latestGif = $(GIF_SELECTOR).last();
+                if ($latestGif.length === 0) {
+                    console.warn('Latest GIF element not found.');
+                    return;
+                }
+
+                // Update the GIF based on the current autoplay state
+                updateGifUrl($latestGif, autoplayEnabled);
+
+                if (autoplayEnabled) {
+                    // Disable JavaScript hover functionality by stopping event propagation
+                    $latestGif.on('mouseenter.autoplayBlock', function(event) {
+                        event.stopImmediatePropagation();
+                    });
+                    $latestGif.on('mouseleave.autoplayBlock', function(event) {
+                        event.stopImmediatePropagation();
+                    });
+                } else {
+                    // Re-enable JavaScript hover functionality by removing the blocking handlers
+                    $latestGif.off('mouseenter.autoplayBlock mouseleave.autoplayBlock');
+                }
+
+                console.log(`New chat message received via socket. Updated 1 GIF(s).`);
+            }, 100); // Adjust the delay as needed (100ms)
+        }
+
+        /**
+         * Initializes the socket listener for 'chatMsg' events.
+         */
+        function initSocketListener() {
+            // Ensure that the socket object exists
+            if (typeof socket === 'undefined') {
+                console.error('Socket object is not available.');
+                return;
+            }
+
+            // Listen for 'chatMsg' events
+            socket.on('chatMsg', handleNewChatMsg);
+
+            console.log('Socket listener for "chatMsg" initialized.');
+        }
+
+        /**
+         * Initializes the entire script.
+         */
+        function init() {
+            // Retrieve persisted autoplay state (if any)
+            const savedState = localStorage.getItem('gifAutoplayEnabled');
+            if (savedState !== null) {
+                autoplayEnabled = savedState === 'true';
+            }
+
+            // We need to make sure that the settings modal is present
+            // Since it might not be immediately available, we'll use a timer to check
+            const checkExist = setInterval(function() {
+                if ($(SETTINGS_LIST_SELECTOR).length) {
+                    console.log('Settings modal is ready.');
+                    clearInterval(checkExist);
+
+                    addToggleButton();
+
+                    // Initialize button icon based on saved state
+                    const $button = $(`#${TOGGLE_BUTTON_ID}`);
+                    const $icon = $button.find('i');
+                    toggleButtonIcon($icon, autoplayEnabled);
+
+                    toggleAutoplay(autoplayEnabled); // Set initial state based on saved or default
+                    processExistingMessages(); // Process existing GIFs
+
+                    // Initialize socket listener for new messages
+                    initSocketListener();
+                }
+            }, 100); // Check every 100ms
+
+        }
+
+        // Start initialization
+        init();
+    });
+})(jQuery);
+
+(function($) {
+    // Ensure the script runs after the DOM is fully loaded
+    $(document).ready(function() {
+        // Configuration Constants
+        const SETTINGS_MODAL_SELECTOR = '#settings-modal'; // Selector for the settings modal
+        const SETTINGS_LIST_SELECTOR = '.modal-settings-list'; // Selector for the modal settings list
+        const CLEAN_BUTTON_ID = 'clean'; // ID for the clean button
+
+        /**
+         * Adds the clean button to the settings modal.
+         */
+        function addCleanButton() {
+            const $settingsList = $(SETTINGS_LIST_SELECTOR);
+            if ($settingsList.length === 0) {
+                console.error(`Element with selector "${SETTINGS_LIST_SELECTOR}" not found.`);
+                return;
+            }
+
+            // Prevent adding multiple buttons
+            if ($(`#${CLEAN_BUTTON_ID}`).length > 0) {
+                console.log('Clean button already exists. Skipping creation.');
+                return;
+            }
+
+            // Create the button
+            const $button = $('<button>', {
+                id: CLEAN_BUTTON_ID,
+                type: 'button',
+                class: 'btn btn-default',
+                text: 'Clean Server Messages',
+                css: {
+                    'margin': '5px 0',
+                    'width': '80%',
+                    'background-color': '#2c2f33',
+                    'color': '#fff',
+                    'border': '1px solid #23272a',
+                    'padding': '10px',
+                    'font-size': '14px',
+                    'cursor': 'pointer',
+                    'border-radius': '3px',
+                    'text-align': 'center'
+                }
+            }).hover(
+                function() { $(this).css('background-color', '#3b3e44'); },
+                function() { $(this).css('background-color', '#2c2f33'); }
+            );
+
+            // Click event to clean server messages
+            $button.on('click', function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                cleanServerMessages();
+            });
+
+            // Append the button to the settings list
+            $settingsList.append($button);
+            console.log('Clean button added to settings modal.');
+        }
+
+        /**
+         * Function to clean server messages from the chat
+         */
+        function cleanServerMessages() {
+            let $messagebuffer = $("#messagebuffer");
+            $messagebuffer.find("[class^='chat-msg-\\\\$server']").each(function() { $(this).remove(); });
+            $messagebuffer.find("[class^='chat-msg-\\\\$voteskip']").each(function() { $(this).remove(); });
+            $messagebuffer.find("[class^='server-msg']").each(function() { $(this).remove(); });
+            $messagebuffer.find("[class^='poll-notify']").each(function() { $(this).remove(); });
+            $(".chat-msg-Video:not(:last)").each(function() { $(this).remove(); });
+            console.log('Server messages cleaned from chat.');
+        }
+
+        /**
+         * Initializes the entire script.
+         */
+        function init() {
+            // We need to make sure that the settings modal is present
+            // Since it might not be immediately available, we'll use a timer to check
+            const checkExist = setInterval(function() {
+                if ($(SETTINGS_LIST_SELECTOR).length) {
+                    console.log('Settings modal is ready.');
+                    clearInterval(checkExist);
+
+                    addCleanButton();
+                }
+            }, 100); // Check every 100ms
+
+        }
+
+        // Start initialization
+        init();
+    });
+})(jQuery);
 
 
 
