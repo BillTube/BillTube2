@@ -1635,7 +1635,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 
         // Create the settings button (cogwheel icon)
         if ($('#settings-button').length === 0) {
-            this.$settingsButton = $('<button id="settings-button" type="button" class="chatbtn" style="float: right; bottom: 4px;" data-tooltip="Settings" data-tooltip-pos="up">')
+            this.$settingsButton = $('<button id="settings-button" type="button" class="chatbtn" style="float: right; bottom: 4px;" data-tooltip="Chat Menu" data-tooltip-pos="up">')
                 .html('<i class="fas fa-cog"></i>')
                 .appendTo(".chat-area-buttons");
         }
