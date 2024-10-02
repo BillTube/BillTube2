@@ -1885,6 +1885,7 @@ filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.8));
     left: 0px;
     bottom: 5px;
     height: 20px;
+	float: left;
 }
 
 .navbar-collapse {
