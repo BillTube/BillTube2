@@ -4993,7 +4993,7 @@ window.cytubeEnhanced.getModule('bbCodesHelper').done(function(commandsModule) {
         
         // Giphy Tab Content
         $('<div class="tab-pane active" id="giphy-tab">' +
-            '<div id="giphy_window" style="min-height:550px" class="col-lg-12 col-md-12">' +
+            '<div id="giphy_window" style="min-height:550px;margin-top: 15px;" class="col-lg-12 col-md-12">' +
             '<center style="height:45px"><span style="float:left">' +
             '<label class="checkbox-inline"><input type="checkbox" id="gifs" class="gifoption" value="no" checked> Gifs</label>' +
             '<label class="checkbox-inline"><input type="checkbox" id="stickers" class="gifoption" value="no"> Stickers</label>' +
@@ -5015,7 +5015,7 @@ window.cytubeEnhanced.getModule('bbCodesHelper').done(function(commandsModule) {
         // Tenor Tab Content (only if enabled)
         if (isTenorEnabled) {
             $('<div class="tab-pane" id="tenor-tab">' +
-                '<div id="tenor_window" style="min-height:550px" class="col-lg-12 col-md-12">' +
+                '<div id="tenor_window" style="min-height:550px;margin-top: 15px;" class="col-lg-12 col-md-12">' +
                 '<div id="tenor_search" style="margin-bottom: 10px;"><form id="tenor_query" class="input-group"><input id="tenor_input" type="text" placeholder="Search Tenor" style="" maxlength="240" class="form-control"><span class="input-group-btn"><button class="btn btn-default" type="submit">Search</button></span></form></div>' +
                 '<div id="tenor-suggestions" style="margin-bottom: 10px;"></div>' +
                 '<div style="height:40px"><center><button style="float:left;margin:5px 0 5px 0;" class="btn btn-sm btn-default tbackbutton fal fa-arrow-left" disabled></button><span class="text-info imagesearch"></span><button style="float:right;margin:5px 0 5px 0;" class="btn btn-sm btn-default tforwardbutton fal fa-arrow-right" disabled></button></center></div>' +
