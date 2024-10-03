@@ -4662,270 +4662,428 @@ function randomHero2() {
 });
 /***/ },
 /* 47 */
+
+
+
 /***/ function(module, exports) {
 
 //__webpack_require__(47);
 
-window . cytubeEnhanced . getModule ( 'bbCodesHelper' ) . done ( function  ( commandsModule )  {
+window.cytubeEnhanced.getModule('bbCodesHelper').done(function(commandsModule) {
+    var GTMR = false;
+    var DONTSPAMGIPHY = true;
+    var DONTSPAMTENOR = true;
+    var TRENDING = false;
 
-			/*
-			Copyright Â© 2016 Benjamin Paul. All rights reserved.
-			Edited to work with BillTube
-			*/
-			var GTMR = false;
+    // Check if Tenor is enabled
+    var isTenorEnabled = (typeof Tenor !== 'undefined' && Tenor === 1);
 
-			giphysearchbtn = $('<button id="giphysearch-btn" data-tooltip="Giphy" data-tooltip-pos="up" class="chatbtn"><i class="fa-solid fa-gif"></i></button>')
-				.appendTo('#chat-controls')
-				.on("click", function() {
-					if (!GTMR) {
-						injectGiphy();
-						setTimeout(function() {
-							$("#giphy_input").focus().val('');
-						}, 250);
-						GTMR = true;
-						setTimeout(function() {
-							GTMR = false;
-						}, 1000);
-					}
-				});
-				function clickPic() {
-				outer.modal('hide');
+    var giphyTenorBtn = $('<button id="giphytenor-btn" data-tooltip="Giphy/Tenor" data-tooltip-pos="up" class="chatbtn"><i class="fa-solid fa-gif"></i></button>')
+        .appendTo('#chat-controls')
+        .on("click", function() {
+            if (!GTMR) {
+                injectGiphyTenor();
+                setTimeout(function() {
+                    $("#giphy_input").focus().val('');
+                }, 250);
+                GTMR = true;
+                setTimeout(function() {
+                    GTMR = false;
+                }, 1000);
+            }
+        });
 
-			}
+    function clickPic() {
+        outer.modal('hide');
+    }
 
-			DONTSPAMGIPHY = true;
+    function getGiphy(p_oEvent) {
+        p_oEvent.preventDefault();
+        if (DONTSPAMGIPHY) {
+            DONTSPAMGIPHY = false;
+            setTimeout(function() {
+                DONTSPAMGIPHY = true;
+            }, 1000);
+            $('.imagesearch').text('Searching...');
+            $('#single').attr('src', '').attr('onclick', '').hide();
+            $('.giphyimage').hide();
+            $(".gforwardbutton").prop('disabled', true);
+            $(".gbackbutton").prop('disabled', true);
+            $(".gbackbutton").off('click');
+            $(".gforwardbutton").off('click');
+            $('.giphyimage').find('img').each(function() {
+                $(this).attr('src', '');
+                $(this).attr('onclick', '');
+            });
+            SINGLE = false;
+            gifterm = $("#giphy_input").val();
+            giff = encodeURIComponent(gifterm);
+            if ($("#gifs").prop('checked')) {
+                giftype = 'gifs';
+            } else {
+                giftype = 'stickers';
+            }
+            TRANSLATE = false;
+            RANDOM = false;
+            if (TRENDING) {
+                searchtype = 'trending?limit=80';
+            } else {
+                if ($("#search").prop('checked')) {
+                    searchtype = 'search?q=' + giff + '&limit=100';
+                } else if ($("#translate").prop('checked')) {
+                    searchtype = 'translate?s=' + giff;
+                    SINGLE = true;
+                    TRANSLATE = true;
+                } else {
+                    searchtype = 'random?tag=' + giff;
+                    SINGLE = true;
+                    RANDOM = true;
+                }
+            }
+            theurl = 'https://api.giphy.com/v1/' + giftype + '/' + searchtype + '&api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes';
+            $.ajax({
+                url: theurl,
+                jsonp: 'callback',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    imagedata = data.data;
+                    if (imagedata !== undefined) {
+                        if (SINGLE) {
+                            $('.imagesearch').text('"' + gifterm + '"');
+                            if (TRANSLATE) {
+                                $("#single").attr('src', imagedata.images.original.url).attr('onclick', 'insertText(\'' + imagedata.images.original.url + ' \');clickPic()').show();
+                            } else {
+                                $("#single").attr('src', imagedata.image_url).attr('onclick', 'insertText(\'' + imagedata.image_url + ' \');clickPic()').show();
+                            }
+                        } else {
+                            if (TRENDING) {
+                                gifterm = '';
+                            } else {
+                                gifterm = ' "' + gifterm + '"';
+                            }
+                            offset = 0;
+                            imagelength = imagedata.length;
+                            $('.giphyimage').show();
+                            $('.imagesearch').text('Showing' + gifterm + ' 1-9 of ' + imagelength);
+                            for (var gip = 0; gip < 9; gip++) {
+                                if (imagedata[gip] !== undefined) {
+                                    imageurl = imagedata[gip].images.original.url;
+                                    if (imagedata[gip].images.fixed_width.width === '200' && parseInt(imagedata[gip].images.fixed_height.height) <= 200) {
+                                        fixed = imagedata[gip].images.fixed_width.url;
+                                    } else {
+                                        fixed = imagedata[gip].images.fixed_height.url;
+                                    }
+                                    if (fixed === '') {
+                                        fixed = imagedata[gip].images.original.url;
+                                    }
+                                    $('.giphyimage').find('img').eq(gip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
+                                }
+                                if (gip === 8) {
+                                    offset += gip + 1;
+                                    if (imagelength > offset) {
+                                        $(".gforwardbutton").prop('disabled', false);
+                                    }
+                                }
+                            }
+                            $(".gforwardbutton").click(function() {
+                                $('.giphyimage').find('img').each(function() {
+                                    $(this).attr('src', '');
+                                    $(this).attr('onclick', '');
+                                });
+                                $('.imagesearch').text('Showing' + gifterm + ' ' + (offset + 1) + '-' + (offset + 9) + ' of ' + imagelength);
+                                for (var fgip = 0; fgip < 9; fgip++) {
+                                    if (imagedata[fgip + offset] !== undefined) {
+                                        imageurl = imagedata[fgip + offset].images.original.url;
+                                        if (imagedata[fgip + offset].images.fixed_width.width === '200' && parseInt(imagedata[fgip + offset].images.fixed_height.height) <= 200) {
+                                            fixed = imagedata[fgip + offset].images.fixed_width.url;
+                                        } else {
+                                            fixed = imagedata[fgip + offset].images.fixed_height.url;
+                                        }
+                                        if (fixed === '') {
+                                            fixed = imagedata[gip].images.original.url;
+                                        }
+                                        $('.giphyimage').find('img').eq(fgip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
+                                    }
+                                    if (fgip === 8) {
+                                        offset += fgip + 1;
+                                        if (imagelength > offset) {
+                                            $(".gforwardbutton").prop('disabled', false);
+                                        } else {
+                                            $(".gforwardbutton").prop('disabled', true);
+                                        }
+                                    }
+                                }
+                                $(".gbackbutton").prop('disabled', false);
+                            });
+                            $(".gbackbutton").click(function() {
+                                $('.giphyimage').find('img').each(function() {
+                                    $(this).attr('src', '');
+                                    $(this).attr('onclick', '');
+                                });
+                                $('.imagesearch').text('Showing' + gifterm + ' ' + (offset - 17) + '-' + (offset - 9) + ' of ' + imagelength);
+                                for (var ggip = 0; ggip < 9; ggip++) {
+                                    if (imagedata[ggip + offset - 18] !== undefined) {
+                                        imageurl = imagedata[ggip + offset - 18].images.original.url;
+                                        if (imagedata[ggip + offset - 18].images.fixed_width.width === '200' && parseInt(imagedata[ggip + offset - 18].images.fixed_height.height) <= 200) {
+                                            fixed = imagedata[ggip + offset - 18].images.fixed_width.url;
+                                        } else {
+                                            fixed = imagedata[ggip + offset - 18].images.fixed_height.url;
+                                        }
+                                        if (fixed === '') {
+                                            fixed = imagedata[ggip + offset - 18].images.original.url;
+                                        }
+                                        $('.giphyimage').find('img').eq(ggip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
+                                    }
+                                    if (ggip === 8) {
+                                        offset -= ggip + 1;
+                                        if (offset > 9) {
+                                            $(".gbackbutton").prop('disabled', false);
+                                        } else {
+                                            $(".gbackbutton").prop('disabled', true);
+                                        }
+                                    }
+                                }
+                                $(".gforwardbutton").prop('disabled', false);
+                            });
+                        }
+                    } else {
+                        $('.imagesearch').text('Error: Not found.');
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                    $('.imagesearch').text('Connection Error: Try again later.');
+                }
+            });
+        }
+    }
 
-			function getGiphy(p_oEvent) {
-				p_oEvent.preventDefault();
-				if (DONTSPAMGIPHY) {
-					DONTSPAMGIPHY = false;
-					setTimeout(function() {
-						DONTSPAMGIPHY = true;
-					}, 1000);
-					$('.imagesearch').text('Searching...');
-					$('#single').attr('src', '').attr('onclick', '').hide();
-					$('.giphyimage').hide();
-					$(".gforwardbutton").prop('disabled', true);
-					$(".gbackbutton").prop('disabled', true);
-					$(".gbackbutton").off('click');
-					$(".gforwardbutton").off('click');
-					$('.giphyimage').find('img').each(function() {
-						$(this).attr('src', '');
-						$(this).attr('onclick', '');
-					});
-					SINGLE = false;
-					gifterm = $("#giphy_input").val();
-					giff = encodeURIComponent(gifterm);
-					if ($("#gifs").prop('checked')) {
-						giftype = 'gifs';
-					} else {
-						giftype = 'stickers';
-					}
-					TRANSLATE = false;
-					RANDOM = false;
-					if (TRENDING) {
-						searchtype = 'trending?limit=80';
-					} else {
-						if ($("#search").prop('checked')) {
-							searchtype = 'search?q=' + giff + '&limit=100';
-						} else if ($("#translate").prop('checked')) {
-							searchtype = 'translate?s=' + giff;
-							SINGLE = true;
-							TRANSLATE = true;
-						} else {
-							searchtype = 'random?tag=' + giff;
-							SINGLE = true;
-							RANDOM = true;
-						}
-					}
-					theurl = 'https://api.giphy.com/v1/' + giftype + '/' + searchtype + '&api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes';
-					$.ajax({
-						url: theurl,
-						jsonp: 'callback',
-						dataType: 'json',
-						success: function(data) {
-							console.log(data);
-							imagedata = data.data;
-							if (imagedata !== undefined) {
-								//onclick="insertText(\'' + imageid + '.pic \');clickPic()" src="' + imageid + '"
-								if (SINGLE) {
-								$('.imagesearch').text('"' + gifterm + '"');
-									if (TRANSLATE) {
-										$("#single").attr('src', imagedata.images.original.url).attr('onclick', 'insertText(\'' + imagedata.images.original.url + ' \');clickPic()').show();
-									} else {
-										$("#single").attr('src', imagedata.image_url).attr('onclick', 'insertText(\'' + imagedata.image_url + ' \');clickPic()').show();
-									}
-								} else {
-									if (TRENDING) {
-										gifterm = '';
-									} else {
-										gifterm = ' "' + gifterm + '"';
-									}
-									offset = 0;
-									imagelength = imagedata.length;
-									$('.giphyimage').show();
-									$('.imagesearch').text('Showing' + gifterm + ' 1-9 of 100');
-									for (var gip = 0; gip < 9; gip++) {
-										if (imagedata[gip] !== undefined) {
-											imageurl = imagedata[gip].images.original.url;
-											if (imagedata[gip].images.fixed_width.width === '200' && parseInt(imagedata[gip].images.fixed_height.height) <= 200) {
-												fixed = imagedata[gip].images.fixed_width.url;
-											} else {
-												fixed = imagedata[gip].images.fixed_height.url;
-											}
-											if (fixed === '') {
-												fixed = imagedata[gip].images.original.url;
-												/*if (imagedata[gip].images.fixed_width.width === '200' && parseInt(imagedata[gip].images.fixed_height.height) <= 200) {
-													fixed = imagedata[gip].images.fixed_width.url;
-												} else {
-													fixed = imagedata[gip].images.fixed_height.url;
-												}*/
-											}
-											$('.giphyimage').find('img').eq(gip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
-										}
-										if (gip === 8) {
-											offset += gip + 1;
-											if (imagelength > offset) {
-												$(".gforwardbutton").prop('disabled', false);
-											}
-										}
-									}
-									$(".gforwardbutton").click(function() {
-										$('.giphyimage').find('img').each(function() {
-											$(this).attr('src', '');
-											$(this).attr('onclick', '');
-										});
-										$('.imagesearch').text('Showing' + gifterm + ' ' + offset + '-' + (offset + 9) + ' of 99');
-										for (var fgip = 0; fgip < 9; fgip++) {
-											if (imagedata[fgip + offset] !== undefined) {
-												imageurl = imagedata[fgip + offset].images.original.url;
-												if (imagedata[fgip + offset].images.fixed_width.width === '200' && parseInt(imagedata[fgip + offset].images.fixed_height.height) <= 200) {
-													fixed = imagedata[fgip + offset].images.fixed_width.url;
-												} else {
-													fixed = imagedata[fgip + offset].images.fixed_height.url;
-												}
-												if (fixed === '') {
-													fixed = imagedata[gip].images.original.url;
-													/*if (imagedata[fgip + offset].images.fixed_width.width === '200' && parseInt(imagedata[fgip + offset].images.fixed_height.height) <= 200) {
-														fixed = imagedata[fgip + offset].images.fixed_width.url;
-													} else {
-														fixed = imagedata[fgip + offset].images.fixed_height.url;
-													}*/
-												}
-												$('.giphyimage').find('img').eq(fgip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
-												
-											}
-											if (fgip === 8) {
-												offset += fgip + 1;
-												if (imagelength > offset) {
-													$(".gforwardbutton").prop('disabled', false);
-												} else {
-													$(".gforwardbutton").prop('disabled', true);
-												}
-											}
-										}
-										$(".gbackbutton").prop('disabled', false);
-									});
-									$(".gbackbutton").click(function() {
-										$('.giphyimage').find('img').each(function() {
-											$(this).attr('src', '');
-											$(this).attr('onclick', '');
-										});
-										$('.imagesearch').text('Showing' + gifterm + ' ' + (offset - 18) + '-' + (offset - 9) + ' of 99');
-										for (var ggip = 0; ggip < 9; ggip++) {
-											if (imagedata[ggip + offset - 18] !== undefined) {
-												imageurl = imagedata[ggip + offset - 18].images.original.url;
-												if (imagedata[ggip + offset - 18].images.fixed_width.width === '200' && parseInt(imagedata[ggip + offset - 18].images.fixed_height.height) <= 200) {
-													fixed = imagedata[ggip + offset - 18].images.fixed_width.url;
-												} else {
-													fixed = imagedata[ggip + offset - 18].images.fixed_height.url;
-												}
-												if (fixed === '') {
-													fixed = imagedata[ggip + offset - 18].images.original.url;
-													/*if (imagedata[ggip + offset - 18].images.fixed_width.width === '200' && parseInt(imagedata[ggip + offset - 18].images.fixed_height.height) <= 200) {
-														fixed = imagedata[ggip + offset - 18].images.fixed_width.url;
-													} else {
-														fixed = imagedata[ggip + offset - 18].images.fixed_height.url;
-													}*/
-												}
-												$('.giphyimage').find('img').eq(ggip).attr('onclick', 'insertText(\'' + imageurl + ' \');clickPic()').attr('src', fixed);
-												
-											}
-											if (ggip === 8) {
-												offset -= ggip + 1;
-												if (offset > 9) {
-													$(".gbackbutton").prop('disabled', false);
-												} else {
-													$(".gbackbutton").prop('disabled', true);
-												}
-											}
-										}
-										$(".gforwardbutton").prop('disabled', false);
-									});
-								}
-							} else {
-								$('.imagesearch').text('Error: Not found.');
-							}
-						},
-						error: function(data) {
-							console.log(data);
-							$('.imagesearch').text('Connection Error: Try again later.');
-						}
-					});
-				}
-			}
-			function injectGiphy() {
-				createTemp('Giphy Gifs');
-				body.append('<div id="giphy_wrap" class="form-group"><span id="giphy_search"></span></div>');
-				$('<div id="giphy_window" style="min-height:550px" class="col-lg-12 col-md-12">' +
-					'<center style="height:45px"><span style="float:left">' +
-					'<label class="checkbox-inline"><input type="checkbox" id="gifs" class="gifoption" value="no" checked> Gifs</label>' +
-					'<label class="checkbox-inline"><input type="checkbox" id="stickers" class="gifoption" value="no"> Stickers</label>' +
-					'</span><span>' +
-					'<label class="checkbox-inline"><input type="checkbox" id="search" class="searchoption" value="no" checked> Search</label>' +
-					'<label class="checkbox-inline"><input type="checkbox" id="translate" class="searchoption" value="no"> Single</label>' +
-					'<label class="checkbox-inline"><input type="checkbox" id="random" class="searchoption" value="no"> Random</label>' +
-					'</span><button style="float:right padding: 1px 6px;" class="Trendingbutton" id="trending">Trending</button></center>' +
-					'<div style="height:40px"><center><button style="float:left;margin:5px 0 5px 0;" class="btn btn-sm btn-default gbackbutton fal fa-arrow-left" disabled></button><span class="text-info imagesearch"></span><button style="float:right;margin:5px 0 5px 0;" class="btn btn-sm btn-default gforwardbutton fal fa-arrow-right" disabled></button></center></div>' +
-					'<center><img id="single" style="cursor:pointer;max-width:500px;max-height:500px;display:none"/></center>' +
-					'<center><span style="max-height:100%;display:none" class="giphyimage">' +
-					'<img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/>' +
-					'<img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/>' +
-					'<img class="GiphyCell"/>' +
-					'</span></center></div>').appendTo("#giphy_wrap");
-				$("#giphy_search").html('<form id="giphy_query"><label style="display: block;"><input id="giphy_input" type="text" placeholder="Search GIPHY" style="" maxlength="240" class="form-control"></input></label></form>');
-				$("#giphy_window").find('.gifoption').each(function() {
-					$(this).click(function() {
-						$('.gifoption').prop('checked', false);
-						$(this).prop('checked', true);
-					});
-				});
-				$("#giphy_window").find('.searchoption').each(function() {
-					$(this).click(function() {
-						$('.searchoption').prop('checked', false);
-						$(this).prop('checked', true);
-					});
-				});
-				$("body").css('overflow', 'hidden');
-				outer.on("hidden.bs.modal", function() {
-					outer.remove();
-					$("body").css('overflow', 'auto');
-					scrollChat();
-				});
-				$('#giphy_query').on('submit', function(p_oEvent) {
-					if ($('#giphy_input').val() === '') {
-						return;
-					}
-					TRENDING = false;
-					getGiphy(p_oEvent);
-				});
-				$('#trending').click(function(p_oEvent) {
-					TRENDING = true;
-					getGiphy(p_oEvent);
-				});
-			}
+    // ... (continued in Part 2)
+// ... (continued from Part 1)
 
-	});
+    function getTenor(p_oEvent, isTrending) {
+        p_oEvent.preventDefault();
+        if (DONTSPAMTENOR) {
+            DONTSPAMTENOR = false;
+            setTimeout(function() {
+                DONTSPAMTENOR = true;
+            }, 1000);
+            $('.imagesearch').text('Searching...');
+            $('#single').attr('src', '').attr('onclick', '').hide();
+            $('.tenorimage').hide();
+            $(".tforwardbutton").prop('disabled', true);
+            $(".tbackbutton").prop('disabled', true);
+            $(".tbackbutton").off('click');
+            $(".tforwardbutton").off('click');
+            $('.tenorimage').find('img').each(function() {
+                $(this).attr('src', '');
+                $(this).attr('onclick', '');
+            });
+            
+            var gifterm = isTrending ? 'trending' : $("#tenor_input").val();
+            var giff = encodeURIComponent(gifterm);
+            var limit = 50; // API V1 limit
+            
+            var apiKey = '5WPAZ4EXST2V'; // Tenor API key
+            var baseUrl = 'https://api.tenor.com/v1/';
+            var theurl = isTrending ? `${baseUrl}trending?key=${apiKey}&limit=${limit}` : `${baseUrl}search?q=${giff}&key=${apiKey}&limit=${limit}`;
+            
+            $.ajax({
+                url: theurl,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    var results = data.results;
+                    if (results && results.length > 0) {
+                        displayTenorResults(results, gifterm, isTrending ? ' Trending' : ` "${gifterm}"`);
+                    } else {
+                        $('.imagesearch').text('Error: Not found.');
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                    $('.imagesearch').text('Connection Error: Try again later.');
+                }
+            });
+        }
+    }
+
+    function displayTenorResults(results, gifterm, searchText) {
+        var offset = 0;
+        var imagelength = results.length;
+        $('.tenorimage').show();
+        $('.imagesearch').text(`Showing${searchText} 1-9 of ${imagelength}`);
+        
+        function updateImages() {
+            $('.tenorimage').empty();
+            for (var i = 0; i < 9; i++) {
+                if (results[i + offset]) {
+                    var result = results[i + offset];
+                    var imageurl = result.media[0].gif.url;
+                    var previewUrl = result.media[0].nanogif.url;
+                    $('<div class="tenor-gif-container">')
+                        .append($('<img>')
+                            .attr('onclick', `insertText('${imageurl} ');clickPic()`)
+                            .attr('src', previewUrl)
+                        )
+                        .appendTo('.tenorimage');
+                }
+            }
+            $('.imagesearch').text(`Showing${searchText} ${offset + 1}-${Math.min(offset + 9, imagelength)} of ${imagelength}`);
+            $(".tforwardbutton").prop('disabled', offset + 9 >= imagelength);
+            $(".tbackbutton").prop('disabled', offset === 0);
+        }
+
+        updateImages();
+
+        $(".tforwardbutton").off('click').on('click', function() {
+            offset += 9;
+            updateImages();
+        });
+
+        $(".tbackbutton").off('click').on('click', function() {
+            offset -= 9;
+            updateImages();
+        });
+    }
+
+    function getTenorSuggestions() {
+        var apiKey = '5WPAZ4EXST2V'; // Tenor API key
+        var baseUrl = 'https://api.tenor.com/v1/';
+        var theurl = `${baseUrl}trending_terms?key=${apiKey}&limit=5`;
+
+        $.ajax({
+            url: theurl,
+            dataType: 'json',
+            success: function(data) {
+                if (data.results && data.results.length > 0) {
+                    var suggestions = ['Trending'].concat(data.results);
+                    var suggestionsHtml = suggestions.map(term => `<button class="btn btn-sm btn-default suggestion-btn">${term}</button>`).join('');
+                    $('#tenor-suggestions').html(suggestionsHtml);
+
+                    $('.suggestion-btn').on('click', function() {
+                        var term = $(this).text();
+                        if (term === 'Trending') {
+                            getTenor({ preventDefault: function() {} }, true);
+                        } else {
+                            $('#tenor_input').val(term);
+                            getTenor({ preventDefault: function() {} }, false);
+                        }
+                    });
+                }
+            },
+            error: function(data) {
+                console.log('Error fetching Tenor suggestions:', data);
+            }
+        });
+    }
+
+    function injectGiphyTenor() {
+        createTemp('Giphy & Tenor Gifs');
+        var tabContent = '<div id="giphytenor_wrap" class="form-group"><ul class="nav nav-tabs" id="giphytenor-tabs">' +
+            '<li class="active"><a href="#giphy-tab" data-toggle="tab">Giphy</a></li>';
+        
+        if (isTenorEnabled) {
+            tabContent += '<li><a href="#tenor-tab" data-toggle="tab">Tenor</a></li>';
+        }
+        
+        tabContent += '</ul><div class="tab-content"></div></div>';
+        body.append(tabContent);
+        
+        // Giphy Tab Content
+        $('<div class="tab-pane active" id="giphy-tab">' +
+            '<div id="giphy_window" style="min-height:550px" class="col-lg-12 col-md-12">' +
+            '<center style="height:45px"><span style="float:left">' +
+            '<label class="checkbox-inline"><input type="checkbox" id="gifs" class="gifoption" value="no" checked> Gifs</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" id="stickers" class="gifoption" value="no"> Stickers</label>' +
+            '</span><span>' +
+            '<label class="checkbox-inline"><input type="checkbox" id="search" class="searchoption" value="no" checked> Search</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" id="translate" class="searchoption" value="no"> Single</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" id="random" class="searchoption" value="no"> Random</label>' +
+            '</span><button style="float:right padding: 1px 6px;" class="Trendingbutton" id="trending">Trending</button></center>' +
+            '<div id="giphy_search" style="margin-bottom: 10px;"><form id="giphy_query" class="input-group"><input id="giphy_input" type="text" placeholder="Search GIPHY" style="" maxlength="240" class="form-control"><span class="input-group-btn"><button class="btn btn-default" type="submit">Search</button></span></form></div>' +
+            '<div style="height:40px"><center><button style="float:left;margin:5px 0 5px 0;" class="btn btn-sm btn-default gbackbutton fal fa-arrow-left" disabled></button><span class="text-info imagesearch"></span><button style="float:right;margin:5px 0 5px 0;" class="btn btn-sm btn-default gforwardbutton fal fa-arrow-right" disabled></button></center></div>' +
+            '<center><img id="single" style="cursor:pointer;max-width:500px;max-height:500px;display:none"/></center>' +
+            '<center><span style="max-height:100%;display:none" class="giphyimage">' +
+            '<img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/>' +
+            '<img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/><img class="GiphyCell"/>' +
+            '<img class="GiphyCell"/>' +
+            '</span></center></div>' +
+            '</div>').appendTo("#giphytenor_wrap .tab-content");
+        
+        // Tenor Tab Content (only if enabled)
+        if (isTenorEnabled) {
+            $('<div class="tab-pane" id="tenor-tab">' +
+                '<div id="tenor_window" style="min-height:550px" class="col-lg-12 col-md-12">' +
+                '<div id="tenor_search" style="margin-bottom: 10px;"><form id="tenor_query" class="input-group"><input id="tenor_input" type="text" placeholder="Search Tenor" style="" maxlength="240" class="form-control"><span class="input-group-btn"><button class="btn btn-default" type="submit">Search</button></span></form></div>' +
+                '<div id="tenor-suggestions" style="margin-bottom: 10px;"></div>' +
+                '<div style="height:40px"><center><button style="float:left;margin:5px 0 5px 0;" class="btn btn-sm btn-default tbackbutton fal fa-arrow-left" disabled></button><span class="text-info imagesearch"></span><button style="float:right;margin:5px 0 5px 0;" class="btn btn-sm btn-default tforwardbutton fal fa-arrow-right" disabled></button></center></div>' +
+                '<center><img id="single" style="cursor:pointer;max-width:500px;max-height:500px;display:none"/></center>' +
+                '<div class="tenorimage"></div>' +
+                '</div>' +
+                '</div>').appendTo("#giphytenor_wrap .tab-content");
+
+            getTenorSuggestions();
+        }
+
+        // Add CSS for Tenor GIF layout
+        $('<style>' +
+            '.tenorimage { display: flex; flex-wrap: wrap; justify-content: space-between; }' +
+            '.tenor-gif-container { width: 32%; margin-bottom: 10px; }' +
+            '.tenor-gif-container img { width: 100%; height: auto; object-fit: cover; cursor: pointer; }' +
+            '.suggestion-btn { margin-right: 5px; margin-bottom: 5px; }' +
+            '</style>').appendTo('head');
+
+        $("#giphy_window").find('.gifoption').each(function() {
+            $(this).click(function() {
+                $('.gifoption').prop('checked', false);
+                $(this).prop('checked', true);
+            });
+        });
+
+        $("#giphy_window").find('.searchoption').each(function() {
+            $(this).click(function() {
+                $('.searchoption').prop('checked', false);
+                $(this).prop('checked', true);
+            });
+        });
+
+        $("body").css('overflow', 'hidden');
+        outer.on("hidden.bs.modal", function() {
+            outer.remove();
+            $("body").css('overflow', 'auto');
+            scrollChat();
+        });
+
+        $('#giphy_query').on('submit', function(p_oEvent) {
+            p_oEvent.preventDefault();
+            if ($('#giphy_input').val() === '') {
+                return;
+            }
+            TRENDING = false;
+            getGiphy(p_oEvent);
+        });
+
+        if (isTenorEnabled) {
+            $('#tenor_query').on('submit', function(p_oEvent) {
+                p_oEvent.preventDefault();
+                if ($('#tenor_input').val() === '') {
+                    return;
+                }
+                getTenor(p_oEvent, false);
+            });
+        }
+
+        $('#trending').click(function(p_oEvent) {
+            TRENDING = true;
+            getGiphy(p_oEvent);
+        });
+    }
+});
+	
+	
+	
 //let the gifs play on hover!
 
 $('#messagebuffer').on('mouseenter', '.giphy', function() {
