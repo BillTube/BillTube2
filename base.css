@@ -1437,18 +1437,14 @@ h1, h2, h3, h4, h5, h6 {
 		-webkit-font-smoothing: antialiased
 	}
 	button#queue_next {
-    border-radius: 10px;
     height: 50px;
-    padding: 15px;
+    padding: 10px;
     bottom: 0px;
-    top: 10px;
 }
 	button#queue_end {
-    border-radius: 10px;
     height: 50px;
-    padding: 15px;
+    padding: 10px;
     bottom: 0px;
-    top: 10px;
 }
 
 	.input-group .input-group-btn > button {
