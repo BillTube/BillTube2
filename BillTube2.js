@@ -1668,8 +1668,8 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
             .html('&times;')
             .css({
                 'position': 'absolute',
-                'top': '10px',
-                'right': '10px',
+                'top': '0px',
+                'right': '0px',
                 'background': 'none',
                 'border': 'none',
                 'color': '#fff',
@@ -1782,7 +1782,7 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
         this.$modalBBCodeRow = $('<div class="modal-bbcode-row">')
             .css({
                 'display': 'flex',
-                'justify-content': 'center',
+                'justify-content': 'space-evenly',
                 'margin-bottom': '10px'
             })
             .appendTo(this.$settingsModal);
@@ -1791,7 +1791,6 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
         this.$colorToggleButton = $('<button type="button" class="btn btn-default" title="Text Color">')
             .html('<i class="fas fa-palette"></i>')
             .css({
-                'margin': '0 5px',
                 'background-color': 'rgb(255 255 255 / 7%)',
                 'color': '#fff',
                 'border': 'none',
@@ -1843,7 +1842,6 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
                 .html(this.markdownTemplates[template].text)
                 .data('template', template)
                 .css({
-                    'margin': '0 5px',
                     'background-color': 'rgb(255 255 255 / 7%)',
                     'color': '#fff',
                     'border': 'none',
