@@ -5743,7 +5743,7 @@ player.on('playing', function() {
         const GIF_URL_PATTERN = /https:\/\/media\.giphy\.com\/media\/[^/]+\/(200_s\.gif|giphy\.gif)/; // Regex to match Giphy GIF URLs
         const CHAT_MSG_CLASS_PREFIX = 'chat-msg-'; // Prefix for chat message classes
 
-        let autoplayEnabled = false; // Initial autoplay state
+        let autoplayEnabled = true; // Initial autoplay state
 
         /**
          * Adds the toggle button to the settings modal.
