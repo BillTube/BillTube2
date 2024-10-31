@@ -3711,7 +3711,7 @@ function emoteToDialog(title, src) {
                         <button class="smiles-tab" data-category="emojis">Emojis</button>
                     </div>
                     <div class="smiles-search-container">
-                        <input type="text" id="smile-search" placeholder="Search emotes..." class="smiles-search">
+                        <input type="text" id="smile-search" class="smiles-search">
                         <i class="fa fa-search smiles-search-icon"></i>
                     </div>
                 </div>
@@ -3984,6 +3984,7 @@ function emoteToDialog(title, src) {
             that.showSmilesPanel();
         });
 
+        // Toggle display for the smiles panel
         this.showSmilesPanel = function () {
             if (app.Helpers.getViewportSize().width < 992) {
                 that.$smilesPanel.empty();
@@ -3992,6 +3993,7 @@ function emoteToDialog(title, src) {
                 if (that.$smilesPanel.is(':hidden')) {
                     $('.smiles-tab').removeClass('active');
                     $('.smiles-tab[data-category="channel-emotes"]').addClass('active');
+                    $('#smile-search').val('');
                     that.renderSmiles();
                     that.loadEmojis();
                     that.loadStoredEmotes();
