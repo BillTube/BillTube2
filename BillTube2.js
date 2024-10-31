@@ -3944,7 +3944,6 @@ function emoteToDialog(title, src) {
             }
         };
 
-        // Event listener for tab switching
         $(document.body).on('click', '.smiles-tab', function () {
             const category = $(this).data('category');
             $('.smiles-tab').removeClass('active');
@@ -3952,14 +3951,12 @@ function emoteToDialog(title, src) {
             that.updateSmilesContent(category);
         });
 
-        // Event listener for search functionality
         $(document.body).on('input', '#smile-search', function () {
             const query = $(this).val();
             const category = $('.smiles-tab.active').data('category');
             that.searchSmiles(query, category);
         });
 
-        // Event listener for toggling sections
         $(document.body).on('click', '.section-header', function () {
             const contentId = $(this).data('toggle');
             $(`#${contentId}`).toggle();
@@ -3970,7 +3967,6 @@ function emoteToDialog(title, src) {
             }
         });
 
-        // Function to insert smile into chat and add to recently used
         this.insertSmile = function (smile) {
             const smileName = smile.name;
             app.Helpers.addMessageToChatInput(' ' + smileName + ' ', 'end');
@@ -3983,19 +3979,19 @@ function emoteToDialog(title, src) {
             }
         };
 
-        // Event listener for emote click
         $(document.body).on('click', '.smile-on-panel', function () {
             that.insertSmile({ name: $(this).data('name'), image: $(this).attr('src') || '' });
             that.showSmilesPanel();
         });
 
-        // Toggle display for the smiles panel
         this.showSmilesPanel = function () {
             if (app.Helpers.getViewportSize().width < 992) {
                 that.$smilesPanel.empty();
                 $('#emotelistbtn').click();
             } else {
                 if (that.$smilesPanel.is(':hidden')) {
+                    $('.smiles-tab').removeClass('active');
+                    $('.smiles-tab[data-category="channel-emotes"]').addClass('active');
                     that.renderSmiles();
                     that.loadEmojis();
                     that.loadStoredEmotes();
@@ -4005,7 +4001,6 @@ function emoteToDialog(title, src) {
             }
         };
 
-        // Initialize and render the emotes when the button is clicked
         this.$smilesBtn.on('click', function() {
             that.showSmilesPanel();
         });
