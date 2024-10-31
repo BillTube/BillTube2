@@ -3504,7 +3504,7 @@ button#newpollbtn {
 div#chat-panel {
     position: absolute;
     bottom: 0px;
-    margin-left: 10px;
+    margin-left: 0px;
     margin-right: 32px;
 }
 #favourite-pictures-panel, #smiles-panel {
@@ -4795,14 +4795,7 @@ button#skip:disabled,button#mediarefresh:disabled {
     animation: lights 8s 750ms linear infinite;
     -webkit-text-fill-color: #922fffbf;
 }
-.chat-msg-RandomRetard .username {
-text-shadow: 1px 1px 7px #ff2828;
-    font-weight: bold;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: border-box, border-box, text;
-    background-image: url(https://i.ibb.co/R60RZRS/sparkling.gif), url(https://i.ibb.co/R60RZRS/sparkling.gif), linear-gradient(178deg, #c76363, #ff2a00, #ff2443);
-    background-size: 10em, 10em, 5em;
-}
+
 .VIP {
   text-shadow: 1px 1px 15px rgb(255 0 224 / 88%);
   font-weight: bold;
