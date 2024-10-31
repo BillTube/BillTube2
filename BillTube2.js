@@ -3905,7 +3905,7 @@ function emoteToDialog(title, src) {
                         element.appendTo(`#${category}-content`);
                     });
                 } else {
-                    $(`#${category}-content`).html('<p>No emotes available in this category.</p>');
+                    $(`#${category}-content`).html('<p>No emotes available.</p>');
                 }
             } else {
                 $('#smiles-content').empty();
@@ -3919,7 +3919,7 @@ function emoteToDialog(title, src) {
                         element.appendTo('#smiles-content');
                     });
                 } else {
-                    $('#smiles-content').html('<p>No emotes available in this category.</p>');
+                    $('#smiles-content').html('<p>No emotes available.</p>');
                 }
             }
         };
