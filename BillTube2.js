@@ -3760,7 +3760,7 @@ function emoteToDialog(title, src) {
                 margin-left: 2px;
             }
             .smiles-tab.active {
-                background: #7289da;
+                background: #6c6c8b3d;
                 color: white;
             }
 			.smiles-search-container {
