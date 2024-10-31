@@ -1022,9 +1022,6 @@ $(document).ready(() => {
     // Attach the event handler
     $ambientButton.on("click", handleAmbientClick);
 });
-
-
-
 $('#skip').click(function(){
   var btn = $(this);
   socket.emit("voteskip");
@@ -1090,8 +1087,6 @@ fsVidButton.addEventListener('click', function(e) {
 
 	this.$chatline = $('#chatline');
     this.currentTitle = '';
-	
-	// Cloudflare Worker URL
     const workerUrl = 'https://trivia-worker.billtube.workers.dev';
 	
     // Timer to automatically close trivia
@@ -1111,8 +1106,6 @@ fsVidButton.addEventListener('click', function(e) {
             console.error('Error updating score:', error);
         }
     }
-
-// Function to transform a string into stylized characters
 function stylizeUsername(username) {
     const boldMap = {
         'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟',
@@ -1128,8 +1121,6 @@ function stylizeUsername(username) {
 
     return username.split('').map(char => boldMap[char] || char).join('');
 }
-
-// Function to display the leaderboard by fetching it from the Cloudflare Worker
 async function displayLeaderboard() {
     try {
         const response = await fetch(`${workerUrl}/leaderboard`);
@@ -1143,49 +1134,38 @@ async function displayLeaderboard() {
         console.error('Error fetching leaderboard:', error);
     }
 }
-
-
-    // Function to extract movie name and release year from the title
     this.extractTitleAndYear = function (title) {
-        // Regular expression to extract the title and year
         const match = title.match(/^(.*)\s\((\d{4})\)$/);
         if (match) {
             return { name: match[1], year: match[2] };
         } else {
-            // If no match, return the title as is without a year
             return { name: title, year: null };
         }
     };
-	
-	    // Function to truncate text to a specified length without cutting off mid-word
     this.truncateText = function (text, maxLength) {
         if (text.length > maxLength) {
             return text.slice(0, text.lastIndexOf(' ', maxLength)) + '...';
         }
         return text;
     };
-	
-       // Fetch the movie/TV show summary and rating from TMDB
-    this.fetchTMDBSummary = async function (title) {
+	    this.fetchTMDBSummary = async function (title) {
         const apiKey = typeof moviedbkey !== 'undefined' && moviedbkey ? moviedbkey : null;
         
         if (!apiKey) {
             return 'Provide a TMDB API key in the theme config.';
         }
-
         const { name, year } = that.extractTitleAndYear(title);
         let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(name)}`;
 
         if (year) {
             searchUrl += `&year=${year}`;
         }
-
         try {
             const response = await fetch(searchUrl);
             const data = await response.json();
             if (data.results && data.results.length > 0) {
                 const movie = data.results[0];
-                const truncatedOverview = that.truncateText(movie.overview, 220);  // Truncate overview to 200 characters	
+                const truncatedOverview = that.truncateText(movie.overview, 250);  
                 return `🎥[b]${movie.title} [/b](${movie.release_date}) ⭐ Rating: ${movie.vote_average}/10: 📄 [i]${truncatedOverview}[/i]`;
             } else {
                 return '[i]No summary found for the current title.[/i]';
@@ -1195,7 +1175,6 @@ async function displayLeaderboard() {
             return 'Error fetching summary from TMDB.';
         }
     };
-
 
 	    this.isCommandPermitted = function (commandName) {
 	        if (that.commandsList[commandName]) {
@@ -1391,15 +1370,11 @@ async function displayLeaderboard() {
         }
 	    };
 		
-		  // Trivia-specific variables
     let triviaActive = false;
     let correctAnswer = '';
     let answeredUsers = new Set();  // To prevent spamming
 
-    // Open Trivia Database API URL (Movie category)
-    const triviaAPIUrl = 'https://opentdb.com/api.php?amount=1&type=multiple';
-
-// Function to fetch trivia question from the API
+const triviaAPIUrl = 'https://opentdb.com/api.php?amount=1&type=multiple';
 async function fetchTriviaQuestion() {
     try {
         const response = await fetch(triviaAPIUrl);
@@ -1408,21 +1383,15 @@ async function fetchTriviaQuestion() {
         if (data.results && data.results.length > 0) {
             const questionData = data.results[0];
             correctAnswer = decodeHTMLEntities(questionData.correct_answer.toLowerCase());
-
-            // Combine correct answer with incorrect answers for a multiple choice question
             const allAnswers = [...questionData.incorrect_answers, questionData.correct_answer];
-            // Decode HTML entities in all answers
             const decodedAnswers = allAnswers.map(answer => decodeHTMLEntities(answer));
-            // Shuffle the answers
+
             decodedAnswers.sort(() => Math.random() - 0.5);
 
-            // Define colors for each answer
             const colors = ["#ffa500", "#ff4500", "#1e90ff", "#32cd32"];
             const coloredAnswers = decodedAnswers.map((answer, index) => 
                 `col:${colors[index % colors.length]}:${answer}`
             );
-
-            // Decode HTML entities in the question
             const decodedQuestion = decodeHTMLEntities(questionData.question);
             return `🎬 [code]Trivia: ${decodedQuestion}[/code] \nOptions: ${coloredAnswers.join(', ')}`;
         } else {
@@ -1450,7 +1419,7 @@ this.commandsList['!trivia'] = {
         const triviaQuestion = await fetchTriviaQuestion();
         triviaActive = true;
         answeredUsers.clear();
-        window.socket.emit("chatMsg", { msg: `!trivia` });  // Show the !trivia command in chat
+        window.socket.emit("chatMsg", { msg: `!trivia` }); 
         window.socket.emit("chatMsg", { msg: triviaQuestion });
 
         triviaTimeout = setTimeout(() => {
@@ -1460,7 +1429,7 @@ this.commandsList['!trivia'] = {
             }
         }, 30000);
 
-        return '';  // Return an empty string to prevent double emission
+        return '';  
     },
     canBeOmitted: true
 };
@@ -1619,10 +1588,6 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-    // Include any required modules or plugins
-    // If you have specific modules to include, replace the following line accordingly
-    // __webpack_require__(13); // Replace with actual module if needed
-
     window.cytubeEnhanced.addModule('bbCodesHelper', function (app, settings) {
         'use strict';
         var that = this;
@@ -1715,8 +1680,6 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
                     'margin-bottom': '10px'
                 })
                 .appendTo(this.$settingsModal); // Append to the modal at the top
-
-            // Add a title for the color selection
             $('<div>')
                 .text('Select Text Color')
                 .css({
@@ -1760,7 +1723,6 @@ deletelastbtn = $('<button title="Delete last added video" id="deletelast-btn" c
                             $chatline.val('col:' + selectedColor + ':' + currentVal);
                         }
                         $chatline.focus();
-                        // Optionally hide the color selection after choosing a color
                         that.$colorSelection.slideUp(150);
                     })
                     .appendTo(that.$colorButtonsContainer);
@@ -3573,9 +3535,12 @@ var observer = new MutationObserver(function (mutations) {
 		emoteToDialog($(this).attr("title"), $(this).attr("src"));
 	});
 });
+//old recent used emotes
+/*
 $("#chatwrap").append(
 '<div id="LastEmote" class="LastEmoteBox">' +
 '</div></div>' );
+
 var config = { childList: true };
 observer.observe(target, config);
 var items = 0;
@@ -3599,7 +3564,11 @@ function emoteToDialog(title, src) {
 		}
 	);
 	btn.prependTo("#LastEmote");}
+	*/
+	
 });
+
+
 /***/ },
 /* 28 */
 /***/ function(module, exports) {
@@ -4011,17 +3980,6 @@ function emoteToDialog(title, src) {
 /***/ }
 
 
-
-
-
-
-
-
-
-
-
-
-
 ,
 /* 30 */
 /***/ function(module, exports) {
@@ -4199,7 +4157,7 @@ function emoteToDialog(title, src) {
 	        selectQualityOption: true,
 	        expandPlaylistOption: true,
 	        showVideoContributorsOption: true,
-	        playlistHeight: 800
+	        playlistHeight: 900
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
@@ -4207,8 +4165,6 @@ function emoteToDialog(title, src) {
 	
 
     this.$topVideoControls = $('<div id="top-video-controls" class="btn-group">').appendTo("#VideoOverlay");
-
-//    videojs("ytapiplayer").ready(function(){this.volume(1);});
 
 	    this.settingsFix = function () {
 	        $("#us-theme").val(window.USEROPTS.theme);
@@ -4745,156 +4701,151 @@ if (typeof UI_Discord !== 'undefined' && (UI_Discord === "1" || UI_Discord === 1
 	    settings = $.extend({}, defaultSettings, settings);
 
 
-$('#chatline').unbind('keydown',tabSuggestions || function(){});
-var tabSuggestions = (function(){
+// Tab Suggestions Script for Cytube
+let tabSuggestions = (function () {
+    const chatline = document.getElementById('chatline');
+    const suggestionsDiv = document.getElementById('suggestionsDiv') || document.createElement('div');
+    let lastMatchNum = 0;
+    let lastMatch;
 
-    var chatline = document.getElementById('chatline'),
-        suggestionsDiv = document.getElementById('suggestionsDiv') || document.createElement('div'),
-        lastMatchNum = 0,
-        lastMatch;
-    suggestionsDiv.id = 'suggestionsDiv',
-    suggestionsDiv.style.position = 'absolute',
-    suggestionsDiv.style.zIndex = '999',
-    chatline.parentNode.appendChild(suggestionsDiv)
+    suggestionsDiv.id = 'suggestionsDiv';
+    suggestionsDiv.style.position = 'absolute';
+    suggestionsDiv.style.zIndex = '999';
+    chatline.parentNode.appendChild(suggestionsDiv);
 
-    function emoteImg(emote){
-        var i = document.createElement('img')
-        i.className = 'channel-emote-small',
-        i.src = emote.image,
-        i.title = emote.name,
-        i.onclick = function(e){
+    function emoteImg(emote) {
+        const i = document.createElement('img');
+        i.className = 'channel-emote-small';
+        i.src = emote.image;
+        i.title = emote.name;
+        i.onclick = function () {
             clearBorders();
-            chatline.value = chatline.value.replace(/\/[a-z0-9?!&]*$/i, emote.name),
-            this.style.border = '2px solid white',
+            chatline.value = chatline.value.replace(/\/[a-z0-9?!&]*$/i, emote.name);
+            this.style.border = '2px solid white';
             chatline.focus();
-            var i = 0, a = this;
-            while (a = a.previousSibling) i++;
-            lastMatchNum = i
-        }
-        return i
+            let index = 0, a = this;
+            while (a = a.previousSibling) index++;
+            lastMatchNum = index;
+        };
+        return i;
     }
 
-    function clearBorders(){
-        for (var i = 0; i < suggestionsDiv.children.length; i++)
-            suggestionsDiv.children[i].style.border = 'none'
+    function clearBorders() {
+        for (let i = 0; i < suggestionsDiv.children.length; i++) {
+            suggestionsDiv.children[i].style.border = 'none';
+        }
     }
 
     function levenshtein(a, b) {
-      if (a.length === 0) return b.length
-      if (b.length === 0) return a.length
-      let tmp, i, j, prev, val, row
-      // swap to save some memory O(min(a,b)) instead of O(a)
-      if (a.length > b.length) {
-        tmp = a
-        a = b
-        b = tmp
-      }
-
-      row = Array(a.length + 1)
-      // init the row
-      for (i = 0; i <= a.length; i++) {
-        row[i] = i
-      }
-
-      // fill in the rest
-      for (i = 1; i <= b.length; i++) {
-        prev = i
-        for (j = 1; j <= a.length; j++) {
-          if (b[i - 1] === a[j - 1]) {
-            val = row[j - 1] // match
-          } else {
-            val = Math.min(row[j - 1] + 1, // substitution
-                  Math.min(prev + 1,     // insertion
-                           row[j] + 1))  // deletion
-          }
-          row[j - 1] = prev
-          prev = val
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        let tmp, i, j, prev, val, row;
+        if (a.length > b.length) {
+            tmp = a;
+            a = b;
+            b = tmp;
         }
-        row[a.length] = prev
-      }
-      return row[a.length]
+
+        row = Array(a.length + 1);
+        for (i = 0; i <= a.length; i++) {
+            row[i] = i;
+        }
+
+        for (i = 1; i <= b.length; i++) {
+            prev = i;
+            for (j = 1; j <= a.length; j++) {
+                if (b[i - 1] === a[j - 1]) {
+                    val = row[j - 1];
+                } else {
+                    val = Math.min(row[j - 1] + 1, Math.min(prev + 1, row[j] + 1));
+                }
+                row[j - 1] = prev;
+                prev = val;
+            }
+            row[a.length] = prev;
+        }
+        return row[a.length];
     }
 
-    return function(e){
-        if (e.keyCode != 9 && !e.shiftKey)
-            suggestionsDiv.innerHTML = '',
-            lastMatch = null
-        else if (e.keyCode == 9){
-            //emotes
+    return function (e) {
+        if (e.keyCode !== 9) {
+            suggestionsDiv.innerHTML = '';
+            lastMatch = null;
+        } else if (e.keyCode === 9) {
             if (lastMatch) {
-                //toggle matches
-                if (Object.prototype.toString.call(lastMatch) === '[object Array]')
-                    //usernames
-                    chatline.value = chatline.value.replace(/[a-z0-9-]+$/i, lastMatch[++lastMatchNum % lastMatch.length])
-                else
-                    //emotes
-                    e.shiftKey ? lastMatchNum = (--lastMatchNum + suggestionsDiv.children.length) % suggestionsDiv.children.length :
-                    lastMatchNum = ++lastMatchNum % suggestionsDiv.children.length,
-                    clearBorders(),suggestionsDiv.children[lastMatchNum] && suggestionsDiv.children[lastMatchNum].onclick()
-            } else {
-
-                var emoteStr = chatline.value.match(/\/[a-z0-9?!&]*$/i)
-                if (emoteStr){
-                    //show emotesuggestions
-                    var emoteList = CHANNEL.emotes.slice(),
-                        suggestions = []
-                    //find matches based on levenshtein distance
-                    emoteStr = emoteStr[0].replace(/\?/g,'\\?')
-                    for (var i = 0, emoteStr_withoutslash = emoteStr.replace('/',''); i < emoteList.length; i++)
-                        if (emoteList[i].name.match(emoteStr_withoutslash) || levenshtein(emoteStr, emoteList[i].name) < 3)
-                            suggestions.push(new emoteImg(emoteList[i]))
-                    //sort suggestions
-                    suggestions.sort(function(a, b){
-                        var indexofa = a.title.indexOf(emoteStr),
-                            indexofb = b.title.indexOf(emoteStr)
-
-                        if (indexofa === 0 && indexofb !== 0)
-                            return -1
-                        else if (indexofb === 0 && indexofa !== 0)
-                            return 1
-                        else {
-                            //sort aphabetically with respect for numbers at the end
-                            var i = 0;
-                            while (a.title.charAt(i) === b.title.charAt(i) && i < a.title.length && i < b.title.length)
-                                i++;
-                            if (a.title.length !== b.title.length &&
-                               (i == a.title.length - 1 || i == b.title.length - 1) &&
-                               !isNaN(parseInt(a.title.charAt(i))) && !isNaN(parseInt(b.title.charAt(i))))
-                                return a.title.charAt(i) < b.title.charAt(i) ? 1 : -1
-                            return a.title.charAt(i) < b.title.charAt(i) ? -1 : 1
-                        }
-                    })
-                    //populate suggestionsDiv
-                    suggestionsDiv.innerHTML = ''
-                    for (var i=0; i<suggestions.length; i++)
-                        suggestionsDiv.appendChild(suggestions[i])
-                    lastMatchNum = 0,
-                    lastMatch = emoteStr,
-                    suggestionsDiv.children[0] && (suggestionsDiv.children[0].style.border = '3px solid white') && suggestionsDiv.children[lastMatchNum].onclick()
-
+                if (Array.isArray(lastMatch)) {
+                    chatline.value = chatline.value.replace(/[a-z0-9-]+$/i, lastMatch[++lastMatchNum % lastMatch.length]);
                 } else {
-                    //usernames
-                    var userStr = chatline.value.match(/[a-z0-9-]+$/i),
-                        userlistElems = $('#userlist .userlist_item');//document.getElementById("userlist").children
-                    lastMatch = [],
-                    lastMatchNum = 0
-                    for (var i = 0; i < userlistElems.length; i++)
-                        if (userlistElems[i].children[1].textContent != CLIENT.name &&
-                            userlistElems[i].children[1].textContent.match(new RegExp('^' + userStr, 'i')))
+                    if (e.shiftKey) {
+                        lastMatchNum = (--lastMatchNum + suggestionsDiv.children.length) % suggestionsDiv.children.length;
+                    } else {
+                        lastMatchNum = ++lastMatchNum % suggestionsDiv.children.length;
+                    }
+                    clearBorders();
+                    suggestionsDiv.children[lastMatchNum] && suggestionsDiv.children[lastMatchNum].onclick();
+                }
+            } else {
+                const emoteStr = chatline.value.match(/\/[a-z0-9?!&]*$/i);
+                if (emoteStr) {
+                    const emoteList = CHANNEL.emotes.slice();
+                    const suggestions = [];
+                    const emoteStrWithoutSlash = emoteStr[0].replace('/', '');
+
+                    for (let i = 0; i < emoteList.length; i++) {
+                        if (emoteList[i].name.match(emoteStrWithoutSlash) || levenshtein(emoteStr, emoteList[i].name) < 3) {
+                            suggestions.push(emoteImg(emoteList[i]));
+                        }
+                    }
+
+                    suggestions.sort(function (a, b) {
+                        const indexOfA = a.title.indexOf(emoteStr);
+                        const indexOfB = b.title.indexOf(emoteStr);
+
+                        if (indexOfA === 0 && indexOfB !== 0) return -1;
+                        if (indexOfB === 0 && indexOfA !== 0) return 1;
+
+                        let i = 0;
+                        while (a.title.charAt(i) === b.title.charAt(i) && i < a.title.length && i < b.title.length) i++;
+                        if (a.title.length !== b.title.length &&
+                            (i === a.title.length - 1 || i === b.title.length - 1) &&
+                            !isNaN(parseInt(a.title.charAt(i))) && !isNaN(parseInt(b.title.charAt(i)))) {
+                            return a.title.charAt(i) < b.title.charAt(i) ? 1 : -1;
+                        }
+                        return a.title.charAt(i) < b.title.charAt(i) ? -1 : 1;
+                    });
+
+                    suggestionsDiv.innerHTML = '';
+                    for (let i = 0; i < suggestions.length; i++) {
+                        suggestionsDiv.appendChild(suggestions[i]);
+                    }
+                    lastMatchNum = 0;
+                    lastMatch = emoteStr;
+                    suggestionsDiv.children[0] && (suggestionsDiv.children[0].style.border = '3px solid white') && suggestionsDiv.children[lastMatchNum].onclick();
+                } else {
+                    const userStr = chatline.value.match(/[a-z0-9-]+$/i);
+                    const userlistElems = $('#userlist .userlist_item');
+                    lastMatch = [];
+                    lastMatchNum = 0;
+                    for (let i = 0; i < userlistElems.length; i++) {
+                        if (userlistElems[i].children[1].textContent !== CLIENT.name &&
+                            userlistElems[i].children[1].textContent.match(new RegExp('^' + userStr, 'i'))) {
                             lastMatch.push(userlistElems[i].children[1].textContent);
-                    if (lastMatch.length != 0)
-                        chatline.value = chatline.value.replace(/[a-z0-9-]+$/i, lastMatch[0])
-                    else
-                        lastMatch = null
+                        }
+                    }
+                    if (lastMatch.length !== 0) {
+                        chatline.value = chatline.value.replace(/[a-z0-9-]+$/i, lastMatch[0]);
+                    } else {
+                        lastMatch = null;
+                    }
                 }
             }
         }
-    }
-})()
+    };
+})();
 
-chatTabComplete = function(){return false},
-$("#chatline").keydown(tabSuggestions)
-	});
+$('#chatline').off('keydown.tabComplete');
+$('#chatline').on('keydown.tabComplete', tabSuggestions);
+});
 /***/ },
 /* 45 */
 /***/ function(module, exports) {
@@ -4944,8 +4895,6 @@ function randomHero2() {
 });
 /***/ },
 /* 47 */
-
-
 
 /***/ function(module, exports) {
 
@@ -5140,10 +5089,6 @@ window.cytubeEnhanced.getModule('bbCodesHelper').done(function(commandsModule) {
             });
         }
     }
-
-    // ... (continued in Part 2)
-// ... (continued from Part 1)
-
     function getTenor(p_oEvent, isTrending) {
         p_oEvent.preventDefault();
         if (DONTSPAMTENOR) {
@@ -5364,8 +5309,6 @@ window.cytubeEnhanced.getModule('bbCodesHelper').done(function(commandsModule) {
     }
 });
 	
-	
-	
 //let the gifs play on hover!
 
 $('#messagebuffer').on('mouseenter', '.giphy', function() {
@@ -5375,48 +5318,30 @@ $('#messagebuffer').on('mouseenter', '.giphy', function() {
 });
 
 $(document).ready(function() {
-    // Function to add the favorite button to images
     function addFavoriteButtonToImages() {
-        // Find all images with the class "chat-picture" or "channel-emote" inside the "messagebuffer"
         $('#messagebuffer .chat-picture').each(function() {
             var $img = $(this);
-            // Check if the button has already been added to avoid duplicates
             if ($img.parent().find('.chat-img-btn').length === 0) {
-                // Create a small button with a tooltip that says "Favorite"
                 var $button = $('<button class="chat-img-btn-fav" title="Favorite" style="position:absolute; top:1px; right:1px; opacity:0.4; background:transparent; border:none; color:white;">⭐</button>');
-                
-                // Position the image parent relative for absolute positioning
                 $img.wrap('<div style="position:relative; display:inline-block;"></div>');
-                // Append the button to the image's parent container
                 $img.parent().append($button);
-                
-                // Add click handler for the button
                 $button.on('click', function() {
-                    // Get the image URL
                     var imageUrl = $img.attr('src');
-                    
-                    // Paste the image URL into the textbox with ID "picture-address"
                     $('#picture-address').val(imageUrl);
-                    
-                    // Trigger the submission by clicking the button with ID "add-picture-btn"
                     $('#add-picture-btn').click();
-                    
-                    // Disable the button to ensure the action is only performed once per image
                     $button.prop('disabled', true);
                 });
             }
         });
     }
-
     // Add favorite button on page load
     addFavoriteButtonToImages();
-
     // Listen for new chat messages and add the button to new images
     socket.on('chatMsg', function(data) {
         // Delay to ensure the message is added to the DOM
         setTimeout(function() {
             addFavoriteButtonToImages();
-        }, 100); // Small delay to ensure the DOM is updated
+        }, 100); 
     });
 });
 
@@ -5439,8 +5364,6 @@ window.cytubeEnhanced.addModule('RequestList', function (app, settings) {
 	        .on('click', function () {
 	            that.handleAddVideoBtn(that.commands);
 	        });
-
-
 	});
 
 /***/ },
@@ -5770,7 +5693,6 @@ function correctSubtitlePlacement() {
 /////////////experimental subtitle local///////////////
 videojs('ytapiplayer_html5_api').ready(function() {
   console.log('Player is ready');
-  // Initialize the Video.js player
   var player = videojs('ytapiplayer');
 
   // Function to remove old subtitles
@@ -6015,9 +5937,7 @@ player.on('playing', function() {
 
 
 (function($) {
-    // Ensure the script runs after the DOM is fully loaded
     $(document).ready(function() {
-        // Configuration Constants
         const SETTINGS_MODAL_SELECTOR = '#settings-modal'; // Selector for the settings modal
         const SETTINGS_LIST_SELECTOR = '.modal-settings-list'; // Selector for the modal settings list
         const TOGGLE_BUTTON_ID = 'gif-autoplay-toggle'; // ID for the toggle button
@@ -6268,18 +6188,12 @@ player.on('playing', function() {
                     initSocketListener();
                 }
             }, 100); // Check every 100ms
-
         }
-
-        // Start initialization
         init();
     });
 })(jQuery);
-
 (function($) {
-    // Ensure the script runs after the DOM is fully loaded
     $(document).ready(function() {
-        // Configuration Constants
         const SETTINGS_MODAL_SELECTOR = '#settings-modal'; // Selector for the settings modal
         const SETTINGS_LIST_SELECTOR = '.modal-settings-list'; // Selector for the modal settings list
         const CLEAN_BUTTON_ID = 'clean'; // ID for the clean button
