@@ -3682,88 +3682,350 @@ function emoteToDialog(title, src) {
 /* 29 */
 /***/ function(module, exports) {
 
-	window.cytubeEnhanced.addModule('smiles', function (app) {
-	    'use strict';
-	    var that = this;
+    window.cytubeEnhanced.addModule('smiles', function (app) {
+        'use strict';
+        var that = this;
 
-	    $('#emotelistbtn').hide();
-	    if ($('#chat-panel').length === 0) {
-	        $('<div id="chat-panel" class="row">').insertAfter("#messagebuffer");
-	    }
-	    if ($('#chat-controls').length === 0) {
-	        $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
-	    }
-	    this.$smilesBtn = $('<button class="chatbtn" id="smiles-btn" data-tooltip="Emotes" data-tooltip-pos="up" >')
-	        .html('<i class="fa-solid fa-face-awesome"></i>')
-	        .prependTo('#chat-controls');
+        // Hiding default emote list button
+        $('#emotelistbtn').hide();
 
-	    this.$smilesPanel = $('<div class="animated animatedFadeInUp fadeInUp" id="smiles-panel">')
-	        .prependTo('#chat-panel')
-	        .hide();
-	    this.renderSmiles = function () {
-	        var smiles = window.CHANNEL.emotes;
+        // Container for emote picker
+        if ($('#chat-panel').length === 0) {
+            $('<div id="chat-panel" class="row">').insertAfter("#messagebuffer");
+        }
+        if ($('#chat-controls').length === 0) {
+            $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
+        }
+        
+        // Emote picker button
+        this.$smilesBtn = $('<button class="chatbtn" id="smiles-btn" data-tooltip="Emotes" data-tooltip-pos="up" >')
+            .html('<i class="fa-solid fa-face-awesome"></i>')
+            .prependTo('#chat-controls');
 
-	        for (var smileIndex = 0, smilesLen = smiles.length; smileIndex < smilesLen; smileIndex++) {
-	            $('<img class="smile-on-panel">')
-	                .attr({src: smiles[smileIndex].image})
-	                .data('name', smiles[smileIndex].name)
-	                .appendTo(this.$smilesPanel);
-	        }
-	    };
-	    this.insertSmile = function (smileName) {
-	        app.Helpers.addMessageToChatInput(' ' + smileName + ' ', 'end');
-	    };
-	    $(document.body).on('click', '.smile-on-panel', function () {
-	        that.insertSmile($(this).data('name'))
-			that.showSmilesPanel();
-	    });
-	    $(window).on('resize', function () {
-	        if (app.Helpers.getViewportSize().width < 992) {
-	            that.$smilesPanel.empty();
-	        }
-	    });
-	    this.showSmilesPanel = function () {
-	        if (app.Helpers.getViewportSize().width < 992) {
-	            that.$smilesPanel.empty();
-	            $('#emotelistbtn').click();
-	        } else {
-	            if (that.$smilesPanel.html() === '') {
-	                that.renderSmiles();
-	            }
+        // Tabbed emote panel container with updated styling
+        this.$smilesPanel = $(
+            `<div id="smiles-panel" style="display: none;">
+                <div class="smiles-header">
+                    <div class="smiles-tabs">
+                        <button class="smiles-tab active" data-category="channel-emotes">Channel Emotes</button>
+                        <button class="smiles-tab" data-category="emojis">Emojis</button>
+                    </div>
+                    <div class="smiles-search-container">
+                        <input type="text" id="smile-search" placeholder="Search emotes..." class="smiles-search">
+                        <i class="fa fa-search smiles-search-icon"></i>
+                    </div>
+                </div>
+                <div id="recently-used-section" class="smiles-section">
+                    <div class="section-header" data-toggle="recently-used-content">Recently Used <span class="toggle-arrow">▼</span></div>
+                    <div id="recently-used-content" class="smiles-content" style="display: none;"></div>
+                </div>
+                <div id="smiles-content" class="smiles-content"></div>
+            </div>`
+        ).appendTo('#chat-panel');
 
-	            var smilesAndPicturesTogether = this.smilesAndPicturesTogether || true; //setted up by userConfig module
+        // CSS for styling the emote picker
+        const smilesCSS = `
+            #smiles-panel {
+                text-align: center;
+                margin: 0px 0px 0px 0px;
+                border: 1px solid #34343469;
+                background-color: var(--theme-bg-menu);
+                border-radius: 9px;
+                max-height: 550px;
+                height: 38rem;
+                width: var(--chatwidth);
+                overflow-x: hidden;
+                overflow-y: hidden;
+                backdrop-filter: saturate(100%) blur(1px);
+                box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+            }
+            .smiles-header {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+            .smiles-tabs {
+                display: flex;
+                margin-bottom: 8px;
+            }
+            .smiles-tab {
+                flex: 1;
+                background: var(--chat-header-bg);
+                color: #b9bbbe;
+                padding: 4px;
+                border: none;
+                cursor: pointer;
+                border-radius: 4px;
+                margin-right: 2px;
+                margin-left: 2px;
+            }
+            .smiles-tab.active {
+                background: #7289da;
+                color: white;
+            }
+			.smiles-search-container {
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+            .smiles-search {
+                padding: 5px;
+                border-radius: 4px;
+                border: none;
+                background: #202225;
+                color: #b9bbbe;
+                width: 100%;
+                margin-bottom: 1px;
+            }
+			     .smiles-search-icon {
+                position: absolute;
+                right: 10px;
+                color: #b9bbbe;
+            }
+            .smiles-section {
+                margin-bottom: 10px;
+            }
+            .section-header {
+                background: #28282847;
+                color: #b9bbbe8a;
+                padding: 6px;
+                font-size: 12px;
+                cursor: pointer;
+                border-radius: 4px;
+                text-align: left;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .toggle-arrow {
+                font-size: 12px;
+            }
+            .smiles-content {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 8px;
+                overflow-y: auto;
+                max-height: 250px;
+                justify-content: space-around;
+                align-content: space-around;
+            }
+            div#recently-used-content {
+                background: #1c1c1c;
+            }
+            .smile-on-panel {
+                width: 48px;
+                height: 48px;
+                margin: 8px;
+                cursor: pointer;
+                position: relative;
+				font-size: 30px;
+            }
+            .smile-on-panel span {
+                font-size: 42px;
+            }
+        `;
 
-	            if ($('#favourite-pictures-panel').length !== 0 && !smilesAndPicturesTogether) {
-	                $('#favourite-pictures-panel').hide();
-	            }
+// Adding the CSS to the document
+        $('<style>').text(smilesCSS).appendTo('head');
 
-	            that.$smilesPanel.toggle();
+        // Variables to hold current emote data and cache expiration
+        this.emoteCategories = {
+            "channel-emotes": [],
+            "emojis": [],
+            "recently-used": []
+        };
+        this.emojiCacheExpiration = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        this.emojiCacheKey = 'emojiCache';
+        this.emojiCacheTimestampKey = 'emojiCacheTimestamp';
+        this.recentlyUsedKey = `recentlyUsedEmotes_${window.CHANNEL.name}`;
 
-	            if (!smilesAndPicturesTogether) {
-	                if (that.$smilesBtn.hasClass('btn-default')) {
-	                    if ($('#favourite-pictures-btn').length !== 0 && $('#favourite-pictures-btn').hasClass('btn-success')) {
-	                        $('#favourite-pictures-btn').removeClass('btn-success').addClass('');
-	                    }
+        // Load recently used from local storage
+        this.loadStoredEmotes = function () {
+            const recentlyUsed = localStorage.getItem(this.recentlyUsedKey);
+            if (recentlyUsed) {
+                this.emoteCategories['recently-used'] = JSON.parse(recentlyUsed).slice(0, 6);
+            }
+        };
 
-	                    that.$smilesBtn.removeClass('');
-	                    that.$smilesBtn.addClass('');
-	                } else {
-	                    that.$smilesBtn.removeClass('');
-	                    that.$smilesBtn.addClass('');
-	                }
-	            }
-	        }
-	    };
-	    this.$smilesBtn.on('click', function() {
-	        that.showSmilesPanel();
-	    });
-	    this.makeSmilesAndPicturesTogether = function () {
-	        that.smilesAndPicturesTogether = true;
-	        that.$smilesBtn.hide();
-	        that.$smilesPanel.hide();
-	    };
-	});
-/***/ },
+        // Render function for channel emotes
+        this.renderSmiles = function () {
+            const smiles = window.CHANNEL.emotes;
+            if (smiles && smiles.length > 0) {
+                this.emoteCategories['channel-emotes'] = smiles.map(smile => ({
+                    name: smile.name,
+                    image: smile.image
+                }));
+                this.updateSmilesContent('channel-emotes');
+            } else {
+                $('#smiles-content').html('<p>No emotes available in this category.</p>');
+            }
+        };
+
+        // Function to load emojis from emoji-api.com with caching
+        this.loadEmojis = async function () {
+            const cachedEmojis = localStorage.getItem(this.emojiCacheKey);
+            const cacheTimestamp = localStorage.getItem(this.emojiCacheTimestampKey);
+            const now = Date.now();
+
+            if (cachedEmojis && cacheTimestamp && (now - cacheTimestamp) < this.emojiCacheExpiration) {
+                this.emoteCategories['emojis'] = JSON.parse(cachedEmojis);
+                return;
+            }
+
+            try {
+                const response = await fetch('https://emoji-api.com/emojis?access_key=4254407708e6e1198bcb7f8975b2e7b0fd50db83');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const emojiData = await response.json();
+                const emojis = emojiData.map(emoji => ({
+                    name: emoji.character,
+                    image: ''
+                }));
+                this.emoteCategories['emojis'] = emojis;
+                localStorage.setItem(this.emojiCacheKey, JSON.stringify(emojis));
+                localStorage.setItem(this.emojiCacheTimestampKey, now.toString());
+            } catch (error) {
+                console.error('Error loading emojis:', error);
+                $('#smiles-content').html('<p>Unable to load emojis. Please try again later.</p>');
+            }
+        };
+
+        // Function to update emote content by category
+        this.updateSmilesContent = function (category) {
+            if (category === 'recently-used') {
+                $(`#${category}-content`).empty();
+                const smiles = this.emoteCategories[category].filter(smile => smile.image !== ''); // Exclude emojis from recently used
+                if (smiles && smiles.length > 0) {
+                    smiles.slice(0, 6).forEach(smile => {
+                        const element = smile.image ?
+                            $('<img class="smile-on-panel">').attr({src: smile.image}) :
+                            $('<span class="smile-on-panel">').text(smile.name);
+                        element.data('name', smile.name);
+                        element.appendTo(`#${category}-content`);
+                    });
+                } else {
+                    $(`#${category}-content`).html('<p>No emotes available in this category.</p>');
+                }
+            } else {
+                $('#smiles-content').empty();
+                const smiles = this.emoteCategories[category];
+                if (smiles && smiles.length > 0) {
+                    smiles.forEach(smile => {
+                        const element = smile.image ?
+                            $('<img class="smile-on-panel">').attr({src: smile.image}) :
+                            $('<span class="smile-on-panel">').text(smile.name);
+                        element.data('name', smile.name);
+                        element.appendTo('#smiles-content');
+                    });
+                } else {
+                    $('#smiles-content').html('<p>No emotes available in this category.</p>');
+                }
+            }
+        };
+
+        // Function to search and filter emotes
+        this.searchSmiles = function(query, category) {
+            $('#smiles-content').empty();
+            const smiles = this.emoteCategories[category].filter(smile =>
+                smile.name.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (smiles && smiles.length > 0) {
+                smiles.forEach(smile => {
+                    const element = smile.image ?
+                        $('<img class="smile-on-panel">').attr({src: smile.image}) :
+                        $('<span class="smile-on-panel">').text(smile.name);
+                    element.data('name', smile.name);
+                    element.appendTo('#smiles-content');
+                });
+            } else {
+                $('#smiles-content').html('<p>No emotes found.</p>');
+            }
+        };
+
+        // Event listener for tab switching
+        $(document.body).on('click', '.smiles-tab', function () {
+            const category = $(this).data('category');
+            $('.smiles-tab').removeClass('active');
+            $(this).addClass('active');
+            that.updateSmilesContent(category);
+        });
+
+        // Event listener for search functionality
+        $(document.body).on('input', '#smile-search', function () {
+            const query = $(this).val();
+            const category = $('.smiles-tab.active').data('category');
+            that.searchSmiles(query, category);
+        });
+
+        // Event listener for toggling sections
+        $(document.body).on('click', '.section-header', function () {
+            const contentId = $(this).data('toggle');
+            $(`#${contentId}`).toggle();
+            const arrow = $(this).find('.toggle-arrow');
+            arrow.text(arrow.text() === '▼' ? '▲' : '▼');
+            if (contentId === 'recently-used-content' && $(`#${contentId}`).is(':visible')) {
+                that.updateSmilesContent('recently-used');
+            }
+        });
+
+        // Function to insert smile into chat and add to recently used
+        this.insertSmile = function (smile) {
+            const smileName = smile.name;
+            app.Helpers.addMessageToChatInput(' ' + smileName + ' ', 'end');
+            if (!this.emoteCategories['recently-used'].find(emote => emote.name === smileName && emote.image !== '')) {
+                this.emoteCategories['recently-used'].unshift(smile);
+                if (this.emoteCategories['recently-used'].length > 6) {
+                    this.emoteCategories['recently-used'].pop();
+                }
+                localStorage.setItem(this.recentlyUsedKey, JSON.stringify(this.emoteCategories['recently-used']));
+            }
+        };
+
+        // Event listener for emote click
+        $(document.body).on('click', '.smile-on-panel', function () {
+            that.insertSmile({ name: $(this).data('name'), image: $(this).attr('src') || '' });
+            that.showSmilesPanel();
+        });
+
+        // Toggle display for the smiles panel
+        this.showSmilesPanel = function () {
+            if (app.Helpers.getViewportSize().width < 992) {
+                that.$smilesPanel.empty();
+                $('#emotelistbtn').click();
+            } else {
+                if (that.$smilesPanel.is(':hidden')) {
+                    that.renderSmiles();
+                    that.loadEmojis();
+                    that.loadStoredEmotes();
+                }
+                that.updateSmilesContent('channel-emotes');
+                that.$smilesPanel.toggle();
+            }
+        };
+
+        // Initialize and render the emotes when the button is clicked
+        this.$smilesBtn.on('click', function() {
+            that.showSmilesPanel();
+        });
+
+    });
+/***/ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
 /* 30 */
 /***/ function(module, exports) {
 
@@ -6046,7 +6308,7 @@ player.on('playing', function() {
                 id: CLEAN_BUTTON_ID,
                 type: 'button',
                 class: 'btn btn-default',
-                text: 'Clean Server Messages',
+                text: 'Clear Server Messages',
                 css: {
                     'margin': '5px 0',
                     'width': '80%',
