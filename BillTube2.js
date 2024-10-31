@@ -1112,20 +1112,38 @@ fsVidButton.addEventListener('click', function(e) {
         }
     }
 
-    // Function to display the leaderboard by fetching it from the Cloudflare Worker
-    async function displayLeaderboard() {
-        try {
-            const response = await fetch(`${workerUrl}/leaderboard`);
-            const leaderboard = await response.json();
-            let message = '🎉 Leaderboard:\n';
-            leaderboard.forEach(({ username, score }) => {
-                message += `${username}: ${score} points\n`;
-            });
-            window.socket.emit("chatMsg", { msg: message });
-        } catch (error) {
-            console.error('Error fetching leaderboard:', error);
-        }
+// Function to transform a string into stylized characters
+function stylizeUsername(username) {
+    const boldMap = {
+        'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟',
+        'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥',
+        'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫',
+        's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱',
+        'y': '𝐲', 'z': '𝐳', 'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃',
+        'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉',
+        'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏',
+        'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕',
+        'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙'
+    };
+
+    return username.split('').map(char => boldMap[char] || char).join('');
+}
+
+// Function to display the leaderboard by fetching it from the Cloudflare Worker
+async function displayLeaderboard() {
+    try {
+        const response = await fetch(`${workerUrl}/leaderboard`);
+        const leaderboard = await response.json();
+        let message = '🎉 Leaderboard:\n';
+        leaderboard.forEach(({ username, score }) => {
+            message += `${stylizeUsername(username)}: ${score} points\n`;
+        });
+        window.socket.emit("chatMsg", { msg: message });
+    } catch (error) {
+        console.error('Error fetching leaderboard:', error);
     }
+}
+
 
     // Function to extract movie name and release year from the title
     this.extractTitleAndYear = function (title) {
@@ -6084,7 +6102,6 @@ player.on('playing', function() {
         init();
     });
 })(jQuery);
-
 
 
 
