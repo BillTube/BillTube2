@@ -1397,7 +1397,7 @@ async function displayLeaderboard() {
     let answeredUsers = new Set();  // To prevent spamming
 
     // Open Trivia Database API URL (Movie category)
-    const triviaAPIUrl = 'https://opentdb.com/api.php?amount=1&category=11&type=multiple';
+    const triviaAPIUrl = 'https://opentdb.com/api.php?amount=1&type=multiple';
 
 // Function to fetch trivia question from the API
 async function fetchTriviaQuestion() {
@@ -1416,9 +1416,15 @@ async function fetchTriviaQuestion() {
             // Shuffle the answers
             decodedAnswers.sort(() => Math.random() - 0.5);
 
+            // Define colors for each answer
+            const colors = ["#ffa500", "#ff4500", "#1e90ff", "#32cd32"];
+            const coloredAnswers = decodedAnswers.map((answer, index) => 
+                `col:${colors[index % colors.length]}:${answer}`
+            );
+
             // Decode HTML entities in the question
             const decodedQuestion = decodeHTMLEntities(questionData.question);
-            return `🎬 [code]Trivia: ${decodedQuestion}[/code] \nOptions: ${decodedAnswers.join(', ')}`;
+            return `🎬 [code]Trivia: ${decodedQuestion}[/code] \nOptions: ${coloredAnswers.join(', ')}`;
         } else {
             return '[i]No trivia question available at the moment.[/i]';
         }
@@ -1429,15 +1435,16 @@ async function fetchTriviaQuestion() {
 }
 
 
+
 this.commandsList['!trivia'] = {
     description: 'Start a trivia question',
     value: async function () {
         if (window.CLIENT.rank < 2) {
-            return 'You do not have permission to start a trivia question.';
+            return 'col:#a52a2a:You do not have permission to start a trivia question.';
         }
 
         if (triviaActive) {
-            return 'A trivia question is already active!';
+            return 'col:#a52a2a:A trivia question is already active!';
         }
 
         const triviaQuestion = await fetchTriviaQuestion();
@@ -1449,7 +1456,7 @@ this.commandsList['!trivia'] = {
         triviaTimeout = setTimeout(() => {
             if (triviaActive) {
                 triviaActive = false;
-                window.socket.emit("chatMsg", { msg: `⏰ Time's up! The correct answer was: ${correctAnswer}` });
+                window.socket.emit("chatMsg", { msg: `col:#a52a2a:⏰ Time's up! The correct answer was: ${correctAnswer}` });
             }
         }, 30000);
 
@@ -1466,7 +1473,7 @@ this.handleTriviaAnswer = async function (username, message) {
             triviaActive = false;
             clearTimeout(triviaTimeout);
             await updateScore(username);
-            window.socket.emit("chatMsg", { msg: `🎉 Correct! ${username} got the right answer! Their score has been updated.` });
+            window.socket.emit("chatMsg", { msg: `col:#008000:🎉 Correct! ${username} got the right answer! Their score has been updated.` });
             displayLeaderboard();
         }
     }
