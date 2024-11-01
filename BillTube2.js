@@ -3518,53 +3518,57 @@ var trnsdelay = 400;//Defines trnsdelay, transition time (in ms)
 /* 27 */
 /***/ function(module, exports) {
 
-	window.cytubeEnhanced.addModule('CopyEmotes', function (app) {
+	window.cytubeEnhanced.addModule('LastUsed', function (app) {
 	    'use strict';
 	    var that = this;
 
-var target = document.querySelector('#messagebuffer');
-var observer = new MutationObserver(function (mutations) {
-	var last = $('#messagebuffer').children().last();
-	var emote = last.find(".channel-emote").click(
-		function () {
-		    $('#chatline').val($('#chatline').val() + " " + ($(this).attr("title")));
-		}
-	);
-	emote.each(function () {
-		console.log($(this).attr("title"), $(this).attr("src"));
-		emoteToDialog($(this).attr("title"), $(this).attr("src"));
-	});
-});
-//old recent used emotes
-/*
-$("#chatwrap").append(
-'<div id="LastEmote" class="LastEmoteBox">' +
-'</div></div>' );
+if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
+    var target = document.querySelector('#messagebuffer');
+    var observer = new MutationObserver(function (mutations) {
+        var last = $('#messagebuffer').children().last();
+        var emote = last.find(".channel-emote").click(
+            function () {
+                $('#chatline').val($('#chatline').val() + " " + ($(this).attr("title")));
+            }
+        );
+        emote.each(function () {
+            console.log($(this).attr("title"), $(this).attr("src"));
+            emoteToDialog($(this).attr("title"), $(this).attr("src"));
+        });
+    });
 
-var config = { childList: true };
-observer.observe(target, config);
-var items = 0;
-function emoteToDialog(title, src) {
-	if (typeof title == 'undefined' || typeof src == 'undefined') {
-		return;
-	}
-	var emoteID = title.replace("/", "")
-	var del = $('#' + emoteID).remove();
-	if(!del.length > 0){
-		items++;
-	}
-	if(items >= 4){
-		$('#chatEmotes').children().last().remove();
-		items--;
-	}
-	var btn = $('<div class="emoteicon" id="'+emoteID+'"title=/'+emoteID+' style="float:left;"><img src="' + src + '" id="' + emoteID + "_img'" + '" width="28" height="28" /></img></div>');
-		btn.click(
-		function () {
-			$('#chatline').val($('#chatline').val() + " " + title);
-		}
-	);
-	btn.prependTo("#LastEmote");}
-	*/
+    $("#chatwrap").append(
+        '<div id="LastEmote" class="LastEmoteBox">' +
+        '</div></div>'
+    );
+
+    var config = { childList: true };
+    observer.observe(target, config);
+    var items = 0;
+
+    function emoteToDialog(title, src) {
+        if (typeof title == 'undefined' || typeof src == 'undefined') {
+            return;
+        }
+        var emoteID = title.replace("/", "");
+        var del = $('#' + emoteID).remove();
+        if (!del.length > 0) {
+            items++;
+        }
+        if (items >= 4) {
+            $('#chatEmotes').children().last().remove();
+            items--;
+        }
+        var btn = $('<div class="emoteicon" id="' + emoteID + '" title=/' + emoteID + ' style="float:left;"><img src="' + src + '" id="' + emoteID + "_img" + '" width="28" height="28" /></img></div>');
+        btn.click(
+            function () {
+                $('#chatline').val($('#chatline').val() + " " + title);
+            }
+        );
+        btn.prependTo("#LastEmote");
+    }
+}
+
 	
 });
 
@@ -3655,18 +3659,16 @@ function emoteToDialog(title, src) {
         'use strict';
         var that = this;
 
-        // Hiding default emote list button
+
         $('#emotelistbtn').hide();
 
-        // Container for emote picker
         if ($('#chat-panel').length === 0) {
             $('<div id="chat-panel" class="row">').insertAfter("#messagebuffer");
         }
         if ($('#chat-controls').length === 0) {
             $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
         }
-        
-        // Emote picker button
+      
         this.$smilesBtn = $('<button class="chatbtn" id="smiles-btn" data-tooltip="Emotes" data-tooltip-pos="up" >')
             .html('<i class="fa-solid fa-face-awesome"></i>')
             .prependTo('#chat-controls');
@@ -3978,7 +3980,6 @@ function emoteToDialog(title, src) {
 
     });
 /***/ }
-
 
 ,
 /* 30 */
@@ -6283,9 +6284,19 @@ player.on('playing', function() {
     });
 })(jQuery);
 
-
-
-
+// Check if "EnableEmoteClick" is defined and set to 1 before running the script
+if (typeof EnableEmoteClick !== 'undefined' && EnableEmoteClick === 1) {
+    $(document).on('click', '[class^="chat-msg-"] .channel-emote', function () {
+        var emoteTitle = $(this).attr('title');
+        
+        if (emoteTitle) {
+            var chatInput = $('#chatline');
+            chatInput.val(chatInput.val() + ' ' + emoteTitle);
+            
+            chatInput.focus();
+        }
+    });
+}
 
 
 
