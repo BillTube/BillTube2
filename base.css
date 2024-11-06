@@ -1344,15 +1344,6 @@ button#skip:disabled,button#mediarefresh:disabled { box-shadow: inset 3px 3px 10
 
 .VIP5 { -webkit-background-clip: text,text,border-box,border-box,border-box; -webkit-text-fill-color: transparent; animation: myproxiesanim 5s linear infinite; background-image: url(https://i.imgur.com/k6rhOtN.gif),radial-gradient(circle,rgba(21,170,255,1)8%,rgba(85,208,255,1)19%,rgba(173,247,242,1)35%,rgba(156,238,243,1)60%,rgba(21,170,255,1)70%,rgba(8,8,255,1)87%,rgba(255,255,255,1)100%),url(https://i.ibb.co/DtJBDNy/white-lightning.gif),url(https://i.imgur.com/afWakbq.gif); background-size: 5em,15%800%,10em,25em; font-weight: 1000; position: relative; transition: .3s; }
   
-#chatsettings, #modflair, .has-scrollbar > .nano-content::-webkit-scrollbar!important, 
-#mainpage > .nano > .nano-pane, #mediarefresh span, div#layout-config-form, 
-div#common-config-form, .chat-avatar_hidden, .mce-notification-inner, 
-.vjs-fullscreen-control, #quickQuality, #leftcontrols, 
-#playlistmanagerwrap, #showchat, #us-no-channelcss, #us-no-channeljs, 
-#us-layout, #us-theme, #pipButton, #queue li[visible='false'], .no-result,
-html.compact .server-msg-reconnect, html.compact span.timestamp, 
-html.compact .navbar-inverse, html.compact #resize-video-larger, 
-html.compact #resize-video-smaller, .vjs-fullscreen-control { 
-display: none; }
-
+#chatsettings,#modflair,.has-scrollbar>.nano-content::-webkit-scrollbar!important,#mainpage>.nano>.nano-pane,#mediarefresh span,div#layout-config-form,div#common-config-form,.chat-avatar_hidden,.mce-notification-inner,.vjs-fullscreen-control,#quickQuality,#leftcontrols,#playlistmanagerwrap,#showchat,#us-no-channelcss,#us-no-channeljs,#us-layout,#us-theme,#pipButton,#queue li[visible='false'],.no-result,html.compact .server-msg-reconnect,html.compact span.timestamp,html.compact .navbar-inverse,html.compact #resize-video-larger,html.compact #resize-video-smaller,.vjs-fullscreen-control{display:none}
 .animatedFadeInUp,.fadeInUp{opacity:0}@keyframes fadeInUp{from{opacity:0;transform:translate3d(0,-20%,0)}to{opacity:1;transform:translate3d(0,0,0)}}@-webkit-keyframes fadeInUp{from{opacity:0;transform:translate3d(0,-20%,0)}to{opacity:1;transform:translate3d(0,0,0)}}.animated{animation-duration:1s;animation-fill-mode:both;-webkit-animation-duration:1s;-webkit-animation-fill-mode:both}.fadeInUp{animation-name:fadeInUp;-webkit-animation-name:fadeInUp}
+@media (max-width:1400px){.queue_sortable li{border-bottom:1px solid #ffffff14!important;counter-increment:index;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;align-content:center;height:140px;flex-wrap:nowrap}.section,.well,#rightpane-inner{border-radius:10px;margin-bottom:25px;margin-left:1rem;margin-right:1rem;margin-top:2rem;padding:2rem;position:relative}}
