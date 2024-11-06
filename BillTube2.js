@@ -597,7 +597,7 @@ $("#modli").append($("#modflair"));
 $("#videoinfo").after($("#rightpane"));
 $("#rightpane-inner").addClass("section");
 $("#mediarefresh").addClass("fal fa-sync OLB").removeClass("btn btn-sm btn-default").text("");
-$("#userlist").addClass("animated animatedFadeInUp fadeInUp");
+//$("#userlist").addClass("animated animatedFadeInUp fadeInUp");
 $("#queue").addClass("queue_sortable");
 $("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Playlist</p></div></div>");
 $("#queuecontainer").append($("#queue"));
