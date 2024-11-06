@@ -1355,3 +1355,4 @@ html.compact .navbar-inverse, html.compact #resize-video-larger,
 html.compact #resize-video-smaller, .vjs-fullscreen-control { 
 display: none; }
 
+.animatedFadeInUp,.fadeInUp{opacity:0}@keyframes fadeInUp{from{opacity:0;transform:translate3d(0,-20%,0)}to{opacity:1;transform:translate3d(0,0,0)}}@-webkit-keyframes fadeInUp{from{opacity:0;transform:translate3d(0,-20%,0)}to{opacity:1;transform:translate3d(0,0,0)}}.animated{animation-duration:1s;animation-fill-mode:both;-webkit-animation-duration:1s;-webkit-animation-fill-mode:both}.fadeInUp{animation-name:fadeInUp;-webkit-animation-name:fadeInUp}
