@@ -434,6 +434,8 @@ console.log("Loading Desktop Theme");
 //Load some dependencies for the base theme
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/ElBeyonder/font-awesome-6.5.2-pro-full@master/css/all.css' />");
 $('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/base.css' />");
+
+
 $('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/PlayerTheme.css' />");
 $.getScript("https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/notifications.js");
@@ -540,8 +542,7 @@ var setImageSrc = function(imageData) {
     $("#newpollbtn").addClass("headerbtn");
 
     // Text modifications
-    //$(".server-msg-reconnect").addClass("fa-solid fa-popcorn").text("");
-    $(".server-msg-reconnect").addClass("fa-duotone fa-solid fa-jack-o-lantern").text(""); //spooky halloween mode
+    $(".server-msg-reconnect").addClass("fa-solid fa-popcorn").text("");
     $userlisttoggle.text("");
     $("#showchansettings").text("Admin Settings");
 
@@ -3960,7 +3961,7 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             }
 
             try {
-                const response = await fetch('https://emoji-api.com/emojis?access_key=YOUR_ACCESS_KEY');
+                const response = await fetch('https://emoji-api.com/emojis?access_key=4254407708e6e1198bcb7f8975b2e7b0fd50db83');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -3978,7 +3979,6 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             }
         };
 
-        // Function to update emote content by category
         this.updateSmilesContent = function (category) {
             if (category === 'recently-used') {
                 $(`#${category}-content`).empty();
