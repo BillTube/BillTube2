@@ -5,7 +5,7 @@
   */
 
 ////Lets initialize some shit////
-var VERSION = '2.4';
+var VERSION = '2.5';
 
 var vplayer = videojs("ytapiplayer")
 
@@ -20,6 +20,7 @@ window.socket.on("changeMedia", function () {
         videofix();
     }
 });
+
 
 refreshVideo = function () {
 	 $('#mediarefresh').click(function(){
@@ -47,6 +48,7 @@ function loadScript(src) {
     }
   });
 }
+
 [...document.querySelectorAll("#currenttitle")].forEach(el => {
   // We just need the length of the string as a CSS variable...
   el.style.setProperty("--length", el.innerText.length);
@@ -221,6 +223,99 @@ ColorsArray = [
     '#40e0d0', '#32cd32', '#008000', '#808000', '#bdb76b', '#00ffff', '#1e90ff', '#0000ff', '#191970',
     '#483d8b'
 ];
+
+$(document).ready(function () {
+    // Load Font Face Observer dynamically with retry mechanism
+    function loadFontFaceObserver(retryCount, callback) {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.3.0/fontfaceobserver.standalone.js';
+        
+        script.onload = function () {
+            console.log('Font Face Observer loaded successfully.');
+            if (typeof callback === 'function') {
+                callback();
+            }
+        };
+
+        script.onerror = function () {
+            console.error('Failed to load Font Face Observer. Retrying...');
+            if (retryCount > 0) {
+                // Retry loading after a short delay
+                setTimeout(function () {
+                    loadFontFaceObserver(retryCount - 1, callback);
+                }, 2000);
+            } else {
+                console.error('Failed to load Font Face Observer after multiple attempts.');
+            }
+        };
+
+        document.head.appendChild(script);
+    }
+
+    // Load Google Fonts dynamically with retry mechanism
+    function loadGoogleFontWithRetry(href, retryCount) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+
+        link.onload = function () {
+            console.log('Font loaded successfully:', href);
+        };
+
+        link.onerror = function () {
+            console.error(`Error loading font ${href}. Retrying...`);
+            if (retryCount > 0) {
+                // Retry loading the font after a short delay
+                setTimeout(function () {
+                    loadGoogleFontWithRetry(href, retryCount - 1);
+                }, 2000);
+            } else {
+                console.error(`Failed to load font ${href} after multiple attempts.`);
+            }
+        };
+
+        document.head.appendChild(link);
+    }
+
+    // Load Google Fonts
+    function loadGoogleFonts() {
+        const fonts = [
+            'https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap&subset=latin-ext',
+            'https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap'
+        ];
+
+        fonts.forEach(function (href) {
+            loadGoogleFontWithRetry(href, 3); // Retry each font up to 3 times
+        });
+    }
+
+    // Observe fonts loading status
+    function observeFonts() {
+        const quicksandObserver = new FontFaceObserver('Quicksand');
+        const montserratObserver = new FontFaceObserver('Montserrat');
+
+        // Observing font loading
+        Promise.all([
+            quicksandObserver.load(null, 5000), 
+            montserratObserver.load(null, 5000)
+        ])
+        .then(function () {
+            console.log('All fonts loaded successfully.');
+        })
+        .catch(function (err) {
+            console.error('One or more fonts failed to load:', err);
+        });
+    }
+
+    // Run all functions in correct order
+    loadFontFaceObserver(3, function () { // Retry up to 3 times
+        loadGoogleFonts();
+        observeFonts();
+    });
+});
+
+
+
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -340,11 +435,9 @@ console.log("Loading Desktop Theme");
 $('head').append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/ElBeyonder/font-awesome-6.5.2-pro-full@master/css/all.css' />");
 $('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/base.css' />");
 $('head').append("<link rel='stylesheet' href='https://billtube.github.io/BillTube2/PlayerTheme.css' />");
-//$.getScript("https://cdn.jsdelivr.net/npm/@misterben/videojs-poster-time@1.0.0/dist/videojs-poster-time.min.js");
 $.getScript("https://cdn.jsdelivr.net/npm/videojs-logo@3.0.0/dist/videojs-logo.min.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/notifications.js");
 $.getScript("https://cdn.jsdelivr.net/gh/BillTube/BillTube2/avatars.js");
-//$.getScript("https://cdnjs.cloudflare.com/ajax/libs/jQuery-Selection/1.0.1/jquery.selection.min.js");
 
 
 function loadScriptAsync(url, shouldLoad, callback) {
@@ -506,7 +599,7 @@ $("#rightpane-inner").addClass("section");
 $("#mediarefresh").addClass("fal fa-sync OLB").removeClass("btn btn-sm btn-default").text("");
 $("#userlist").addClass("animated animatedFadeInUp fadeInUp");
 $("#queue").addClass("queue_sortable");
-$("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Up Next</p></div></div>");
+$("#rightpane").after("<div id='queuecontainer' class='section'><div class='textheader'><p id='upnext' class='sectionheader'>Playlist</p></div></div>");
 $("#queuecontainer").append($("#queue"));
 $("#upnext").append($("#plmeta")).after("<ul id='ploptions' class='menu hidden' role='menu'></ul>");
 $("#ploptions").append($("#shuffleplaylist"), $("#clearplaylist"), $("#getplaylist"));
@@ -931,7 +1024,7 @@ window.cytubeEnhanced=new window.CytubeEnhanced(window.cytubeEnhancedSettings&&w
 	    };
 	    settings = $.extend({}, defaultSettings, settings);
 
-$("#videowrap").append("<div id='VideoOverlay' class='fadein'><button data-tooltip='Fullscreen the video' data-tooltip-pos='down' class='fal fa-expand-alt OLB' id='fs-vid-button'></button></div>");
+$("#videowrap").append("<div id='VideoOverlay' class='fadein'><button data-tooltip='Fullscreen' data-tooltip-pos='down' class='fa-solid fa-expand OLB' id='fs-vid-button'></button></div>");
 $("#VideoOverlay").hide();
 var i = null;
 $("#videowrap").mousemove(function() {
@@ -944,7 +1037,7 @@ $("#videowrap").mousemove(function() {
 });
 $("#VideoOverlay").append($("#mediarefresh"));
 $("#VideoOverlay").append("<button id='skip' data-tooltip='Voteskip the video' data-tooltip-pos='down' class='fal fa-arrow-alt-to-right OLB'></button>");
-$("#VideoOverlay").append("<button id='Ambient' data-tooltip='Ambient Mode' data-tooltip-pos='down' style='float: right;' class='fal fa-popcorn OLB'></button>");
+$("#VideoOverlay").append("<button id='Ambient' data-tooltip='Ambient Mode' data-tooltip-pos='down' style='float: left;' class='fal fa-popcorn OLB'></button>");
 
 $(document).ready(() => {
     // Cache jQuery selectors
@@ -3659,6 +3752,9 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
         'use strict';
         var that = this;
 
+        // Variables to manage keyboard navigation
+        this.highlightedIndex = -1;
+        this.currentEmotes = [];
 
         $('#emotelistbtn').hide();
 
@@ -3668,7 +3764,7 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
         if ($('#chat-controls').length === 0) {
             $('<div id="chat-controls" class="btn-group">').appendTo(".chat-area-buttons");
         }
-      
+
         this.$smilesBtn = $('<button class="chatbtn" id="smiles-btn" data-tooltip="Emotes" data-tooltip-pos="up" >')
             .html('<i class="fa-solid fa-face-awesome"></i>')
             .prependTo('#chat-controls');
@@ -3734,7 +3830,7 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
                 background: #6c6c8b3d;
                 color: white;
             }
-			.smiles-search-container {
+            .smiles-search-container {
                 display: flex;
                 align-items: center;
                 position: relative;
@@ -3748,7 +3844,7 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
                 width: 100%;
                 margin-bottom: 1px;
             }
-			     .smiles-search-icon {
+            .smiles-search-icon {
                 position: absolute;
                 right: 10px;
                 color: #b9bbbe;
@@ -3789,14 +3885,20 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
                 margin: 8px;
                 cursor: pointer;
                 position: relative;
-				font-size: 30px;
+                font-size: 30px;
             }
             .smile-on-panel span {
                 font-size: 42px;
             }
+            /* CSS for highlighting selected emote */
+            .smile-on-panel.highlighted {
+                border: 2px solid #00aced;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
         `;
 
-// Adding the CSS to the document
+        // Adding the CSS to the document
         $('<style>').text(smilesCSS).appendTo('head');
 
         // Variables to hold current emote data and cache expiration
@@ -3844,7 +3946,7 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             }
 
             try {
-                const response = await fetch('https://emoji-api.com/emojis?access_key=4254407708e6e1198bcb7f8975b2e7b0fd50db83');
+                const response = await fetch('https://emoji-api.com/emojis?access_key=YOUR_ACCESS_KEY');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -3867,6 +3969,8 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             if (category === 'recently-used') {
                 $(`#${category}-content`).empty();
                 const smiles = this.emoteCategories[category].filter(smile => smile.image !== ''); // Exclude emojis from recently used
+                this.currentEmotes = smiles.slice(0, 6); // Update current emotes for navigation
+                this.highlightedIndex = -1;  // Reset highlighted index
                 if (smiles && smiles.length > 0) {
                     smiles.slice(0, 6).forEach(smile => {
                         const element = smile.image ?
@@ -3881,6 +3985,8 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             } else {
                 $('#smiles-content').empty();
                 const smiles = this.emoteCategories[category];
+                this.currentEmotes = smiles; // Store current emotes for navigation
+                this.highlightedIndex = -1;  // Reset highlighted index
                 if (smiles && smiles.length > 0) {
                     smiles.forEach(smile => {
                         const element = smile.image ?
@@ -3901,7 +4007,8 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             const smiles = this.emoteCategories[category].filter(smile =>
                 smile.name.toLowerCase().includes(query.toLowerCase())
             );
-
+            this.currentEmotes = smiles; // Update current emotes
+            this.highlightedIndex = -1;  // Reset highlighted index
             if (smiles && smiles.length > 0) {
                 smiles.forEach(smile => {
                     const element = smile.image ?
@@ -3927,6 +4034,54 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             const category = $('.smiles-tab.active').data('category');
             that.searchSmiles(query, category);
         });
+
+        // Event listener for keydown on the search input
+        $('#smile-search').on('keydown', function(e) {
+            const keyCode = e.keyCode || e.which;
+            if (keyCode === 9) { // Tab key
+                e.preventDefault(); // Prevent default tab behavior
+                that.navigateEmotes();
+            } else if (keyCode === 13) { // Enter key
+                e.preventDefault(); // Prevent default enter behavior
+                if (that.highlightedIndex >= 0 && that.highlightedIndex < that.currentEmotes.length) {
+                    const selectedEmote = that.currentEmotes[that.highlightedIndex];
+                    that.insertSmile(selectedEmote);
+                    that.showSmilesPanel(); // Close the panel after selection
+                }
+            } else if (keyCode === 27) { // Escape key (optional)
+                // Close the panel when Escape is pressed
+                that.showSmilesPanel();
+            }
+        });
+
+        // Function to navigate through emotes
+        this.navigateEmotes = function() {
+            const emoteElements = $('#smiles-content .smile-on-panel');
+            if (emoteElements.length === 0) return;
+
+            // Remove highlight from previously highlighted emote
+            emoteElements.removeClass('highlighted');
+
+            // Update highlightedIndex
+            this.highlightedIndex = (this.highlightedIndex + 1) % emoteElements.length;
+
+            // Add highlight to the new emote
+            const newHighlightedEmote = emoteElements.eq(this.highlightedIndex);
+            newHighlightedEmote.addClass('highlighted');
+
+            // Scroll to the highlighted emote if necessary
+            const container = $('#smiles-content');
+            const emoteTop = newHighlightedEmote.position().top;
+            const emoteBottom = emoteTop + newHighlightedEmote.outerHeight();
+            const containerScrollTop = container.scrollTop();
+            const containerHeight = container.height();
+
+            if (emoteBottom > containerHeight) {
+                container.scrollTop(containerScrollTop + (emoteBottom - containerHeight));
+            } else if (emoteTop < 0) {
+                container.scrollTop(containerScrollTop + emoteTop);
+            }
+        };
 
         $(document.body).on('click', '.section-header', function () {
             const contentId = $(this).data('toggle');
@@ -3955,6 +4110,13 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
             that.showSmilesPanel();
         });
 
+        // Reset highlighted index when an emote is hovered over
+        $(document.body).on('mouseenter', '.smile-on-panel', function () {
+            $('#smiles-content .smile-on-panel').removeClass('highlighted');
+            that.highlightedIndex = $('#smiles-content .smile-on-panel').index(this);
+            $(this).addClass('highlighted');
+        });
+
         // Toggle display for the smiles panel
         this.showSmilesPanel = function () {
             if (app.Helpers.getViewportSize().width < 992) {
@@ -3971,6 +4133,15 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
                 }
                 that.updateSmilesContent('channel-emotes');
                 that.$smilesPanel.toggle();
+
+                if (that.$smilesPanel.is(':visible')) {
+                    $('#smile-search').focus();
+                    that.highlightedIndex = -1; // Reset highlighted index
+                } else {
+                    // Panel is hidden, remove highlights
+                    $('#smiles-content .smile-on-panel').removeClass('highlighted');
+                    that.highlightedIndex = -1;
+                }
             }
         };
 
@@ -3979,7 +4150,8 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
         });
 
     });
-/***/ }
+}
+
 
 ,
 /* 30 */
@@ -5729,7 +5901,7 @@ videojs('ytapiplayer_html5_api').ready(function() {
       importButton.textContent = '';
       importButton.className = 'fal fa-regular fa-subtitles OLB';
       importButton.style.zIndex = 1000;          // Make sure it appears on top
-      importButton.style.float = 'right';
+      importButton.style.float = 'left';
 	  importButton.setAttribute('data-tooltip-pos', 'down');
       importButton.setAttribute('data-tooltip', 'Local Subtitles');
 
@@ -6141,10 +6313,6 @@ player.on('playing', function() {
                 console.log(`New chat message received via socket. Updated 1 GIF(s).`);
             }, 100); // Adjust the delay as needed (100ms)
         }
-
-        /**
-         * Initializes the socket listener for 'chatMsg' events.
-         */
         function initSocketListener() {
             // Ensure that the socket object exists
             if (typeof socket === 'undefined') {
@@ -6261,10 +6429,6 @@ player.on('playing', function() {
             $(".chat-msg-Video:not(:last)").each(function() { $(this).remove(); });
             console.log('Server messages cleaned from chat.');
         }
-
-        /**
-         * Initializes the entire script.
-         */
         function init() {
             // We need to make sure that the settings modal is present
             // Since it might not be immediately available, we'll use a timer to check
@@ -6275,16 +6439,12 @@ player.on('playing', function() {
 
                     addCleanButton();
                 }
-            }, 100); // Check every 100ms
-
+            }, 100); 
         }
-
-        // Start initialization
         init();
     });
 })(jQuery);
 
-// Check if "EnableEmoteClick" is defined and set to 1 before running the script
 if (typeof EnableEmoteClick !== 'undefined' && EnableEmoteClick === 1) {
     $(document).on('click', '[class^="chat-msg-"] .channel-emote', function () {
         var emoteTitle = $(this).attr('title');
@@ -6297,6 +6457,59 @@ if (typeof EnableEmoteClick !== 'undefined' && EnableEmoteClick === 1) {
         }
     });
 }
+
+$(document).ready(function () {
+    function addChatFilterButton() {
+        const chatFilterMenu = $("#cs-chatfilters");
+        if (!chatFilterMenu.length) {
+            console.error("Chat filter menu not found.");
+            return;
+        }
+        const newFilterButton = $(
+            '<button id="addCustomFilterButton" class="btn btn-sm btn-primary" style="margin-top: 10px;">Import Required BillTube Chat Filters</button>'
+        );
+        chatFilterMenu.append(newFilterButton);
+        newFilterButton.on("click", function () {
+            importCustomChatFiltersToTextarea();
+        });
+    }
+    function importCustomChatFiltersToTextarea() {
+        const customFilters = [
+            {"name":"monospace","source":"`(.+?)`","flags":"g","replace":"<code>\\1</code>","active":true,"filterlinks":false},
+            {"name":"bold","source":"\\*(.+?)\\*","flags":"g","replace":"<strong>\\1</strong>","active":true,"filterlinks":false},
+            {"name":"italic","source":"_(.+?)_","flags":"g","replace":"<em>\\1</em>","active":true,"filterlinks":false},
+            {"name":"strike","source":"~~(.+?)~~","flags":"g","replace":"<s>\\1</s>","active":true,"filterlinks":false},
+            {"name":"inline spoiler","source":"\\[sp\\](.*?)\\[\\/sp\\]","flags":"gi","replace":"<span class=\"spoiler\">\\1</span>","active":true,"filterlinks":false},
+            {"name":"partial quote","source":"&gt;(.+?)$","flags":"g","replace":"<span class=\"quote\">&gt;\\1 </span>","active":true,"filterlinks":false},
+            {"name":"italic text","source":"\\[i\\](.+?)\\[\\/i\\]","flags":"g","replace":"<em>\\1</em>","active":true,"filterlinks":false},
+            {"name":"monospace text","source":"\\[code\\](.+?)\\[\\/code\\]","flags":"gi","replace":"<code>\\1</code>","active":true,"filterlinks":false},
+            {"name":"bold text","source":"\\[b\\](.+?)\\[\\/b\\]","flags":"gi","replace":"<strong>\\1</strong>","active":true,"filterlinks":false},
+            {"name":"striked text","source":"\\[s\\](.+?)\\[\\/s\\]","flags":"gi","replace":"<s>\\1</s>","active":true,"filterlinks":false},
+            {"name":"short spoiler","source":"\\[sp\\]","flags":"g","replace":"<span class=\"spoiler\">","active":true,"filterlinks":false},
+            {"name":"closing font style","source":"\\[\\/\\]","flags":"g","replace":"<span>","active":true,"filterlinks":false},
+            {"name":"chat colors (premium)","source":"col:(.*?):","flags":"g","replace":"<span style=\"color:\\1\" class=\"chatcolor\">","active":true,"filterlinks":false},
+            {"name":"giphy","source":"https?://(?|media\\d\.giphy\.com/media/([^ /\\n]+)/giphy\.gif|i\.giphy\.com/([^ /\\n]+)\.gif|giphy\.com/gifs/(?:.*-)?([^ /\\n]+))","flags":"gi","replace":"<img class=\"giphy chat-picture\" src=\"https://media.giphy.com/media/\\1/200_s.gif\" />","active":true,"filterlinks":true}    
+			];
+
+        // Find the export text field
+        const exportTextField = $("#cs-chatfilters-exporttext");
+        if (exportTextField.length) {
+            try {
+                exportTextField.val(JSON.stringify(customFilters, null, 2));
+                console.log("Imported custom chat filters into text field:", customFilters);
+            } catch (e) {
+                console.error("Error serializing custom filters:", e);
+            }
+        } else {
+            console.error("Unable to find export text field.");
+        }
+    }
+
+    // Adding the custom button after the page is loaded
+    addChatFilterButton();
+});
+
+
 
 
 
