@@ -3476,6 +3476,20 @@ window.cytubeEnhanced.addModule("languageSwitcher",function(e){"use strict";var 
 	if( !win.FixedFixed ) {
 		$( win.document.documentElement ).addClass( S.classes.withoutFixedFixed );
 	}
+// Select the "Home" link based on the provided path
+const homeLink = document.querySelector("#nav-collapsible > ul > li:nth-child(1) > a");
+
+if (homeLink && homeLink.textContent.trim() === "Home") {
+  // Remove the "Home" link if it exists
+  homeLink.parentElement.remove(); // Removing the parent <li> element
+}
+// Select the user count element
+const userCountElement = document.querySelector("#usercount");
+
+if (userCountElement) {
+  // Remove any non-numeric characters from the text content
+  userCountElement.textContent = userCountElement.textContent.replace(/\D/g, '');
+}
 })( window, jQuery );
 ///////////////Navigation shit/////////////////
 this.$titleRow = $('<div id="navtabs" class="row">').insertAfter('#main');
