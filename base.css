@@ -1111,7 +1111,7 @@ ul.Emojilist.dropdown-menu.ul-double { background-color: var(--theme-bg-color); 
 
 div#chat-panel { bottom: 0px; margin-left: 0px; margin-right: 32px; position: absolute; }
 
-#favourite-pictures-panel, #smiles-panel { backdrop-filter: saturate(100%) blur(1px); background-color: var(--theme-bg-color); border: 1px solid #343434; border-radius: 7px; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3); height: 33rem; margin: 0px 17px 0px 10px; max-height: 500px; overflow-x: hidden; overflow-y: scroll; text-align: center; width: 100%; }
+#favourite-pictures-panel, #smiles-panel { background-image: -webkit-radial-gradient(top, circle cover, #1d1f30 0%, var(--body-bg-color) 80%); border: 1px solid #343434; border-radius: 7px; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3); height: 33rem; margin: 0px 17px 0px 10px; max-height: 500px; overflow-x: hidden; overflow-y: scroll; text-align: center; width: 100%; }
 
 #pictures-trash { height: 55px; padding: 10px; }
 
@@ -1347,3 +1347,4 @@ button#skip:disabled,button#mediarefresh:disabled { box-shadow: inset 3px 3px 10
 #chatsettings,#modflair,.has-scrollbar>.nano-content::-webkit-scrollbar!important,#mainpage>.nano>.nano-pane,#mediarefresh span,div#layout-config-form,div#common-config-form,.chat-avatar_hidden,.mce-notification-inner,.vjs-fullscreen-control,#quickQuality,#leftcontrols,#playlistmanagerwrap,#showchat,#us-no-channelcss,#us-no-channeljs,#us-layout,#us-theme,#pipButton,#queue li[visible='false'],.no-result,html.compact .server-msg-reconnect,html.compact span.timestamp,html.compact .navbar-inverse,html.compact #resize-video-larger,html.compact #resize-video-smaller,.vjs-fullscreen-control{display:none}
 .animatedFadeInUp,.fadeInUp{opacity:0}@keyframes fadeInUp{from{opacity:0;transform:translate3d(0,-20%,0)}to{opacity:1;transform:translate3d(0,0,0)}}@-webkit-keyframes fadeInUp{from{opacity:0;transform:translate3d(0,-20%,0)}to{opacity:1;transform:translate3d(0,0,0)}}.animated{animation-duration:1s;animation-fill-mode:both;-webkit-animation-duration:1s;-webkit-animation-fill-mode:both}.fadeInUp{animation-name:fadeInUp;-webkit-animation-name:fadeInUp}
 @media (max-width:1400px){.queue_sortable li{border-bottom:1px solid #ffffff14!important;counter-increment:index;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;align-content:center;height:140px;flex-wrap:nowrap}.section,.well,#rightpane-inner{border-radius:10px;margin-bottom:25px;margin-left:1rem;margin-right:1rem;margin-top:2rem;padding:2rem;position:relative}}
+vjs-text-track-cue {z-index: 10;}
