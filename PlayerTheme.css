@@ -641,8 +641,6 @@ span.icon-cancel-circled:before{
 	margin: 0 8px;
 	width: 20px;
 }
-/*Audio button*/
-.vjs-audio-button{display:none;}
 /*Live btn*/
 button.vjs-live-button.vjs-control.vjs-button{display:none;}
 /*control bar*/
