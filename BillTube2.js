@@ -3581,7 +3581,7 @@ $( window ).load(function() {
 
 /////////////////////////////////////////////
 $( '#tabs' ).fixedsticky();
-if (window.CLIENT.rank >= 3) {
+if (window.CLIENT.rank >= 2) {
 	$("#polltab").removeClass("hidden");
 }
 $("#polltab").append($("#newpollbtn"));
