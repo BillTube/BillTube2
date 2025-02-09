@@ -6502,8 +6502,8 @@ $(document).ready(function () {
             {"name":"short spoiler","source":"\\[sp\\]","flags":"g","replace":"<span class=\"spoiler\">","active":true,"filterlinks":false},
             {"name":"closing font style","source":"\\[\\/\\]","flags":"g","replace":"<span>","active":true,"filterlinks":false},
             {"name":"chat colors (premium)","source":"col:(.*?):","flags":"g","replace":"<span style=\"color:\\1\" class=\"chatcolor\">","active":true,"filterlinks":false},
-            {"name":"giphy","source":"https?://(?|media\\d\.giphy\.com/media/([^ /\\n]+)/giphy\.gif|i\.giphy\.com/([^ /\\n]+)\.gif|giphy\.com/gifs/(?:.*-)?([^ /\\n]+))","flags":"gi","replace":"<img class=\"giphy chat-picture\" src=\"https://media.giphy.com/media/\\1/200_s.gif\" />","active":true,"filterlinks":true}    
-			];
+            {"name": "giphy","source": "https?://(?|media\\d\\.giphy\\.com/media/(?:[^/]+/)?([^ /\\n]+)/giphy\\.gif|i\\.giphy\\.com/([^ /\\n]+)\\.gif|giphy\\.com/gifs/(?:.*-)?([^ /\\n]+))","flags": "gi","replace": "<img class=\"giphy chat-picture\" src=\"https://media.giphy.com/media/\\1/200_s.gif\" />","active": true,"filterlinks": true}
+	];
 
         // Find the export text field
         const exportTextField = $("#cs-chatfilters-exporttext");
