@@ -3949,6 +3949,27 @@ if (typeof LastUsed !== 'undefined' && LastUsed === 1) {
                 $('#smiles-content').html('<p>No emotes available in this category.</p>');
             }
         };
+        // Function to search and filter emotes
+        this.searchSmiles = function(query, category) {
+            $('#smiles-content').empty();
+            const smiles = this.emoteCategories[category].filter(smile =>
+                smile.name.toLowerCase().includes(query.toLowerCase())
+            );
+            this.currentEmotes = smiles; // Update current emotes
+            this.highlightedIndex = -1;  // Reset highlighted index
+            if (smiles && smiles.length > 0) {
+                smiles.forEach(smile => {
+                    const element = smile.image ?
+                        $('<img class="smile-on-panel">').attr({src: smile.image}) :
+                        $('<span class="smile-on-panel">').text(smile.name);
+                    element.data('name', smile.name);
+                    element.appendTo('#smiles-content');
+                });
+            } else {
+                $('#smiles-content').html('<p>No emotes found.</p>');
+            }
+        };
+
 
         this.updateSmilesContent = function (category) {
             if (category === 'recently-used') {
