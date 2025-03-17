@@ -5134,7 +5134,7 @@ function randomHero2() {
                         RANDOM = true;
                     }
                 }
-                theurl = 'https://api.giphy.com/v1/' + giftype + '/' + searchtype + '&api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes';
+                theurl = 'https://api.giphy.com/v1/' + giftype + '/' + searchtype + '&api_key=bb2006d9d3454578be1a99cfad65913d';
                 $.ajax({
                     url: theurl,
                     jsonp: 'callback',
