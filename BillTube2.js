@@ -6495,7 +6495,6 @@ function importCustomChatFiltersToTextarea() {
         {"name": "tenor","source": "(https?://media\\.tenor\\.com/[^\\s]+\\.gif)","flags": "gi","replace": "<img class=\"tenor chat-picture\" src=\"\\0\" />","active": true,"filterlinks": true}
     ];
 
-        // Find the export text field
         const exportTextField = $("#cs-chatfilters-exporttext");
         if (exportTextField.length) {
             try {
@@ -6509,10 +6508,69 @@ function importCustomChatFiltersToTextarea() {
         }
     }
 
-    // Adding the custom button after the page is loaded
     addChatFilterButton();
 });
 
+window.cytubeEnhanced.addModule('chatTextSize', function (app) {
+  'use strict';
+  var that = this;
+  var tab = app.Settings.getTab('settings', 'Theme Settings', 300);
+  var userSettings = app.Settings.storage;
+  var namespace = 'chattext';
+
+  this.scheme = {
+    'size': {
+      title: 'Chat Text Size',
+      default: 'medium',
+      options: [
+        { value: 'small',  title: 'Small'  },
+        { value: 'medium', title: 'Medium' },
+        { value: 'big',    title: 'Big'    }
+      ]
+    }
+  };
+
+  for (var key in this.scheme) {
+    var item = this.scheme[key];
+    userSettings.setDefault(namespace + '.' + key, item.default);
+    item.options.forEach(function(opt){ 
+      opt.selected = (userSettings.get(namespace + '.' + key) == opt.value); 
+    });
+    tab.addControl('select', 'horizontal', item.title, key, item.options, null, 400);
+  }
+
+  var css = `
+    #messagebuffer.bt-chat-sm .username,
+    #messagebuffer.bt-chat-sm .timestamp,
+    #messagebuffer.bt-chat-sm .chat-msg { font-size: 12px; }
+
+    #messagebuffer.bt-chat-md .username,
+    #messagebuffer.bt-chat-md .timestamp,
+    #messagebuffer.bt-chat-md .chat-msg { font-size: 14px; }
+
+    #messagebuffer.bt-chat-lg .username,
+    #messagebuffer.bt-chat-lg .timestamp,
+    #messagebuffer.bt-chat-lg .chat-msg { font-size: 16px; }
+  `;
+  $('<style>').text(css).appendTo('head');
+
+  function apply(size) {
+    var $mb = $('#messagebuffer');
+    $mb.removeClass('bt-chat-sm bt-chat-md bt-chat-lg');
+    if (size === 'small')  $mb.addClass('bt-chat-sm');
+    if (size === 'medium') $mb.addClass('bt-chat-md');
+    if (size === 'big')    $mb.addClass('bt-chat-lg');
+  }
+
+  // apply on startup
+  apply(userSettings.get(namespace + '.size'));
+
+  // persist + apply on save
+  app.Settings.onSave(function (settings) {
+    settings.set(namespace + '.size', $('#' + app.prefix + 'size').val());
+    apply(settings.get(namespace + '.size'));
+  });
+});
 
 
 
