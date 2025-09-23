@@ -6542,15 +6542,15 @@ window.cytubeEnhanced.addModule('chatTextSize', function (app) {
   var css = `
     #messagebuffer.bt-chat-sm .username,
     #messagebuffer.bt-chat-sm .timestamp,
-    #messagebuffer.bt-chat-sm .chat-msg { font-size: 12px; }
+    #messagebuffer.bt-chat-sm .chat-msg { font-size: 1.2rem; }
 
     #messagebuffer.bt-chat-md .username,
     #messagebuffer.bt-chat-md .timestamp,
-    #messagebuffer.bt-chat-md .chat-msg { font-size: 14px; }
+    #messagebuffer.bt-chat-md .chat-msg { font-size: 1.4rem; }
 
     #messagebuffer.bt-chat-lg .username,
     #messagebuffer.bt-chat-lg .timestamp,
-    #messagebuffer.bt-chat-lg .chat-msg { font-size: 16px; }
+    #messagebuffer.bt-chat-lg .chat-msg { font-size: 1.8rem; }
   `;
   $('<style>').text(css).appendTo('head');
 
