@@ -19,11 +19,6 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spookyshow.png",
                 "title": "Visit the Are you afraid of the dark/goosebumps Channel"
             },
-			{
-                "channel_url": "https://cytu.be/r/futuramaSD",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/futuram.png",
-                "title": "Visit the Futurama Channel"
-            },
 		{
                 "channel_url": "https://cytu.be/r/KOTH",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/koth.png",
@@ -43,6 +38,11 @@
                 "channel_url": "https://cytu.be/r/billcartoon",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/crtn.png",
                 "title": "Visit the Cartoons Channel"
+            },
+						{
+                "channel_url": "https://cytu.be/r/futuramaSD",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/futuram.png",
+                "title": "Visit the Futurama Channel"
             }
         ]
     }
