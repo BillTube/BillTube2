@@ -9,10 +9,10 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/spooktober3.png",
                 "title": "Visit the Spooktober Channel"
             },
-		{
-                "channel_url": "https://cytu.be/r/southparkhd",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/C47MQA3.png",
-                "title": "Visit the Southpark Channel"
+								{
+                "channel_url": "https://cytu.be/r/billtube",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/hansen.png",
+                "title": "Visit the TCAP Channel"
             },
 					{
                 "channel_url": "https://cytu.be/r/spookykidshows",
@@ -34,25 +34,15 @@
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/simps.png",
                 "title": "Visit the Simpsons Channel"
             },
-		{
-                "channel_url": "https://cytu.be/r/buffy",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/GxCKtEZ.png",
-                "title": "Visit the Buffy Channel"
-            },
-					{
-                "channel_url": "https://cytu.be/r/billtube",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/hansen.png",
-                "title": "Visit the TCAP Channel"
-            },
-					{
-                "channel_url": "https://cytu.be/r/billcartoon",
-                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/crtn.png",
-                "title": "Visit the Cartoons Channel"
-            },
 				{
                 "channel_url": "https://cytu.be/r/spookyshows2",
                 "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/SS2.png",
                 "title": "Visit the Spooky 2 Channel"
+            },
+								{
+                "channel_url": "https://cytu.be/r/billcartoon",
+                "image_url": "https://raw.githubusercontent.com/BillTube/Extras/gh-pages/crtn.png",
+                "title": "Visit the Cartoons Channel"
             }
         ]
     }
